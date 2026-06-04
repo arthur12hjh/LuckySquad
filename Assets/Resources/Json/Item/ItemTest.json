@@ -1,0 +1,75 @@
+[
+  {
+    "id": 1,
+    "name": "초보자의 녹슨 검",
+    "type": 0,
+    "effects": [
+      {
+        "$type": "Item.DamageEffect, Assembly-CSharp",
+        "EffectType": 0,
+        "DamageType": 0,
+        "Damage": 15,
+        "Duration": 0,
+        "TickPeriod": 0
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "강철 장검",
+    "type": 0,
+    "effects": [
+      {
+        "$type": "Item.DamageEffect, Assembly-CSharp",
+        "EffectType": 0,
+        "DamageType": 0,
+        "Damage": 35,
+        "Duration": 0,
+        "TickPeriod": 0
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "용암의 대검",
+    "type": 0,
+    "effects": [
+      {
+        "$type": "Item.DamageEffect, Assembly-CSharp",
+        "EffectType": 0,
+        "DamageType": 0,
+        "Damage": 60,
+        "Duration": 0,
+        "TickPeriod": 0
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "이동속도 증가 포션",
+    "type":2 ,
+    "effects": [
+      {
+        "$type": "Item.BuffEffect, Assembly-CSharp",
+        "EffectType": 2,
+        "Amount": 30,
+        "Duration": 3,
+        "Interval": 0
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "파란 포션",
+    "type":2 ,
+    "effects": [
+      {
+        "$type": "Item.HealEffect, Assembly-CSharp",
+        "EffectType": 0,
+        "Amount": 30,
+        "Duration": 0,
+        "Interval": 0
+      }
+    ]
+  }
+]
