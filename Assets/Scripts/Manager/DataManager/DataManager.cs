@@ -1,17 +1,24 @@
 using UnityEngine;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using static UnityEditor.Progress;
 using Item;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "Manager", menuName = "ScriptableObjects/DataManager", order = 1)]
 public class DataManager : ScriptableObject
 {
     public string                               JsonUrl;
-    [SerializeField] private List<ItemData>     Items = new List<ItemData>();
+    [SerializeField] private Dictionary<int, ItemData> Items = new Dictionary<int, ItemData>();
 
     #region Default
 
+    public ItemData? FindItemData(int id)
+    {
+        if(Items.TryGetValue(id, out var item))
+            return item;
+
+        return null;
+    }
 
     private bool Initialize()
     {
@@ -33,12 +40,8 @@ public class DataManager : ScriptableObject
             };
 
             string jsonString = jsonAsset.text;
-            Items = JsonConvert.DeserializeObject<List<ItemData>>(jsonString, settings);
-
-            foreach (ItemData item in Items) 
-            {
-                Debug.Log(item.szName + "/" + item.eType.ToString());
-            }
+            List<ItemData> items = JsonConvert.DeserializeObject<List<ItemData>>(jsonString, settings);
+            Items = items.ToDictionary((info => info.iID));
         }
 
         return true;
