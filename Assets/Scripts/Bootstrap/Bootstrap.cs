@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class Bootstrap
+public class Bootstrap : MonoBehaviour
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void Init()
+    private void Awake()
     {
         CreateManagers();
+        SceneManager.LoadScene("LogoLoading");
     }
 
-    static void CreateManagers()
+    void CreateManagers()
     {
         new GameObject("GameManager").AddComponent<GameManager>();
         new GameObject("Addressables").AddComponent<AddressablesManager>();
