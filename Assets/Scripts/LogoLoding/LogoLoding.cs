@@ -12,19 +12,18 @@ public class LogoLoding : MonoBehaviour
     private void Start()
     {
         AddressablesManager.Instance.OnInitialized += OnInitDone;
-        AddressablesManager.Instance.Init();
     }
 
     private void OnInitDone()
     {
         AddressablesManager.Instance.OnInitialized -= OnInitDone;
+        AddressablesManager.Instance.Load<Sprite>("TestImage");
         isInitialized = true;
         text.SetActive(true);
     }
 
     private void Update()
     {
-        //if (isInitialized)
-        //    SceneManager.LoadScene("Lobby");
+
     }
 }
