@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea2209ebc46ce6408aa2085070406ab, type: 3}
+  m_Name: Suriken_Normal 1
+  m_EditorClassIdentifier: Assembly-CSharp::ItemRef
+  ID: 2
+  Icons:
+  - {fileID: 1058462150826265694, guid: 57f2b3236d093c84e9766ff8ade58c77, type: 3}
+  - {fileID: -2711914483384625500, guid: 57f2b3236d093c84e9766ff8ade58c77, type: 3}
+  - {fileID: -2348164843907849548, guid: 57f2b3236d093c84e9766ff8ade58c77, type: 3}

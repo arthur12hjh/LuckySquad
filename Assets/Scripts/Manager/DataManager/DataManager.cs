@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Item;
 using System.Linq;
 
-[CreateAssetMenu(fileName = "Manager", menuName = "ScriptableObjects/DataManager", order = 1)]
+[CreateAssetMenu(fileName = "Manager", menuName = "Scriptable Objects/DataManager/DataManager", order = 1)]
 public class DataManager : ScriptableObject
 {
     public string                               JsonUrl;

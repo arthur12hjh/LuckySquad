@@ -1,5 +1,5 @@
-using UnityEngine;
 using Item;
+using UnityEngine;
 
 public static class ItemFactory
 {
@@ -25,6 +25,7 @@ public abstract class BaseItem : MonoBehaviour
         get { return info; }
     }
 
+    protected int               level = 1;
     protected ItemData          info;
     public virtual void Initalize(ItemData Data)
     {
