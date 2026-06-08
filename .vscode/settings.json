@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "LuckySquad.sln"
+    "dotnet.defaultSolution": "LuckySquad.slnx",
+    "FSharp.suggestGitignore": false
 }
