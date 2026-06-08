@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Item
 {
@@ -49,6 +50,9 @@ namespace Item
 
         [JsonProperty("TickPeriod")]
         public float        fInterval;      // 平 林扁
+
+        [JsonProperty("Range")]
+        public float fRange;                // 荤芭府
     }
 
     [Serializable]
@@ -124,6 +128,21 @@ namespace Item
         public float        fInterval;      // 平 林扁
     }
 
+    public enum ProjectileType { END };
+
+    [Serializable]
+    public struct Projectileinfo
+    {
+        [JsonProperty("Type")]
+        public ProjectileType   Type;
+
+        [JsonProperty("Damage")]
+        public float            fDamage;
+
+        [JsonProperty("Speed")]
+        public float            fSpeed;
+    }
+
     public struct ItemData
     {
         [JsonProperty("id")]
@@ -150,5 +169,4 @@ namespace Item
             this.Effects = effects ?? new List<Effect>();
         }
     }
-
 }
