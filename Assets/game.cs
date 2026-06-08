@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class game : MonoBehaviour
 {
-    [SerializeField] GameObject prefab;
+    public ObjectPoolRef prefab;
 
     // Start is called before the first frame update
     void Start()
     {
-         DataManager Ins = DataManager.Instance;
-        ItemFactory.AbstractCreateItem<ProjectileWeapon>(1);
+        DataManager Ins = DataManager.Instance;
+       
     }
 
     // Update is called once per frame
@@ -17,12 +17,11 @@ public class game : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject gameobject = GameObject.Instantiate(prefab);
+            var ob = ObjectPoolManager.Instance.Get(prefab) ;
+            AttackHitBox HitBox = ob.GetComponent<AttackHitBox>();
 
-            Projectileinfo info = new Projectileinfo();
-            info.fSpeed = 0.015f;
-
-            gameobject.GetComponent<Projectile>().ShootProjectile(ref info, new Vector2(1, 1));
+            ob.SetActive(true);
+            HitBox.Initialized(Vector2.zero, Vector2.one, AttackHitBox.HitBoxType.Circle);
         }
     }
 }

@@ -14,8 +14,17 @@ namespace Attack
     [Serializable]
     public struct SAttackData
     {
-        public int             iDamage;
+        public float           iDamage;
         public int             iHitCount;
         public EAttackType     AttackType;
+
+        public SAttackData(float damage = 0, int HitCount = 1, EAttackType type = EAttackType.Slash)
+        {
+            iDamage = damage;
+            iHitCount = HitCount;
+            AttackType = type;
+        }
     }
+
+   
 }
