@@ -8,9 +8,9 @@ public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager Instance { get; private set; }
 
-    [SerializeField] private List<ObjectPoolRef> objectPoolRefs;            // µ¥ÀÌÅÍ ¸®½ºÆ®.
+    [SerializeField] private List<ObjectPoolRef> objectPoolRefs;            // ë°ì´í„° ë¦¬ìŠ¤íŠ¸.
 
-    private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> PoolDictionary = new(); // ¿¹ºñ°´Ã¼ ´ã´Â ¸Ê
+    private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> PoolDictionary = new(); // ì˜ˆë¹„ê°ì²´ ë‹´ëŠ” ë§µ
 
     private void Awake()
     {
@@ -22,20 +22,20 @@ public class ObjectPoolManager : MonoBehaviour
     private ObjectPool<GameObject> CreatePool(ObjectPoolRef refSO)
     {
         var pool = new ObjectPool<GameObject>(
-            createFunc: () => Instantiate(refSO.prefab),        // »ı¼º ¹æ½Ä
-            actionOnGet: obj => obj.SetActive(true),            // Get. ÀÎ°ÔÀÓ ÇÊµå·Î ºÒ·¯¿Ã ¶§ ¹æ½Ä
-            actionOnRelease: obj => obj.SetActive(false),       // Release. ÇÊµå¿¡¼­ ÀÌÅ»ÇÒ ¶§ ¹æ½Ä
-            actionOnDestroy: obj => Destroy(obj),               // Destroy. ¾Æ¿¹ »èÁ¦ÇÒ ¶§ ¹æ½Ä
-            collectionCheck: false,                             // ReleaseÇÒ ¶§ Ç®¿¡ µé¾î°¡ÀÖ´Â ¿ÀºêÁ§Æ®ÀÎÁö Ã¼Å©.
-            defaultCapacity: refSO.initializePoolSize,         // Ã³À½ »ı¼ºÇÒ °´Ã¼¾ç
-            maxSize: refSO.initializePoolSize * 2              // ÃÖ´ë »óÇÑ¼±
+            createFunc: () => Instantiate(refSO.prefab),        // ìƒì„± ë°©ì‹
+            actionOnGet: obj => obj.SetActive(true),            // Get. ì¸ê²Œì„ í•„ë“œë¡œ ë¶ˆëŸ¬ì˜¬ ë•Œ ë°©ì‹
+            actionOnRelease: obj => obj.SetActive(false),       // Release. í•„ë“œì—ì„œ ì´íƒˆí•  ë•Œ ë°©ì‹
+            actionOnDestroy: obj => Destroy(obj),               // Destroy. ì•„ì˜ˆ ì‚­ì œí•  ë•Œ ë°©ì‹
+            collectionCheck: false,                             // Releaseí•  ë•Œ í’€ì— ë“¤ì–´ê°€ìˆëŠ” ì˜¤ë¸Œì íŠ¸ì¸ì§€ ì²´í¬.
+            defaultCapacity: refSO.initializePoolSize,         // ì²˜ìŒ ìƒì„±í•  ê°ì²´ì–‘
+            maxSize: refSO.initializePoolSize * 2              // ìµœëŒ€ ìƒí•œì„ 
             );
         Prewarm(pool, refSO.initializePoolSize);
 
         return pool;
     }
 
-    // »çÀü »ı¼º. defaultCapacity¸¸Å­ ¹Ì¸® ¸¸µé¾îµÎ±â
+    // ì‚¬ì „ ìƒì„±. defaultCapacityë§Œí¼ ë¯¸ë¦¬ ë§Œë“¤ì–´ë‘ê¸°
     private void Prewarm(ObjectPool<GameObject> pool, int iSize)
     {
         var tempObjectList = new GameObject[iSize];
