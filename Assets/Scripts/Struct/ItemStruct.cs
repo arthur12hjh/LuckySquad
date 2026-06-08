@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Item
 {
@@ -23,10 +22,35 @@ namespace Item
     }
 
     [Serializable]
+    public struct Projectileinfo
+    {
+        public float fSpeed;
+        public float fDamage;
+
+    }
+
+    [Serializable]
     public abstract class Effect
     {
         [JsonProperty("type")]
         public EEffectType EffectType;
+    }
+
+    [Serializable]
+    public class LevelData
+    {
+        [JsonProperty("Level")]
+        public readonly int Level;
+
+        [JsonProperty("effects")]
+        public readonly List<Effect> Effects;
+
+        public LevelData(int level = 1,
+                         List<Effect> effects = null)
+        {
+            this.Level = level;
+            this.Effects = effects ?? new List<Effect>();
+        }
     }
 
     [Serializable]
@@ -52,7 +76,26 @@ namespace Item
         public float        fInterval;      // 틱 주기
 
         [JsonProperty("Range")]
-        public float fRange;                // 사거리
+        public float        fRange;                // 사거리
+    }
+
+    [Serializable]
+    public class ProjectTileEffect : Effect
+    {
+        [JsonProperty("Count")]
+        public int iCount;        // 값
+
+        [JsonProperty("Damage")]
+        public float fDamage;        // 값
+
+        [JsonProperty("Duration")]
+        public float fDuration;      // 지속 시간
+
+        [JsonProperty("TickPeriod")]
+        public float fInterval;      // 틱 주기
+
+        [JsonProperty("Range")]
+        public float fRange;         // 사거리
     }
 
     [Serializable]
@@ -128,45 +171,35 @@ namespace Item
         public float        fInterval;      // 틱 주기
     }
 
-    public enum ProjectileType { END };
-
-    [Serializable]
-    public struct Projectileinfo
-    {
-        [JsonProperty("Type")]
-        public ProjectileType   Type;
-
-        [JsonProperty("Damage")]
-        public float            fDamage;
-
-        [JsonProperty("Speed")]
-        public float            fSpeed;
-    }
-
     public struct ItemData
     {
         [JsonProperty("id")]
-        public readonly int             iID;
+        public readonly int                 iID;
 
         [JsonProperty("name")]
-        public readonly string          szName;
+        public readonly string              szName;
+
+        [JsonProperty("Max_Level")]
+        public readonly int                 MaxLevel;
 
         [JsonProperty("type")]
-        public readonly EItemType       eType;
+        public readonly EItemType           eType;
 
-        [JsonProperty("effects")]
-        public readonly List<Effect>    Effects;
+        [JsonProperty("LevelData")]
+        public readonly List<LevelData>     LevelDatas;
 
         // 생성자를 통해서 딱 한 번만 세팅 가능
         public ItemData(int id = 1,
-                        string name = "", 
+                        string name = "",
+                        int maxLevel = 1,
                         EItemType type = EItemType.None,
-                        List<Effect> effects = null)
+                        List<LevelData> levelDatas = null)
         {
             this.iID = id;
             this.szName = name;
+            this.MaxLevel = maxLevel;
             this.eType = type;
-            this.Effects = effects ?? new List<Effect>();
+            this.LevelDatas = levelDatas ?? new List<LevelData>();
         }
     }
 }
