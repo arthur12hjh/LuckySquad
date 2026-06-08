@@ -1,6 +1,7 @@
 using Item;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class OrbitingWeapon : EquipmentBase
 {
@@ -24,7 +25,7 @@ public class OrbitingWeapon : EquipmentBase
 
         if (IsActive)
         {
-            transform.Rotate(0, 0, 180 * Time.deltaTime * Speed);
+           transform.Rotate(0f,0f, 180f *  Time.deltaTime * Speed);
         }
     }
 
@@ -34,6 +35,7 @@ public class OrbitingWeapon : EquipmentBase
         Create_Projectile();
         SettingProjectile();
 
+        transform.localPosition = new Vector3(0f, transform.parent.transform.localScale.y * 0.5f, 0f);
         IsActive = true;
     }
 
@@ -54,7 +56,6 @@ public class OrbitingWeapon : EquipmentBase
 
     protected override void SettingLevelData()
     {
-        
         SettingProjectile();
     }
 
@@ -91,17 +92,15 @@ public class OrbitingWeapon : EquipmentBase
                 if (Effect is ProjectTileEffect effect)
                 {
                     TickAngle = 360 / effect.iCount;
-                    Range = effect.fRange;
-
                     for (int i = 0; i < CircleList.Count; ++i)
                     {
                         if (i < effect.iCount)
                         {
                             float rad = i * TickAngle * Mathf.Deg2Rad;
-                            float NewX = Mathf.Sin(rad) * Range;
-                            float NewY = Mathf.Cos(rad) * Range;
+                            float NewX = Mathf.Sin(rad) * effect.fRange;
+                            float NewY = Mathf.Cos(rad) * effect.fRange;
 
-                            CircleList[i].transform.position = new Vector3(NewX, NewY, 0);
+                            CircleList[i].transform.localPosition = new Vector3(NewX, NewY, 0);
                             CircleList[i].SetActive(true);
                         }
                             
