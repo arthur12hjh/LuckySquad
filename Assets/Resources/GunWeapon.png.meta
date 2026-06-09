@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 46006a232c33c466ab874879b7db2d10
+guid: 484612bfd9a0c7d458d9a1ac98474fec
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6742490991749950665
-    second: player-set_0
+      213: -7926273996343999597
+    second: GunWeapon_0
+  - first:
+      213: 8513100061382608832
+    second: GunWeapon_1
+  - first:
+      213: 3832761975458720380
+    second: GunWeapon_2
+  - first:
+      213: 6144477042268754305
+    second: GunWeapon_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,23 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player-set_0
+      name: GunWeapon_0
       rect:
         serializedVersion: 2
-        x: 24
-        y: 3
-        width: 65
-        height: 97
-      alignment: 9
-      pivot: {x: 0.36, y: 0}
+        x: 82
+        y: 24
+        width: 310
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cce68075d3229d50800000000000000
-      internalID: 6742490991749950665
+      spriteID: 3930087abc7300290800000000000000
+      internalID: -7926273996343999597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunWeapon_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 15
+        width: 291
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c70118c66b942670800000000000000
+      internalID: 8513100061382608832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunWeapon_2
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 24
+        width: 382
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7a67d7b5b4b03530800000000000000
+      internalID: 3832761975458720380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunWeapon_3
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 24
+        width: 344
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 181d8faa051954550800000000000000
+      internalID: 6144477042268754305
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0e356055a48f34ff18d642b3266ab5ed
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player-set_0: 6742490991749950665
+      GunWeapon_0: -7926273996343999597
+      GunWeapon_1: 8513100061382608832
+      GunWeapon_2: 3832761975458720380
+      GunWeapon_3: 6144477042268754305
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -25,10 +25,20 @@ public abstract class BaseItem : MonoBehaviour
         get { return info; }
     }
 
+    protected SpriteRenderer    spriteRenderer = null;
+    protected Sprite[]          spriteTexs = null;
+
     protected int               level = 1;
     protected ItemData          info;
+
+    [SerializeField] string     SpriteTextureUrl;
+
+
     public virtual void Initalize(ItemData Data)
     {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteTexs = Resources.LoadAll<Sprite>(SpriteTextureUrl);
+
         info = Data;
     }
 }

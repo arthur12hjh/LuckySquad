@@ -1,15 +1,16 @@
 using Item;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class OrbitingWeapon : EquipmentBase
 {
-    [SerializeField] private GameObject projectTile = null;
-    List<GameObject> CircleList = new List<GameObject>();
- 
-    private float    TickAngle = 0f;
-    private float    Speed = 3f;
+    [SerializeField] private ObjectPoolRef projectTileRefSO = null;
+    List<GameObject> ProjecTileList = new List<GameObject>();
+
+    private ProjectTileEffect   projectTileEffect;
+    private float               TickAngle = 0f;
+    private float               fSpeed = 3f;
+    private int                 iActiveProjectile = 0;
 
     void Start()
     {
@@ -18,22 +19,16 @@ public class OrbitingWeapon : EquipmentBase
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            LevelUp();
-        }
-
         if (IsActive)
         {
-           transform.Rotate(0f,0f, 180f *  Time.deltaTime * Speed);
+           transform.Rotate(0f,0f, 180f *  Time.deltaTime * fSpeed);
         }
     }
 
-    public override void Initalize(ItemData Data)
+    public override void Initalize(ItemData itemData)
     {
-        base.Initalize(Data);
-        Create_Projectile();
-        SettingProjectile();
+        base.Initalize(itemData);
+        SerializationWeaponData();
 
         transform.localPosition = new Vector3(0f, transform.parent.transform.localScale.y * 0.5f, 0f);
         IsActive = true;
@@ -56,63 +51,70 @@ public class OrbitingWeapon : EquipmentBase
 
     protected override void SettingLevelData()
     {
-        SettingProjectile();
+        SerializationWeaponData();
     }
 
-    private bool Create_Projectile()
+    private bool SerializationWeaponData()
     {
-        if(info.LevelDatas[info.MaxLevel - 1] != null)
-        {
-            foreach (var Effect in info.LevelDatas[info.MaxLevel - 1].Effects)
-            {
-                if (Effect is ProjectTileEffect effect)
-                {
-                    for (int i = 0; i < effect.iCount; ++i)
-                    {
-                        var gameOb = GameObject.Instantiate(projectTile, gameObject.transform);
+        if (info.LevelDatas.Count < level)
+            return false;
 
-                        gameOb.SetActive(false);
-                        CircleList.Add(gameOb);
-                    }
-                }
+        
+        foreach (var effect in info.LevelDatas[level - 1].Effects)
+        {
+            if (effect is ProjectTileEffect infoProjectileEffect)
+            {
+                projectTileEffect = infoProjectileEffect;
+
+                TickAngle = 360f / projectTileEffect.iCount;
+                iActiveProjectile = GetProjectileCount();
+
+                CreateProjectile();
+                ComputeProjecTilePosition();
             }
         }
-        else
-            return false;
 
         return true;
     }
 
-    private bool SettingProjectile()
+    private void CreateProjectile()
     {
-        if (info.LevelDatas[level - 1] != null)
+        if (iActiveProjectile - ProjecTileList.Count > 0)
         {
-            foreach (var Effect in info.LevelDatas[level - 1].Effects)
+            for (int i = iActiveProjectile - ProjecTileList.Count; i > 0; --i)
             {
-                if (Effect is ProjectTileEffect effect)
-                {
-                    TickAngle = 360 / effect.iCount;
-                    for (int i = 0; i < CircleList.Count; ++i)
-                    {
-                        if (i < effect.iCount)
-                        {
-                            float rad = i * TickAngle * Mathf.Deg2Rad;
-                            float NewX = Mathf.Sin(rad) * effect.fRange;
-                            float NewY = Mathf.Cos(rad) * effect.fRange;
+                var gameOb = ObjectPoolManager.Instance.Get(projectTileRefSO);
+                gameOb.transform.parent = transform;
+                gameOb.SetActive(false);
+                var ObjSR  = gameOb.GetComponent<SpriteRenderer>();
+                if(ObjSR != null)
+                    ObjSR.sprite = spriteTexs[level - 1];
 
-                            CircleList[i].transform.localPosition = new Vector3(NewX, NewY, 0);
-                            CircleList[i].SetActive(true);
-                        }
-                            
-                        else
-                            CircleList[i].SetActive(false);
-                    }
-                }
+                ProjecTileList.Add(gameOb);
             }
         }
-        else
-            return false;
+    }
 
-        return true;
+    private void ComputeProjecTilePosition()
+    {
+        for (int i = 0; i < ProjecTileList.Count; ++i)
+        {
+            if (i < projectTileEffect.iCount)
+            {
+                float rad = i * TickAngle * Mathf.Deg2Rad;
+                float posX = Mathf.Sin(rad) * projectTileEffect.fRange;
+                float posY = Mathf.Cos(rad) * projectTileEffect.fRange;
+
+                ProjecTileList[i].transform.localPosition = new Vector3(posX, posY, 0);
+                ProjecTileList[i].SetActive(true);
+            }
+            else
+                ProjecTileList[i].SetActive(false);
+        }
+    }
+
+    int GetProjectileCount()
+    {
+        return projectTileEffect.iCount;
     }
 }

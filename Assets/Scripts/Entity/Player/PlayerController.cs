@@ -1,3 +1,4 @@
+using Item;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,7 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private GameObject playerObj;
+    [SerializeField] private GameObject WeaponObj;
 
+    ProjectileWeapon Weapon;
     Animator playerAnimator;
     Transform playerTransform;
     Rigidbody2D playerrb;
@@ -25,11 +28,22 @@ public class PlayerController : MonoBehaviour
             playerAnimator = playerObj.GetComponent<Animator>();
             playerTransform = playerObj.transform;
             playerrb = playerObj.GetComponent<Rigidbody2D>();
+
+            var obj = GameObject.Instantiate(WeaponObj, playerObj.transform);
+
+            ItemData? data = DataManager.Instance.FindItemData(4);
+            if (data is ItemData Iteminfo)
+            {
+                Weapon = obj.GetComponent<ProjectileWeapon>();
+                Weapon.Initalize(Iteminfo);
+            }
         }
     }
 
     void Update()
     {
+        if(Weapon != null)
+            Weapon.Update_Directation(new Vector3(1f, 1f, 0f));
     }
 
     private void FixedUpdate()

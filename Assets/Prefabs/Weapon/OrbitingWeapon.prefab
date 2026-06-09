@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9bed4c6fb227bf4eb52bed7d9ab65ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrbitingWeapon
-  projectTile: {fileID: 4732061679744568107, guid: d1bd1f14bc4f81e419b898e53de999a8, type: 3}
+  SpriteTextureUrl: Shuriken
+  projectTileRefSO: {fileID: 11400000, guid: a3a439ad94b92954e89e8d5cdef17a40, type: 2}
