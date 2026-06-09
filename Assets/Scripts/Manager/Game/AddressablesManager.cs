@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ public class AddressablesManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public int Progress { get; private set; } = 1;
 
     // 구조체는 복사가 일어나서 클래스로 만듬
     private class CacheEntry<T>
@@ -60,9 +62,9 @@ public class AddressablesManager : MonoBehaviour
         OnInitialized?.Invoke();
     }
 
-
     // Addressables 에셋을 로드하는 함수
     // callback이 null이면 "캐싱만" 수행하고 결과는 외부로 전달하지 않음
+    // Load<GameObject>("tag", obj) Load<AudioClip>("tag", audio) Load<Sprite>("tag", sprite)
     public void Load<T>(string key, Action<T> callback = null)
     {
         StartCoroutine(LoadRoutine(key, callback));
@@ -190,14 +192,19 @@ public class AddressablesManager : MonoBehaviour
     }
 
 
+    // AddressablesManager.Instance.LoadLabel<Sprite>(sceneName + "_img", list =>
+    // {
+    //     var target = list.Find(x => x.name == "box1");
+    //     img.sprite = target;
+    // });
 
     // Addressable에 있는 label이 같은 모든 객체를 한번에 불러온다.
-    public IEnumerator LoadLabel<T>(string label, Action<List<T>> callback)
+    public IEnumerator LoadLabel<T>(string label, Action<List<T>> callback = null)
     {
         // 이미 생성되어 있으면 바로 값을 넘겨준다.
-        if (labelCache.TryGetValue(label, out var cached))
+        if (TryGetLabel(label, out List<T> cached))
         {
-            callback?.Invoke((List<T>)cached.value);
+            callback?.Invoke((List<T>)cached);
             yield break;
         }
 
@@ -221,7 +228,22 @@ public class AddressablesManager : MonoBehaviour
         callback?.Invoke(list);
     }
 
+    public bool TryGetLabel<T>(string key, out List<T> value)
+    {
+        value = null;
 
+        // 라벨 존재 여부 확인
+        if (!labelCache.TryGetValue(key, out var cached))
+            return false;
+
+        if (cached.value is List<T> list)
+        {
+            value = list;
+            return true;
+        }
+
+        return false;
+    }
 
     // 데이터 해제
     public void ReleaseLabel(string label)

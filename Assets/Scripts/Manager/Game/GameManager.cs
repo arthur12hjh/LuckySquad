@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,12 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
+    public int currentStage { get; private set; } = 1;
+
+    public Enums.SceneType currentSceneType { get; private set; }
+
+    public event Action<Enums.SceneType> OnSceneChanged;
+
     private void Awake()
     {
         if (instance == null)
@@ -18,6 +25,7 @@ public class GameManager : MonoBehaviour
             instance = this;
 
             DontDestroyOnLoad(gameObject);
+            currentSceneType = Enums.SceneType.Loding;
         }
         else
         {
@@ -33,5 +41,17 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ChangeScene(Enums.SceneType type)
+    {
+        currentSceneType = type;
+
+        OnSceneChanged?.Invoke(type);
+    }
+
+    public void SetStage(int stage)
+    {
+        currentStage = stage;
     }
 }
