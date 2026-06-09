@@ -1,9 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MonsterRef", menuName = "Scriptable Objects/MonsterRef")]
-public class MonsterRef : ObjectPoolRef
+public class MonsterRef : EntityRef
 {
-    [SerializeField] private float HP;
-    [SerializeField] private float Power;
-    [SerializeField] private float Speed;
+    
 }
