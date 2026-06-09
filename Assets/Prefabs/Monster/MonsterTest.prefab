@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5481336107901786487}
   - component: {fileID: 9108570500107607456}
+  - component: {fileID: -5004695018595741909}
   m_Layer: 0
   m_Name: MonsterTest
   m_TagString: Untagged
@@ -91,3 +92,16 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-5004695018595741909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796388243311698571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2352ad6d12742bc8869683c008a56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Monster
+  monsterRef: {fileID: 0}

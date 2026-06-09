@@ -75,7 +75,7 @@
                 {
                     "name": "",
                     "id": "da2e8c53-7d76-4bd0-ba1b-2278de1f8bd1",
-                    "path": "<Joystick>/stick",
+                    "path": "<Touchscreen>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
