@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using static UnityEngine.Rendering.DebugUI;
 
 public class AddressablesManager : MonoBehaviour
 {
@@ -35,14 +36,12 @@ public class AddressablesManager : MonoBehaviour
         public T value;
         // 메모리 해제를 위해서 필요함
         public AsyncOperationHandle<T> handle;
-        // 참조 카운트
-        public int refCount;
     }
 
-    private class LabelCache
+    private class LabelCache<T>
     {
-        public object value;
-        public AsyncOperationHandle handle;
+        public List<T> value;
+        public AsyncOperationHandle<IList<T>> handle;
     }
 
     // 데이터를 캐싱해서 재사용하기 위함
@@ -52,8 +51,7 @@ public class AddressablesManager : MonoBehaviour
         = new Dictionary<Type, Dictionary<string, object>>();
 
     // Label로 한번에 받은 데이터를 캐싱해서 재사용하기 위함
-    private Dictionary<string, LabelCache> labelCache
-        = new Dictionary<string, LabelCache>();
+    private Dictionary<string, object> labelCache = new();
 
     // 초기화
     private IEnumerator InitFlow()
@@ -63,56 +61,47 @@ public class AddressablesManager : MonoBehaviour
     }
 
     // Addressables 에셋을 로드하는 함수
-    // callback이 null이면 "캐싱만" 수행하고 결과는 외부로 전달하지 않음
-    // Load<GameObject>("tag", obj) Load<AudioClip>("tag", audio) Load<Sprite>("tag", sprite)
-    public void Load<T>(string key, Action<T> callback = null)
+    // Key값으로 찾음
+    public AsyncOperationHandle<T> LoadRoutine<T>(string key)
     {
-        StartCoroutine(LoadRoutine(key, callback));
-    }
+        // 1. 캐시 체크
+        // 만약 이미 로드가 된거라면 그냥 그거 찾아서  불러옴
+        if (TryGetCache<T>(key, out T cached))
+            return Addressables.ResourceManager.CreateCompletedOperation<T>(cached, null);
 
-    private IEnumerator LoadRoutine<T>(string key, Action<T> callback)
-    {
-        // 만약 값이 있으면 로드를 안하고 즉시 반환을 해준다.
-        if (TryGetCache(key, out T cached))
-        {
-            callback?.Invoke(cached);
-            yield break;
-        }
-
-        // Addressables를 이용하여서 비동기 로딩을 한다.
+        // 2. 로딩 시작
+        // 지금부터 비동기 시작
         var handle = Addressables.LoadAssetAsync<T>(key);
-        yield return handle;
 
-        // 실패시 코루틴을 종료한다.
-        if (handle.Status != AsyncOperationStatus.Succeeded)
-            yield break;
+        // 3. 완료 후 캐싱
 
-        // 값을 캐싱한다.
-        SetCache(key, handle);
+        handle.Completed += h =>
+        {
+            if (h.Status == AsyncOperationStatus.Succeeded)
+            {
+                SetCache<T>(key, h.Result, h);
+            }
+        };
 
-        callback?.Invoke(handle.Result);
+        return handle;
     }
 
-
-
-    private void SetCache<T>(string key, AsyncOperationHandle<T> handle)
+    // 캐시에 저장하는 함수
+    private void SetCache<T>(string key, T value, AsyncOperationHandle<T> handle)
     {
-        // 제네릭으로 받은 타입을 정의 해준다.
         Type type = typeof(T);
 
-        // 만약 타입 Dictionary가 없으면 생성을 해준다.
+        // 타입을 딕셔너리에 찾아서 없으면 추가
         if (!cache.ContainsKey(type))
             cache[type] = new Dictionary<string, object>();
 
-        // 저장을 해준다.
+
         cache[type][key] = new CacheEntry<T>
         {
-            value = handle.Result,
+            value = value,
             handle = handle,
-            refCount = 1
         };
     }
-
 
 
     public bool TryGetCache<T>(string key, out T value)
@@ -133,7 +122,6 @@ public class AddressablesManager : MonoBehaviour
         // 타입이 맞으면 반환
         if (obj is CacheEntry<T> entry)
         {
-            entry.refCount++;
             value = entry.value;
             return true;
         }
@@ -159,11 +147,6 @@ public class AddressablesManager : MonoBehaviour
         // 제거
         if (obj is CacheEntry<T> entry)
         {
-            entry.refCount--;
-
-            if (entry.refCount > 0)
-                return;
-
             Addressables.Release(entry.handle);
             dict.Remove(key);
         }
@@ -191,54 +174,49 @@ public class AddressablesManager : MonoBehaviour
         cache.Clear();
     }
 
-
-    // AddressablesManager.Instance.LoadLabel<Sprite>(sceneName + "_img", list =>
-    // {
-    //     var target = list.Find(x => x.name == "box1");
-    //     img.sprite = target;
-    // });
-
-    // Addressable에 있는 label이 같은 모든 객체를 한번에 불러온다.
-    public IEnumerator LoadLabel<T>(string label, Action<List<T>> callback = null)
+    //label, 결과, 진행률
+    public AsyncOperationHandle<IList<T>> LoadLabel<T>(string label)
     {
-        // 이미 생성되어 있으면 바로 값을 넘겨준다.
+        // 1. 캐시 체크
         if (TryGetLabel(label, out List<T> cached))
         {
-            callback?.Invoke((List<T>)cached);
-            yield break;
+            return Addressables.ResourceManager.CreateCompletedOperation<IList<T>>(
+                cached,
+                null
+            );
         }
 
-        // Addressable에 있는 라벨을 비동기 함수로 다 가지고 온다.
+        // 2. 로딩 시작 (핸들 반환)
         var handle = Addressables.LoadAssetsAsync<T>(label, null);
-        yield return handle;
 
-        // 실패시 종료한다.
-        if (handle.Status != AsyncOperationStatus.Succeeded)
-            yield break;
-
-        // 캐싱을 해준다
-        var list = new List<T>(handle.Result);
-
-        labelCache[label] = new LabelCache
+        // 3. 캐시 저장
+        handle.Completed += h =>
         {
-            value = list,
-            handle = handle
+            if (h.Status == AsyncOperationStatus.Succeeded)
+            {
+                labelCache[label] = new LabelCache<T>
+                {
+                    value = new List<T>(h.Result),
+                    handle = h
+                };
+            }
         };
 
-        callback?.Invoke(list);
+        return handle;
     }
 
     public bool TryGetLabel<T>(string key, out List<T> value)
     {
         value = null;
 
-        // 라벨 존재 여부 확인
-        if (!labelCache.TryGetValue(key, out var cached))
+        // 존재하는지 확인 한다.
+        if (!labelCache.TryGetValue(key, out var obj))
             return false;
 
-        if (cached.value is List<T> list)
+        // 데이터 타입이 맞는지 확인 후 실제 데이터를 반환한다.
+        if (obj is LabelCache<T> cache)
         {
-            value = list;
+            value = cache.value;
             return true;
         }
 
@@ -253,7 +231,7 @@ public class AddressablesManager : MonoBehaviour
             return;
 
         // Addressables 메모리 해제
-        Addressables.Release(cache.handle);
+        Addressables.Release(cache);
 
         // 캐시 제거
         labelCache.Remove(label);
