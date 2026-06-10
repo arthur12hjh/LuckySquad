@@ -27,6 +27,11 @@ namespace Item
         public float fSpeed;
         public float fDamage;
 
+        public Projectileinfo(float fspeed, float fdamage)
+        {
+            this.fSpeed = fspeed;
+            this.fDamage = fdamage;
+        }
     }
 
     [Serializable]
@@ -83,19 +88,22 @@ namespace Item
     public class ProjectTileEffect : Effect
     {
         [JsonProperty("Count")]
-        public int iCount;        // 값
+        public int iCount;              // 값
+
+        [JsonProperty("LineCount")]
+        public int ilineCount;          // 값
 
         [JsonProperty("Damage")]
-        public float fDamage;        // 값
+        public float fDamage;           // 값
 
         [JsonProperty("Duration")]
-        public float fDuration;      // 지속 시간
+        public float fDuration;         // 지속 시간
 
         [JsonProperty("TickPeriod")]
-        public float fInterval;      // 틱 주기
+        public float fInterval;         // 틱 주기
 
         [JsonProperty("Range")]
-        public float fRange;         // 사거리
+        public float fRange;            // 사거리
     }
 
     [Serializable]
@@ -171,7 +179,7 @@ namespace Item
         public float        fInterval;      // 틱 주기
     }
 
-    public struct ItemData
+    public class ItemData
     {
         [JsonProperty("id")]
         public readonly int                 iID;

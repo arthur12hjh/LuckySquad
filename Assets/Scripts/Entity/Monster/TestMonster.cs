@@ -1,6 +1,5 @@
 using Attack;
 using Item;
-using UnityEditor;
 using UnityEngine;
 
 public class TestMonster : MonoBehaviour, DamageInterface
@@ -37,13 +36,7 @@ public class TestMonster : MonoBehaviour, DamageInterface
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        var Obj = GameObject.Instantiate(prefab, gameObject.transform);
-
-        ItemData? data = DataManager.Instance.FindItemData(1);
-        if (data is ItemData Iteminfo)
-        {
-             Obj.GetComponent<OrbitingWeapon>().Initalize(Iteminfo);
-        }
+        ItemFactory.AbstractCreateItem<OrbitingWeapon>(prefab, gameObject.transform, 1);
     }
 
     // Update is called once per frame

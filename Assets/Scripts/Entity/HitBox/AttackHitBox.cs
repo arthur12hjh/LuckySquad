@@ -77,7 +77,7 @@ public class AttackHitBox : MonoBehaviour
 #if UNITY_EDITOR
             DestroyImmediate(HitCollider);
 #else
-            Destory(HitCollider);
+            Destroy(HitCollider);
 #endif
             HitCollider = null;
         }

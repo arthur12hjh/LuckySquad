@@ -6,7 +6,7 @@ public class Bootstrap : MonoBehaviour
     private void Awake()
     {
         CreateManagers();
-        SceneManager.LoadScene("LogoLoading");
+        SceneManager.LoadScene("Logo");
     }
 
     void CreateManagers()
