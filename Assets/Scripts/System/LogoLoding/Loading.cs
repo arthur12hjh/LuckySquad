@@ -32,7 +32,7 @@ public class Loading : MonoBehaviour
     // 스테이지
     private IEnumerator StageChange(string sceneName)
     {
-        yield return StartCoroutine(LoadSceneObject(sceneName));
+        yield return StartCoroutine(LoadStageObject(sceneName));
         SceneManager.LoadScene(sceneName);
     }
 
@@ -64,5 +64,39 @@ public class Loading : MonoBehaviour
         yield return obj;
         yield return audio;
         yield return img;
+    }
+
+    private IEnumerator LoadStageObject(string sceneName)
+    {
+        float objP = 0f;
+        float audioP = 0f;
+        float imgP = 0f;
+        float DataP = 0f;
+
+        var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
+        var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
+        var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
+        var Data = AddressablesManager.Instance.LoadLabel<StageRef>(sceneName, "ref");
+
+        while (true)
+        {
+            objP = obj.PercentComplete;
+            audioP = audio.PercentComplete;
+            imgP = img.PercentComplete;
+            DataP = Data.PercentComplete;
+
+            float total = (objP + audioP + imgP + DataP) / 4f;
+
+            if (obj.IsDone && audio.IsDone && img.IsDone && Data.IsDone)
+                break;
+
+            yield return null;
+        }
+
+        // 안전 대기
+        yield return obj;
+        yield return audio;
+        yield return img;
+        yield return Data;
     }
 }

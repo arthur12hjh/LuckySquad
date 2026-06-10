@@ -6,6 +6,10 @@ public class Bootstrap : MonoBehaviour
     private void Awake()
     {
         CreateManagers();
+    }
+
+    private void Start()
+    {
         SceneManager.LoadScene("Logo");
     }
 
@@ -13,5 +17,6 @@ public class Bootstrap : MonoBehaviour
     {
         new GameObject("GameManager").AddComponent<GameManager>();
         new GameObject("Addressables").AddComponent<AddressablesManager>();
+        new GameObject("Stage").AddComponent<StageManager>();
     }
 }
