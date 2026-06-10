@@ -8,25 +8,36 @@ public class ObjectPoolManager : MonoBehaviour
 
     [SerializeField] private List<ObjectPoolRef> objectPoolRefs;            // 데이터 리스트.
 
-    private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> PoolDictionary = new(); // 예비객체 담는 맵
+    private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> _poolDictionary = new(); // 예비객체 담는 맵
 
     private void Awake()
     {
         Instance = this;
         foreach (var refSO in objectPoolRefs)
-            PoolDictionary[refSO] = CreatePool(refSO);
+        {
+            var parent = new GameObject($"{refSO.name}Pool").transform;
+            parent.SetParent(transform);
+            _poolDictionary[refSO] = CreatePool(refSO, parent);
+        }
     }
 
-    private ObjectPool<GameObject> CreatePool(ObjectPoolRef refSO)
+    private ObjectPool<GameObject> CreatePool(ObjectPoolRef refSO, Transform parent)
     {
-        var pool = new ObjectPool<GameObject>(
-            createFunc: () => Instantiate(refSO.prefab),        // 생성 방식
-            actionOnGet: obj => obj.SetActive(true),            // Get. 인게임 필드로 불러올 때 방식
-            actionOnRelease: obj => obj.SetActive(false),       // Release. 필드에서 이탈할 때 방식
-            actionOnDestroy: obj => Destroy(obj),               // Destroy. 아예 삭제할 때 방식
-            collectionCheck: false,                             // Release할 때 풀에 들어가있는 오브젝트인지 체크.
-            defaultCapacity: refSO.initializePoolSize,         // 처음 생성할 객체양
-            maxSize: refSO.initializePoolSize * 2              // 최대 상한선
+        ObjectPool<GameObject> pool = null;
+        pool = new ObjectPool<GameObject>(
+            createFunc: () =>
+            { 
+                var obj =  Instantiate(refSO.prefab, parent);
+                if(obj.TryGetComponent<IPoolable>(out IPoolable poolable))
+                    poolable.OnSpawn(() => pool.Release(obj));
+                return obj;
+            },            // 생성 방식
+            actionOnGet: obj => obj.SetActive(true),              // Get. 인게임 필드로 불러올 때 방식
+            actionOnRelease: obj  => obj.SetActive(false),        // Release. 필드에서 이탈할 때 방식
+            actionOnDestroy: obj => Destroy(obj),                 // Destroy. 아예 삭제할 때 방식
+            collectionCheck: false,                                         // Release할 때 풀에 들어가있는 오브젝트인지 체크.
+            defaultCapacity: refSO.initializePoolSize,                      // 처음 생성할 객체양
+            maxSize: refSO.initializePoolSize * 2                           // 최대 상한선
             );
         Prewarm(pool, refSO.initializePoolSize);
 
@@ -43,7 +54,7 @@ public class ObjectPoolManager : MonoBehaviour
             pool.Release(tempObjectList[i]);
     }
 
-    public GameObject Get(ObjectPoolRef refSO) => PoolDictionary[refSO].Get();
-    public void Release(ObjectPoolRef refSO, GameObject obj) => PoolDictionary[refSO].Release(obj);
+    public GameObject Get(ObjectPoolRef refSO) => _poolDictionary[refSO].Get();
+    public void Release(ObjectPoolRef refSO, GameObject obj) => _poolDictionary[refSO].Release(obj);
 
 }
