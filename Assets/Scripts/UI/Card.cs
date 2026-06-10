@@ -60,7 +60,7 @@ public class Card : MonoBehaviour
         }
 
         // 값 대입
-        cardName = Item.Value.szName;
+        cardName = Item.szName;
        
 
         if (itemImage != null && itemSprites != null && cardID >= 0 && cardID < itemSprites.Length)
