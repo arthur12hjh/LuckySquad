@@ -11,7 +11,6 @@ public class HolyWater : ProjectileBase
     Vector3     TargetPoint = Vector3.zero;
 
     float       AccTime = 0f;
-    float       DotAccTime = 0f;
     bool        AttackAble = false;
 
     void Awake()
@@ -26,24 +25,26 @@ public class HolyWater : ProjectileBase
         if (bIsAlive)
         {
             AccTime += Time.deltaTime;
-            if (AccTime < 10f)
+            if (AttackAble)
             {
-                transform.position = Vector3.Lerp(StartPoint, TargetPoint, AccTime / 10f);
+                if (AccTime >= 50f)
+                {
+                    collider2D.isTrigger = false;
+                    bIsAlive = false;
+                    Release();
+                }
             }
             else
             {
-                if (AttackAble)
+                if (AccTime < 10f)
                 {
-                    DotAccTime += Time.deltaTime;
-                    if(DotAccTime >= 50f)
-                    {
-                        collider2D.isTrigger = false;
-                        Release();
-                    }
+                    transform.position = Vector3.Lerp(StartPoint, TargetPoint, AccTime / 10f);
                 }
                 else
                 {
+                    AccTime = 0;
                     spriteRenderer.sprite = TempTex;
+                    gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0f);
                     collider2D.isTrigger = true;
                     AttackAble = true;
                 }
@@ -56,7 +57,6 @@ public class HolyWater : ProjectileBase
         base.ShootProjectile(projectileinfo, vdir, Tex);
 
         AccTime = 0;
-        DotAccTime = 0;
         AttackAble = false;
         StartPoint = transform.position;
     }

@@ -99,6 +99,9 @@ namespace Item
         [JsonProperty("Damage")]
         public float fDamage;           // 값
 
+        [JsonProperty("Damage")]
+        public float fSpeed;           // 값
+
         [JsonProperty("Duration")]
         public float fDuration;         // 지속 시간
 

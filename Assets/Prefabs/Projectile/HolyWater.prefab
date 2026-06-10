@@ -142,4 +142,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f72a204343378439be291e832fc4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HolyWater
-  TempTex: {fileID: -2544289722327301655, guid: 9d5cc12d7954b6e42b2f5ebd3f132512, type: 3}
+  TempTex: {fileID: 3941515354516406409, guid: 9d5cc12d7954b6e42b2f5ebd3f132512, type: 3}
