@@ -11,6 +11,7 @@
       {
         "$type": "Item.ProjectTileEffect, Assembly-CSharp",
         "Count": 2,
+        "LineCount": 1,
         "Damage": 20,
         "Duration": 0,
         "TickPeriod": 0,
@@ -24,6 +25,7 @@
       {
         "$type": "Item.ProjectTileEffect, Assembly-CSharp",
         "Count": 4,
+        "LineCount": 1,
         "Damage": 40,
         "Duration": 0,
         "TickPeriod": 0,
@@ -45,6 +47,7 @@
           {
             "$type": "Item.ProjectTileEffect, Assembly-CSharp",
             "Count": 4,
+            "LineCount": 1,
             "Damage": 30,
             "Duration": 0,
             "TickPeriod": 0,
@@ -66,6 +69,7 @@
           {
             "$type": "Item.ProjectTileEffect, Assembly-CSharp",
             "Count": 4,
+            "LineCount": 1,
             "Damage": 60,
             "Duration": 0,
             "TickPeriod": 0,
@@ -74,5 +78,41 @@
         ]
       }
     ]
+  },
+  {
+    "id": 4,
+    "name": "땅땅땅땅",
+    "Max_Level": 2,
+    "type": 0,
+    "LevelData": [
+  {
+    "Level": 1,
+    "effects": [
+      {
+        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
+        "Count": 1,
+        "LineCount": 1,
+        "Damage": 20,
+        "Duration": 0,
+        "TickPeriod": 2.5,
+        "Range": 1.5
+      }
+    ]
+  },
+  {
+    "Level": 2,
+    "effects": [
+      {
+        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
+        "Count": 2,
+        "LineCount": 6,
+        "Damage": 40,
+        "Duration": 0,
+        "TickPeriod": 1.5,
+        "Range": 1.5
+      }
+    ]
+  }
+]
   }
 ]

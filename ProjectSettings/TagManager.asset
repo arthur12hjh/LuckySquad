@@ -47,11 +47,11 @@ TagManager:
   - name: Background
     uniqueID: 2421123253
     locked: 0
-  - name: Environment
-    uniqueID: 1916664915
-    locked: 0
   - name: Entity
     uniqueID: 174949215
+    locked: 0
+  - name: Environment
+    uniqueID: 1916664915
     locked: 0
   - name: UI
     uniqueID: 1339961131

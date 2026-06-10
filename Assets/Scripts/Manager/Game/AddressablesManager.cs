@@ -174,11 +174,14 @@ public class AddressablesManager : MonoBehaviour
         cache.Clear();
     }
 
-    //label, 결과, 진행률
-    public AsyncOperationHandle<IList<T>> LoadLabel<T>(string label)
+    //label
+    public AsyncOperationHandle<IList<T>> LoadLabel<T>(string label, string labelType)
     {
-        // 1. 캐시 체크
-        if (TryGetLabel(label, out List<T> cached))
+        // 캐시 키
+        string cacheKey = $"{label}_{labelType}";
+
+        // 캐시 체크
+        if (TryGetLabel(cacheKey, out List<T> cached))
         {
             return Addressables.ResourceManager.CreateCompletedOperation<IList<T>>(
                 cached,
@@ -186,15 +189,26 @@ public class AddressablesManager : MonoBehaviour
             );
         }
 
-        // 2. 로딩 시작 (핸들 반환)
-        var handle = Addressables.LoadAssetsAsync<T>(label, null);
+        // 라벨 2개
+        List<object> labels = new List<object>()
+        {
+            label,
+            labelType
+        };
 
-        // 3. 캐시 저장
+        // 두 라벨 모두 포함된 Asset 로드
+        var handle = Addressables.LoadAssetsAsync<T>(
+            labels,
+            null,
+            Addressables.MergeMode.Intersection
+        );
+
+        // 캐시 저장
         handle.Completed += h =>
         {
             if (h.Status == AsyncOperationStatus.Succeeded)
             {
-                labelCache[label] = new LabelCache<T>
+                labelCache[cacheKey] = new LabelCache<T>
                 {
                     value = new List<T>(h.Result),
                     handle = h

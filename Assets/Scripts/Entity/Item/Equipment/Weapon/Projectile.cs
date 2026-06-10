@@ -4,30 +4,37 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    private SpriteRenderer              spriteRenderer = null;
     private Projectileinfo              info = new Projectileinfo();
 
-    private Vector2                     vDir = Vector2.zero;
+    private Vector3                     vDir = Vector2.zero;
     private bool                        bIsAlive = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
     {
         if(bIsAlive)
         {
-            transform.position = vDir * info.fSpeed * Time.deltaTime;
+            transform.position += vDir * info.fSpeed * Time.deltaTime;
         }
     }
 
-    public void ShootProjectile(ref Projectileinfo projectileinfo, Vector2 vdir)
+    public void Initalize()
+    {
+
+    }
+
+    public void ShootProjectile(Projectileinfo projectileinfo, Vector2 vdir, Sprite Tex)
     {
         info = projectileinfo;
         vDir = vdir;
         bIsAlive = true;
+
+        if (spriteRenderer == null)
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        spriteRenderer.sprite = Tex;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,5 +51,13 @@ public class Projectile : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         Debug.Log($"Exit : {other.name}");
+    }
+
+    public void Release()
+    {
+        if (ObjectPoolManager.Instance != null)
+            return;
+
+        //ObjectPoolManager.Instance.Release(this);
     }
 }

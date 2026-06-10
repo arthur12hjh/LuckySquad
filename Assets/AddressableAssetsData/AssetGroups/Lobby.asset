@@ -14,9 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Lobby
   m_GUID: b4e392dd30ab7284695463296aeedb55
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 396d7abf91ece2449a38d5b5d82e9d54
+    m_Address: Assets/Prefabs/Player/Monster/MonsterTest.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - obj
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cd20b202dcef486e8dcee5949fa5a9a
+    m_Address: Assets/Prefabs/Player/PlayerTest.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - obj
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1bd1f14bc4f81e419b898e53de999a8
+    m_Address: Assets/Prefabs/Projectile/Projectile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - obj
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: 6d2b2cd87ace76a4da09390eac0d3595, type: 2}
+  m_Settings: {fileID: 11400000, guid: 9431f25a67994e64e87f2dd68a4a24a7, type: 2}
   m_SchemaSet:
     m_Schemas:
     - {fileID: 11400000, guid: 229f99980da641047a05d5132769ebae, type: 2}

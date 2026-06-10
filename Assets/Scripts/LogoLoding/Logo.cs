@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Logo : MonoBehaviour
 {
-    private bool isInitialized = false;
     [SerializeField]
     private GameObject text;
 
