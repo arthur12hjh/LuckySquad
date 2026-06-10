@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
-    public int currentStage { get; private set; } = 1;
+    public int currentStage { get; private set; } = -1;
 
     public Enums.SceneType currentSceneType { get; private set; }
 

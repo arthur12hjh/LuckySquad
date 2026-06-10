@@ -42,9 +42,9 @@ public class Loading : MonoBehaviour
         float audioP = 0f;
         float imgP = 0f;
 
-        var obj = AddressablesManager.Instance.LoadLabel<GameObject>($"{sceneName}_obj");
-        var audio = AddressablesManager.Instance.LoadLabel<AudioClip>($"{sceneName}_bmg");
-        var img = AddressablesManager.Instance.LoadLabel<Sprite>($"{sceneName}_img");
+        var obj = AddressablesManager.Instance.LoadLabel<GameObject>($"{sceneName}");
+        var audio = AddressablesManager.Instance.LoadLabel<AudioClip>($"{sceneName}");
+        var img = AddressablesManager.Instance.LoadLabel<Sprite>($"{sceneName}");
 
         while (true)
         {
