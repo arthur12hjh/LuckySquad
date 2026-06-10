@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -7,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class Loading : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI loadingText;
+
     private Enums.SceneType sceneType;
     private int currentStege = -1;
 
@@ -16,10 +19,15 @@ public class Loading : MonoBehaviour
 
         currentStege = GameManager.Instance.currentStage;
 
+
+        SceneManager.LoadScene(sceneName);
         if (currentStege == -1)
             StartCoroutine(SceneChange(sceneName));
         else
             StartCoroutine(StageChange($"{sceneName}_{currentStege}"));
+
+        StartCoroutine(AnimateLoadingText());
+
     }
 
     // 로비, 스토어 등등
@@ -98,5 +106,18 @@ public class Loading : MonoBehaviour
         yield return audio;
         yield return img;
         yield return Data;
+    }
+
+    IEnumerator AnimateLoadingText()
+    {
+        while (true)
+        {
+            loadingText.text = "Loading.";
+            yield return new WaitForSeconds(0.5f);
+            loadingText.text = "Loading..";
+            yield return new WaitForSeconds(0.5f);
+            loadingText.text = "Loading...";
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

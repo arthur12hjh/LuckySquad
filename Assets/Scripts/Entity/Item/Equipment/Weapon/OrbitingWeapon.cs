@@ -117,4 +117,12 @@ public class OrbitingWeapon : EquipmentBase
     {
         return projectTileEffect.iCount;
     }
+
+    private void OnDestroy()
+    {
+        foreach (var obj in ProjecTileList)
+        {
+            obj.GetComponent<Projectile>().Release();
+        }
+    }
 }

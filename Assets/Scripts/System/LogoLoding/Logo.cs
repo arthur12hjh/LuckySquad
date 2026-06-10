@@ -1,15 +1,19 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using DG.Tweening;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Logo : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject text;
+    [SerializeField] private GameObject text;
+    [SerializeField] private TextMeshProUGUI pressMessageText;
 
     private InputAction action;
+
+    private float minAlpha = 0.3f;
+    private float textFadeduration = 1.5f;
 
     private void Start()
     {
@@ -22,6 +26,10 @@ public class Logo : MonoBehaviour
         action.canceled += ChangeScene;
 
         action.Enable();
+
+        pressMessageText.DOFade(minAlpha, textFadeduration)
+            .SetEase(Ease.InOutSine)
+            .SetLoops(-1, LoopType.Yoyo);
     }
 
     private void ChangeScene(InputAction.CallbackContext ctx)
@@ -33,5 +41,6 @@ public class Logo : MonoBehaviour
     private void OnDisable()
     {
         action.canceled -= ChangeScene;
+        pressMessageText.DOKill();
     }
 }

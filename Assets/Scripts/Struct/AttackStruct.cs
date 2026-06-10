@@ -25,6 +25,4 @@ namespace Attack
             AttackType = type;
         }
     }
-
-   
 }
