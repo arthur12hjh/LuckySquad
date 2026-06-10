@@ -1,62 +1,59 @@
-using Item;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private GameObject playerObj;
-    [SerializeField] private GameObject WeaponObj;
+    [SerializeField] private GameObject _playerObj;
+    [SerializeField] private PlayerStats _playerStats;
 
-    ProjectileWeapon Weapon;
-    Animator playerAnimator;
-    Transform playerTransform;
-    Rigidbody2D playerrb;
+    Animator _playerAnimator;
+    Transform _playerTransform;
+    Rigidbody2D _playerrb;
 
-    [SerializeField] Vector2 inputVec;
-
+    [SerializeField] Vector2 _inputVec;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(playerObj == null)
-        {
-            Debug.Log($"PlayerController : Cannot find Player Object.\nInput Player Object to Inspector");
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            playerAnimator = playerObj.GetComponent<Animator>();
-            playerTransform = playerObj.transform;
-            playerrb = playerObj.GetComponent<Rigidbody2D>();
 
-            var obj = GameObject.Instantiate(WeaponObj, playerObj.transform);
-
-            ItemData? data = DataManager.Instance.FindItemData(4);
-            if (data is ItemData Iteminfo)
-            {
-                Weapon = obj.GetComponent<ProjectileWeapon>();
-                Weapon.Initalize(Iteminfo);
-            }
-        }
     }
 
     void Update()
     {
-        if(Weapon != null)
-            Weapon.Update_Directation(new Vector3(1f, 1f, 0f));
     }
 
     private void FixedUpdate()
     {
-        playerrb.MovePosition(playerrb.position + inputVec * (Speed * Time.fixedDeltaTime));
+        _playerrb.MovePosition(_playerrb.position + _inputVec * (Speed * Time.fixedDeltaTime));
     }
 
     void OnMove(InputValue value)
     {
-        inputVec = value.Get<Vector2>();
+        _inputVec = value.Get<Vector2>();
     }
 
-    public float Speed { get{return speed;} set{speed = value;} }
+    public void Initialize(PlayerStats playerStats, GameObject playerObj)
+    {
+        _playerStats = playerStats;
+        _playerObj = playerObj;
+        if (playerObj == null)
+        {
+            enabled = false;
+            return;
+        }
+        
+        _playerAnimator = _playerObj.GetComponent<Animator>();
+        _playerTransform = _playerObj.transform;
+        _playerrb = _playerObj.GetComponent<Rigidbody2D>();
+
+        if (_playerrb == null)
+        {
+            Debug.LogWarning("PlayerController:: Player Prefab's Rigidbody is empty.\nPlease Make Own Rigidbody");
+            _playerrb = InitializeRigidbody2D(_playerObj);
+        }
+    }
+    
+    public float Speed { get{return _playerStats.Speed;} set{_playerStats.Speed = value;} }
 
     private Rigidbody2D InitializeRigidbody2D(GameObject obj)
     {

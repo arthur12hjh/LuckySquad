@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1094119bc3d9db42a2023d1f7b80c4e, type: 3}
   m_Name: TestMonRef
   m_EditorClassIdentifier: Assembly-CSharp::MonsterRef
-  prefab: {fileID: 1796388243311698571, guid: 396d7abf91ece2449a38d5b5d82e9d54, type: 3}
-  initializePoolSize: 200
-  HP: 0
+  HP: 5
   Power: 0
-  Speed: 0
+  Speed: 1.5
