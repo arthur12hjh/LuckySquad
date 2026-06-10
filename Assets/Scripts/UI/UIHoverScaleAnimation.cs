@@ -14,11 +14,11 @@ public class UIHoverScaleAnimation : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        rectTransform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack);
+        rectTransform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        rectTransform.DOScale(1.0f, 0.2f).SetEase(Ease.OutBack);
+        rectTransform.DOScale(1.0f, 0.2f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 }

@@ -1,10 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewScriptableObjectScript", menuName = "Scriptable Objects/NewScriptableObjectScript")]
-public class NewScriptableObjectScript : ScriptableObject
+[CreateAssetMenu(fileName = "UIManager", menuName = "Scriptable Objects/UIManager")]
+public class UIManager : ScriptableObject
 {
     void StartStage(int stage)
     {
 
     }
+    
 }
