@@ -15,6 +15,7 @@ public class PlayerStats
 
     [SerializeField] private int _level;
     [SerializeField] private int _currentExp;
+    [SerializeField] private int _currentGold;
     [SerializeField] private float _maxHp;
     [SerializeField] private float _currentHp;
     [SerializeField] private float _power;
@@ -31,6 +32,7 @@ public class PlayerStats
         _duration = refSO.Duration;
         _level = 0;
         _currentExp = 0;
+        _currentGold = 0;
         _maxHp = refSO.HP;
         _currentHp = refSO.HP;
         _power = refSO.Power;
@@ -44,6 +46,17 @@ public class PlayerStats
         {
             if (_level == value) return;
             _level = value;
+            OnChanged?.Invoke();
+        }
+    }
+
+    public int currentGold
+    {
+        get => _currentGold;
+        set
+        {
+            if (_currentGold == value) return;
+            _currentGold = value;
             OnChanged?.Invoke();
         }
     }

@@ -42,11 +42,15 @@ public class Card : MonoBehaviour
 
     public void SetData(int id, int grade)
     {
+        rectTransform.DOKill();
+        rectTransform.localScale = Vector2.one;
+        rectTransform.DOPunchScale(Vector3.one *  0.2f, 0.3f, vibrato: 1, elasticity: 0.5f).SetUpdate(true);
+
         cardID = id;
         cardGrade = grade;
 
         // currentLevel
-        BindSprites();
+       // BindSprites();
     }
 
     void BindSprites()
