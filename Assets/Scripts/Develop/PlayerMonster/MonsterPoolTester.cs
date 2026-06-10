@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MonsterPoolTester : MonoBehaviour
 {
-    [SerializeField] private MonsterRef monsterRef;
+    [SerializeField] private ObjectPoolRef objRef;
 
     [SerializeField] private Vector2 Range_x = new Vector2(-7.5f, 7.8f);
     [SerializeField] private Vector2 Range_y = new Vector2(-3.3f, 2.7f);
@@ -15,8 +15,9 @@ public class MonsterPoolTester : MonoBehaviour
         if(_timer > 0.1f)
         {
             _timer = 0f;
-            var monster = ObjectPoolManager.Instance.Get(monsterRef);
+            var monster = ObjectPoolManager.Instance.Get(objRef);
             monster.transform.position = new Vector3(Random.Range(Range_x.x, Range_x.y), Random.Range(Range_y.x, Range_y.y), 0f);
+            monster.GetComponent<BaseEntity>().Initialize(objRef.initRef);
         }
     }
 }

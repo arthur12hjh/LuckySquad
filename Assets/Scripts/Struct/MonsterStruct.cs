@@ -5,5 +5,5 @@ using UnityEngine;
 
 namespace Entity
 {
-    
+
 }

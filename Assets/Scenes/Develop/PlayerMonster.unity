@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPoolManager
   objectPoolRefs:
-  - {fileID: 11400000, guid: c994b05e03b971144819b9c482451873, type: 2}
+  - {fileID: 11400000, guid: fa8d161f1512b4eacac69b8c1efb1176, type: 2}
 --- !u!4 &363848228
 Transform:
   m_ObjectHideFlags: 0
@@ -1752,7 +1752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eda4ae7b85a84d438afe1db8f5dffeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterPoolTester
-  monsterRef: {fileID: 11400000, guid: c994b05e03b971144819b9c482451873, type: 2}
+  objRef: {fileID: 11400000, guid: fa8d161f1512b4eacac69b8c1efb1176, type: 2}
   Range_x: {x: -7.5, y: 7.8}
   Range_y: {x: -3.3, y: 2.7}
 --- !u!1 &1881524670
@@ -1893,6 +1893,10 @@ PrefabInstance:
     - target: {fileID: 647102625984419277, guid: 9cd20b202dcef486e8dcee5949fa5a9a, type: 3}
       propertyPath: m_Name
       value: PlayerTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138020416748785720, guid: 9cd20b202dcef486e8dcee5949fa5a9a, type: 3}
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8529553048065626036, guid: 9cd20b202dcef486e8dcee5949fa5a9a, type: 3}
       propertyPath: m_LocalScale.x
