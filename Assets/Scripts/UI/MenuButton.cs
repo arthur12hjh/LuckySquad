@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class MenuButton : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class MenuButton : MonoBehaviour
     [SerializeField] private Sprite selectedSprite;
 
     bool isPressed = false;
+
+    private readonly float pressOffset = 30f;
+
     Toggle toggle; 
     RectTransform rect;
 
@@ -32,7 +36,7 @@ public class MenuButton : MonoBehaviour
         {
             if(isPressed == false)
             {   
-                rect.anchoredPosition += new Vector2(0f, 30f);
+                rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y + pressOffset), 0.2f).SetEase(Ease.OutBack);
                 panel.SetActive(true);
                 buttonImage.sprite = selectedSprite;
             }
@@ -43,7 +47,7 @@ public class MenuButton : MonoBehaviour
         {
             if (isPressed == true)
             {
-                rect.anchoredPosition += new Vector2(0f, -30f);
+                rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - pressOffset), 0.2f).SetEase(Ease.OutBack);
                 panel.SetActive(false);
                 buttonImage.sprite = normalSprite;
             }
