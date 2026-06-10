@@ -1,9 +1,11 @@
 using Attack;
 using Item;
+using System;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPoolable
 {
+    private Action                      _releaseAct;
     private SpriteRenderer              spriteRenderer = null;
     private Projectileinfo              info = new Projectileinfo();
 
@@ -45,6 +47,7 @@ public class Projectile : MonoBehaviour
         if(Monster != null)
         {
             Monster.Dagmed(Monster.gameObject, new SAttackData(info.fDamage, 1, EAttackType.Strike));
+            Release();
         }
     }
 
@@ -55,9 +58,12 @@ public class Projectile : MonoBehaviour
 
     public void Release()
     {
-        if (ObjectPoolManager.Instance != null)
-            return;
+        if(_releaseAct != null)
+            _releaseAct.Invoke();
+    }
 
-        //ObjectPoolManager.Instance.Release(this);
+    public void OnSpawn(Action releaseSelf)
+    {
+        _releaseAct = releaseSelf;
     }
 }
