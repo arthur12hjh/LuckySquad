@@ -9,13 +9,30 @@ public static class ItemFactory
         GameObject gameObject = new GameObject("Item");
         gameObject.AddComponent<T>();
 
-        ItemData? data = DataManager.Instance.FindItemData(iItemID);
-        if (data is ItemData Iteminfo)
+        ItemData data = DataManager.Instance.FindItemData(iItemID);
+        if (data != null && data is ItemData Iteminfo)
         {
             gameObject.GetComponent<T>().Initalize(Iteminfo);
         }
 
         return gameObject;
+    }
+
+    static public GameObject AbstractCreateItem<T>(GameObject prefab, Transform parent = null, int iItemID = 0)
+    where T : BaseItem, new()
+    {
+        if (iItemID == 0)
+            return null;
+
+        var obj = GameObject.Instantiate(prefab, parent);
+
+        ItemData data = DataManager.Instance.FindItemData(iItemID);
+        if (data != null && data is ItemData Iteminfo)
+        {
+            obj.GetComponent<T>().Initalize(Iteminfo);
+        }
+
+        return obj;
     }
 }
 

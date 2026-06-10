@@ -12,7 +12,7 @@ public class DataManager : ScriptableObject
 
     #region Default
 
-    public ItemData? FindItemData(int id)
+    public ItemData FindItemData(int id)
     {
         if(Items.TryGetValue(id, out var item))
             return item;

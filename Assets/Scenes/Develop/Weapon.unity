@@ -270,10 +270,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424fdc2b57c214661a672b416b9a79ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 1.5
-  playerObj: {fileID: 1046114588}
-  WeaponObj: {fileID: 6294688345810203835, guid: fca7daa172184b24aa547cdf8c45191a, type: 3}
-  inputVec: {x: 0, y: 0}
+  _playerObj: {fileID: 1046114588}
+  _playerStats:
+    _magneticPower: 0
+    _expMagnification: 0
+    _projectileAmount: 0
+    _attackRange: 0
+    _attackSpeed: 0
+    _projectileSpeed: 0
+    _duration: 0
+    _level: 0
+    _currentExp: 0
+    _maxHp: 0
+    _currentHp: 0
+    _power: 0
+    _speed: 0
+  _inputVec: {x: 0, y: 0}
 --- !u!114 &498160008
 MonoBehaviour:
   m_ObjectHideFlags: 0

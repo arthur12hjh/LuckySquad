@@ -84,7 +84,7 @@ public class OrbitingWeapon : EquipmentBase
             for (int i = iActiveProjectile - ProjecTileList.Count; i > 0; --i)
             {
                 var gameOb = ObjectPoolManager.Instance.Get(projectTileRefSO);
-                gameOb.transform.parent = transform;
+                gameOb.transform.parent = gameObject.transform;
                 gameOb.SetActive(false);
                 var ObjSR  = gameOb.GetComponent<SpriteRenderer>();
                 if(ObjSR != null)

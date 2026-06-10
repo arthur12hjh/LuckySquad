@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _playerrb.MovePosition(_playerrb.position + _inputVec * (Speed * Time.fixedDeltaTime));
+        if(_playerrb != null)
+            _playerrb.MovePosition(_playerrb.position + _inputVec * (Speed * Time.fixedDeltaTime));
     }
 
     void OnMove(InputValue value)
