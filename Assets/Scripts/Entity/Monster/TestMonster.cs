@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestMonster : MonoBehaviour, DamageInterface
 {
     public GameObject prefab;
+    public GameObject Thunderprefab;
 
     public float CriticalDamage()
     {
@@ -37,6 +38,7 @@ public class TestMonster : MonoBehaviour, DamageInterface
     void Start()
     {
         ItemFactory.AbstractCreateItem<OrbitingWeapon>(prefab, gameObject.transform, 1);
+        ItemFactory.AbstractCreateItem<ProjectileWeapon>(Thunderprefab, gameObject.transform, 2);
     }
 
     // Update is called once per frame

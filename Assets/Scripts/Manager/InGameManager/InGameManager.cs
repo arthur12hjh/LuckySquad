@@ -25,7 +25,14 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private GameObject _playerControllerObj;
     [SerializeField] private CinemachineVirtualCamera _playerCamera;
-    
+
+
+    [SerializeField] private Vector3    _SpawnBound;
+
+    SpawnPattern _spawnPattern = null;
+    public   SpawnPattern OutScreenSpawnPattern => _spawnPattern;
+
+
     void Awake()
     {    
         if (Instance != null && Instance != this)
@@ -64,6 +71,8 @@ public class InGameManager : MonoBehaviour
         {
             InstantiatePlayerVirtualCamera();
         }
+
+        _spawnPattern = OutBoundSpawnPattern.Create(_SpawnBound);
     }
 
     void OnDestroy()

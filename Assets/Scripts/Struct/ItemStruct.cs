@@ -74,6 +74,9 @@ namespace Item
         [JsonProperty("Damage")]
         public float        fDamage;        // 값
 
+        [JsonProperty("AttackCount")]
+        public int          iCount;        // 공격 횟수
+
         [JsonProperty("Duration")]
         public float        fDuration;      // 지속 시간
 
@@ -81,7 +84,7 @@ namespace Item
         public float        fInterval;      // 틱 주기
 
         [JsonProperty("Range")]
-        public float        fRange;                // 사거리
+        public float        fRange;         // 사거리
     }
 
     [Serializable]

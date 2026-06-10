@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class ProjectileWeapon : EquipmentBase
 {
-    [SerializeField] private ObjectPoolRef projectTileRefSO = null;
-    [SerializeField] private int           LineAngle = 90;
-    [SerializeField] private string        BulletTextureUrl;
+    public enum ProjectileType { Projectile, Throw, None};
 
+    [SerializeField] private ObjectPoolRef  projectTileRefSO = null;
+    [SerializeField] private int            LineAngle = 90;
+    [SerializeField] private string         BulletTextureUrl;
+    [SerializeField] private ProjectileType type = ProjectileType.Projectile;
+
+    private SpawnPattern        spawnPattern = null;
     private Sprite[]            BulletSpriteTex;
     private ProjectTileEffect   projectTileEffect;
     private Vector2             vDir = Vector2.zero;
@@ -17,7 +21,7 @@ public class ProjectileWeapon : EquipmentBase
     // Start i s called before the first frame update
     void Start()
     {
-        StartCoroutine(RepeatActionCoroutine());
+       
     }
 
     public void Update_Directation(Vector2 dir)
@@ -30,8 +34,19 @@ public class ProjectileWeapon : EquipmentBase
         base.Initalize(itemData);
         BulletSpriteTex = Resources.LoadAll<Sprite>(BulletTextureUrl);
 
-        level++;
+        switch(type)
+        {
+            case ProjectileType.Projectile:
+                spawnPattern = ProjectileSpawnPattern.Create(gameObject);
+                break;
+
+            case ProjectileType.Throw:
+                spawnPattern = InGameManager.Instance.OutScreenSpawnPattern;
+                break;
+        }
+
         SerializationWeaponData();
+        StartCoroutine(RepeatActionCoroutine());
        
         IsActive = true;
     }
@@ -92,7 +107,10 @@ public class ProjectileWeapon : EquipmentBase
 
     private void ShootBulletEvent()
     {
-       if (vDir == Vector2.zero || ItemData.iID == 0)
+       if (ItemData.iID == 0 || spawnPattern == null)
+            return;
+
+        if (vDir == Vector2.zero && type == ProjectileType.Projectile)
             return;
 
         int ShootLineCnt = GetShootLineCount();
@@ -105,8 +123,9 @@ public class ProjectileWeapon : EquipmentBase
             Vector3 newDir = Quaternion.Euler(0, 0, AccAngle) * vDir;
 
             gameObj.SetActive(true);
-            gameObj.transform.position = transform.position;
-            gameObj.GetComponent<Projectile>().ShootProjectile(new Projectileinfo(fSpeed, projectTileEffect.fDamage), newDir, BulletSpriteTex[level - 1]);
+
+            gameObj.transform.position = spawnPattern.GetPosition(Vector3.zero);
+            gameObj.GetComponent<ProjectileBase>().ShootProjectile(new Projectileinfo(fSpeed, projectTileEffect.fDamage), newDir, BulletSpriteTex[level - 1]);
         }
 
         iShootCount++;

@@ -275,7 +275,7 @@ MonoBehaviour:
   _playerObj: {fileID: 0}
   _playerControllerObj: {fileID: 0}
   _playerCamera: {fileID: 0}
-  _SpawnBound: {x: 7, y: 12, z: 0}
+  _SpawnBound: {x: 1, y: 1, z: 0}
 --- !u!1 &1303615052 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1796388243311698571, guid: 396d7abf91ece2449a38d5b5d82e9d54, type: 3}

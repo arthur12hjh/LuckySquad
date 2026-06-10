@@ -46,11 +46,11 @@
         "effects": [
           {
             "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-            "Count": 4,
+            "Count": 2,
             "LineCount": 1,
             "Damage": 30,
             "Duration": 0,
-            "TickPeriod": 0,
+            "TickPeriod": 1.5,
             "Range": 10
           }
         ]
@@ -114,5 +114,27 @@
     ]
   }
 ]
+  },
+   {
+    "id": 5,
+    "name": "번개 번개 번개맨",
+    "Max_Level": 1,
+    "type": 0,
+    "LevelData": [
+      {
+        "Level": 1,
+        "effects": [
+          {
+            "$type": "Item.DamageEffect, Assembly-CSharp",
+            "EffectType": 0,
+            "Damage": 30,
+            "AttackCount": 1,
+            "Duration": 0,
+            "TickPeriod": 1,
+            "Range": 10
+          }
+        ]
+      }
+    ]
   }
 ]
