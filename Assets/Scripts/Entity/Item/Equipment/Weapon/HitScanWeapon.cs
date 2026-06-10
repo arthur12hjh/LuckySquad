@@ -2,7 +2,6 @@ using Item;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class HitScanWeapon : EquipmentBase
 {

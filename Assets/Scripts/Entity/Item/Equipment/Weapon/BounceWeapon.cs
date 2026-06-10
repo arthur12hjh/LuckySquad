@@ -1,9 +1,6 @@
 using Item;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static ProjectileWeapon;
-
 public class BounceWeapon : EquipmentBase
 {
     private ProjectTileEffect projectTileEffect;
@@ -22,7 +19,17 @@ public class BounceWeapon : EquipmentBase
     {
         if (IsActive)
         {
-            transform.position += vDir * projectTileEffect.fSpeed * Time.deltaTime;
+            int wallMask = 1 << 6;
+            float moveDist = projectTileEffect.fSpeed * Time.deltaTime;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, vDir, moveDist, wallMask);
+            if (hit.collider != null)
+            {
+                vDir = Vector2.Reflect(vDir, hit.normal);
+            }
+            else
+            {
+                transform.position += vDir * moveDist;
+            }
         }
     }
 
@@ -31,6 +38,8 @@ public class BounceWeapon : EquipmentBase
         base.Initalize(itemData);
         SerializationWeaponData();
 
+        gameObject.transform.position = gameObject.transform.parent.position;
+        vDir = Random.insideUnitCircle.normalized;
         IsActive = true;
     }
 

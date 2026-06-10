@@ -99,7 +99,7 @@ namespace Item
         [JsonProperty("Damage")]
         public float fDamage;           // °ª
 
-        [JsonProperty("Damage")]
+        [JsonProperty("Speed")]
         public float fSpeed;           // °ª
 
         [JsonProperty("Duration")]

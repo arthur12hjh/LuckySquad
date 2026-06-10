@@ -13,6 +13,7 @@
         "Count": 2,
         "LineCount": 1,
         "Damage": 20,
+        "Speed": 2,
         "Duration": 0,
         "TickPeriod": 0,
         "Range": 1.5
@@ -27,6 +28,7 @@
         "Count": 4,
         "LineCount": 1,
         "Damage": 40,
+        "Speed": 2,
         "Duration": 0,
         "TickPeriod": 0,
         "Range": 1.5
@@ -49,6 +51,7 @@
             "Count": 2,
             "LineCount": 1,
             "Damage": 30,
+            "Speed": 2,
             "Duration": 0,
             "TickPeriod": 1.5,
             "Range": 10
@@ -71,6 +74,7 @@
             "Count": 4,
             "LineCount": 1,
             "Damage": 60,
+            "Speed": 2,
             "Duration": 0,
             "TickPeriod": 0,
             "Range": 10
@@ -93,6 +97,7 @@
         "Count": 1,
         "LineCount": 1,
         "Damage": 20,
+        "Speed": 2,
         "Duration": 0,
         "TickPeriod": 2.5,
         "Range": 1.5
@@ -107,6 +112,7 @@
         "Count": 2,
         "LineCount": 6,
         "Damage": 40,
+        "Speed": 2,
         "Duration": 0,
         "TickPeriod": 1.5,
         "Range": 1.5

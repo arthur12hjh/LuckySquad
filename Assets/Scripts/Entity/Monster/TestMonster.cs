@@ -37,8 +37,7 @@ public class TestMonster : MonoBehaviour, DamageInterface
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ItemFactory.AbstractCreateItem<OrbitingWeapon>(prefab, gameObject.transform, 1);
-        ItemFactory.AbstractCreateItem<ProjectileWeapon>(Thunderprefab, gameObject.transform, 2);
+        ItemFactory.AbstractCreateItem<BounceWeapon>(Thunderprefab, gameObject.transform, 2);
     }
 
     // Update is called once per frame
