@@ -23,10 +23,17 @@ public class ObjectPoolManager : MonoBehaviour
 
     private ObjectPool<GameObject> CreatePool(ObjectPoolRef refSO, Transform parent)
     {
-        var pool = new ObjectPool<GameObject>(
-            createFunc: () => Instantiate(refSO.prefab, parent),            // 생성 방식
+        ObjectPool<GameObject> pool = null;
+        pool = new ObjectPool<GameObject>(
+            createFunc: () =>
+            { 
+                var obj =  Instantiate(refSO.prefab, parent);
+                if(obj.TryGetComponent<IPoolable>(out IPoolable poolable))
+                    poolable.OnSpawn(() => pool.Release(obj));
+                return obj;
+            },            // 생성 방식
             actionOnGet: obj => obj.SetActive(true),              // Get. 인게임 필드로 불러올 때 방식
-            actionOnRelease: obj  => obj.SetActive(false),         // Release. 필드에서 이탈할 때 방식
+            actionOnRelease: obj  => obj.SetActive(false),        // Release. 필드에서 이탈할 때 방식
             actionOnDestroy: obj => Destroy(obj),                 // Destroy. 아예 삭제할 때 방식
             collectionCheck: false,                                         // Release할 때 풀에 들어가있는 오브젝트인지 체크.
             defaultCapacity: refSO.initializePoolSize,                      // 처음 생성할 객체양

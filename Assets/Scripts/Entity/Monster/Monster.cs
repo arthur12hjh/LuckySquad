@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Monster : BaseEntity
 {
+    [SerializeField] private Transform _playerTransform;
     
     public override void Initialize(ScriptableObject initRef)
     {
