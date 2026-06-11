@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Id: 
   m_RemoteCatalogLoadPath:
     m_Id: 
-  m_ContentStateBuildPathProfileVariableName: 
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
@@ -106,6 +106,10 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - Test
+    - Lobby
+    - obj
+    - img
+    - sound
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9995508f4df5db24aae1aa93f56def50, type: 2}

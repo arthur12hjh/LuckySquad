@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private PlayerStats _playerStats;
 
-    Animator _playerAnimator;
-    Transform _playerTransform;
-    Rigidbody2D _playerrb;
+    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private Transform _playerTransform;
+    [SerializeField] private Rigidbody2D _playerrb;
 
     [SerializeField] Vector2 _inputVec;
     
@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _playerrb.MovePosition(_playerrb.position + _inputVec * (Speed * Time.fixedDeltaTime));
+        if(_playerrb != null)
+            _playerrb.MovePosition(_playerrb.position + _inputVec * (Speed * Time.fixedDeltaTime));
     }
 
     void OnMove(InputValue value)

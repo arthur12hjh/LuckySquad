@@ -1,11 +1,9 @@
-
 public abstract class EquipmentBase : BaseItem
 {
     public bool Active { get { return IsActive; } }
 
-    protected bool  IsActive = false;
-    protected float fInterval = 0;
-    protected float Range = 0f;
+    protected bool              IsActive = false;
+    protected float             Range = 0f;
 
     public void UseItem()
     {
