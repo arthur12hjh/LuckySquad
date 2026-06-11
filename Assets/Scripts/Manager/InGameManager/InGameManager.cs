@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using UnityEngine;
 
 // InGameManager
@@ -14,6 +15,11 @@ public class InGameManager : MonoBehaviour
 {
     public static InGameManager Instance { get; private set; }
 
+    private bool isGamePaused = false;
+    private float gameTime = 0f;
+    private int currentSecond = 0;
+    private int previousSecond = 0;
+
     [Header("Debugger")]
     [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager 연동 시스템 사용 시 더이상 사용하지 않음
     [SerializeField] private GameObject _playerPrefab;
@@ -26,12 +32,12 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private GameObject _playerControllerObj;
     [SerializeField] private CinemachineVirtualCamera _playerCamera;
 
-
     [SerializeField] private Vector3    _SpawnBound;
 
     SpawnPattern _spawnPattern = null;
     public   SpawnPattern OutScreenSpawnPattern => _spawnPattern;
 
+    public event Action<int> OnTimeChange; // 게임 시간 변화 이벤트 1초마다 호출
 
     void Awake()
     {    
@@ -75,6 +81,11 @@ public class InGameManager : MonoBehaviour
         _spawnPattern = OutBoundSpawnPattern.Create(_SpawnBound);
     }
 
+    private void Update()
+    {
+        UpdateGameTime();
+    }
+
     void OnDestroy()
     {
         if (Instance == this)
@@ -98,5 +109,37 @@ public class InGameManager : MonoBehaviour
     
     public PlayerStats GetPlayerStats() => _playerStats;
     public Transform GetPlayerTransform() => _playerObj.transform;
-    
+
+    public void StopGame()
+    {
+        if (!isGamePaused)
+        {
+            Time.timeScale = 0;
+            isGamePaused = true;
+            Debug.Log("Game Paused");
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (isGamePaused)
+        {
+            Time.timeScale = 1;
+            isGamePaused = false;
+            Debug.Log("Game Resumed");
+        }
+    }
+
+    private void UpdateGameTime()
+    {
+        gameTime += Time.deltaTime;
+
+        currentSecond = Mathf.FloorToInt(gameTime);
+
+        if (currentSecond != previousSecond)
+        {
+            OnTimeChange?.Invoke(currentSecond);
+            previousSecond = currentSecond;
+        }
+    }
 }

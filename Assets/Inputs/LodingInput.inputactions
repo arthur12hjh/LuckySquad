@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "name": "LodingInput",
+    "maps": [
+        {
+            "name": "Loding",
+            "id": "d8c86b65-c542-4811-b10e-990a6eae945d",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "e35471bf-2850-4f10-acb3-aa5d09f71848",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fc63fb6e-2bf4-463c-a100-90451ec52ddc",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "31731c84-0b19-4a1b-8f8f-e1a92104f2c2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
