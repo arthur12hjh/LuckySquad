@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Logo : MonoBehaviour
 {
-    [SerializeField] private GameObject text;
     [SerializeField] private TextMeshProUGUI pressMessageText;
 
     private InputAction action;
