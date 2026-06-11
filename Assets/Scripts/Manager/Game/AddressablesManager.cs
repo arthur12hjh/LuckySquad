@@ -180,14 +180,10 @@ public class AddressablesManager : MonoBehaviour
         // 캐시 키
         string cacheKey = $"{label}_{labelType}";
 
-        // 캐시 체크
+        // 1. 캐시 체크
+        // 만약 이미 로드가 된거라면 그냥 그거 찾아서 불러옴
         if (TryGetLabel(cacheKey, out List<T> cached))
-        {
-            return Addressables.ResourceManager.CreateCompletedOperation<IList<T>>(
-                cached,
-                null
-            );
-        }
+            return Addressables.ResourceManager.CreateCompletedOperation<IList<T>>(cached, null);
 
         // 라벨 2개
         List<object> labels = new List<object>()
