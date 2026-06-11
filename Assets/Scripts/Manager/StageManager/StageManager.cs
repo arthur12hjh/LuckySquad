@@ -14,9 +14,10 @@ public class StageManager : MonoBehaviour
     private int currentWaveIndex;                       // 현재 웨이브
     private Dictionary<int, StageRef> stageDatas;    // 스테이지 데이터 저장용
 
-    private float stageTimer;
+    private int stageTimer = 0;
+    private int currentSecond = 0;
 
-    private bool isStart = false;
+    private bool isWaveCheck = false;
 
     [SerializeField]
     private StageRef currentStageData;                  // 현재 스테이지 데이터
@@ -51,8 +52,37 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (isStart)
-            stageTimer += Time.deltaTime;
+        if (currentSecond < 5)
+        {
+            currentSecond = InGameManager.Instance.currentSecond;
+            stageTimer = currentSecond % 60;
+        }
+
+        if (stageTimer == 25)
+        {
+            if (!isWaveCheck)
+            {
+                isWaveCheck = true;
+                CheckWaveSpawnTime();
+            }
+        }
+        else if (stageTimer == 55)
+        {
+            if (!isWaveCheck)
+            {
+                isWaveCheck = true;
+
+                if (currentSecond == 4)
+                    CheckBossSpawnTime();
+                else
+                    CheckWaveSpawnTime();
+            }
+        }
+        else
+        {
+            isWaveCheck = false;
+        }
+
     }
 
     private void StageDateLoad()
@@ -83,12 +113,22 @@ public class StageManager : MonoBehaviour
         currentStageIndex = GameManager.Instance.currentStage;
         currentWaveIndex = 0;
 
-        if(currentStageIndex >= 1)
+        if (currentStageIndex >= 1)
             StageDateLoad();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         StageSetting();
-    } 
+    }
+
+    private void CheckWaveSpawnTime()
+    {
+
+    }
+
+    private void CheckBossSpawnTime()
+    {
+
+    }
 }

@@ -3,47 +3,48 @@ using System;
 using UnityEngine;
 
 // InGameManager
-// ì¸ê²Œì„ì˜ ë¡œì§, Additive Sceneê³¼ì˜ í†µì‹ ì„ ìœ„í•œ ë°ì´í„°ë¥¼ ë‹´ëŠ” ì‹±ê¸€í†¤ ë§¤ë‹ˆì €
-// DontDestroyOnLoadê°€ ì•„ë‹Œ, ì¸ê²Œì„ ì§„ì…ì‹œì—ë§Œ ì„¤ì •ë˜ëŠ” ì‹±ê¸€í†¤ ë§¤ë‹ˆì €
+// ÀÎ°ÔÀÓÀÇ ·ÎÁ÷, Additive Scene°úÀÇ Åë½ÅÀ» À§ÇÑ µ¥ÀÌÅÍ¸¦ ´ã´Â ½Ì±ÛÅæ ¸Å´ÏÀú
+// DontDestroyOnLoad°¡ ¾Æ´Ñ, ÀÎ°ÔÀÓ ÁøÀÔ½Ã¿¡¸¸ ¼³Á¤µÇ´Â ½Ì±ÛÅæ ¸Å´ÏÀú
 
-// Player Initialize ë¡œì§
-// 1) ì”¬ ì§„ì… ì‹œ, InGameManager::Awakeì—ì„œ Player Dataë¥¼ ë°›ì•„ì˜¨ë‹¤.
-// 2) InGameManager::Startì—ì„œ PlayerDataë¥¼ ê¸°ë°˜ìœ¼ë¡œ class _playerStats = new PlayerStats()ë¡œ ìƒì„±í•˜ê³  ë°ì´í„°ë¥¼ ì…ë ¥í•´.
-// 3) InGameManager::Startì—ì„œ PlayerDataë¥¼ ê¸°ë°˜ìœ¼ë¡œ Player Prefabê³¼ PlayerController Prefabì„ Instantiateë¥¼ í•´.
-// 4) InGameManager::Startì—ì„œ Player GameObjectë¥¼ PlayerControllerì— ë“±ë¡í•´.
+// Player Initialize ·ÎÁ÷
+// 1) ¾À ÁøÀÔ ½Ã, InGameManager::Awake¿¡¼­ Player Data¸¦ ¹Ş¾Æ¿Â´Ù.
+// 2) InGameManager::Start¿¡¼­ PlayerData¸¦ ±â¹İÀ¸·Î class _playerStats = new PlayerStats()·Î »ı¼ºÇÏ°í µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇØ.
+// 3) InGameManager::Start¿¡¼­ PlayerData¸¦ ±â¹İÀ¸·Î Player Prefab°ú PlayerController PrefabÀ» Instantiate¸¦ ÇØ.
+// 4) InGameManager::Start¿¡¼­ Player GameObject¸¦ PlayerController¿¡ µî·ÏÇØ.
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager Instance { get; private set; }
 
     private bool isGamePaused = false;
-    private float gameTime = 0f;
-    private int currentSecond = 0;
+    private float gameTime = 0;
+
+    public int currentSecond { get; private set; } = 0;
     private int previousSecond = 0;
 
     [Header("Debugger")]
-    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager ì—°ë™ ì‹œìŠ¤í…œ ì‚¬ìš© ì‹œ ë”ì´ìƒ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ
+    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager ¿¬µ¿ ½Ã½ºÅÛ »ç¿ë ½Ã ´õÀÌ»ó »ç¿ëÇÏÁö ¾ÊÀ½
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _playerControllerPrefab;
     [SerializeField] private Vector2 _playerSpawnPos = new Vector2(0.6f, 0.3f);
-    
+
     [Header("Player Data")]
     [SerializeField] private PlayerStats _playerStats;
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private GameObject _playerControllerObj;
     [SerializeField] private CinemachineVirtualCamera _playerCamera;
 
-    public event Action<int> OnTimeChange; // ê²Œì„ ì‹œê°„ ë³€í™” ì´ë²¤íŠ¸ 1ì´ˆë§ˆë‹¤ í˜¸ì¶œ
+    public event Action<int> OnTimeChange; // °ÔÀÓ ½Ã°£ º¯È­ ÀÌº¥Æ® 1ÃÊ¸¶´Ù È£Ãâ
 
     void Awake()
-    {    
+    {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
-        // 1) ì”¬ ì§„ì… ì‹œ, InGameManager::Awakeì—ì„œ Player Dataë¥¼ ë°›ì•„ì˜¨ë‹¤.
-        // ë‹¹ì¥ì€ ì¼ë‹¨ ë¹„í™œì„±í™” ì‹œì¼œë‘ê³ , ì¶”í›„ ë³‘í•© ë° ì‚¬ìš©ì ë°ì´í„° ì²˜ë¦¬ êµ¬ì¡° ì™„ì„± ì‹œ êµ¬í˜„
+        // 1) ¾À ÁøÀÔ ½Ã, InGameManager::Awake¿¡¼­ Player Data¸¦ ¹Ş¾Æ¿Â´Ù.
+        // ´çÀåÀº ÀÏ´Ü ºñÈ°¼ºÈ­ ½ÃÄÑµÎ°í, ÃßÈÄ º´ÇÕ ¹× »ç¿ëÀÚ µ¥ÀÌÅÍ Ã³¸® ±¸Á¶ ¿Ï¼º ½Ã ±¸Çö
         if (_tempStatsRef != null)
         {
             _playerStats = new PlayerStats(_tempStatsRef);
@@ -90,12 +91,12 @@ public class InGameManager : MonoBehaviour
         _playerCamera.Follow = _playerObj.transform;
         _playerCamera.m_Lens.OrthographicSize = 4.46f;
 
-        // 2D ì¶”ì ìš© Body: Framing Transposer
+        // 2D ÃßÀû¿ë Body: Framing Transposer
         CinemachineFramingTransposer transposer =
             _playerCamera.AddCinemachineComponent<CinemachineFramingTransposer>();
         transposer.m_CameraDistance = 10f;
     }
-    
+
     public PlayerStats GetPlayerStats() => _playerStats;
     public Transform GetPlayerTransform() => _playerObj.transform;
 
