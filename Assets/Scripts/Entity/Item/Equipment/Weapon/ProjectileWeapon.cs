@@ -14,6 +14,7 @@ public class ProjectileWeapon : EquipmentBase
     private SpawnPattern        spawnPattern = null;
     private Sprite[]            BulletSpriteTex;
     private ProjectTileEffect   projectTileEffect;
+
     private Vector2             vDir = Vector2.zero;
     private float               fSpeed = 3f;
     private int                 iShootCount = 0;
@@ -24,7 +25,7 @@ public class ProjectileWeapon : EquipmentBase
        
     }
 
-    public void Update_Directation(Vector2 dir)
+    public override void Update_Directation(Vector2 dir)
     {
         vDir = dir;
     }

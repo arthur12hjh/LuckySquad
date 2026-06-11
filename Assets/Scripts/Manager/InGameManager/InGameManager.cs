@@ -36,7 +36,6 @@ public class InGameManager : MonoBehaviour
 
     SpawnPattern _spawnPattern = null;
     public   SpawnPattern OutScreenSpawnPattern => _spawnPattern;
-
     public event Action<int> OnTimeChange; // 게임 시간 변화 이벤트 1초마다 호출
 
     void Awake()

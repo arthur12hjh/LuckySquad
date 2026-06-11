@@ -1,36 +1,38 @@
 using Item;
-using System.Collections;
+using System;
 using UnityEngine;
+
 public class BounceWeapon : EquipmentBase
 {
-    private ProjectTileEffect projectTileEffect;
-    private Rigidbody2D       BounceRb = null;
+    private ProjectTileEffect           projectTileEffect;
+    
+    private float   radius = 0.3f;
+    private Vector2 localPos;
+    private Vector2 dir;
 
-    Vector3 vDir;
+    private Camera  cam;
+    private Vector2 BoundSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        BounceRb = GetComponent<Rigidbody2D>();
+       
+
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsActive)
-        {
-            int wallMask = 1 << 6;
-            float moveDist = projectTileEffect.fSpeed * Time.deltaTime;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, vDir, moveDist, wallMask);
-            if (hit.collider != null)
-            {
-                vDir = Vector2.Reflect(vDir, hit.normal);
-            }
-            else
-            {
-                transform.position += vDir * moveDist;
-            }
-        }
+        if (cam == null)
+            return;
+
+        // 플레이어 기준 좌표 이동
+        localPos += dir * projectTileEffect.fSpeed * Time.deltaTime;
+        ComputeScreenSize();
+        Vector3 camPos = cam.transform.position;
+        camPos.z = 0f;
+        transform.position = camPos + (Vector3)localPos;
     }
 
     public override void Initalize(ItemData itemData)
@@ -38,9 +40,43 @@ public class BounceWeapon : EquipmentBase
         base.Initalize(itemData);
         SerializationWeaponData();
 
-        gameObject.transform.position = gameObject.transform.parent.position;
-        vDir = Random.insideUnitCircle.normalized;
-        IsActive = true;
+        cam = Camera.main;
+
+        radius = gameObject.transform.localScale.x * 0.2f;
+        localPos = Vector2.zero;
+        dir = UnityEngine.Random.insideUnitCircle.normalized;
+        transform.position = InGameManager.Instance.GetPlayerTransform().position;
+    }
+
+    void ComputeScreenSize()
+    {
+        // 화면 크기 계산
+        BoundSize.x = cam.orthographicSize - radius;
+        BoundSize.y = BoundSize.x * cam.aspect - radius;
+
+        // X축 반사
+        if (localPos.x < -BoundSize.y)
+        {
+            localPos.x = -BoundSize.y;
+            dir.x = Mathf.Abs(dir.x);
+        }
+        else if (localPos.x > BoundSize.y)
+        {
+            localPos.x = BoundSize.y;
+            dir.x = -Mathf.Abs(dir.x);
+        }
+
+        // Y축 반사
+        if (localPos.y < -BoundSize.x)
+        {
+            localPos.y = -BoundSize.x;
+            dir.y = Mathf.Abs(dir.y);
+        }
+        else if (localPos.y > BoundSize.x)
+        {
+            localPos.y = BoundSize.x;
+            dir.y = -Mathf.Abs(dir.y);
+        }
     }
 
     protected override bool bIsUseItem()
@@ -62,6 +98,17 @@ public class BounceWeapon : EquipmentBase
     {
         SerializationWeaponData();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var Mon = collision.gameObject.GetComponent<Monster>();
+        if (Mon == null)
+            return;
+
+        Mon.Damaged(gameObject, new Attack.SAttackData(20));
+        Debug.Log($"Hit BoundBall : {Mon.name}");
+    }
+
 
     private bool SerializationWeaponData()
     {

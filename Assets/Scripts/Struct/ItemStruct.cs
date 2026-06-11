@@ -216,4 +216,17 @@ namespace Item
             this.LevelDatas = levelDatas ?? new List<LevelData>();
         }
     }
+
+    [System.Serializable]
+    public enum EWeaponType
+    {
+        Projectile,
+        Bounce,
+        Rotation,
+        Throw,
+        HitScan,
+        None
+    }
+
+   
 }
