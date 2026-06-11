@@ -21,6 +21,8 @@ public class InGameManager : MonoBehaviour
     public int currentSecond { get; private set; } = 0;
     private int previousSecond = 0;
 
+    private bool isTimeEnd = false;
+
     [Header("Debugger")]
     [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager 연동 시스템 사용 시 더이상 사용하지 않음
     [SerializeField] private GameObject _playerPrefab;
@@ -73,7 +75,8 @@ public class InGameManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateGameTime();
+        if (!isTimeEnd)
+            UpdateGameTime();
     }
 
     void OnDestroy()
@@ -123,6 +126,12 @@ public class InGameManager : MonoBehaviour
     private void UpdateGameTime()
     {
         gameTime += Time.deltaTime;
+
+        if (gameTime >= 300)
+        {
+            gameTime = 300f;
+            isTimeEnd = true;
+        }
 
         currentSecond = Mathf.FloorToInt(gameTime);
 

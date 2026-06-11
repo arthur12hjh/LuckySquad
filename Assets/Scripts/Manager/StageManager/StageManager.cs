@@ -1,38 +1,38 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class StageManager : MonoBehaviour
 {
-    private static StageManager instance;
-    public static StageManager Instance => instance;
+    public static StageManager Instance { get; private set; }
 
     private int currentStageIndex;                      // 현재 스테이지
     private int currentWaveIndex;                       // 현재 웨이브
     private Dictionary<int, StageRef> stageDatas;    // 스테이지 데이터 저장용
 
-    private int stageTimer = 0;
-    private int currentSecond = 0;
+    private int prevTimer = 0;
+    private int bossIndex = 0;
 
-    private bool isWaveCheck = false;
+    public event Action<StageRef> OnWave;
+    public event Action<GameObject> OnBoss;
 
     [SerializeField]
     private StageRef currentStageData;                  // 현재 스테이지 데이터
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+        Instance = this;
     }
 
     private void Start()
@@ -42,47 +42,39 @@ public class StageManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        InGameManager.Instance.OnTimeChange += HandleTimeChange;
     }
 
     private void OnDisable()
     {
         currentStageData = null;
+        InGameManager.Instance.OnTimeChange -= HandleTimeChange;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Update()
     {
-        if (currentSecond < 5)
+    }
+
+    private void HandleTimeChange(int currentCount)
+    {
+        currentStageData.StageTime = currentCount;
+
+        // 보스 (5분)
+        if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
-            currentSecond = InGameManager.Instance.currentSecond;
-            stageTimer = currentSecond % 60;
+            OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
+            bossIndex++;
+            return;
         }
 
-        if (stageTimer == 25)
+        // 웨이브 (매 분 0초)
+        if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
-            if (!isWaveCheck)
-            {
-                isWaveCheck = true;
-                CheckWaveSpawnTime();
-            }
+            currentStageData.WaveIndex++;
+            // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
+            OnWave?.Invoke(currentStageData);
         }
-        else if (stageTimer == 55)
-        {
-            if (!isWaveCheck)
-            {
-                isWaveCheck = true;
-
-                if (currentSecond == 4)
-                    CheckBossSpawnTime();
-                else
-                    CheckWaveSpawnTime();
-            }
-        }
-        else
-        {
-            isWaveCheck = false;
-        }
-
     }
 
     private void StageDateLoad()
