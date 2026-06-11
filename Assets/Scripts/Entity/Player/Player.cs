@@ -6,7 +6,7 @@ public class Player : BaseEntity
     {
     }
 
-    protected override void Move()
+    protected override void Move(Vector3 position, float speedModifier = 1f)
     {
         
     }
