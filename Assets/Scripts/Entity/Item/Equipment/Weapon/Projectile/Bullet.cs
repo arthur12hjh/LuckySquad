@@ -37,7 +37,7 @@ public class Bullet : ProjectileBase
         var Monster = other.gameObject.GetComponent<TestMonster>();
         if(Monster != null)
         {
-            Monster.Dagmed(Monster.gameObject, new SAttackData(info.fDamage, 1, EAttackType.Strike));
+            Monster.Damaged(Monster.gameObject, new SAttackData(info.fDamage, 1, EAttackType.Strike));
             Release();
         }
     }

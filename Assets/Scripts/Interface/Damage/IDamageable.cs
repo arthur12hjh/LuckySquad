@@ -1,9 +1,9 @@
 using UnityEngine;
 using Attack;
 
-public interface DamageInterface
+public interface IDamageable
 {
-    void    Dagmed(GameObject gameObject, SAttackData DamageStruct);
+    void    Damaged(GameObject gameObject, SAttackData DamageStruct);
 
     float   GuardDamage();
     bool    IsGuard();

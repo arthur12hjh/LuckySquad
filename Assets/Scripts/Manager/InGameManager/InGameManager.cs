@@ -49,10 +49,6 @@ public class InGameManager : MonoBehaviour
         Instance = this;
         // 1) 씬 진입 시, InGameManager::Awake에서 Player Data를 받아온다.
         // 당장은 일단 비활성화 시켜두고, 추후 병합 및 사용자 데이터 처리 구조 완성 시 구현
-    }
-
-    void Start()
-    {
         if (_tempStatsRef != null)
         {
             _playerStats = new PlayerStats(_tempStatsRef);

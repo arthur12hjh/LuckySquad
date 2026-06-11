@@ -11,10 +11,12 @@ TagManager:
   - 
   - Water
   - UI
+  - Monster
+  - Projectile
+  - Player
+  - Deactive
   - Wall
   - BounceBall
-  - 
-  - 
   - 
   - 
   - 

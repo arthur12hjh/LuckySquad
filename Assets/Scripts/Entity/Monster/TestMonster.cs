@@ -2,7 +2,7 @@ using Attack;
 using Item;
 using UnityEngine;
 
-public class TestMonster : MonoBehaviour, DamageInterface
+public class TestMonster : MonoBehaviour, IDamageable
 {
     public GameObject prefab;
     public GameObject Thunderprefab;
@@ -12,7 +12,7 @@ public class TestMonster : MonoBehaviour, DamageInterface
         throw new System.NotImplementedException();
     }
 
-    public void Dagmed(GameObject gameObject, SAttackData DamageStruct)
+    public void Damaged(GameObject gameObject, SAttackData DamageStruct)
     {
         Debug.Log($"Damage : {DamageStruct.iDamage } \n" +
                   $"Hit Count: { DamageStruct.iHitCount } \n" + 
