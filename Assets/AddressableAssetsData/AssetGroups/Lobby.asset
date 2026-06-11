@@ -15,12 +15,61 @@ MonoBehaviour:
   m_GroupName: Lobby
   m_GUID: b4e392dd30ab7284695463296aeedb55
   m_SerializeEntries:
+  - m_GUID: 1ec604e4763f1aa4fae6b810f0fa9c08
+    m_Address: Assets/Prefabs/Weapon/OrbitingWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - obj
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fba5f1a449a73f4ba824904665752f9
+    m_Address: Assets/Prefabs/Weapon/HitScanWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - obj
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 396d7abf91ece2449a38d5b5d82e9d54
     m_Address: Assets/Prefabs/Player/Monster/MonsterTest.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lobby
     - obj
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 484612bfd9a0c7d458d9a1ac98474fec
+    m_Address: GunWeapon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - img
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e784e51179e50a4ba15ea36e0b5530c
+    m_Address: Assets/Prefabs/Projectile/HolyWater.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - obj
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57f2b3236d093c84e9766ff8ade58c77
+    m_Address: Shuriken
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - img
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ac190f1717799a40bef2c253a30dfec
+    m_Address: Assets/Prefabs/Weapon/BounceWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - obj
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a22789ed2adfd04db8192d114e91f2c
+    m_Address: Ball
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - img
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9cd20b202dcef486e8dcee5949fa5a9a
     m_Address: Assets/Prefabs/Player/PlayerTest.prefab
@@ -29,7 +78,35 @@ MonoBehaviour:
     - Lobby
     - obj
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d1bd1f14bc4f81e419b898e53de999a8
+  - m_GUID: 9d5cc12d7954b6e42b2f5ebd3f132512
+    m_Address: GroundFog-removebg-preview
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - img
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4b61f41b8e77f64eb487179d459ac9d
+    m_Address: BulletTex
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - img
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5b0248860d98b94c8b15f49935de64c
+    m_Address: Thunder
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - img
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fca7daa172184b24aa547cdf8c45191a
+    m_Address: Assets/Prefabs/Weapon/ProjectTileWeapon_projectile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - obj
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd205ad84432bb14b98221c05fcbf8e6
     m_Address: Assets/Prefabs/Projectile/Projectile.prefab
     m_ReadOnly: 0
     m_SerializedLabels:

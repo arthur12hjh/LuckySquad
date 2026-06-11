@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VectorGraphics;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 
 public class Loading : MonoBehaviour
@@ -18,26 +15,26 @@ public class Loading : MonoBehaviour
         string sceneName = GameManager.Instance.currentSceneType.ToString();
 
         currentStege = GameManager.Instance.currentStage;
+        //SceneManager.LoadScene(sceneName);
+        StartCoroutine(SceneChange(sceneName));
+      /*  if (currentStege == -1)
+            StartCoroutine(SceneChange(sceneName));
+        else
+            StartCoroutine(StageChange($"{sceneName}_{currentStege}"));
 
-
-        SceneManager.LoadScene(sceneName);
-        //if (currentStege == -1)
-        //    StartCoroutine(SceneChange(sceneName));
-        //else
-        //    StartCoroutine(StageChange($"{sceneName}_{currentStege}"));
-
-        //StartCoroutine(AnimateLoadingText());
+        StartCoroutine(AnimateLoadingText());*/
 
     }
 
-    // ·Îºñ, ½ºÅä¾î µîµî
+    // ï¿½Îºï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     private IEnumerator SceneChange(string sceneName)
     {
         yield return StartCoroutine(LoadSceneObject(sceneName));
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("Weapon");
+        //SceneManager.LoadScene(sceneName);
     }
 
-    // ½ºÅ×ÀÌÁö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private IEnumerator StageChange(string sceneName)
     {
         yield return StartCoroutine(LoadSceneObject(sceneName));
@@ -51,26 +48,26 @@ public class Loading : MonoBehaviour
         float imgP = 0f;
 
         var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
-        var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
+        //var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
         var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
 
         while (true)
         {
             objP = obj.PercentComplete;
-            audioP = audio.PercentComplete;
+            //audioP = audio.PercentComplete;
             imgP = img.PercentComplete;
 
             float total = (objP + audioP + imgP) / 3f;
 
-            if (obj.IsDone && audio.IsDone && img.IsDone)
+            if (obj.IsDone && img.IsDone) // audio.IsDone 
                 break;
 
             yield return null;
         }
 
-        // ¾ÈÀü ´ë±â
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         yield return obj;
-        yield return audio;
+        yield return GetComponent<AudioSource>();
         yield return img;
     }
 

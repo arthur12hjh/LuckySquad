@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: 1c88d8a5335389148bfb633145fab498
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3999217175527890777
+    second: Kunai-removebg-preview_0
+  - first:
+      213: 3052753659919707788
+    second: Kunai-removebg-preview_1
+  - first:
+      213: 7931275041336288683
+    second: Kunai-removebg-preview_2
+  - first:
+      213: 1389099722573096675
+    second: Kunai-removebg-preview_3
+  - first:
+      213: -9155592217792123307
+    second: Kunai-removebg-preview_4
+  - first:
+      213: 3198579631328826420
+    second: Kunai-removebg-preview_5
+  - first:
+      213: 1688103502152980871
+    second: Kunai-removebg-preview_6
+  - first:
+      213: -4999668313959479617
+    second: Kunai-removebg-preview_7
+  - first:
+      213: 6993534282905992709
+    second: Kunai-removebg-preview_8
+  - first:
+      213: -2038629300330592257
+    second: Kunai-removebg-preview_9
+  - first:
+      213: -1053858461343660163
+    second: Kunai-removebg-preview_10
+  - first:
+      213: 9098217117334845604
+    second: Kunai-removebg-preview_11
+  - first:
+      213: 1058462150826265694
+    second: Kunai-removebg-preview_12
+  - first:
+      213: -8748458090139808231
+    second: Kunai-removebg-preview_13
+  - first:
+      213: -2348164843907849548
+    second: Kunai-removebg-preview_14
+  - first:
+      213: 6293253127710763355
+    second: Kunai-removebg-preview_15
+  - first:
+      213: 6244168651397376407
+    second: Kunai-removebg-preview_16
+  - first:
+      213: -8667180587417018035
+    second: Kunai-removebg-preview_17
+  - first:
+      213: -2283713128637956645
+    second: Kunai-removebg-preview_18
+  - first:
+      213: -4431753689684350413
+    second: Kunai-removebg-preview_19
+  - first:
+      213: -1983816226419240581
+    second: Kunai-removebg-preview_20
+  - first:
+      213: 2645597358805503579
+    second: Kunai-removebg-preview_21
+  - first:
+      213: -2174545999351720610
+    second: Kunai-removebg-preview_22
+  - first:
+      213: 2673739889354922800
+    second: Kunai-removebg-preview_23
+  - first:
+      213: -8755003529361749265
+    second: Kunai-removebg-preview_24
+  - first:
+      213: -4044334205722591347
+    second: Kunai-removebg-preview_25
+  - first:
+      213: -4530367770614892984
+    second: Kunai-removebg-preview_26
+  - first:
+      213: -2711914483384625500
+    second: Kunai-removebg-preview_27
+  - first:
+      213: 6118673014780938069
+    second: Kunai-removebg-preview_28
+  - first:
+      213: -3602632814702565517
+    second: Kunai-removebg-preview_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 291
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a0e409ea2def78c0800000000000000
+      internalID: -3999217175527890777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 291
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8ea94e874f8d5a20800000000000000
+      internalID: 3052753659919707788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 285
+        width: 71
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba565ced0ac811e60800000000000000
+      internalID: 7931275041336288683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 292
+        width: 76
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e6209186d2174310800000000000000
+      internalID: 1389099722573096675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 305
+        width: 46
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55e6b26e26dc0f080800000000000000
+      internalID: -9155592217792123307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_5
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 322
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43497275a33a36c20800000000000000
+      internalID: 3198579631328826420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_6
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 293
+        width: 46
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 789dbe5f0395d6710800000000000000
+      internalID: 1688103502152980871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_7
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 330
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb64ba7682c9d9ab0800000000000000
+      internalID: -4999668313959479617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_8
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 266
+        width: 126
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50eb02180660e0160800000000000000
+      internalID: 6993534282905992709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_9
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 298
+        width: 10
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff78715d37555b3e0800000000000000
+      internalID: -2038629300330592257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_10
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 312
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7742102051ff51f0800000000000000
+      internalID: -1053858461343660163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_11
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 291
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a83f18834c534e70800000000000000
+      internalID: 9098217117334845604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 201
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5c023cd7b960be00800000000000000
+      internalID: 1058462150826265694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_13
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 201
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91e03d4e7bb379680800000000000000
+      internalID: -8748458090139808231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_14
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 200
+        width: 80
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b2efccf384a96fd0800000000000000
+      internalID: -2348164843907849548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_15
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 196
+        width: 100
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59e0d66060265750800000000000000
+      internalID: 6293253127710763355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_16
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 197
+        width: 84
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 799ab203e4eb7a650800000000000000
+      internalID: 6244168651397376407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_17
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 241
+        width: 104
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41e8da2d2df7b780800000000000000
+      internalID: -8667180587417018035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_18
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 206
+        width: 131
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdd73a6520f9e40e0800000000000000
+      internalID: -2283713128637956645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 112
+        width: 76
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33a665aef7f3f72c0800000000000000
+      internalID: -4431753689684350413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_20
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 111
+        width: 83
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7110ac17a11874e0800000000000000
+      internalID: -1983816226419240581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_21
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 106
+        width: 95
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5e4056e7cc07b420800000000000000
+      internalID: 2645597358805503579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_22
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 103
+        width: 103
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e55d4e05fe572d1e0800000000000000
+      internalID: -2174545999351720610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_23
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 109
+        width: 116
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03bdac663480b1520800000000000000
+      internalID: 2673739889354922800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_24
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 2
+        width: 161
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fea0a111daaff7680800000000000000
+      internalID: -8755003529361749265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 19
+        width: 76
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8f71fab773afd7c0800000000000000
+      internalID: -4044334205722591347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_26
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 17
+        width: 83
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 846fe9af386e021c0800000000000000
+      internalID: -4530367770614892984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_27
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 12
+        width: 93
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a65f9c45285d5ad0800000000000000
+      internalID: -2711914483384625500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_28
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 12
+        width: 92
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55749c650b4e9e450800000000000000
+      internalID: 6118673014780938069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kunai-removebg-preview_29
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 22
+        width: 133
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 377ec77ea80e00ec0800000000000000
+      internalID: -3602632814702565517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Kunai-removebg-preview_0: -3999217175527890777
+      Kunai-removebg-preview_1: 3052753659919707788
+      Kunai-removebg-preview_10: -1053858461343660163
+      Kunai-removebg-preview_11: 9098217117334845604
+      Kunai-removebg-preview_12: 1058462150826265694
+      Kunai-removebg-preview_13: -8748458090139808231
+      Kunai-removebg-preview_14: -2348164843907849548
+      Kunai-removebg-preview_15: 6293253127710763355
+      Kunai-removebg-preview_16: 6244168651397376407
+      Kunai-removebg-preview_17: -8667180587417018035
+      Kunai-removebg-preview_18: -2283713128637956645
+      Kunai-removebg-preview_19: -4431753689684350413
+      Kunai-removebg-preview_2: 7931275041336288683
+      Kunai-removebg-preview_20: -1983816226419240581
+      Kunai-removebg-preview_21: 2645597358805503579
+      Kunai-removebg-preview_22: -2174545999351720610
+      Kunai-removebg-preview_23: 2673739889354922800
+      Kunai-removebg-preview_24: -8755003529361749265
+      Kunai-removebg-preview_25: -4044334205722591347
+      Kunai-removebg-preview_26: -4530367770614892984
+      Kunai-removebg-preview_27: -2711914483384625500
+      Kunai-removebg-preview_28: 6118673014780938069
+      Kunai-removebg-preview_29: -3602632814702565517
+      Kunai-removebg-preview_3: 1389099722573096675
+      Kunai-removebg-preview_4: -9155592217792123307
+      Kunai-removebg-preview_5: 3198579631328826420
+      Kunai-removebg-preview_6: 1688103502152980871
+      Kunai-removebg-preview_7: -4999668313959479617
+      Kunai-removebg-preview_8: 6993534282905992709
+      Kunai-removebg-preview_9: -2038629300330592257
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

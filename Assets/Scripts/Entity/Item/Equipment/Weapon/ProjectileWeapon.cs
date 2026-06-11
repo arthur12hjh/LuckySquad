@@ -124,7 +124,6 @@ public class ProjectileWeapon : EquipmentBase
             Vector3 newDir = Quaternion.Euler(0, 0, AccAngle) * vDir;
 
             gameObj.SetActive(true);
-
             gameObj.transform.position = spawnPattern.GetPosition(Vector3.zero);
             gameObj.GetComponent<ProjectileBase>().ShootProjectile(new Projectileinfo(fSpeed, projectTileEffect.fDamage), newDir, BulletSpriteTex[level - 1]);
         }

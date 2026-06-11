@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Develop/PlayerMonster.unity
     guid: 9a15cb8ee92ff451c9a19acc85b0da65
   - enabled: 1
+    path: Assets/Scenes/Develop/Weapon.unity
+    guid: 53639163594a24cffa57525e92f593e4
+  - enabled: 1
     path: Assets/Scenes/LobbyScene/Lobby.unity
     guid: e901aaf38ff2d0046bdb8e873f98ecee
   m_configObjects:
