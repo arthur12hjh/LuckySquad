@@ -86,6 +86,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             _material.SetFloat(_flashAmountID, 0f);
             _material.SetFloat(_DissolveAmountID, 0f);
         }
+
         
         _currentState = MonsterState.Idle;
     }
