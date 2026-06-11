@@ -9,7 +9,7 @@ public abstract class BaseEntity : MonoBehaviour
     
     public abstract void Initialize(ScriptableObject initRef);
 
-    protected abstract void Move();
+    protected abstract void Move(Vector3 position, float speedModifier = 1f);
 
     public float Speed
     {
