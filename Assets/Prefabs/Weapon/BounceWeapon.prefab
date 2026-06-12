@@ -142,11 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907b7af3f4f4101448e9944e3ba51cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BounceWeapon
-  SpriteTextureUrl: Ball
-  bIsPhysics: 1
-  layermask:
-    serializedVersion: 2
-    m_Bits: 1024
+  SpriteTextureUrl: BallAtlas
 --- !u!50 &8834645450175766789
 Rigidbody2D:
   serializedVersion: 5

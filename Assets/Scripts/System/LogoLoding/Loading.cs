@@ -5,6 +5,7 @@ using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 
 public class Loading : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Loading : MonoBehaviour
         currentStege = GameManager.Instance.currentStage;
 
 
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
         if (currentStege == -1)
             StartCoroutine(SceneChange(sceneName));
         else
@@ -34,7 +35,8 @@ public class Loading : MonoBehaviour
     private IEnumerator SceneChange(string sceneName)
     {
         yield return StartCoroutine(LoadSceneObject(sceneName));
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("Weapon");
     }
 
     // 스테이지
@@ -48,21 +50,23 @@ public class Loading : MonoBehaviour
     {
         float objP = 0f;
         float audioP = 0f;
+        float imgPA = 0f;
         float imgP = 0f;
 
         var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
-        var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
+        //var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
+        var imgA = AddressablesManager.Instance.LoadLabel<SpriteAtlas>(sceneName, "imgAtlas");
         var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
 
         while (true)
         {
             objP = obj.PercentComplete;
-            audioP = audio.PercentComplete;
+            //audioP = audio.PercentComplete;
             imgP = img.PercentComplete;
 
-            float total = (objP + audioP + imgP) / 3f;
+            float total = (objP + audioP + imgP + imgPA ) / 4f;
 
-            if (obj.IsDone && audio.IsDone && img.IsDone)
+            if (obj.IsDone  && img.IsDone && imgA.IsDone)// && audio.IsDone
                 break;
 
             yield return null;
@@ -70,8 +74,9 @@ public class Loading : MonoBehaviour
 
         // 안전 대기
         yield return obj;
-        yield return audio;
+        //yield return audio;
         yield return img;
+        yield return imgA;
     }
 
     private IEnumerator LoadStageObject(string sceneName)
@@ -79,11 +84,13 @@ public class Loading : MonoBehaviour
         float objP = 0f;
         float audioP = 0f;
         float imgP = 0f;
+        float imgPA = 0f;
         float DataP = 0f;
 
         var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
         var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
         var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
+        var imgA = AddressablesManager.Instance.LoadLabel<SpriteAtlas>(sceneName, "imgAtlas");
         var Data = AddressablesManager.Instance.LoadLabel<StageRef>(sceneName, "ref");
 
         while (true)
@@ -91,11 +98,12 @@ public class Loading : MonoBehaviour
             objP = obj.PercentComplete;
             audioP = audio.PercentComplete;
             imgP = img.PercentComplete;
+            imgPA = imgA.PercentComplete;
             DataP = Data.PercentComplete;
 
-            float total = (objP + audioP + imgP + DataP) / 4f;
+            float total = (objP + audioP + imgP + DataP + imgPA) / 5f;
 
-            if (obj.IsDone && audio.IsDone && img.IsDone && Data.IsDone)
+            if (obj.IsDone && audio.IsDone && img.IsDone && Data.IsDone && imgA.IsDone)
                 break;
 
             yield return null;
@@ -105,6 +113,7 @@ public class Loading : MonoBehaviour
         yield return obj;
         yield return audio;
         yield return img;
+        yield return imgA;
         yield return Data;
     }
 

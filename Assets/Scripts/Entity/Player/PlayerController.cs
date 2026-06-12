@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private Vector2 _inputVec;
-    [SerializeField] private Vector2 _PreinputVec;
     
     private static readonly int _isMoveID = Animator.StringToHash("isMove");
     private static readonly int _directionID = Animator.StringToHash("Direction");
@@ -61,15 +60,10 @@ public class PlayerController : MonoBehaviour
             _playerAnimator.SetFloat(_directionID, _inputVec.x);
         }
 
-         if (Mathf.Approximately(_inputVec.magnitude, 0f))
+        if (_equipmentItems.TryGetValue(EWeaponType.Projectile, out var obj))
         {
-            if (_equipmentItems.TryGetValue(EWeaponType.Projectile, out var obj))
-            {
-                obj.Update_Directation(_PreinputVec);
-            }
+            obj.Update_Directation(_inputVec);
         }
-        else
-            _PreinputVec = _inputVec;
     }
 
     public void Initialize(PlayerStats playerStats, GameObject playerObj)
@@ -94,14 +88,16 @@ public class PlayerController : MonoBehaviour
 
         _weaponDic = _weaponPrefab.ToDictionary(x => x.weaponType, x => x.prefab);
 
-        if (_weaponDic.TryGetValue(EWeaponType.Bounce, out var obj))
+/*        if (_weaponDic.TryGetValue(EWeaponType.Bounce, out var obj))
         {
             _equipmentItems.Add(EWeaponType.Bounce, ItemFactory.AbstractCreateItem(obj, _playerObj.transform, 4).GetComponent<EquipmentBase>());
-        }
+        }*/
 
         if (_weaponDic.TryGetValue(EWeaponType.Projectile, out var Projectileobj))
         {
-            _equipmentItems.Add(EWeaponType.Projectile, ItemFactory.AbstractCreateItem(Projectileobj, _playerObj.transform, 1).GetComponent<EquipmentBase>());
+            var ProJectileObj = ItemFactory.AbstractCreateItem(Projectileobj, _playerObj.transform, 1).GetComponent<EquipmentBase>();
+            ProJectileObj.Update_Directation(new Vector2(-1, 0));
+            _equipmentItems.Add(EWeaponType.Projectile, ProJectileObj);
         }
     }
     

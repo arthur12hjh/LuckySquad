@@ -1,8 +1,6 @@
 using Item;
 using UnityEngine;
-using System.Collections.Generic;
-using Unity.VectorGraphics;
-using System.Collections;
+using UnityEngine.U2D;
 
 public static class ItemFactory
 {
@@ -45,7 +43,7 @@ public abstract class BaseItem : MonoBehaviour
     }
 
     protected SpriteRenderer    spriteRenderer = null;
-    protected List<Sprite>      spriteTexs = null;
+    protected Sprite[]          spriteTexs = null;
 
     protected int               level = 1;
     protected ItemData          info;
@@ -57,7 +55,13 @@ public abstract class BaseItem : MonoBehaviour
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
-        AddressablesManager.Instance.TryGetLabel<Sprite>("Lobby_img", out spriteTexs);
+        var sprite = AddressablesManager.Instance.GetLabelObject<SpriteAtlas>("Lobby", "imgAtlas", SpriteTextureUrl);
+        if (sprite != null)
+        {
+            spriteTexs = new Sprite[sprite.spriteCount];
+            sprite.GetSprites(spriteTexs);
+        }
+   
         info = Data;
     }
 }

@@ -16,6 +16,8 @@ public class ProjectileSpawnPattern : SpawnPattern
 
     public override Vector3 GetPosition(Vector3 offset)
     {
-        return Owner.transform.position + offset;
+        Vector2 offPos = Owner.transform.localScale * 0.5f;
+
+        return Owner.transform.localPosition + (Vector3)offPos + offset;
     }
 }

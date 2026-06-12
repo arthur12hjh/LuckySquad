@@ -325,9 +325,8 @@ GameObject:
   - component: {fileID: 193153738}
   - component: {fileID: 193153737}
   - component: {fileID: 193153740}
-  - component: {fileID: 193153741}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,18 +398,6 @@ MonoBehaviour:
   _playerControllerObj: {fileID: 0}
   _playerCamera: {fileID: 0}
   _SpawnBound: {x: 7, y: 12, z: 0}
---- !u!114 &193153741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193153736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5101ba670a9767b45bf00500602c79ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AddressablesManager
 --- !u!1 &302312098
 GameObject:
   m_ObjectHideFlags: 0

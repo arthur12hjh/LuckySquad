@@ -90,7 +90,7 @@ SpriteRenderer:
   m_Size: {x: 3.1, y: 2.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2481864778115880563
 MonoBehaviour:
@@ -104,7 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908724df420c4b0418bd85bce9478b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileWeapon
-  SpriteTextureUrl: GunWeapon
+  SpriteTextureUrl: GunWeaponAtlas
   projectTileRefSO: {fileID: 11400000, guid: a3a439ad94b92954e89e8d5cdef17a40, type: 2}
   LineAngle: 90
-  BulletTextureUrl: BulletTex
+  BulletTextureUrl: BulletAtlas
+  type: 0

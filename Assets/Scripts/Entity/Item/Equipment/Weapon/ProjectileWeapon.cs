@@ -1,6 +1,7 @@
 using Item;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class ProjectileWeapon : EquipmentBase
 {
@@ -27,18 +28,26 @@ public class ProjectileWeapon : EquipmentBase
 
     public override void Update_Directation(Vector2 dir)
     {
+        if (dir == Vector2.zero)
+            return;
+
         vDir = dir;
     }
 
     public override void Initalize(ItemData itemData)
     {
         base.Initalize(itemData);
-        BulletSpriteTex = Resources.LoadAll<Sprite>(BulletTextureUrl);
+        var sprite = AddressablesManager.Instance.GetLabelObject<SpriteAtlas>("Lobby", "imgAtlas", BulletTextureUrl);
+        if (sprite != null)
+        {
+            BulletSpriteTex = new Sprite[sprite.spriteCount];
+            sprite.GetSprites(BulletSpriteTex);
+        }
 
-        switch(type)
+        switch (type)
         {
             case ProjectileType.Projectile:
-                spawnPattern = ProjectileSpawnPattern.Create(gameObject);
+                spawnPattern = ProjectileSpawnPattern.Create(gameObject.transform.parent.gameObject);
                 break;
 
             case ProjectileType.Throw:

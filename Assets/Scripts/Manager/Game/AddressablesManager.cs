@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.U2D;
 
 public class AddressablesManager : MonoBehaviour
 {
@@ -232,6 +233,7 @@ public class AddressablesManager : MonoBehaviour
         ReleaseLabel<GameObject>(stageName, "obj");
         ReleaseLabel<AudioClip>(stageName, "sound");
         ReleaseLabel<Sprite>(stageName, "img");
+        ReleaseLabel<SpriteAtlas>(stageName, "imgAtlas");
         ReleaseLabel<StageRef>(stageName, "ref");
     }
 
