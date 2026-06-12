@@ -1,6 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 
 public class Loading : MonoBehaviour
@@ -15,29 +18,29 @@ public class Loading : MonoBehaviour
         string sceneName = GameManager.Instance.currentSceneType.ToString();
 
         currentStege = GameManager.Instance.currentStage;
-        //SceneManager.LoadScene(sceneName);
-        StartCoroutine(SceneChange(sceneName));
-      /*  if (currentStege == -1)
+
+
+        SceneManager.LoadScene(sceneName);
+        if (currentStege == -1)
             StartCoroutine(SceneChange(sceneName));
         else
             StartCoroutine(StageChange($"{sceneName}_{currentStege}"));
 
-        StartCoroutine(AnimateLoadingText());*/
+        StartCoroutine(AnimateLoadingText());
 
     }
 
-    // ï¿½Îºï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    // ·Îºñ, ½ºÅä¾î µîµî
     private IEnumerator SceneChange(string sceneName)
     {
         yield return StartCoroutine(LoadSceneObject(sceneName));
-        SceneManager.LoadScene("Weapon");
-        //SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ½ºÅ×ÀÌÁö
     private IEnumerator StageChange(string sceneName)
     {
-        yield return StartCoroutine(LoadSceneObject(sceneName));
+        yield return StartCoroutine(LoadStageObject(sceneName));
         SceneManager.LoadScene(sceneName);
     }
 
@@ -48,27 +51,61 @@ public class Loading : MonoBehaviour
         float imgP = 0f;
 
         var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
-        //var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
+        var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
         var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
 
         while (true)
         {
             objP = obj.PercentComplete;
-            //audioP = audio.PercentComplete;
+            audioP = audio.PercentComplete;
             imgP = img.PercentComplete;
 
             float total = (objP + audioP + imgP) / 3f;
 
-            if (obj.IsDone && img.IsDone) // audio.IsDone 
+            if (obj.IsDone && audio.IsDone && img.IsDone)
                 break;
 
             yield return null;
         }
 
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        // ¾ÈÀü ´ë±â
         yield return obj;
-        yield return GetComponent<AudioSource>();
+        yield return audio;
         yield return img;
+    }
+
+    private IEnumerator LoadStageObject(string sceneName)
+    {
+        float objP = 0f;
+        float audioP = 0f;
+        float imgP = 0f;
+        float DataP = 0f;
+
+        var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
+        var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
+        var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
+        var Data = AddressablesManager.Instance.LoadLabel<StageRef>(sceneName, "ref");
+
+        while (true)
+        {
+            objP = obj.PercentComplete;
+            audioP = audio.PercentComplete;
+            imgP = img.PercentComplete;
+            DataP = Data.PercentComplete;
+
+            float total = (objP + audioP + imgP + DataP) / 4f;
+
+            if (obj.IsDone && audio.IsDone && img.IsDone && Data.IsDone)
+                break;
+
+            yield return null;
+        }
+
+        // ¾ÈÀü ´ë±â
+        yield return obj;
+        yield return audio;
+        yield return img;
+        yield return Data;
     }
 
     IEnumerator AnimateLoadingText()

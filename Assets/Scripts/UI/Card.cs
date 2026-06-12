@@ -55,7 +55,7 @@ public class Card : MonoBehaviour
 
     void BindSprites()
     {
-        ItemData? Item = dataManager.FindItemData(cardID);
+        ItemData Item = dataManager.FindItemData(cardID);
 
         if(null == Item)
         {

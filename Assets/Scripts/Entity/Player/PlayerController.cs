@@ -28,7 +28,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Vector2 _inputVec;
     [SerializeField] private Vector2 _PreinputVec;
-
+    
+    private static readonly int _isMoveID = Animator.StringToHash("isMove");
+    private static readonly int _directionID = Animator.StringToHash("Direction");
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,14 +45,23 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(_playerrb != null)
+        if (_playerrb is not null)
+        {
             _playerrb.MovePosition(_playerrb.position + _inputVec * (Speed * Time.fixedDeltaTime));
+            _playerAnimator.SetBool(_isMoveID, !Mathf.Approximately(_inputVec.magnitude, 0f));
+        }
     }
 
     void OnMove(InputValue value)
     {
         _inputVec = value.Get<Vector2>();
-        if (Mathf.Approximately(_inputVec.magnitude, 0f))
+        
+        if (!Mathf.Approximately(_inputVec.x, 0f))
+        {
+            _playerAnimator.SetFloat(_directionID, _inputVec.x);
+        }
+
+         if (Mathf.Approximately(_inputVec.magnitude, 0f))
         {
             if (_equipmentItems.TryGetValue(EWeaponType.Projectile, out var obj))
             {

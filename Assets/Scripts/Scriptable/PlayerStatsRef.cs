@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStatsRef", menuName = "Scriptable Objects/PlayerStatsRef")]
 public class PlayerStatsRef : EntityRef
