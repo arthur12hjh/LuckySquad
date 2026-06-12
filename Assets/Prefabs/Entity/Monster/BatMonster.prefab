@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9108570500107607456}
   - component: {fileID: -5004695018595741909}
   - component: {fileID: -3069823657331198155}
-  - component: {fileID: 1009926160959460236}
+  - component: {fileID: -7172953335877278076}
   m_Layer: 6
-  m_Name: MonsterTest
+  m_Name: BatMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,10 +81,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 174949215
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6152605402682598171, guid: 060000ea906bb44919a51f98ce207401, type: 3}
+  m_Sprite: {fileID: -8072220183094876539, guid: 97d7ca049d9784d1bbdbe2f5cdba5851, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   _animator: {fileID: -3069823657331198155}
   _renderer: {fileID: 0}
   _material: {fileID: 0}
+  _rigidbody2D: {fileID: 0}
 --- !u!95 &-3069823657331198155
 Animator:
   serializedVersion: 7
@@ -120,7 +121,7 @@ Animator:
   m_GameObject: {fileID: 1796388243311698571}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c69abd0daa18d456a882c00e21235c7e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 188019411cdbd44b89f70e6dedfa3c13, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -132,8 +133,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &1009926160959460236
-BoxCollider2D:
+--- !u!58 &-7172953335877278076
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -162,19 +163,9 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0036067665, y: 0.5054102}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.38, y: 0.59}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.6176811, y: 0.9386847}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0.36}
+  m_Radius: 0.45

@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // InGameManager
-// �ΰ����� ����, Additive Scene���� ����� ���� �����͸� ��� �̱��� �Ŵ���
-// DontDestroyOnLoad�� �ƴ�, �ΰ��� ���Խÿ��� �����Ǵ� �̱��� �Ŵ���
+// 인게임의 로직, Additive Scene과의 통신을 위한 데이터를 담는 싱글톤 매니저
+// DontDestroyOnLoad가 아닌, 인게임 진입시에만 설정되는 싱글톤 매니저
 
-// Player Initialize ����
-// 1) �� ���� ��, InGameManager::Awake���� Player Data�� �޾ƿ´�.
-// 2) InGameManager::Start���� PlayerData�� ������� class _playerStats = new PlayerStats()�� �����ϰ� �����͸� �Է���.
-// 3) InGameManager::Start���� PlayerData�� ������� Player Prefab�� PlayerController Prefab�� Instantiate�� ��.
-// 4) InGameManager::Start���� Player GameObject�� PlayerController�� �����.
+// Player Initialize 로직
+// 1) 씬 진입 시, InGameManager::Awake에서 Player Data를 받아온다.
+// 2) InGameManager::Start에서 PlayerData를 기반으로 class _playerStats = new PlayerStats()로 생성하고 데이터를 입력해.
+// 3) InGameManager::Start에서 PlayerData를 기반으로 Player Prefab과 PlayerController Prefab을 Instantiate를 해.
+// 4) InGameManager::Start에서 Player GameObject를 PlayerController에 등록해.
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager Instance { get; private set; }
+
+    public event Action OnGameStart;
 
     private bool isGamePaused = false;
     private float gameTime = 0f;
@@ -25,22 +27,23 @@ public class InGameManager : MonoBehaviour
     private bool isTimeEnd = false;
 
     [Header("Debugger")]
-    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager ���� �ý��� ��� �� ���̻� ������� ����
+    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager 연동 시스템 사용 시 더이상 사용하지 않음
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _playerControllerPrefab;
     [SerializeField] private Vector2 _playerSpawnPos = new Vector2(0.6f, 0.3f);
-    
+    [SerializeField] private WaveData _waveData;
+
     [Header("Player Data")]
     [SerializeField] private PlayerStats _playerStats;
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private GameObject _playerControllerObj;
     [SerializeField] private CinemachineVirtualCamera _playerCamera;
 
+    public event Action<int> OnTimeChange; // 게임 시간 변화 이벤트 1초마다 호출
     [SerializeField] private Vector3    _SpawnBound;
 
     SpawnPattern _spawnPattern = null;
     public   SpawnPattern OutScreenSpawnPattern => _spawnPattern;
-    public event Action<int> OnTimeChange; // ���� �ð� ��ȭ �̺�Ʈ 1�ʸ��� ȣ��
 
     void Awake()
     {
@@ -51,9 +54,8 @@ public class InGameManager : MonoBehaviour
             return;
         }
         Instance = this;
-        // 1) �� ���� ��, InGameManager::Awake���� Player Data�� �޾ƿ´�.
-        // ������ �ϴ� ��Ȱ��ȭ ���ѵΰ�, ���� ���� �� ����� ������ ó�� ���� �ϼ� �� ����
-
+        // 1) 씬 진입 시, InGameManager::Awake에서 Player Data를 받아온다.
+        // 당장은 일단 비활성화 시켜두고, 추후 병합 및 사용자 데이터 처리 구조 완성 시 구현
         if (_tempStatsRef != null)
         {
             _playerStats = new PlayerStats(_tempStatsRef);
@@ -79,9 +81,18 @@ public class InGameManager : MonoBehaviour
             InstantiatePlayerVirtualCamera();
         }
 
+        // if (WaveManager.Instance != null)
+        // {
+        //     WaveManager.Instance.Initialize(_waveData);
+        // }
         _spawnPattern = OutBoundSpawnPattern.Create(_SpawnBound);
     }
 
+    void Start()
+    {
+        // OnGameStart?.Invoke();
+    }
+    
     private void Update()
     {
         UpdateGameTime();
@@ -102,7 +113,6 @@ public class InGameManager : MonoBehaviour
         _playerCamera.Follow = _playerObj.transform;
         _playerCamera.m_Lens.OrthographicSize = 4.46f;
 
-        // 2D ������ Body: Framing Transposer
         CinemachineFramingTransposer transposer =
             _playerCamera.AddCinemachineComponent<CinemachineFramingTransposer>();
         transposer.m_CameraDistance = 10f;

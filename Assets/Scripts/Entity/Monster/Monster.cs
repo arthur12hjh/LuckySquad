@@ -12,6 +12,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private Material _material;
+    [SerializeField] private Rigidbody2D _rigidbody2D;
 
     private static readonly int _flashAmountID = Shader.PropertyToID("_FlashAmount");
     private static readonly int _DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
@@ -107,6 +108,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         
         _renderer =  GetComponent<SpriteRenderer>();
         _material = _renderer.material;
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         
         ChangeState(MonsterState.Idle);
     }
@@ -147,6 +149,10 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         
         _material.SetFloat(_flashAmountID, 0f); // 루프 오차 보정
 
+    }
+
+    void FixedUpdate()
+    {
     }
     
     private IEnumerator Dissolve(float duration)

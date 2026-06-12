@@ -5,10 +5,10 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "StageRef", menuName = "Scriptable Objects/StageRef")]
 public class StageRef : ScriptableObject
 {
-    [SerializeField] public int StageIndex;                         // ½ºÅ×ÀÌÁö
-    [SerializeField] public int WaveIndex;                          // ¸î ¿şÀÌºê
-    //[SerializeField] public                                         // ¿şÀÌºê µ¥ÀÌÅÍ
-    [SerializeField] public List<GameObject> MonsterSpawnDate;      // ¸ó½ºÅÍ Á¾·ù
-    [SerializeField] public List<GameObject> Boss;                  // º¸½º ¸ó½ºÅÍ
-    [SerializeField] public float StageTime;                        // ½ºÅ×ÀÌÁö ½Ã°£
+    [SerializeField] public int StageIndex;                         // ìŠ¤í…Œì´ì§€
+    [SerializeField] public int WaveIndex;                          // ëª‡ ì›¨ì´ë¸Œ
+    [SerializeField] public WaveData CurrentWaveData;               // ì›¨ì´ë¸Œ ë°ì´í„°
+    [SerializeField] public List<GameObject> MonsterSpawnDate;      // ëª¬ìŠ¤í„° ì¢…ë¥˜
+    [SerializeField] public List<GameObject> Boss;                  // ë³´ìŠ¤ ëª¬ìŠ¤í„°
+    [SerializeField] public float StageTime;                        // ìŠ¤í…Œì´ì§€ ì‹œê°„
 }
