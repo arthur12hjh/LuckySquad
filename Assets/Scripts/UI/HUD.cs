@@ -1,16 +1,21 @@
+using DG.Tweening;
 using TMPro;
 using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI monsterCountText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI gameTimeText;
     [SerializeField] private Slider expSlider;
 
     private PlayerStats playerStats;
+
+    float expSliderTestValue =0f;
 
     private void Start()
     {
@@ -23,6 +28,11 @@ public class HUD : MonoBehaviour
         InGameManager.Instance.OnTimeChange += UpdateGameTimeUI;
     }
 
+    private void Update()
+    {
+        monsterCountText.text = $"{InGameManager.Instance.monsterCount}";
+    }
+
     private void OnDestroy()
     {
         if (InGameManager.Instance != null)
@@ -33,7 +43,7 @@ public class HUD : MonoBehaviour
 
     void UpdateExpUI()
     {
-       expSlider.value = playerStats.CurrentExp;
+       expSlider.value = playerStats.CurrentExp % expSlider.maxValue;
     }
 
     void UpdateGoldUI()
@@ -52,4 +62,5 @@ public class HUD : MonoBehaviour
         int seconds = totalSeconds % 60;
         gameTimeText.text = $" {minutes:00}:{seconds:00}";
     }
+
 }

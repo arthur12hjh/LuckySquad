@@ -6,6 +6,7 @@ public static class Enums
     {
         Loding,
         Lobby,
+        Weapon,
         Store,
         Stage
     }

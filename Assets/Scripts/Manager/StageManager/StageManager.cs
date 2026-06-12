@@ -81,12 +81,14 @@ public class StageManager : MonoBehaviour
 
     private void StageDateLoad()
     {
-        var handle = AddressablesManager.Instance.LoadLabel<StageRef>($"Stage{currentStageIndex}", "ref");
+        //var handle = AddressablesManager.Instance.LoadLabel<StageRef>($"Stage{currentStageIndex}", "ref");
+        //
+        //handle.Completed += h =>
+        //{
+        //    OnStageLoaded(h);
+        //};
 
-        handle.Completed += h =>
-        {
-            OnStageLoaded(h);
-        };
+        currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", "Stage1");
     }
 
     private void OnStageLoaded(AsyncOperationHandle<IList<StageRef>> h)

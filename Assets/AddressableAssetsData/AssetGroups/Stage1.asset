@@ -29,13 +29,6 @@ MonoBehaviour:
     - obj
     - stage1
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d1bd1f14bc4f81e419b898e53de999a8
-    m_Address: Assets/Prefabs/Projectile/Projectile.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - obj
-    - stage1
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: de44b2fd78ce530408e4758d6a271a94
     m_Address: Stage1
     m_ReadOnly: 0

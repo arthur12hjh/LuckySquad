@@ -122,7 +122,7 @@ public class OrbitingWeapon : EquipmentBase
     {
         foreach (var obj in ProjecTileList)
         {
-            obj.GetComponent<Projectile>().Release();
+            obj.GetComponent<ProjectileBase>().Release();
         }
     }
 }

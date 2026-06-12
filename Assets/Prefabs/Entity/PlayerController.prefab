@@ -75,6 +75,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424fdc2b57c214661a672b416b9a79ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 1.5
-  playerObj: {fileID: 0}
-  inputVec: {x: 0, y: 0}
+  _playerObj: {fileID: 0}
+  _playerStats:
+    _magneticPower: 0
+    _expMagnification: 0
+    _projectileAmount: 0
+    _attackRange: 0
+    _attackSpeed: 0
+    _projectileSpeed: 0
+    _duration: 0
+    _level: 0
+    _currentExp: 0
+    _currentGold: 0
+    _maxHp: 0
+    _currentHp: 0
+    _power: 0
+    _speed: 0
+  _playerAnimator: {fileID: 0}
+  _playerTransform: {fileID: 0}
+  _playerrb: {fileID: 0}
+  _weaponPrefab:
+  - weaponType: 0
+    prefab: {fileID: 6294688345810203835, guid: fca7daa172184b24aa547cdf8c45191a, type: 3}
+  - weaponType: 1
+    prefab: {fileID: 4441691523912970309, guid: 8ac190f1717799a40bef2c253a30dfec, type: 3}
+  - weaponType: 2
+    prefab: {fileID: 2788845392586185211, guid: 1ec604e4763f1aa4fae6b810f0fa9c08, type: 3}
+  - weaponType: 3
+    prefab: {fileID: 6294688345810203835, guid: e35fa58ec6b52a24786643f3c3da2d98, type: 3}
+  - weaponType: 4
+    prefab: {fileID: 4441691523912970309, guid: 2fba5f1a449a73f4ba824904665752f9, type: 3}
+  _inputVec: {x: 0, y: 0}

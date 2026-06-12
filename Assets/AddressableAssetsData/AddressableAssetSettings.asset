@@ -111,9 +111,7 @@ MonoBehaviour:
     - obj
     - img
     - sound
-    - ref
-    - stage1
-    - Logo
+    - imgAtlas
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9995508f4df5db24aae1aa93f56def50, type: 2}

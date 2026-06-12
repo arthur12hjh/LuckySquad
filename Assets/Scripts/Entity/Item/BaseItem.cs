@@ -1,5 +1,6 @@
 using Item;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public static class ItemFactory
 {
@@ -18,8 +19,7 @@ public static class ItemFactory
         return gameObject;
     }
 
-    static public GameObject AbstractCreateItem<T>(GameObject prefab, Transform parent = null, int iItemID = 0)
-    where T : BaseItem, new()
+    static public GameObject AbstractCreateItem(GameObject prefab, Transform parent = null, int iItemID = 0)
     {
         if (iItemID == 0)
             return null;
@@ -29,7 +29,7 @@ public static class ItemFactory
         ItemData data = DataManager.Instance.FindItemData(iItemID);
         if (data != null && data is ItemData Iteminfo)
         {
-            obj.GetComponent<T>().Initalize(Iteminfo);
+            obj.GetComponent<BaseItem>().Initalize(Iteminfo);
         }
 
         return obj;
@@ -54,8 +54,14 @@ public abstract class BaseItem : MonoBehaviour
     public virtual void Initalize(ItemData Data)
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        spriteTexs = Resources.LoadAll<Sprite>(SpriteTextureUrl);
 
+        var sprite = AddressablesManager.Instance.GetLabelObject<SpriteAtlas>("Lobby", "imgAtlas", SpriteTextureUrl);
+        if (sprite != null)
+        {
+            spriteTexs = new Sprite[sprite.spriteCount];
+            sprite.GetSprites(spriteTexs);
+        }
+   
         info = Data;
     }
 }

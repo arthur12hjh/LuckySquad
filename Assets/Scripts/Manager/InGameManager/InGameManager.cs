@@ -1,6 +1,7 @@
 using Cinemachine;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // InGameManager
 // 인게임의 로직, Additive Scene과의 통신을 위한 데이터를 담는 싱글톤 매니저
@@ -18,11 +19,11 @@ public class InGameManager : MonoBehaviour
     public event Action OnGameStart;
 
     private bool isGamePaused = false;
-    private float gameTime = 0;
-
-    public int currentSecond { get; private set; } = 0;
+    private float gameTime = 0f;
+    private int currentSecond = 0;
     private int previousSecond = 0;
 
+    public uint monsterCount { get; private set; } = 0;
     private bool isTimeEnd = false;
 
     [Header("Debugger")]
@@ -39,9 +40,14 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _playerCamera;
 
     public event Action<int> OnTimeChange; // 게임 시간 변화 이벤트 1초마다 호출
+    [SerializeField] private Vector3    _SpawnBound;
+
+    SpawnPattern _spawnPattern = null;
+    public   SpawnPattern OutScreenSpawnPattern => _spawnPattern;
 
     void Awake()
     {
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -79,6 +85,7 @@ public class InGameManager : MonoBehaviour
         // {
         //     WaveManager.Instance.Initialize(_waveData);
         // }
+        _spawnPattern = OutBoundSpawnPattern.Create(_SpawnBound);
     }
 
     void Start()
@@ -88,8 +95,7 @@ public class InGameManager : MonoBehaviour
     
     private void Update()
     {
-        if (!isTimeEnd)
-            UpdateGameTime();
+        UpdateGameTime();
     }
 
     void OnDestroy()
@@ -111,10 +117,11 @@ public class InGameManager : MonoBehaviour
             _playerCamera.AddCinemachineComponent<CinemachineFramingTransposer>();
         transposer.m_CameraDistance = 10f;
     }
-
+    
     public PlayerStats GetPlayerStats() => _playerStats;
     public Transform GetPlayerTransform() => _playerObj.transform;
 
+    // 일시정지 기능
     public void StopGame()
     {
         if (!isGamePaused)
@@ -125,6 +132,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
+    // 일시정지 해제 기능
     public void ResumeGame()
     {
         if (isGamePaused)
@@ -139,12 +147,6 @@ public class InGameManager : MonoBehaviour
     {
         gameTime += Time.deltaTime;
 
-        if (gameTime >= 300)
-        {
-            gameTime = 300f;
-            isTimeEnd = true;
-        }
-
         currentSecond = Mathf.FloorToInt(gameTime);
 
         if (currentSecond != previousSecond)
@@ -152,5 +154,12 @@ public class InGameManager : MonoBehaviour
             OnTimeChange?.Invoke(currentSecond);
             previousSecond = currentSecond;
         }
+    }
+
+    // 다시 로비로 이동
+    public void EndStage()
+    {
+        GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
+        SceneManager.LoadScene("Loading");
     }
 }

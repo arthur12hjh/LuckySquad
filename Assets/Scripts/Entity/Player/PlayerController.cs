@@ -1,8 +1,18 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Item;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [System.Serializable]
+    public class WeaponPrefabPair
+    {
+        public EWeaponType weaponType;
+        public GameObject prefab;
+    }
+
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private PlayerStats _playerStats;
 
@@ -10,7 +20,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private Rigidbody2D _playerrb;
 
-    [SerializeField] Vector2 _inputVec;
+    [SerializeField] private List<WeaponPrefabPair>                   _weaponPrefab;
+    [SerializeField] private Dictionary<EWeaponType, GameObject>      _weaponDic;
+    [SerializeField] private Dictionary<EWeaponType, EquipmentBase>   _equipmentItems =
+        new Dictionary<EWeaponType, EquipmentBase>();
+
+
+    [SerializeField] private Vector2 _inputVec;
     
     private static readonly int _isMoveID = Animator.StringToHash("isMove");
     private static readonly int _directionID = Animator.StringToHash("Direction");
@@ -18,11 +34,12 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     void Update()
     {
+      
     }
 
     private void FixedUpdate()
@@ -41,6 +58,11 @@ public class PlayerController : MonoBehaviour
         if (!Mathf.Approximately(_inputVec.x, 0f))
         {
             _playerAnimator.SetFloat(_directionID, _inputVec.x);
+        }
+
+        if (_equipmentItems.TryGetValue(EWeaponType.Projectile, out var obj))
+        {
+            obj.Update_Directation(_inputVec);
         }
     }
 
@@ -63,6 +85,20 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("PlayerController:: Player Prefab's Rigidbody is empty.\nPlease Make Own Rigidbody");
             _playerrb = InitializeRigidbody2D(_playerObj);
         }
+
+        _weaponDic = _weaponPrefab.ToDictionary(x => x.weaponType, x => x.prefab);
+
+/*        if (_weaponDic.TryGetValue(EWeaponType.Bounce, out var obj))
+        {
+            _equipmentItems.Add(EWeaponType.Bounce, ItemFactory.AbstractCreateItem(obj, _playerObj.transform, 4).GetComponent<EquipmentBase>());
+        }*/
+
+        //if (_weaponDic.TryGetValue(EWeaponType.Projectile, out var Projectileobj))
+        //{
+        //    var ProJectileObj = ItemFactory.AbstractCreateItem(Projectileobj, _playerObj.transform, 1).GetComponent<EquipmentBase>();
+        //    ProJectileObj.Update_Directation(new Vector2(-1, 0));
+        //    _equipmentItems.Add(EWeaponType.Projectile, ProJectileObj);
+        //}
     }
     
     public float Speed { get{return _playerStats.Speed;} set{_playerStats.Speed = value;} }
