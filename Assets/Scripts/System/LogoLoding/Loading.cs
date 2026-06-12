@@ -25,7 +25,7 @@ public class Loading : MonoBehaviour
         if (currentStege == -1)
             StartCoroutine(SceneChange(sceneName));
         else
-            StartCoroutine(StageChange($"{sceneName}_{currentStege}"));
+            StartCoroutine(StageChange($"{sceneName}{currentStege}"));
 
         StartCoroutine(AnimateLoadingText());
 

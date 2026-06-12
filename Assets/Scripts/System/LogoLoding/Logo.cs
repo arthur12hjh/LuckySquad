@@ -33,7 +33,8 @@ public class Logo : MonoBehaviour
 
     private void ChangeScene(InputAction.CallbackContext ctx)
     {
-        GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
+        GameManager.Instance.ChangeScene(Enums.SceneType.Stage);
+        GameManager.Instance.SetStage(1);
         SceneManager.LoadScene("Loading");
     }
 
