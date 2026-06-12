@@ -54,7 +54,6 @@ public abstract class BaseItem : MonoBehaviour
     public virtual void Initalize(ItemData Data)
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
         var sprite = AddressablesManager.Instance.GetLabelObject<SpriteAtlas>("Lobby", "imgAtlas", SpriteTextureUrl);
         if (sprite != null)
         {

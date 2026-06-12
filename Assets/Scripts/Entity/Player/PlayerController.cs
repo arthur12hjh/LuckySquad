@@ -88,17 +88,17 @@ public class PlayerController : MonoBehaviour
 
         _weaponDic = _weaponPrefab.ToDictionary(x => x.weaponType, x => x.prefab);
 
-/*        if (_weaponDic.TryGetValue(EWeaponType.Bounce, out var obj))
+        if (_weaponDic.TryGetValue(EWeaponType.Bounce, out var obj))
         {
             _equipmentItems.Add(EWeaponType.Bounce, ItemFactory.AbstractCreateItem(obj, _playerObj.transform, 4).GetComponent<EquipmentBase>());
-        }*/
+        }
 
-        if (_weaponDic.TryGetValue(EWeaponType.Projectile, out var Projectileobj))
+/*        if (_weaponDic.TryGetValue(EWeaponType.Projectile, out var Projectileobj))
         {
             var ProJectileObj = ItemFactory.AbstractCreateItem(Projectileobj, _playerObj.transform, 1).GetComponent<EquipmentBase>();
             ProJectileObj.Update_Directation(new Vector2(-1, 0));
             _equipmentItems.Add(EWeaponType.Projectile, ProJectileObj);
-        }
+        }*/
     }
     
     public float Speed { get{return _playerStats.Speed;} set{_playerStats.Speed = value;} }
