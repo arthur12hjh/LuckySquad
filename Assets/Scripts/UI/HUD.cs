@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class HUD : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI monsterCountText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI gameTimeText;
     [SerializeField] private Slider expSlider;
@@ -21,6 +22,11 @@ public class HUD : MonoBehaviour
         playerStats.OnChanged += UpdateLevelUI;
 
         InGameManager.Instance.OnTimeChange += UpdateGameTimeUI;
+    }
+
+    private void Update()
+    {
+        monsterCountText.text = $"x {InGameManager.Instance.monsterCount}";
     }
 
     private void OnDestroy()
