@@ -19,7 +19,7 @@ public class StageManager : MonoBehaviour
     private int prevTimer = 0;
     private int bossIndex = 0;
 
-    public event Action<StageRef> OnWave;
+    public event Action<WaveData> OnWave;
     public event Action<GameObject> OnBoss;
 
     [SerializeField]
@@ -37,12 +37,13 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
+        InGameManager.Instance.OnTimeChange += HandleTimeChange;
     }
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        InGameManager.Instance.OnTimeChange += HandleTimeChange;
+        //InGameManager.Instance.OnTimeChange += HandleTimeChange;
     }
 
     private void OnDisable()
@@ -71,9 +72,10 @@ public class StageManager : MonoBehaviour
         // 웨이브 (매 분 0초)
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
+            Debug.Log("Wave Called");
             currentStageData.WaveIndex++;
             // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
-            OnWave?.Invoke(currentStageData);
+            OnWave?.Invoke(currentStageData.CurrentWaveData);
         }
     }
 

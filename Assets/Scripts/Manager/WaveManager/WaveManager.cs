@@ -1,0 +1,122 @@
+using System.Collections;
+using UnityEngine;
+
+/*
+ * 웨이브 시스템
+ 
+   ScriptableObject SpawnEvent
+   - 웨이브 단일 데이터를 보관한다.
+   - 파티클 이펙트와 비슷한 느낌
+   - Get할 Pool Object의 Key값
+   - 몇 초부터 몇 초까지를 정한다.
+   - 그리고 그 사이 주기를 정한다.
+   - 한 번에 몇 마리를 내보낼지 정한다
+   - enum으로 단일 보스웨이브, 몬스터 웨이브 등 설정한다
+   
+   ScriptableObject WaveData
+   - 한 스테이지의 모든 웨이브 정보를 담는다
+   - List로 SpawnEvent를 담고 있는다
+   
+   WaveManager
+   - WaveData를 받아 저장합니다.
+   - float _playTime을 만듭니다. 매프레임 Time.deltaTime을 더해줍니다.
+   - StartCoroutine.RunWave(SpawnEvent)으로 List에 있는 SpawnEvent들을 각각 돌려줍니다.
+   
+   RunWave
+   - interval에 따라 미리 WaitForSeconds를 만들어줍니다.
+   - startTime - _playTime만큼 기다려줍니다.
+   - while(endTime > _playTime) 동안 ObjectPool.Get; yield return interval;을 반복해줍니다.
+ */
+public class WaveManager : MonoBehaviour
+{
+    public static WaveManager Instance { get; private set; }
+    private enum WaveState { Default, Running, End }
+    
+    //[SerializeField] private WaveData _waveData;
+    [SerializeField] private WaveState _currentWaveState;
+    [SerializeField] private float _playTime = 0f;
+
+    private int _activeWaveCount = 0;
+
+    // Intialize는 바꿔야한다.
+    // 
+    public void Initialize(WaveData waveData)
+    {
+        _currentWaveState = WaveState.Default;
+        //_waveData = waveData;
+        _playTime = Time.time;
+        _activeWaveCount = 0;
+    }
+
+    public void StartWaves(WaveData waveData)
+    {
+        Debug.Log("Waves Start");
+        StopAllCoroutines();
+        
+        if (waveData is null || waveData.spawnEvents == null || waveData.spawnEvents.Count == 0)
+        {
+            Debug.LogWarning($"[{nameof(WaveManager)}] WaveData가 비어 있어 시작할 수 없습니다.");
+            return;
+        }
+ 
+        _playTime = Time.time;
+        _currentWaveState = WaveState.Running;
+        _activeWaveCount = waveData.spawnEvents.Count;
+ 
+        foreach (var spawnEvent in waveData.spawnEvents)
+            StartCoroutine(RunWave(spawnEvent));
+    }
+
+    public void EndWaves()
+    {
+        StopAllCoroutines();
+        _activeWaveCount = 0;
+        _currentWaveState = WaveState.End;
+    }
+
+    void OnEnable()
+    {
+        if (StageManager.Instance != null)
+        {
+            StageManager.Instance.OnWave += StartWaves;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (StageManager.Instance != null)
+        {
+            StageManager.Instance.OnWave -= StartWaves;
+        }
+    }
+    
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+    }
+
+    IEnumerator RunWave(SpawnEvent spawnEvent)
+    {
+        var interval = new WaitForSeconds(spawnEvent.interval);
+        yield return new WaitForSeconds(spawnEvent.startTime);
+        
+        while (Time.time - _playTime < spawnEvent.endTime - spawnEvent.startTime)
+        {
+            for(int i=0; i<spawnEvent.monsterCount; ++i)
+                SpawnMonster(spawnEvent.poolKey);
+            yield return interval;
+        }
+    }
+
+    void SpawnMonster(ObjectPoolRef objRef)
+    {
+        var monster = ObjectPoolManager.Instance.Get(objRef);
+        monster.transform.position = new Vector3(Random.Range(-7.5f, 7.8f), Random.Range(-3.3f, 2.7f), 0f);
+        monster.GetComponent<BaseEntity>().Initialize(objRef.initRef);
+    }
+    
+}

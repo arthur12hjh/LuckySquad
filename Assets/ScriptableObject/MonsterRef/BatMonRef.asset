@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1094119bc3d9db42a2023d1f7b80c4e, type: 3}
-  m_Name: TestMonRef
+  m_Name: BatMonRef
   m_EditorClassIdentifier: Assembly-CSharp::MonsterRef
   HP: 5
   Power: 0
-  Speed: 0.5
+  Speed: 1.3
