@@ -46,7 +46,6 @@ public class StageManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        //InGameManager.Instance.OnTimeChange += HandleTimeChange;
     }
 
     private void OnDisable()
@@ -56,9 +55,6 @@ public class StageManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void Update()
-    {
-    }
 
     private void HandleTimeChange(int currentCount)
     {
@@ -92,27 +88,7 @@ public class StageManager : MonoBehaviour
 
     private void StageDateLoad()
     {
-        //var handle = AddressablesManager.Instance.LoadLabel<StageRef>($"Stage{currentStageIndex}", "ref");
-        //
-        //handle.Completed += h =>
-        //{
-        //    OnStageLoaded(h);
-        //};
-
         currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", "Stage1");
-    }
-
-    private void OnStageLoaded(AsyncOperationHandle<IList<StageRef>> h)
-    {
-        if (h.Status != AsyncOperationStatus.Succeeded)
-            return;
-
-        stageDatas = new Dictionary<int, StageRef>();
-
-        foreach (var stage in h.Result)
-            stageDatas[stage.StageIndex] = stage;
-
-        currentStageData = stageDatas[currentStageIndex];
     }
 
     public void StageSetting()

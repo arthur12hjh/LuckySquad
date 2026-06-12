@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // InGameManager
-// 인게임의 로직, Additive Scene과의 통신을 위한 데이터를 담는 싱글톤 매니저
-// DontDestroyOnLoad가 아닌, 인게임 진입시에만 설정되는 싱글톤 매니저
+// ?�게?�의 로직, Additive Scene과의 ?�신???�한 ?�이?��? ?�는 ?��???매니?�
+// DontDestroyOnLoad가 ?�닌, ?�게??진입?�에�??�정?�는 ?��???매니?�
 
 // Player Initialize 로직
-// 1) 씬 진입 시, InGameManager::Awake에서 Player Data를 받아온다.
-// 2) InGameManager::Start에서 PlayerData를 기반으로 class _playerStats = new PlayerStats()로 생성하고 데이터를 입력해.
-// 3) InGameManager::Start에서 PlayerData를 기반으로 Player Prefab과 PlayerController Prefab을 Instantiate를 해.
-// 4) InGameManager::Start에서 Player GameObject를 PlayerController에 등록해.
+// 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
+// 2) InGameManager::Start?�서 PlayerData�?기반?�로 class _playerStats = new PlayerStats()�??�성?�고 ?�이?��? ?�력??
+// 3) InGameManager::Start?�서 PlayerData�?기반?�로 Player Prefab�?PlayerController Prefab??Instantiate�???
+// 4) InGameManager::Start?�서 Player GameObject�?PlayerController???�록??
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager Instance { get; private set; }
@@ -27,7 +27,7 @@ public class InGameManager : MonoBehaviour
     private bool isTimeEnd = false;
 
     [Header("Debugger")]
-    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager 연동 시스템 사용 시 더이상 사용하지 않음
+    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager ?�동 ?�스???�용 ???�이???�용?��? ?�음
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _playerControllerPrefab;
     [SerializeField] private Vector2 _playerSpawnPos = new Vector2(0.6f, 0.3f);
@@ -39,7 +39,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private GameObject _playerControllerObj;
     [SerializeField] private CinemachineVirtualCamera _playerCamera;
 
-    public event Action<int> OnTimeChange; // 게임 시간 변화 이벤트 1초마다 호출
+    public event Action<int> OnTimeChange; // 게임 ?�간 변???�벤??1초마???�출
     [SerializeField] private Vector3    _SpawnBound;
 
     SpawnPattern _spawnPattern = null;
@@ -54,8 +54,8 @@ public class InGameManager : MonoBehaviour
             return;
         }
         Instance = this;
-        // 1) 씬 진입 시, InGameManager::Awake에서 Player Data를 받아온다.
-        // 당장은 일단 비활성화 시켜두고, 추후 병합 및 사용자 데이터 처리 구조 완성 시 구현
+        // 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
+        // ?�장?� ?�단 비활?�화 ?�켜?�고, 추후 병합 �??�용???�이??처리 구조 ?�성 ??구현
         if (_tempStatsRef != null)
         {
             _playerStats = new PlayerStats(_tempStatsRef);
@@ -121,7 +121,7 @@ public class InGameManager : MonoBehaviour
     public PlayerStats GetPlayerStats() => _playerStats;
     public Transform GetPlayerTransform() => _playerObj.transform;
 
-    // 일시정지 기능
+    // ?�시?��? 기능
     public void StopGame()
     {
         if (!isGamePaused)
@@ -132,7 +132,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    // 일시정지 해제 기능
+    // ?�시?��? ?�제 기능
     public void ResumeGame()
     {
         if (isGamePaused)
@@ -156,7 +156,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    // 다시 로비로 이동
+    // ?�시 로비�??�동
     public void EndStage()
     {
         GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
