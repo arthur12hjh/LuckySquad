@@ -1,20 +1,22 @@
 using DG.Tweening;
 using Item;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
+    [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Image itemImage;
     [SerializeField] private Image gradeImage;
+    [SerializeField] private TextMeshProUGUI gradeText;
+    [SerializeField] private Button button;
 
     [SerializeField] private Sprite[] itemSprites;
-    [SerializeField] private Sprite[] gradeSprites;
 
-    [SerializeField] private RectTransform rectTransform;
-    [SerializeField] private Button button;
+    [SerializeField] private CardSO[] cardRefs;
 
     public Action<Card> onSelected;
 
@@ -50,29 +52,27 @@ public class Card : MonoBehaviour
         cardGrade = grade;
 
         // currentLevel
-       // BindSprites();
+        BindSprites();
     }
 
     void BindSprites()
     {
-        ItemData Item = dataManager.FindItemData(cardID);
-
-        if(null == Item)
-        {
-            Debug.LogError("Item data not found for ID: " + cardID);
-            return;
-        }
+        //ItemData Item = dataManager.FindItemData(cardID);
+        CardSO cardRef = cardRefs[cardGrade];
+        //if (null == Item)
+        //{
+        //    Debug.LogError("Item data not found for ID: " + cardID);
+        //    return;
+        //}
 
         // 값 대입
-        cardName = Item.szName;
-       
+        //cardName = Item.szName;
 
-        if (itemImage != null && itemSprites != null && cardID >= 0 && cardID < itemSprites.Length)
-            itemImage.sprite = itemSprites[cardID];
+        //if (itemImage != null && itemSprites != null && cardID >= 0 && cardID < itemSprites.Length)
+        //    itemImage.sprite = itemSprites[cardID];
 
-        if (gradeImage != null && gradeSprites != null && cardGrade >= 0 && cardGrade < gradeSprites.Length)
-            gradeImage.sprite = gradeSprites[cardGrade];
+        gradeImage.sprite = cardRef.GradeImage;
+        //gradeText.text = cardRef.GradeName;
     }
-
     
 }

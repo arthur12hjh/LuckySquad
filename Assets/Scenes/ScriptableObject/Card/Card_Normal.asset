@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95b599cf2aabd247925ef2ed5eb4b64, type: 3}
+  m_Name: Card_Normal
+  m_EditorClassIdentifier: Assembly-CSharp::CardRef
+  gradeIndex: 0
+  gradeName: Normal
+  gradeImage: {fileID: -8371522330757494791, guid: 2c1bb15abf9bc484baa13d263d60e1ff, type: 3}
