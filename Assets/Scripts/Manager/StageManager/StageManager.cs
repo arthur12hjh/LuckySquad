@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,8 @@ public class StageManager : MonoBehaviour
 
     public event Action<WaveData> OnWave;
     public event Action<GameObject> OnBoss;
+
+    private bool atOnce = true;
 
     [SerializeField]
     private StageRef currentStageData;                  // 현재 스테이지 데이터
@@ -60,6 +63,14 @@ public class StageManager : MonoBehaviour
     private void HandleTimeChange(int currentCount)
     {
         currentStageData.StageTime = currentCount;
+
+        if (atOnce)
+        {
+            Debug.Log("Wave Called");
+            // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
+            OnWave?.Invoke(currentStageData.CurrentWaveData);
+            atOnce = false;
+        }
 
         // 보스 (5분)
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)

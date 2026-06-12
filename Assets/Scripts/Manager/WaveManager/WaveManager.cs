@@ -37,6 +37,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float _playTime = 0f;
 
     private int _activeWaveCount = 0;
+    private StageManager _stageManager;
 
     // Intialize는 바꿔야한다.
     // 
@@ -76,10 +77,7 @@ public class WaveManager : MonoBehaviour
 
     void OnEnable()
     {
-        if (StageManager.Instance != null)
-        {
-            StageManager.Instance.OnWave += StartWaves;
-        }
+        SubscribeStageManager();
     }
 
     void OnDisable()
@@ -92,7 +90,7 @@ public class WaveManager : MonoBehaviour
     
     void Start()
     {
-        
+        SubscribeStageManager();
     }
 
     void Update()
@@ -118,5 +116,19 @@ public class WaveManager : MonoBehaviour
         monster.transform.position = new Vector3(Random.Range(-7.5f, 7.8f), Random.Range(-3.3f, 2.7f), 0f);
         monster.GetComponent<BaseEntity>().Initialize(objRef.initRef);
     }
-    
+
+
+    void SubscribeStageManager()
+    {
+        if (_stageManager != null)
+            return;
+        
+        Debug.Log("OnEnable");
+        if (StageManager.Instance != null)
+        {
+            _stageManager = StageManager.Instance;
+            Debug.Log("구독과 좋아요 알람설정까지");
+            _stageManager.OnWave += StartWaves;
+        }
+    }
 }
