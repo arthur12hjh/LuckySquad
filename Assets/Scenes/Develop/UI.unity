@@ -1245,7 +1245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &227452185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3033,7 +3033,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -3240,6 +3240,7 @@ MonoBehaviour:
   _playerObj: {fileID: 0}
   _playerControllerObj: {fileID: 0}
   _playerCamera: {fileID: 0}
+  _SpawnBound: {x: 0, y: 0, z: 0}
 --- !u!4 &679547549
 Transform:
   m_ObjectHideFlags: 0
@@ -8808,6 +8809,7 @@ MonoBehaviour:
   monsterCountText: {fileID: 1816291584}
   levelText: {fileID: 1119685533}
   gameTimeText: {fileID: 248238746}
+  expSlider: {fileID: 617494534}
 --- !u!1 &1025674445
 GameObject:
   m_ObjectHideFlags: 0
