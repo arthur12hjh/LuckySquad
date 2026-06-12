@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Lobby : MonoBehaviour
@@ -36,8 +37,9 @@ public class Lobby : MonoBehaviour
 
     public void Start_Stage()
     {
-        GameManager.Instance.SetStage((int)stageIndex);
+        GameManager.Instance.SetStage(1);
         GameManager.Instance.ChangeScene(Enums.SceneType.Stage);
+        SceneManager.LoadScene("Loading");
     }
 
     private void UpdateStageUI()

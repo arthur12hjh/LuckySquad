@@ -43,7 +43,8 @@ public class InGameManager : MonoBehaviour
     public event Action<int> OnTimeChange; // ���� �ð� ��ȭ �̺�Ʈ 1�ʸ��� ȣ��
 
     void Awake()
-    {    
+    {
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -52,6 +53,7 @@ public class InGameManager : MonoBehaviour
         Instance = this;
         // 1) �� ���� ��, InGameManager::Awake���� Player Data�� �޾ƿ´�.
         // ������ �ϴ� ��Ȱ��ȭ ���ѵΰ�, ���� ���� �� ����� ������ ó�� ���� �ϼ� �� ����
+
         if (_tempStatsRef != null)
         {
             _playerStats = new PlayerStats(_tempStatsRef);
@@ -109,6 +111,7 @@ public class InGameManager : MonoBehaviour
     public PlayerStats GetPlayerStats() => _playerStats;
     public Transform GetPlayerTransform() => _playerObj.transform;
 
+    // 일시정지 기능
     public void StopGame()
     {
         if (!isGamePaused)
@@ -119,6 +122,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
+    // 일시정지 해제 기능
     public void ResumeGame()
     {
         if (isGamePaused)
@@ -142,7 +146,8 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    public void EndGame()
+    // 다시 로비로 이동
+    public void EndStage()
     {
         GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
         SceneManager.LoadScene("Loading");

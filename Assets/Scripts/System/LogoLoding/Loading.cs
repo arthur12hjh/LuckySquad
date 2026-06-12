@@ -35,8 +35,8 @@ public class Loading : MonoBehaviour
     private IEnumerator SceneChange(string sceneName)
     {
         yield return StartCoroutine(LoadSceneObject(sceneName));
-        //SceneManager.LoadScene(sceneName);
-        SceneManager.LoadScene("Weapon");
+        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene("Weapon");
     }
 
     // 스테이지
