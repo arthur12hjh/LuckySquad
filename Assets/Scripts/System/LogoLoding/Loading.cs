@@ -12,7 +12,7 @@ public class Loading : MonoBehaviour
     [SerializeField] TextMeshProUGUI loadingText;
 
     private Enums.SceneType sceneType;
-    private int currentStege = -1;
+    private uint currentStege = 0;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class Loading : MonoBehaviour
 
 
         //SceneManager.LoadScene(sceneName);
-        if (currentStege == -1)
+        if (currentStege == 0)
             StartCoroutine(SceneChange(sceneName));
         else
             StartCoroutine(StageChange($"{sceneName}{currentStege}"));

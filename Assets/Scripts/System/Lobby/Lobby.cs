@@ -37,7 +37,7 @@ public class Lobby : MonoBehaviour
 
     public void Start_Stage()
     {
-        GameManager.Instance.SetStage(1);
+        GameManager.Instance.SetStage(stageIndex);
         GameManager.Instance.ChangeScene(Enums.SceneType.Stage);
         SceneManager.LoadScene("Loading");
     }
