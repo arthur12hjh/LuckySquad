@@ -1,145 +1,155 @@
 [
   {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 1,
     "name": "뉴비 표창",
     "Max_Level": 2,
     "type": 0,
     "LevelData": [
-  {
-    "Level": 1,
-    "effects": [
       {
-        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-        "Count": 2,
-        "LineCount": 1,
-        "Damage": 20,
-        "Speed": 2,
-        "Duration": 0,
-        "TickPeriod": 0,
-        "Range": 1.5
+        "Textures": [],
+        "Particles": [],
+        "ItemEffects": {}
+      },
+      {
+        "Textures": [],
+        "Particles": [],
+        "ItemEffects": {}
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 20,
+        "iCount": 2,
+        "iMaxLineCount": 1,
+        "fSpeed": 2,
+        "fRange": 1.5,
+        "fInterval": 0
+      },
+      {
+        "fDamage": 40,
+        "iCount": 4,
+        "iMaxLineCount": 1,
+        "fSpeed": 2,
+        "fRange": 1.5,
+        "fInterval": 0
       }
     ]
   },
   {
-    "Level": 2,
-    "effects": [
-      {
-        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-        "Count": 4,
-        "LineCount": 1,
-        "Damage": 40,
-        "Speed": 2,
-        "Duration": 0,
-        "TickPeriod": 0,
-        "Range": 1.5
-      }
-    ]
-  }
-]
-  },
-  {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 2,
     "name": "뉴비 표창.Level2",
     "Max_Level": 2,
     "type": 0,
     "LevelData": [
       {
-        "Level": 1,
-        "effects": [
-          {
-            "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-            "Count": 2,
-            "LineCount": 1,
-            "Damage": 30,
-            "Speed": 2,
-            "Duration": 0,
-            "TickPeriod": 1.5,
-            "Range": 10
-          }
-        ]
+        "Textures": [],
+        "Particles": [],
+        "ItemEffects": {}
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 30,
+        "iCount": 2,
+        "iMaxLineCount": 1,
+        "fSpeed": 2,
+        "fRange": 10,
+        "fInterval": 1.5
       }
     ]
   },
   {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 3,
     "name": "뉴비 표창.Level3",
     "Max_Level": 2,
     "type": 0,
     "LevelData": [
       {
-        "Level": 1,
-        "effects": [
-          {
-            "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-            "Count": 4,
-            "LineCount": 1,
-            "Damage": 60,
-            "Speed": 2,
-            "Duration": 0,
-            "TickPeriod": 0,
-            "Range": 10
-          }
-        ]
+        "Textures": [],
+        "Particles": [],
+        "ItemEffects": {}
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 60,
+        "iCount": 4,
+        "iMaxLineCount": 1,
+        "fSpeed": 2,
+        "fRange": 10,
+        "fInterval": 0
       }
     ]
   },
   {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 4,
     "name": "땅땅땅땅",
     "Max_Level": 2,
     "type": 0,
     "LevelData": [
-  {
-    "Level": 1,
-    "effects": [
       {
-        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-        "Count": 1,
-        "LineCount": 1,
-        "Damage": 20,
-        "Speed": 2,
-        "Duration": 0,
-        "TickPeriod": 2.5,
-        "Range": 1.5
+        "Textures": [],
+        "Particles": [],
+        "ItemEffects": {}
+      },
+      {
+        "Textures": [],
+        "Particles": [],
+        "ItemEffects": {}
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 20,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 2,
+        "fRange": 1.5,
+        "fInterval": 2.5
+      },
+      {
+        "fDamage": 40,
+        "iCount": 2,
+        "iMaxLineCount": 6,
+        "fSpeed": 2,
+        "fRange": 1.5,
+        "fInterval": 1.5
       }
     ]
   },
   {
-    "Level": 2,
-    "effects": [
-      {
-        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-        "Count": 2,
-        "LineCount": 6,
-        "Damage": 40,
-        "Speed": 2,
-        "Duration": 0,
-        "TickPeriod": 1.5,
-        "Range": 1.5
-      }
-    ]
-  }
-]
-  },
-   {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 5,
     "name": "번개 번개 번개맨",
     "Max_Level": 1,
     "type": 0,
     "LevelData": [
       {
-        "Level": 1,
-        "effects": [
-          {
-            "$type": "Item.DamageEffect, Assembly-CSharp",
-            "EffectType": 0,
-            "Damage": 30,
-            "AttackCount": 1,
-            "Duration": 0,
-            "TickPeriod": 1,
-            "Range": 10
-          }
-        ]
+        "Textures": [],
+        "Particles": [],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": 0,
+              "EffectType": 0
+            }
+          ]
+        }
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 30,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 0,
+        "fRange": 10,
+        "fInterval": 1
       }
     ]
   }

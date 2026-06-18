@@ -12,7 +12,6 @@ public class DataManager : ScriptableObject
 
     [SerializeField] private List<EfffectRef>    _Effects = new List<EfffectRef>();
     private Dictionary<int, ObjectPoolRef>       _EffectSO = new Dictionary<int, ObjectPoolRef>();
-    
     #region Default
 
     public ItemData FindItemData(int id)

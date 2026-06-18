@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public int currentStage { get; private set; } = -1;
 
     public Enums.SceneType currentSceneType { get; private set; }
-
     public event Action<Enums.SceneType> OnSceneChanged;
 
     private void Awake()

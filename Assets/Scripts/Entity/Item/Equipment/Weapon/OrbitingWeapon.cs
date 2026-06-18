@@ -2,20 +2,14 @@ using Item;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbitingWeapon : EquipmentBase
+public class OrbitingWeapon : WeaponBase
 {
     [SerializeField] private ObjectPoolRef projectTileRefSO = null;
     List<GameObject> ProjecTileList = new List<GameObject>();
 
-    private ProjectTileEffect   projectTileEffect;
     private float               TickAngle = 0f;
     private float               fSpeed = 3f;
     private int                 iActiveProjectile = 0;
-
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -39,11 +33,6 @@ public class OrbitingWeapon : EquipmentBase
         return true;
     }
 
-    protected override bool bIsLevelUpItem()
-    {
-        return true;
-    }
-
     protected override void UseItemLogic()
     {
 
@@ -56,23 +45,14 @@ public class OrbitingWeapon : EquipmentBase
 
     private bool SerializationWeaponData()
     {
-        if (info.LevelDatas.Count < level)
+        if (info.MaxLevel < level)
             return false;
 
-        
-        foreach (var effect in info.LevelDatas[level - 1].Effects)
-        {
-            if (effect is ProjectTileEffect infoProjectileEffect)
-            {
-                projectTileEffect = infoProjectileEffect;
+        TickAngle = 360f / WeaponData.WeaponConfigs[level - 1].iCount;
+        iActiveProjectile = GetProjectileCount();
 
-                TickAngle = 360f / projectTileEffect.iCount;
-                iActiveProjectile = GetProjectileCount();
-
-                CreateProjectile();
-                ComputeProjecTilePosition();
-            }
-        }
+        CreateProjectile();
+        ComputeProjecTilePosition();
 
         return true;
     }
@@ -97,13 +77,17 @@ public class OrbitingWeapon : EquipmentBase
 
     private void ComputeProjecTilePosition()
     {
+        float range = WeaponData.WeaponConfigs[level - 1].fRange;
+        int Count = WeaponData.WeaponConfigs[level - 1].iCount;
+
         for (int i = 0; i < ProjecTileList.Count; ++i)
         {
-            if (i < projectTileEffect.iCount)
+            if (i < Count)
             {
                 float rad = i * TickAngle * Mathf.Deg2Rad;
-                float posX = Mathf.Sin(rad) * projectTileEffect.fRange;
-                float posY = Mathf.Cos(rad) * projectTileEffect.fRange;
+                
+                float posX = Mathf.Sin(rad) * range;
+                float posY = Mathf.Cos(rad) * range;
 
                 ProjecTileList[i].transform.localPosition = new Vector3(posX, posY, 0);
                 ProjecTileList[i].SetActive(true);
@@ -115,7 +99,7 @@ public class OrbitingWeapon : EquipmentBase
 
     int GetProjectileCount()
     {
-        return projectTileEffect.iCount;
+        return WeaponData.WeaponConfigs[level - 1].iCount;
     }
 
     private void OnDestroy()

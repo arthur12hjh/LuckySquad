@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class ProjectileWeapon : EquipmentBase
+public class ProjectileWeapon : WeaponBase
 {
     public enum ProjectileType { Projectile, Throw, None};
 
@@ -14,17 +14,10 @@ public class ProjectileWeapon : EquipmentBase
 
     private SpawnPattern        spawnPattern = null;
     private Sprite[]            BulletSpriteTex;
-    private ProjectTileEffect   projectTileEffect;
 
     private Vector2             vDir = Vector2.zero;
     private float               fSpeed = 3f;
     private int                 iShootCount = 0;
-
-    // Start i s called before the first frame update
-    void Start()
-    {
-       
-    }
 
     public override void Update_Directation(Vector2 dir)
     {
@@ -55,47 +48,10 @@ public class ProjectileWeapon : EquipmentBase
                 break;
         }
 
-        SerializationWeaponData();
+        SettingLevelData();
         StartCoroutine(RepeatActionCoroutine());
        
         IsActive = true;
-    }
-
-    protected override bool bIsUseItem()
-    {
-        return true;
-    }
-
-    protected override bool bIsLevelUpItem()
-    {
-        return true;
-    }
-
-    protected override void UseItemLogic()
-    {
-
-    }
-
-    protected override void SettingLevelData()
-    {
-        SerializationWeaponData();
-    }
-
-    private bool SerializationWeaponData()
-    {
-        if (info.LevelDatas.Count < level)
-            return false;
-
-        spriteRenderer.sprite = spriteTexs[level - 1];
-        foreach (var effect in info.LevelDatas[level - 1].Effects)
-        {
-            if(effect is ProjectTileEffect infoProjectileEffect)
-            {
-                projectTileEffect = infoProjectileEffect;
-            }
-        }
-
-        return true;
     }
 
     IEnumerator RepeatActionCoroutine()
@@ -105,10 +61,10 @@ public class ProjectileWeapon : EquipmentBase
             ShootBulletEvent();
 
             float interval = 0.2f;
-            if (iShootCount >= projectTileEffect.iCount)
+            if (iShootCount >= WeaponData.WeaponConfigs[level - 1].iCount)
             {
                 iShootCount = 0;
-                interval = projectTileEffect.fInterval;
+                interval = WeaponData.WeaponConfigs[level - 1].fInterval;
             }
 
             yield return new WaitForSeconds(interval);
@@ -127,14 +83,19 @@ public class ProjectileWeapon : EquipmentBase
         int angle = LineAngle / ShootLineCnt;
         int startAngle = -(angle * (ShootLineCnt - 1)) / 2; ;
 
-        for (int i = 0, AccAngle = startAngle; i < projectTileEffect.ilineCount; i++, AccAngle += angle)
+        int LineCount = GetShootLineCount();
+        for (int i = 0, AccAngle = startAngle; i < LineCount; i++, AccAngle += angle)
         {
             var gameObj = ObjectPoolManager.Instance.Get(projectTileRefSO);
             Vector3 newDir = Quaternion.Euler(0, 0, AccAngle) * vDir;
 
             gameObj.SetActive(true);
             gameObj.transform.position = spawnPattern.GetPosition(Vector3.zero);
-            gameObj.GetComponent<ProjectileBase>().ShootProjectile(new Projectileinfo(fSpeed, projectTileEffect.fDamage), newDir, BulletSpriteTex[level - 1]);
+            gameObj.GetComponent<ProjectileBase>().ShootProjectile(new Projectileinfo(
+                                       fSpeed, 
+                                       WeaponData.WeaponConfigs[level - 1].fDamage),
+                                       newDir, 
+                                       BulletSpriteTex[level - 1]);
         }
 
         iShootCount++;
@@ -142,6 +103,6 @@ public class ProjectileWeapon : EquipmentBase
 
     int GetShootLineCount()
     {
-        return projectTileEffect.ilineCount;
+        return WeaponData.WeaponConfigs[level - 1].iMaxLineCount;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HitScanWeapon : EquipmentBase
 {
-    private DamageEffect        damageEffect;
+    private WeaponData          WeaponData;
     private int                 iAttackCnt = 0;
     private float               AccTime = 0;
 
@@ -83,17 +83,8 @@ public class HitScanWeapon : EquipmentBase
 
     private bool SerializationWeaponData()
     {
-        if (info.LevelDatas.Count < level)
+        if (info.MaxLevel < level)
             return false;
-
-        
-        foreach (var effect in info.LevelDatas[level - 1].Effects)
-        {
-            if (effect is DamageEffect infoProjectileEffect)
-            {
-                damageEffect = infoProjectileEffect;
-            }
-        }
 
         return true;
     }
@@ -109,7 +100,7 @@ public class HitScanWeapon : EquipmentBase
             if (iAttackCnt >= ATK_cnt)
             {
                 iAttackCnt = 0;
-                interval = damageEffect.fInterval;
+                interval = WeaponData.WeaponConfigs[level - 1].fInterval;
             }
 
             yield return new WaitForSeconds(interval);
@@ -120,13 +111,13 @@ public class HitScanWeapon : EquipmentBase
     {
         transform.position = Vector3.zero + Vector3.one * iAttackCnt;
 
-        circleCollider.radius = damageEffect.fRange;
+        circleCollider.radius = WeaponData.WeaponConfigs[level - 1].fRange;
         circleCollider.isTrigger = true;
         iAttackCnt++;
     }
 
     int GetWeaponAttackCount()
     {
-        return damageEffect.iCount + 2;
+        return WeaponData.WeaponConfigs[level - 1].iCount + 2;
     }
 }
