@@ -33,6 +33,7 @@ MonoBehaviour:
     m_Address: Stage1
     m_ReadOnly: 0
     m_SerializedLabels:
+    - ref
     - stage1
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0

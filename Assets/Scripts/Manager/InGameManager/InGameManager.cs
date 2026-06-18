@@ -90,7 +90,7 @@ public class InGameManager : MonoBehaviour
 
     void Start()
     {
-        // OnGameStart?.Invoke();
+        OnGameStart?.Invoke();
     }
     
     private void Update()

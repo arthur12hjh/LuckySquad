@@ -9,8 +9,8 @@ public class Lobby : MonoBehaviour
     [SerializeField] private Button prevStageButton;
     [SerializeField] private Button nextStageButton;
 
-    private uint stageIndex = 0;
-    private const uint maxStageIndex = 5;
+    private uint stageIndex = 1;
+    private const uint maxStageIndex = 6;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class Lobby : MonoBehaviour
 
     public void OnClickPrevStage()
     {
-        if (stageIndex == 0)
+        if (stageIndex == 1)
             return;
 
         --stageIndex;
@@ -44,9 +44,9 @@ public class Lobby : MonoBehaviour
 
     private void UpdateStageUI()
     {
-        stageText.text = $"STAGE {(stageIndex + 1)}" ;
+        stageText.text = $"STAGE {(stageIndex)}" ;
 
-        prevStageButton.interactable = stageIndex > 0;
+        prevStageButton.interactable = stageIndex > 1;
         nextStageButton.interactable = stageIndex < maxStageIndex;
     }
 
