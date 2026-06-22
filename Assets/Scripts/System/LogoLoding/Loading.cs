@@ -12,7 +12,7 @@ public class Loading : MonoBehaviour
     [SerializeField] TextMeshProUGUI loadingText;
 
     private Enums.SceneType sceneType;
-    private int currentStege = -1;
+    private uint currentStege = 0;
 
     void Start()
     {
@@ -22,10 +22,10 @@ public class Loading : MonoBehaviour
 
 
         //SceneManager.LoadScene(sceneName);
-        if (currentStege == -1)
+        if (currentStege == 0)
             StartCoroutine(SceneChange(sceneName));
         else
-            StartCoroutine(StageChange($"{sceneName}_{currentStege}"));
+            StartCoroutine(StageChange($"{sceneName}{currentStege}"));
 
         StartCoroutine(AnimateLoadingText());
 
@@ -35,8 +35,8 @@ public class Loading : MonoBehaviour
     private IEnumerator SceneChange(string sceneName)
     {
         yield return StartCoroutine(LoadSceneObject(sceneName));
-        //SceneManager.LoadScene(sceneName);
-        SceneManager.LoadScene("Weapon");
+        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene("Weapon");
     }
 
     // 스테이지
@@ -50,23 +50,24 @@ public class Loading : MonoBehaviour
     {
         float objP = 0f;
         float audioP = 0f;
-        float imgPA = 0f;
         float imgP = 0f;
+        float imgPA = 0f;
 
         var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
         //var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
-        var imgA = AddressablesManager.Instance.LoadLabel<SpriteAtlas>(sceneName, "imgAtlas");
         var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
+        var imgA = AddressablesManager.Instance.LoadLabel<SpriteAtlas>(sceneName, "imgAtlas");
 
         while (true)
         {
             objP = obj.PercentComplete;
             //audioP = audio.PercentComplete;
             imgP = img.PercentComplete;
+            imgPA = imgA.PercentComplete;
 
             float total = (objP + audioP + imgP + imgPA ) / 4f;
 
-            if (obj.IsDone  && img.IsDone && imgA.IsDone)// && audio.IsDone
+            if (obj.IsDone && img.IsDone && imgA.IsDone)// && audio.IsDone
                 break;
 
             yield return null;

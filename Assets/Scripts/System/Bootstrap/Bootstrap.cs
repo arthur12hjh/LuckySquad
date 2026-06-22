@@ -17,5 +17,6 @@ public class Bootstrap : MonoBehaviour
     {
         new GameObject("GameManager").AddComponent<GameManager>();
         new GameObject("Addressables").AddComponent<AddressablesManager>();
+        new GameObject("Audio").AddComponent<AudioManager>();
     }
 }

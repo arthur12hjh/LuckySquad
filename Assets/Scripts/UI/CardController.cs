@@ -35,9 +35,10 @@ public class CardController : MonoBehaviour
         foreach (Card card in cards)
         {
             card.gameObject.SetActive(true);
-            card.SetData(Random.Range(0, 2), Random.Range(0, 3));
-            InGameManager.Instance.StopGame();
+            card.SetData(Random.Range(0, 2), Random.Range(0, 5));
         }
+
+        InGameManager.Instance.StopGame();
     }
 
     public void CloseCard(Card SelectCard)
@@ -47,8 +48,9 @@ public class CardController : MonoBehaviour
         foreach (Card card in cards)
         {
             card.gameObject.SetActive(false);
-            InGameManager.Instance.ResumeGame();
         }
+
+        InGameManager.Instance.ResumeGame();
     }
 
 }
