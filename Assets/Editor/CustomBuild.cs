@@ -12,7 +12,20 @@ public class CustomBuilder
     static void PerformBuild()
     {
         Directory.CreateDirectory("Builds/Windows");
-        BuildPipeline.BuildPlayer(FindEnabledEditorScenes(), "Builds/Windows/MyGame.exe", BuildTarget.StandaloneWindows, BuildOptions.None);
+        BuildPlayerOptions options = new BuildPlayerOptions
+        {
+            scenes = FindEnabledEditorScenes(),
+            locationPathName = "Builds/Windows/MyGame.exe",
+            target = BuildTarget.StandaloneWindows64,
+            options = BuildOptions.None
+        };
+
+        var report = BuildPipeline.BuildPlayer(options);
+
+        if (report.summary.result != UnityEditor.Build.Reporting.BuildResult.Succeeded)
+        {
+            throw new Exception("Build Failed");
+        }
     }
 
     private static string[] FindEnabledEditorScenes()
