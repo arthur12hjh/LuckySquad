@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using System.IO;
 using UnityEngine;
 
 public class CustomBuilder
@@ -11,10 +10,8 @@ public class CustomBuilder
 
     static void PerformBuild()
     {
-        Directory.CreateDirectory("Builds/Windows");
         BuildPipeline.BuildPlayer(FindEnabledEditorScenes(), "Builds/Windows/MyGame.exe", BuildTarget.StandaloneWindows, BuildOptions.None);
     }
-
     private static string[] FindEnabledEditorScenes()
     {
         List<string> EditorScenes = new List<string>();
