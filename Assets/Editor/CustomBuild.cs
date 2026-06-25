@@ -5,7 +5,7 @@ using UnityEditor;
 using System.IO;
 using UnityEngine;
 
-public class CustomBuilder
+public class CustomBuild
 {
     static string[] SCENES = FindEnabledEditorScenes();
 
