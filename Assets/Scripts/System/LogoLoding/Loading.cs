@@ -55,19 +55,19 @@ public class Loading : MonoBehaviour
 
         var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
         //var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
-        var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
+        // var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
         var imgA = AddressablesManager.Instance.LoadLabel<SpriteAtlas>(sceneName, "imgAtlas");
 
         while (true)
         {
             objP = obj.PercentComplete;
             //audioP = audio.PercentComplete;
-            imgP = img.PercentComplete;
+            //imgP = img.PercentComplete;
             imgPA = imgA.PercentComplete;
 
             float total = (objP + audioP + imgP + imgPA ) / 4f;
 
-            if (obj.IsDone && img.IsDone && imgA.IsDone)// && audio.IsDone
+            if (obj.IsDone &&  imgA.IsDone)// img.IsDone && && audio.IsDone
                 break;
 
             yield return null;
@@ -76,7 +76,7 @@ public class Loading : MonoBehaviour
         // 안전 대기
         yield return obj;
         //yield return audio;
-        yield return img;
+        //yield return img;
         yield return imgA;
     }
 
@@ -89,22 +89,22 @@ public class Loading : MonoBehaviour
         float DataP = 0f;
 
         var obj = AddressablesManager.Instance.LoadLabel<GameObject>(sceneName, "obj");
-        var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
-        var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
-        var imgA = AddressablesManager.Instance.LoadLabel<SpriteAtlas>(sceneName, "imgAtlas");
+        // var audio = AddressablesManager.Instance.LoadLabel<AudioClip>(sceneName, "sound");
+        // var img = AddressablesManager.Instance.LoadLabel<Sprite>(sceneName, "img");
+        // var imgA = AddressablesManager.Instance.LoadLabel<SpriteAtlas>(sceneName, "imgAtlas");
         var Data = AddressablesManager.Instance.LoadLabel<StageRef>(sceneName, "ref");
 
         while (true)
         {
             objP = obj.PercentComplete;
-            audioP = audio.PercentComplete;
-            imgP = img.PercentComplete;
-            imgPA = imgA.PercentComplete;
+            // audioP = audio.PercentComplete;
+            // imgP = img.PercentComplete;
+            // imgPA = imgA.PercentComplete;
             DataP = Data.PercentComplete;
 
             float total = (objP + audioP + imgP + DataP + imgPA) / 5f;
 
-            if (obj.IsDone && audio.IsDone && img.IsDone && Data.IsDone && imgA.IsDone)
+            if (obj.IsDone && Data.IsDone) // && audio.IsDone && img.IsDone && imgA.IsDone
                 break;
 
             yield return null;
@@ -112,9 +112,9 @@ public class Loading : MonoBehaviour
 
         // 안전 대기
         yield return obj;
-        yield return audio;
-        yield return img;
-        yield return imgA;
+        // yield return audio;
+        // yield return img;
+        // yield return imgA;
         yield return Data;
     }
 
