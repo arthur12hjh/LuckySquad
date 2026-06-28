@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private List<AudioClip> playerSfx; // 플레이어 효과음
     [SerializeField] private List<AudioClip> stageSfx; // 스테이지 모든 효과음
 
-    private int currentStageIndex = 0;
+    private uint currentStageIndex = 0;
     private Enums.SceneType currentStegeType;
 
     private void Awake()

@@ -13,31 +13,32 @@ MonoBehaviour:
   m_Name: Stage1
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Stage1
-  m_GUID: 11b6f0d27fc773d409d3f786cbb5a75f
+  m_GUID: 29d870b837d75f446ac4f198fb97310f
   m_SerializeEntries:
   - m_GUID: 396d7abf91ece2449a38d5b5d82e9d54
-    m_Address: Assets/Prefabs/Player/Monster/MonsterTest.prefab
+    m_Address: Assets/Prefabs/Entity/Monster/MonsterTest.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
+    - Stage1
     - obj
-    - stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9cd20b202dcef486e8dcee5949fa5a9a
-    m_Address: Assets/Prefabs/Player/PlayerTest.prefab
+    m_Address: Assets/Prefabs/Entity/PlayerTest.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
+    - Stage1
     - obj
-    - stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: de44b2fd78ce530408e4758d6a271a94
-    m_Address: Stage1
+    m_Address: Assets/Scenes/ScriptableObject/Stage/Stage1.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - stage1
+    - Stage1
+    - ref
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9431f25a67994e64e87f2dd68a4a24a7, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 604bf0583eaa28b4abc613d4a47754ef, type: 2}
-    - {fileID: 11400000, guid: 427411aaf4c802e4a9d8c5adfac27c11, type: 2}
+    - {fileID: 11400000, guid: 9b8e7e0ea5f447746912141eeeb845c7, type: 2}
+    - {fileID: 11400000, guid: 57fd80627ce4b744ca56863be26f50b3, type: 2}

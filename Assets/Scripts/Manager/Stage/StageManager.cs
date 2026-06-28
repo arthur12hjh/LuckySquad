@@ -13,7 +13,7 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
 
-    private int currentStageIndex;                      // 현재 스테이지
+    private uint currentStageIndex;                      // 현재 스테이지
     private int currentWaveIndex;                       // 현재 웨이브
     private Dictionary<int, StageRef> stageDatas;    // 스테이지 데이터 저장용
 

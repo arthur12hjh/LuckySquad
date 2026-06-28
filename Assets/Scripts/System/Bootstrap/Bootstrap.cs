@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,12 +6,16 @@ public class Bootstrap : MonoBehaviour
 {
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         CreateManagers();
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return null;
+
         SceneManager.LoadScene("Logo");
+
     }
 
     void CreateManagers()
@@ -19,4 +24,4 @@ public class Bootstrap : MonoBehaviour
         new GameObject("Addressables").AddComponent<AddressablesManager>();
         new GameObject("Audio").AddComponent<AudioManager>();
     }
-}
+}   
