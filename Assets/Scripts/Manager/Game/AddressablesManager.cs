@@ -1,4 +1,3 @@
-using AutoGroupGenerator;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -168,7 +167,7 @@ public class AddressablesManager : MonoBehaviour
 
         // 라벨 2개
         // Addressables에 label, labelType이 다 있는 걸 로드한다.
-        List<object> labels = new List<object>()
+        List<object> labels = new List<object>()    
         {
             label,
             labelType
