@@ -5,6 +5,7 @@
     "name": "리볼버",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconGunWeaponAtlas",
     "Textures": "GunWeaponAtlas",
     "LevelData": [
       {
@@ -92,6 +93,7 @@
     "name": "체인 라이트닝",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconThunderAtlas",
     "Textures": "ThunderAtlas",
     "LevelData": [
       {
@@ -179,6 +181,7 @@
     "name": "공",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconBallAtlas",
     "Textures": "BallAtlas",
     "LevelData": [
       {
@@ -266,6 +269,7 @@
     "name": "맹독 안개",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconGroundFogAtlas",
     "Textures": "GroundFogAtlas",
     "LevelData": [
       {
@@ -353,6 +357,7 @@
     "name": "수리검",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconShurikenAtlas",
     "Textures": "ShurikenAtlas",
     "LevelData": [
       {
