@@ -316,6 +316,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 34e335514ef049946a26455117eff87c, type: 2}
   - {fileID: 11400000, guid: 7caf32b30536fd44987d19b491bfb106, type: 2}
   - {fileID: 11400000, guid: f71231ee995c7334db66ceca18caeb4a, type: 2}
+  - {fileID: 11400000, guid: 1e24f5c0bf0967c4797a91b9c21d4b8c, type: 2}
 --- !u!4 &363848228
 Transform:
   m_ObjectHideFlags: 0
@@ -1584,6 +1585,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   _currentWaveState: 0
   _playTime: 0
+  _spawnPoints:
+  - {x: 7, y: 10, z: 0}
+  - {x: 8, y: 9, z: 0}
+  - {x: 7, y: 7, z: 0}
+  - {x: -7, y: -7, z: 0}
+  - {x: -7, y: 10, z: 0}
+  - {x: -8, y: 9, z: 0}
+  - {x: 10, y: 0, z: 0}
 --- !u!1 &1500682754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,7 +1685,7 @@ MonoBehaviour:
   _playerPrefab: {fileID: 647102625984419277, guid: 9cd20b202dcef486e8dcee5949fa5a9a, type: 3}
   _playerControllerPrefab: {fileID: 910658204997625895, guid: 7688a24904cb544b0826068bd5d36f19, type: 3}
   _playerSpawnPos: {x: 0.6, y: 0.3}
-  _waveData: {fileID: 0}
+  _waveData: {fileID: 11400000, guid: 3fe645c12c17e425a9b5d6635cff39fc, type: 2}
   _playerStats:
     _magneticPower: 0
     _expMagnification: 0
@@ -1916,6 +1925,7 @@ MonoBehaviour:
   batRef: {fileID: 11400000, guid: 67e4bad2f3043460e8a45127d8ba97ef, type: 2}
   Range_x: {x: -7.5, y: 7.8}
   Range_y: {x: -3.3, y: 2.7}
+  count: 0
 --- !u!1 &2119117691
 GameObject:
   m_ObjectHideFlags: 0

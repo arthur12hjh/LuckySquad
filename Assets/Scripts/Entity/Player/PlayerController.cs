@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private PlayerStats _playerStats;
 
-    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private Player _playercs;
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private Rigidbody2D _playerrb;
 
@@ -28,8 +28,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Vector2 _inputVec;
     
-    private static readonly int _isMoveID = Animator.StringToHash("isMove");
-    private static readonly int _directionID = Animator.StringToHash("Direction");
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,19 +45,15 @@ public class PlayerController : MonoBehaviour
         if (_playerrb is not null)
         {
             _playerrb.MovePosition(_playerrb.position + _inputVec * (Speed * Time.fixedDeltaTime));
-            _playerAnimator.SetBool(_isMoveID, !Mathf.Approximately(_inputVec.magnitude, 0f));
+            _playercs.UpdatePlayer(_inputVec);
         }
     }
 
     void OnMove(InputValue value)
     {
         _inputVec = value.Get<Vector2>();
+        _playercs.UpdatePlayer(_inputVec);
         
-        if (!Mathf.Approximately(_inputVec.x, 0f))
-        {
-            _playerAnimator.SetFloat(_directionID, _inputVec.x);
-        }
-
         if (_equipmentItems.TryGetValue(EWeaponType.Projectile, out var obj))
         {
             obj.Update_Directation(_inputVec);
@@ -76,7 +70,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         
-        _playerAnimator = _playerObj.GetComponent<Animator>();
+        _playercs =  playerObj.GetComponent<Player>();
         _playerTransform = _playerObj.transform;
         _playerrb = _playerObj.GetComponent<Rigidbody2D>();
 
