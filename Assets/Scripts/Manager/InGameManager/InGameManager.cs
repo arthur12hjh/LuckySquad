@@ -96,6 +96,10 @@ public class InGameManager : MonoBehaviour
     private void Update()
     {
         UpdateGameTime();
+        if(Input.GetKeyDown(KeyCode.P)) 
+        {
+            EndStage();
+        }
     }
 
     void OnDestroy()
@@ -159,6 +163,8 @@ public class InGameManager : MonoBehaviour
     // ?¤ì‹œ ë¡œë¹„ë¡??´ë™
     public void EndStage()
     {
+        AddressablesManager.Instance.ReleaseStage(($"Stage{GameManager.Instance.currentStage}"));
+        GameManager.Instance.SetStage(0);
         GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
         SceneManager.LoadScene("Loading");
     }

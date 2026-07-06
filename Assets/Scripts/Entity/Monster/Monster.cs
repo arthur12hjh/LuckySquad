@@ -102,7 +102,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     
     void Start()
     {
-        // 나중에 수정할 로직. 이후 플레이어 위치 받아주는거 다시 만들 예정
+        // ?�중???�정??로직. ?�후 ?�레?�어 ?�치 받아주는�??�시 만들 ?�정
         if(InGameManager.Instance is not null)
             _playerTransform = InGameManager.Instance.GetPlayerTransform();
         
@@ -147,7 +147,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_flashAmountID, 0f); // 루프 오차 보정
+        _material.SetFloat(_flashAmountID, 0f); // 루프 ?�차 보정
 
     }
 
@@ -169,7 +169,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_DissolveAmountID, 1f); // 루프 오차 보정
+        _material.SetFloat(_DissolveAmountID, 1f); // 루프 ?�차 보정
         
         _releaseSelf?.Invoke();
     }

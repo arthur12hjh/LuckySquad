@@ -43,6 +43,13 @@ public class AddressablesManager : MonoBehaviour
         public AsyncOperationHandle<IList<T>> handle;
     }
 
+    private class CommonCache
+    {
+        public List<UnityEngine.Object> value;
+        public Dictionary<string, UnityEngine.Object> keyValue;
+        public AsyncOperationHandle<IList<UnityEngine.Object>> handle;
+    }
+
     // 데이터를 캐싱해서 재사용하기 위함
     // 제네릭으로 데이터를 받고 이름이랑 결과로 저장한다
     // Hash를 이용함
@@ -50,6 +57,8 @@ public class AddressablesManager : MonoBehaviour
 
     // Label로 한번에 받은 데이터를 캐싱해서 재사용하기 위함
     private Dictionary<string, object> labelCache = new();
+
+    private Dictionary<string, CommonCache> commonCache = new();
 
     // 초기화
     private IEnumerator InitFlow()
@@ -240,6 +249,90 @@ public class AddressablesManager : MonoBehaviour
             return cache.value;
 
         return null;
+    }
+
+    public AsyncOperationHandle<IList<UnityEngine.Object>> LoadCommon()
+    {
+        // 1. 캐시 체크
+        // 만약 이미 로드가 된거라면 Addressables를 호출 안함
+        if (TryGetComponentList("Common", out List<UnityEngine.Object> cached))
+            return Addressables.ResourceManager.
+                CreateCompletedOperation<IList<UnityEngine.Object>>(cached, null);
+
+        // 라벨 Asset 로드
+        var handle = Addressables.LoadAssetsAsync<UnityEngine.Object>(
+            "Common", null, Addressables.MergeMode.Intersection);
+
+        // 캐시 저장
+        handle.Completed += h =>
+        {
+            if (h.Status == AsyncOperationStatus.Succeeded)
+            {
+                var list = new List<UnityEngine.Object>(h.Result);
+                var dictionary = new Dictionary<string, UnityEngine.Object>();
+
+                foreach (var obj in list)
+                {
+                    dictionary[obj.name] = obj;
+                }
+
+                commonCache["Common"] = new CommonCache
+                {
+                    value = list,
+                    keyValue = dictionary,
+                    handle = h
+                };
+            }
+        };
+
+        return handle;
+    }
+
+    private bool TryGetComponentList(string key, out List<UnityEngine.Object> List)
+    {
+        List = null;
+
+        if (!commonCache.TryGetValue(key, out var cache))
+            return false;
+
+        List = cache.value;
+        return true;
+    }
+
+    public T GetCommon<T>(string name)
+    where T : UnityEngine.Object
+    {
+        if (!TryGetCommonMap("Common", out var map))
+            return null;
+
+        if (map.TryGetValue(name, out var cache))
+            return cache as T;
+
+        return null;
+    }
+
+    private bool TryGetCommonMap(string key, out Dictionary<string, UnityEngine.Object> map)
+    {
+        map = null;
+
+        // 존재하는지 확인 한다.
+        if (!commonCache.TryGetValue(key, out var cache))
+            return false;
+
+        map = cache.keyValue;
+        return true;
+    }
+
+    public void ReleaseCommon()
+    {
+        if (!commonCache.TryGetValue("Common", out var obj))
+            return;
+
+        if(obj is CommonCache cache)
+        {
+            Addressables.Release(cache.handle);
+            commonCache.Remove("Common");
+        }
     }
 
     public void ReleaseStage(string stageName)

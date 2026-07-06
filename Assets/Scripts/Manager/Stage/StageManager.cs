@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework.Constraints;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
-using static UnityEngine.Rendering.VirtualTexturing.Debugging;
+
 
 public class StageManager : MonoBehaviour
 {
@@ -51,10 +51,12 @@ public class StageManager : MonoBehaviour
     private void OnDisable()
     {
         currentStageData = null;
-        InGameManager.Instance.OnTimeChange -= HandleTimeChange;
+
+        if (InGameManager.Instance != null)
+            InGameManager.Instance.OnTimeChange -= HandleTimeChange;
+
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
 
     private void HandleTimeChange(int currentCount)
     {
@@ -71,6 +73,8 @@ public class StageManager : MonoBehaviour
         // º¸½º (5ºÐ)
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
+            Debug.Log("Boss Cerate");
+
             OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
             bossIndex++;
             return;
@@ -88,7 +92,8 @@ public class StageManager : MonoBehaviour
 
     private void StageDateLoad()
     {
-        currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", "Stage1");
+        string current_Stage = "Stage" + currentStageIndex;
+        currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", current_Stage);
     }
 
     public void StageSetting()

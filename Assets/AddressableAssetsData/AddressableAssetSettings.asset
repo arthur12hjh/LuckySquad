@@ -63,6 +63,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 124d16ab99263e14cb278d590fe72d34, type: 2}
   - {fileID: 11400000, guid: 55d1051d283038b42bf3c87b42f39a18, type: 2}
+  - {fileID: 11400000, guid: 6a8dade520f46214b977f598a03d24ca, type: 2}
   - {fileID: 11400000, guid: 79ab5e2f842a3e148a2439ddc9a17912, type: 2}
   - {fileID: 11400000, guid: 6acb75b82ca2e4a42847879bedc855a1, type: 2}
   m_BuildSettings:
@@ -111,6 +112,7 @@ MonoBehaviour:
     - obj
     - imgAtlas
     - ref
+    - Common
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9995508f4df5db24aae1aa93f56def50, type: 2}

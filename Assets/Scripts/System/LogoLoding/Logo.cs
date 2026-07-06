@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +13,8 @@ public class Logo : MonoBehaviour
 
     private float minAlpha = 0.3f;
     private float textFadeDuration = 1.5f;
+
+    private bool isReady = false;
 
     private void OnEnable()
     {
@@ -29,31 +32,29 @@ public class Logo : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("[Logo] Start Enter");
-
         if (pressMessageText != null)
         {
-            Debug.Log("[Logo] Text Fade Start");
-
             pressMessageText.DOFade(minAlpha, textFadeDuration)
                 .SetEase(Ease.InOutSine)
                 .SetLoops(-1, LoopType.Yoyo);
-
-            Debug.Log("[Logo] Text Fade Running");
-        }
-        else
-        {
-            Debug.LogWarning("[Logo] pressMessageText is NULL");
         }
 
-        Debug.Log("[Logo] Start End");
+        StartCoroutine(LoadCommon());
+
+    }
+
+    private IEnumerator LoadCommon()
+    {
+        yield return AddressablesManager.Instance.LoadCommon();
+        isReady = true;
     }
 
     private void OnPressed(InputAction.CallbackContext ctx)
     {
-        GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
+        if (!isReady)
+            return;
 
-        Debug.Log("Logo clicked");
+        GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
 
         // 중복 입력 방지
         action.Disable();
