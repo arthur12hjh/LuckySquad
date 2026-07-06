@@ -47,21 +47,17 @@ namespace Item
     [Serializable]
     public class LevelData
     {
-        [JsonProperty("Textures")]
-        public readonly List<string>                    TextureID;
-
         [JsonProperty("Particles")]
-        public readonly List<int>                       ParticleIDs;
+        public readonly List<int>               ParticleIDs;
 
         [JsonProperty("ItemEffects")]
         public readonly Dictionary<EEffectType, List<Effect>>  ItemEffects;
 
         public LevelData(
-            List<string> textureIDs = null,
             List<int>    particleIDs = null,
             Dictionary<EEffectType, List<Effect>> effects = null)
         {
-            this.TextureID = textureIDs;
+           
             this.ParticleIDs = particleIDs;
             this.ItemEffects = effects ?? new Dictionary<EEffectType, List<Effect>>();
         }
@@ -102,14 +98,22 @@ namespace Item
     {
         public enum EDamageType
         {
-            Instant,     // 즉시 회복
-            OverTime,    // 지속 회복
+            Instant,     // 즉시 데미지
+            OverTime,    // 지속 데미지
             None,
         }
 
         [JsonProperty("EffectType")]
         public EDamageType  eDamageType;
 
+        [JsonProperty("Amount")]
+        public float fMagnitude;     // 값
+
+        [JsonProperty("Duration")]
+        public float fDuration;      // 지속 시간
+
+        [JsonProperty("Interval")]
+        public float fInterval;      // 틱 주기
     }
 
     [Serializable]
@@ -199,6 +203,9 @@ namespace Item
         [JsonProperty("type")]
         public readonly EItemType           eType;
 
+        [JsonProperty("Textures")]
+        public readonly string              AddressableName;
+
         [JsonProperty("LevelData")]
         public readonly List<LevelData>     LevelDatas;
 
@@ -207,6 +214,7 @@ namespace Item
                         string name = "",
                         int maxLevel = 1,
                         EItemType type = EItemType.None,
+                        string addressableName = null,
                         List<LevelData> levelDatas = null)
         {
             this.iID = id;
@@ -214,6 +222,7 @@ namespace Item
             this.MaxLevel = maxLevel;
             this.eType = type;
             this.LevelDatas = levelDatas ?? new List<LevelData>();
+            this.AddressableName = addressableName;
         }
     }
 
@@ -227,9 +236,10 @@ namespace Item
                         string name = "",
                         int maxLevel = 1,
                         EItemType type = EItemType.None,
+                        string addressableName = null,
                         List<LevelData> levelDatas = null,
                         List<WeaponConfig> weaponConfigs = null) :
-            base(id, name, maxLevel, type, levelDatas)
+            base(id, name, maxLevel, type, addressableName, levelDatas)
         {
             this.WeaponConfigs = weaponConfigs ?? new List<WeaponConfig>();
         }

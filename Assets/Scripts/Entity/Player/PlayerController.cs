@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
         if (_weaponDic.TryGetValue(EWeaponType.Bounce, out var obj))
         {
-            _equipmentItems.Add(EWeaponType.Bounce, ItemFactory.AbstractCreateItem(obj, _playerObj.transform, 4).GetComponent<EquipmentBase>());
+            _equipmentItems.Add(EWeaponType.Bounce, ItemFactory.AbstractCreateItem(obj, _playerObj.transform, 3).GetComponent<EquipmentBase>());
         }
 
 

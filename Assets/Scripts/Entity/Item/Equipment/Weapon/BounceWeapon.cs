@@ -75,9 +75,14 @@ public class BounceWeapon : WeaponBase
 
         if(bIsReflect)
         {
-            var EffectSO = DataManager.Instance.FindEffectSO(1001);
-            var obj = ObjectPoolManager.Instance.Get(EffectSO);
-            obj.gameObject.transform.position = transform.position;
+            foreach(var particleID in WeaponData.LevelDatas[level - 1].ParticleIDs)
+            {
+                var EffectSO = DataManager.Instance.FindEffectSO(particleID);
+                var obj = ObjectPoolManager.Instance.Get(EffectSO);
+
+                obj.gameObject.transform.position = transform.position;
+            }
+          
         }
     }   
 
