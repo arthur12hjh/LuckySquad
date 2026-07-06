@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CustomBuilder
 {
-    static string[] SCENES = FindEnabledEditorScenes();
+    /*static string[] SCENES = FindEnabledEditorScenes();
 
     static void PerformBuild()
     {
@@ -21,5 +21,5 @@ public class CustomBuilder
             EditorScenes.Add(scene.path);
         }
         return EditorScenes.ToArray();
-    }
+    }*/
 }
