@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
-    public int currentStage { get; private set; } = -1;
+    public uint currentStage { get; private set; } = 0;
 
     public Enums.SceneType currentSceneType { get; private set; }
 
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         OnSceneChanged?.Invoke(type);
     }
 
-    public void SetStage(int stage)
+    public void SetStage(uint stage)
     {
         currentStage = stage;
     }

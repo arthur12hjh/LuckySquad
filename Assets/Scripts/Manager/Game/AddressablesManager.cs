@@ -167,7 +167,7 @@ public class AddressablesManager : MonoBehaviour
 
         // 라벨 2개
         // Addressables에 label, labelType이 다 있는 걸 로드한다.
-        List<object> labels = new List<object>()
+        List<object> labels = new List<object>()    
         {
             label,
             labelType
@@ -226,6 +226,22 @@ public class AddressablesManager : MonoBehaviour
 
         // 로드된 에셋 목록 중 이름이 일치하는 에셋 검색
         return assets.Find(x => x.name == assetName);
+    }
+
+    public List<T> GetLabelDictionary<T>(string label, string labelType)
+    {
+        // 키 값을 그대로 받는다.
+        string key = $"{label}_{labelType}";
+
+        // 해당 라벨이 아직 로드되지 않았다면 null 반환
+        if (!labelCache.TryGetValue(key, out var obj))
+            return null;
+
+        // 현재 딕셔너리 타입을 그대록 가지고 온다.
+        if (obj is LabelCache<T> cache)
+            return cache.value;
+
+        return null;
     }
 
     public void ReleaseStage(string stageName)

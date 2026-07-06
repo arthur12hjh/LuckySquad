@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // InGameManager
-// �ΰ����� ����, Additive Scene���� ����� ���� �����͸� ��� �̱��� �Ŵ���
-// DontDestroyOnLoad�� �ƴ�, �ΰ��� ���Խÿ��� �����Ǵ� �̱��� �Ŵ���
+// ?�게?�의 로직, Additive Scene과의 ?�신???�한 ?�이?��? ?�는 ?��???매니?�
+// DontDestroyOnLoad가 ?�닌, ?�게??진입?�에�??�정?�는 ?��???매니?�
 
-// Player Initialize ����
-// 1) �� ���� ��, InGameManager::Awake���� Player Data�� �޾ƿ´�.
-// 2) InGameManager::Start���� PlayerData�� ������� class _playerStats = new PlayerStats()�� �����ϰ� �����͸� �Է���.
-// 3) InGameManager::Start���� PlayerData�� ������� Player Prefab�� PlayerController Prefab�� Instantiate�� ��.
-// 4) InGameManager::Start���� Player GameObject�� PlayerController�� �����.
+// Player Initialize 로직
+// 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
+// 2) InGameManager::Start?�서 PlayerData�?기반?�로 class _playerStats = new PlayerStats()�??�성?�고 ?�이?��? ?�력??
+// 3) InGameManager::Start?�서 PlayerData�?기반?�로 Player Prefab�?PlayerController Prefab??Instantiate�???
+// 4) InGameManager::Start?�서 Player GameObject�?PlayerController???�록??
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager Instance { get; private set; }
+
+    public event Action OnGameStart;
 
     private bool isGamePaused = false;
     private float gameTime = 0f;
@@ -25,22 +27,23 @@ public class InGameManager : MonoBehaviour
     private bool isTimeEnd = false;
 
     [Header("Debugger")]
-    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager ���� �ý��� ��� �� ���̻� ������� ����
+    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager ?�동 ?�스???�용 ???�이???�용?��? ?�음
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _playerControllerPrefab;
     [SerializeField] private Vector2 _playerSpawnPos = new Vector2(0.6f, 0.3f);
-    
+    [SerializeField] private WaveData _waveData;
+
     [Header("Player Data")]
     [SerializeField] private PlayerStats _playerStats;
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private GameObject _playerControllerObj;
     [SerializeField] private CinemachineVirtualCamera _playerCamera;
 
+    public event Action<int> OnTimeChange; // 게임 ?�간 변???�벤??1초마???�출
     [SerializeField] private Vector3    _SpawnBound;
 
     SpawnPattern _spawnPattern = null;
     public   SpawnPattern OutScreenSpawnPattern => _spawnPattern;
-    public event Action<int> OnTimeChange; // ���� �ð� ��ȭ �̺�Ʈ 1�ʸ��� ȣ��
 
     void Awake()
     {
@@ -51,9 +54,8 @@ public class InGameManager : MonoBehaviour
             return;
         }
         Instance = this;
-        // 1) �� ���� ��, InGameManager::Awake���� Player Data�� �޾ƿ´�.
-        // ������ �ϴ� ��Ȱ��ȭ ���ѵΰ�, ���� ���� �� ����� ������ ó�� ���� �ϼ� �� ����
-
+        // 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
+        // ?�장?� ?�단 비활?�화 ?�켜?�고, 추후 병합 �??�용???�이??처리 구조 ?�성 ??구현
         if (_tempStatsRef != null)
         {
             _playerStats = new PlayerStats(_tempStatsRef);
@@ -79,9 +81,18 @@ public class InGameManager : MonoBehaviour
             InstantiatePlayerVirtualCamera();
         }
 
+        // if (WaveManager.Instance != null)
+        // {
+        //     WaveManager.Instance.Initialize(_waveData);
+        // }
         _spawnPattern = OutBoundSpawnPattern.Create(_SpawnBound);
     }
 
+    void Start()
+    {
+        OnGameStart?.Invoke();
+    }
+    
     private void Update()
     {
         UpdateGameTime();
@@ -102,7 +113,6 @@ public class InGameManager : MonoBehaviour
         _playerCamera.Follow = _playerObj.transform;
         _playerCamera.m_Lens.OrthographicSize = 4.46f;
 
-        // 2D ������ Body: Framing Transposer
         CinemachineFramingTransposer transposer =
             _playerCamera.AddCinemachineComponent<CinemachineFramingTransposer>();
         transposer.m_CameraDistance = 10f;
@@ -111,7 +121,7 @@ public class InGameManager : MonoBehaviour
     public PlayerStats GetPlayerStats() => _playerStats;
     public Transform GetPlayerTransform() => _playerObj.transform;
 
-    // 일시정지 기능
+    // ?�시?��? 기능
     public void StopGame()
     {
         if (!isGamePaused)
@@ -122,7 +132,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    // 일시정지 해제 기능
+    // ?�시?��? ?�제 기능
     public void ResumeGame()
     {
         if (isGamePaused)
@@ -146,7 +156,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    // 다시 로비로 이동
+    // ?�시 로비�??�동
     public void EndStage()
     {
         GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);

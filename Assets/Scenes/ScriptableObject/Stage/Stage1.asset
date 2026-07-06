@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageRef
   StageIndex: 1
   WaveIndex: 4
+  CurrentWaveData: {fileID: 11400000, guid: 3fe645c12c17e425a9b5d6635cff39fc, type: 2}
   MonsterSpawnDate: []
   Boss: []
   StageTime: 5
