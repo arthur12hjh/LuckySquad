@@ -107,4 +107,5 @@ MonoBehaviour:
   projectTileRefSO: {fileID: 11400000, guid: 1e24f5c0bf0967c4797a91b9c21d4b8c, type: 2}
   LineAngle: 90
   BulletTextureUrl: BallAtlas
+  fSpeed: 10
   type: 1

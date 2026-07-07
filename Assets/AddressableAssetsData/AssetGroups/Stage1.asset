@@ -75,12 +75,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage1
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: de44b2fd78ce530408e4758d6a271a94
-    m_Address: Assets/Scenes/ScriptableObject/Stage/Stage1.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Stage1
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fca7daa172184b24aa547cdf8c45191a
     m_Address: Assets/Prefabs/Weapon/ProjectTileWeapon_projectile.prefab
     m_ReadOnly: 0

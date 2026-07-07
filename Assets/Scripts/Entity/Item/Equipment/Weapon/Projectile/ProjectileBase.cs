@@ -7,7 +7,7 @@ public abstract class ProjectileBase : MonoBehaviour, IPoolable
     protected Action            _releaseAct;
     protected SpriteRenderer    spriteRenderer = null;
     protected Projectileinfo    info = new Projectileinfo();
-    protected Vector3           vDir = Vector2.zero;
+    protected Vector3           vDir = Vector3.zero;
     protected bool              bIsAlive = false;
 
     public virtual void ShootProjectile(Projectileinfo projectileinfo, Vector2 vdir, Sprite Tex)

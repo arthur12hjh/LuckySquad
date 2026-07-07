@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: a8bb2e72775d0e7429dd84f965aa0647
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 4e784e51179e50a4ba15ea36e0b5530c
+    m_Address: Assets/Prefabs/Projectile/HolyWater.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd205ad84432bb14b98221c05fcbf8e6
+    m_Address: Assets/Prefabs/Projectile/Projectile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9431f25a67994e64e87f2dd68a4a24a7, type: 2}
   m_SchemaSet:

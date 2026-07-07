@@ -2387,6 +2387,8 @@ MonoBehaviour:
   objectPoolRefs:
   - {fileID: 11400000, guid: fa8d161f1512b4eacac69b8c1efb1176, type: 2}
   - {fileID: 11400000, guid: 67e4bad2f3043460e8a45127d8ba97ef, type: 2}
+  - {fileID: 11400000, guid: 1e24f5c0bf0967c4797a91b9c21d4b8c, type: 2}
+  - {fileID: 11400000, guid: 928262c832284ee46bbfe891ea2705bb, type: 2}
 --- !u!1 &1138711847
 GameObject:
   m_ObjectHideFlags: 0

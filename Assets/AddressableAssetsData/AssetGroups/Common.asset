@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Common
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20d2a22332083584ba691433da7857d9
+    m_Address: Assets/Sprites/Atlas/GroundFogAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2fba5f1a449a73f4ba824904665752f9
     m_Address: Assets/Prefabs/Weapon/HitScanWeapon.prefab
     m_ReadOnly: 0
@@ -59,6 +65,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f20eb9d2f9677744da0cdbbee2f861c3
     m_Address: Assets/Image/Atlas/ThunderAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: febe8019c39fea6468dc31f1a97c6057
+    m_Address: Assets/Sprites/Atlas/IconGroundFogAtlas.spriteatlasv2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Common
