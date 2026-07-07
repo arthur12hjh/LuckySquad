@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: DataManager
   m_EditorClassIdentifier: 
   JsonUrl: Json/Item/ItemTest
+  _weaponPrefab:
+  - {fileID: 11400000, guid: 55a41392b585840488ce56bda83c3937, type: 2}
+  - {fileID: 11400000, guid: 26d8009050d82cc429a06ae2284d1573, type: 2}
+  - {fileID: 11400000, guid: 098406f301661dd4f8528fb0801b3e8b, type: 2}
+  - {fileID: 11400000, guid: 4f57f423c56d4ab46a767817ae2b06c2, type: 2}
+  - {fileID: 11400000, guid: 4882c21a9c1c1e74281639564b6cf54d, type: 2}
   _Effects:
   - {fileID: 11400000, guid: 34e335514ef049946a26455117eff87c, type: 2}
   - {fileID: 11400000, guid: 7caf32b30536fd44987d19b491bfb106, type: 2}

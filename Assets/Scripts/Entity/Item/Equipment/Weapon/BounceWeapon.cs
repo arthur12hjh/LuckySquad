@@ -2,8 +2,11 @@ using Item;
 using System;
 using UnityEngine;
 
+
 public class BounceWeapon : WeaponBase
 {
+    private static readonly Vector2 BoundOffset = new Vector2(2.5f, 2.5f);
+
     private float   radius = 0.3f;
     private Vector2 localPos;
     private Vector2 dir;
@@ -20,9 +23,7 @@ public class BounceWeapon : WeaponBase
         // 플레이어 기준 좌표 이동
         localPos += dir * WeaponData.WeaponConfigs[level - 1].fSpeed * Time.deltaTime;
         ComputeScreenSize();
-        Vector3 camPos = cam.transform.position;
-        camPos.z = 0f;
-        transform.position = camPos + (Vector3)localPos;
+        transform.position = (Vector3)localPos;
     }
 
     public override void Initalize(ItemData itemData)
@@ -32,8 +33,8 @@ public class BounceWeapon : WeaponBase
 
         cam = Camera.main;
 
-        radius = gameObject.transform.localScale.x * 0.2f;
-        localPos = Vector2.zero;
+        radius = gameObject.transform.localScale.x;
+        localPos = InGameManager.Instance.GetPlayerTransform().position;
         dir = UnityEngine.Random.insideUnitCircle.normalized;
         transform.position = InGameManager.Instance.GetPlayerTransform().position;
     }
@@ -42,47 +43,54 @@ public class BounceWeapon : WeaponBase
     {
         // 화면 크기 계산
         bool bIsReflect = false;
-        BoundSize.x = cam.orthographicSize - radius;
-        BoundSize.y = BoundSize.x * cam.aspect - radius;
+        Vector3 min = cam.ViewportToWorldPoint(new Vector3(0, 0));
+        Vector3 max = cam.ViewportToWorldPoint(new Vector3(1, 1));
 
-        // X축 반사
-        if (localPos.x < -BoundSize.y)
+        float left = min.x - BoundOffset.x + radius;
+        float right = max.x + BoundOffset.x - radius;
+        float bottom = min.y - BoundOffset.y + radius;
+        float top = max.y + BoundOffset.y - radius;
+
+        // X
+        if (localPos.x < left)
         {
-            localPos.x = -BoundSize.y;
+            localPos.x = left;
             dir.x = Mathf.Abs(dir.x);
             bIsReflect = true;
         }
-        else if (localPos.x > BoundSize.y)
+        else if (localPos.x > right)
         {
-            localPos.x = BoundSize.y;
+            localPos.x = right;
             dir.x = -Mathf.Abs(dir.x);
             bIsReflect = true;
         }
 
-        // Y축 반사
-        if (localPos.y < -BoundSize.x)
+        // Y
+        if (localPos.y < bottom)
         {
-            localPos.y = -BoundSize.x;
+            localPos.y = bottom;
             dir.y = Mathf.Abs(dir.y);
             bIsReflect = true;
         }
-        else if (localPos.y > BoundSize.x)
+        else if (localPos.y > top)
         {
-            localPos.y = BoundSize.x;
+            localPos.y = top;
             dir.y = -Mathf.Abs(dir.y);
             bIsReflect = true;
         }
 
-        if(bIsReflect)
+        if (bIsReflect)
         {
-            foreach(var particleID in WeaponData.LevelDatas[level - 1].ParticleIDs)
+            float angle = UnityEngine.Random.Range(-10f, 10f);
+            dir = Quaternion.AngleAxis(angle, Vector3.forward) * dir;
+
+            foreach (var particleID in WeaponData.LevelDatas[level - 1].ParticleIDs)
             {
                 var EffectSO = DataManager.Instance.FindEffectSO(particleID);
                 var obj = ObjectPoolManager.Instance.Get(EffectSO);
 
                 obj.gameObject.transform.position = transform.position;
             }
-          
         }
     }   
 

@@ -151,7 +151,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     private IEnumerator Dissolve(float duration)
     {
         InGameManager.Instance.GetPlayerStats().GetExp(1);
-        
+
         gameObject.layer =  LayerMask.NameToLayer("Deactive");
         float curTime = 0f;
         _material.SetFloat(_DissolveAmountID, 0f);

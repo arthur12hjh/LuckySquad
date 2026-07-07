@@ -3,12 +3,16 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Item;
 using System.Linq;
+using System;
 
 [CreateAssetMenu(fileName = "Manager", menuName = "Scriptable Objects/DataManager/DataManager", order = 1)]
 public class DataManager : ScriptableObject
 {
     public string                               JsonUrl;
-    [SerializeField] private Dictionary<int, ItemData> Items = new Dictionary<int, ItemData>();
+    private Dictionary<int, ItemData> Items = new Dictionary<int, ItemData>();
+
+    [SerializeField] private List<WeaponSO>             _weaponPrefab;
+    private Dictionary<Item.EWeaponType, GameObject>    WeaponPrefabs;
 
     [SerializeField] private List<EfffectRef>    _Effects = new List<EfffectRef>();
     private Dictionary<int, ObjectPoolRef>       _EffectSO = new Dictionary<int, ObjectPoolRef>();
@@ -18,8 +22,15 @@ public class DataManager : ScriptableObject
     {
         if(Items.TryGetValue(id, out var item))
             return item;
-
        
+        return null;
+    }
+
+    public GameObject GetWeaponPrefab(Item.EWeaponType Type)
+    {
+        if (WeaponPrefabs.TryGetValue(Type, out var item))
+            return item;
+
         return null;
     }
 
@@ -36,7 +47,7 @@ public class DataManager : ScriptableObject
         if (Items == null || Items.Count == 0)
             return null;
 
-        int index = Random.Range(0, Items.Count);
+        int index = UnityEngine.Random.Range(0, Items.Count);
         return Items.Values.ElementAt(index);
     }
 
@@ -46,6 +57,7 @@ public class DataManager : ScriptableObject
             return false;
 
         _EffectSO = _Effects.ToDictionary(x => x.EffectID, x => (ObjectPoolRef)x);
+        WeaponPrefabs = _weaponPrefab.ToDictionary(x => x.Type, x => x.prefab);
         return true;
     }
 
