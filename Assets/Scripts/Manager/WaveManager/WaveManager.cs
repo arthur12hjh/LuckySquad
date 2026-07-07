@@ -38,6 +38,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float _playTime = 0f;
     
     [SerializeField] private Vector3[] _spawnPoints;
+
+    [SerializeField]
+    private WaveData _currentWaveData;
     
     private int _activeWaveCount = 0;
     private StageManager _stageManager;
@@ -56,6 +59,9 @@ public class WaveManager : MonoBehaviour
     {
         Debug.Log("Waves Start");
         StopAllCoroutines();
+        
+        
+        _currentWaveData = waveData;
         
         if (waveData is null || waveData.spawnEvents == null || waveData.spawnEvents.Count == 0)
         {

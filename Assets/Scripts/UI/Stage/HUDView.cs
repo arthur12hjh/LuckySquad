@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class HUD : MonoBehaviour
+public class HUDView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private TextMeshProUGUI monsterCountText;
@@ -13,8 +13,6 @@ public class HUD : MonoBehaviour
     [SerializeField] private Slider expSlider;
 
     private PlayerStats playerStats;
-
-    float expSliderTestValue =0f;
 
     private void Start()
     {
@@ -25,6 +23,8 @@ public class HUD : MonoBehaviour
         playerStats.OnChanged += UpdateLevelUI;
 
         InGameManager.Instance.OnTimeChange += UpdateGameTimeUI;
+
+        expSlider.maxValue = playerStats.BaseExp;
     }
 
     private void Update()
@@ -34,6 +34,13 @@ public class HUD : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (playerStats != null)
+        {
+            playerStats.OnChanged -= UpdateGoldUI;
+            playerStats.OnChanged -= UpdateExpUI;
+            playerStats.OnChanged -= UpdateLevelUI;
+        }
+
         if (InGameManager.Instance != null)
         {
             InGameManager.Instance.OnTimeChange -= UpdateGameTimeUI;
@@ -42,7 +49,8 @@ public class HUD : MonoBehaviour
 
     void UpdateExpUI()
     {
-       expSlider.value = playerStats.CurrentExp % expSlider.maxValue;
+        expSlider.value = playerStats.CurrentExp % expSlider.maxValue;
+        Debug.Log("경험치 변경 호출");
     }
 
     void UpdateGoldUI()

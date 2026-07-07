@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b67d6a397b0f4414bfe0c1804579964, type: 3}
+  m_Name: s1w3Ref
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  spawnEvents:
+  - {fileID: 11400000, guid: 99349be799b3f4cdf8f35c38cf027234, type: 2}

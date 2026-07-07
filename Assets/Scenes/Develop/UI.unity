@@ -1245,7 +1245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &227452185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3222,6 +3222,7 @@ MonoBehaviour:
   _playerPrefab: {fileID: 647102625984419277, guid: 9cd20b202dcef486e8dcee5949fa5a9a, type: 3}
   _playerControllerPrefab: {fileID: 910658204997625895, guid: 7688a24904cb544b0826068bd5d36f19, type: 3}
   _playerSpawnPos: {x: 0.6, y: 0.3}
+  _waveData: {fileID: 0}
   _playerStats:
     _magneticPower: 0
     _expMagnification: 0
@@ -13099,7 +13100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1400345381, guid: 6d1a2570067e3ae4cb5c72a2bca3b8d5, type: 3}
+  m_Sprite: {fileID: 7375623448582939881, guid: 39e0242329775814891ef673e48ae932, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13163,7 +13164,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 679547548}
         m_TargetAssemblyTypeName: InGameManager, Assembly-CSharp
-        m_MethodName: EndGame
+        m_MethodName: EndStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

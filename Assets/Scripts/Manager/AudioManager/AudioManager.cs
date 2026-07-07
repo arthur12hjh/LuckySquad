@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
     public static AudioManager Instance => instance;
 
+    private AudioSource bgmAudioSource;
+
     [Header("Bmg Clips")]
     [SerializeField] private AudioClip bmgAudio; // ¹è°æ À½¾Ç
 
@@ -47,7 +49,12 @@ public class AudioManager : MonoBehaviour
             StageSfxLoad($"{currentStegeType.ToString()}{currentStageIndex}");
         else
             NomalSfxLoad(currentStegeType.ToString());
-    } 
+    }
+
+    public void PlayBGM()
+    {
+        bgmAudioSource.PlayOneShot(bmgAudio, 1f);
+    }
 
     public void PlayerSfxload()
     {

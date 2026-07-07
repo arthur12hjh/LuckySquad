@@ -31,6 +31,15 @@ public class DataManager : ScriptableObject
         return null;
     }
 
+    public ItemData GetRandomItemData()
+    {
+        if (Items == null || Items.Count == 0)
+            return null;
+
+        int index = Random.Range(0, Items.Count);
+        return Items.Values.ElementAt(index);
+    }
+
     private bool Initialize()
     {
         if (LoadJsonFile() == false)
@@ -48,7 +57,7 @@ public class DataManager : ScriptableObject
         {
             var settings = new JsonSerializerSettings
             {
-                TypeNameHandling = TypeNameHandling.All // Å¸ÀÔ Á¤º¸¸¦ JSON¿¡ Æ÷ÇÔ½ÃÅ´
+                TypeNameHandling = TypeNameHandling.All // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ JSONï¿½ï¿½ ï¿½ï¿½ï¿½Ô½ï¿½Å´
             };
 
             string jsonString = jsonAsset.text;

@@ -11,4 +11,12 @@ public static class Enums
         Stage
     }
 
+    public enum LobbyScreen
+    {
+        Stage,
+        Store,
+        Setting,
+        Item,
+        Message
+    }
 }
