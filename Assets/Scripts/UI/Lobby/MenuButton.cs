@@ -1,15 +1,16 @@
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
-using DG.Tweening;
+using static Enums;
 
 public class MenuButton : MonoBehaviour
 {
-    [SerializeField] private Image buttonImage;
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private Sprite selectedSprite;
+    [SerializeField] private LobbyScreen sceneType;
 
     bool isPressed = false;
 
@@ -18,7 +19,6 @@ public class MenuButton : MonoBehaviour
     Toggle toggle; 
     RectTransform rect;
 
-    public GameObject panel;
     void Start()
     {
         rect = GetComponent<RectTransform>();
@@ -37,8 +37,7 @@ public class MenuButton : MonoBehaviour
             if(isPressed == false)
             {   
                 rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y + pressOffset), 0.2f).SetEase(Ease.OutBack);
-                panel.SetActive(true);
-                buttonImage.sprite = selectedSprite;
+                LobbyManager.Instance.ScreenChage(sceneType);
             }
 
             isPressed = true;
@@ -48,8 +47,6 @@ public class MenuButton : MonoBehaviour
             if (isPressed == true)
             {
                 rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - pressOffset), 0.2f).SetEase(Ease.OutBack);
-                panel.SetActive(false);
-                buttonImage.sprite = normalSprite;
             }
             isPressed = false;
         }

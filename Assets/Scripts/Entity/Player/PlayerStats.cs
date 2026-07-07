@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStats
 {
     public event Action OnChanged; // UI용 
+    public event Action OnChangedLevel; // 레벨업 이벤트
     [SerializeField] private float _magneticPower;    // 자석
     [SerializeField] private float _expMagnification;
     [SerializeField] private float _projectileAmount; // 투사체 증가
@@ -20,6 +21,9 @@ public class PlayerStats
     [SerializeField] private float _currentHp;
     [SerializeField] private float _power;
     [SerializeField] private float _speed;
+
+    private int BASE_EXPERIENCE = 10;
+    private const int maxLevel = 50;
     
     public PlayerStats(PlayerStatsRef refSO)
     {
@@ -180,6 +184,11 @@ public class PlayerStats
         }
     }
 
+    public int BaseExp
+    {
+        get => BASE_EXPERIENCE;
+    }
+
     public float Speed
     {
         get => _speed;
@@ -189,6 +198,27 @@ public class PlayerStats
             _speed = value;
             OnChanged?.Invoke();
         }
+    }
+
+    public void GetExp(int experience)
+    { 
+        // Testcode
+        _currentExp += experience;
+
+        int nextLevel = _currentExp / BASE_EXPERIENCE; 
+
+        if (_level < nextLevel)
+        {
+            LevelUp();
+        }
+
+        OnChanged?.Invoke();
+    }
+
+    private void LevelUp()
+    {
+        _level++;
+        OnChangedLevel?.Invoke();
     }
     // expmagnification
     // projectileamount
