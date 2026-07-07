@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a247890ef29b84b86c2f6d97e705b2, type: 3}
   m_Name: BatPoolRef
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPoolRef
-  prefab: {fileID: 1796388243311698571, guid: 0adc79b956a5644959846037232c4e26, type: 3}
+  poolName: Bat
+  prefab:
+    m_AssetGUID: 0adc79b956a5644959846037232c4e26
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
   initRef: {fileID: 11400000, guid: c1b587f0f79ac4251887dea6d2165436, type: 2}
-  initializePoolSize: 100
+  initializePoolSize: 500

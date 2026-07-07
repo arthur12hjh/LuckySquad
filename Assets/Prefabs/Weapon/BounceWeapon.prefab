@@ -80,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 174949215
-  m_SortingLayer: 3
+  m_SortingLayerID: -1921259539
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 0}
@@ -142,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907b7af3f4f4101448e9944e3ba51cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BounceWeapon
-  SpriteTextureUrl: BallAtlas
 --- !u!50 &8834645450175766789
 Rigidbody2D:
   serializedVersion: 5

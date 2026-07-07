@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3442754918770180624}
   - component: {fileID: -2423366181711007207}
   - component: {fileID: 189409287007318086}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HolyWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 285531713
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1123977777716130304, guid: 9a22789ed2adfd04db8192d114e91f2c, type: 3}
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!70 &-2423366181711007207
 CapsuleCollider2D:
