@@ -59,13 +59,13 @@ public class StageManager : MonoBehaviour
     private void HandleTimeChange(int currentCount)
     {
         currentStageData.StageTime = currentCount;
-        Debug.Log($"Time :  {currentStageData.StageTime}");
+        //Debug.Log($"Time :  {currentStageData.StageTime}");
 
         if (atOnce)
         {
-            Debug.Log("Wave Called");
+            //Debug.Log("Wave Called");
             // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
-            OnWave?.Invoke(currentStageData.CurrentWaveData);
+            OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
             atOnce = false;
         }
 
@@ -80,10 +80,10 @@ public class StageManager : MonoBehaviour
         // 웨이브 (매 분 0초)
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
-            Debug.Log("Wave Called");
+            //Debug.Log("Wave Called");
             currentStageData.WaveIndex++;
             // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
-            OnWave?.Invoke(currentStageData.CurrentWaveData);
+            OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
         }
     }
 

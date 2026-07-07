@@ -5,25 +5,26 @@ using System.Collections;
 
 public class Monster : BaseEntity, IDamageable, IPoolable
 {
-    private enum MonsterState {Idle, Chase, Fear, Dead, End}
+    // 자식 클래스에서 상태를 참조/전환할 수 있도록 protected로 연다
+    protected enum MonsterState {Idle, Chase, Fear, Dead, End}
     
     [Header("Components")]
-    [SerializeField] private Transform _playerTransform;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private SpriteRenderer _renderer;
-    [SerializeField] private Material _material;
-    [SerializeField] private Rigidbody2D _rigidbody2D;
+    [SerializeField] protected Transform _playerTransform;
+    [SerializeField] protected Animator _animator;
+    [SerializeField] protected SpriteRenderer _renderer;
+    [SerializeField] protected Material _material;
+    [SerializeField] protected Rigidbody2D _rigidbody2D;
 
-    private static readonly int _flashAmountID = Shader.PropertyToID("_FlashAmount");
-    private static readonly int _DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
+    protected static readonly int _flashAmountID = Shader.PropertyToID("_FlashAmount");
+    protected static readonly int _DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
 
-    private static readonly int _isMoveID = Animator.StringToHash("isMove");
-    private static readonly int _isFearID = Animator.StringToHash("isFear");
-    private static readonly int _directionID = Animator.StringToHash("Direction");
+    protected static readonly int _isMoveID = Animator.StringToHash("isMove");
+    protected static readonly int _isFearID = Animator.StringToHash("isFear");
+    protected static readonly int _directionID = Animator.StringToHash("Direction");
     
     private Action _releaseSelf;
     
-    private MonsterState _currentState = MonsterState.Idle;
+    protected MonsterState _currentState = MonsterState.Idle;
     
     public void OnSpawn(Action releaseSelf) => _releaseSelf = releaseSelf;
     
@@ -36,9 +37,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     {
         if (_currentState == MonsterState.Dead)
             return;
-        // Debug.Log($"Damage : {DamageStruct.iDamage } \n" +
-        //           $"Hit Count: { DamageStruct.iHitCount } \n" + 
-        //           $"Type : { DamageStruct.AttackType.ToString() }");
 
         _currentHp -= DamageStruct.iDamage * DamageStruct.iHitCount;
         StartCoroutine(HitFlash(0.1f));
@@ -46,10 +44,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         {
             ChangeState(MonsterState.Dead);
         }
-        // else
-        // {
-        //     Debug.Log("Damaged");
-        // }
     }
     
     public float GuardDamage()
@@ -88,15 +82,11 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             _material.SetFloat(_DissolveAmountID, 0f);
         }
 
-        
         _currentState = MonsterState.Idle;
     }
 
     protected override void Move(Vector3 position, float speedModifier = 1f)
     {
-        // transform.position = Vector3.MoveTowards(transform.position, position, Speed * speedModifier * Time.deltaTime);
-        // _animator.SetBool(_isMoveID, true);
-        // _animator.SetFloat(_directionID, _playerTransform.position.x - transform.position.x);
         Vector2 currentPos = _rigidbody2D.position;
         Vector2 targetPos = Vector2.MoveTowards(currentPos, position, Speed * speedModifier * Time.fixedDeltaTime);
         _rigidbody2D.MovePosition(targetPos);
@@ -142,7 +132,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         }
         
         _material.SetFloat(_flashAmountID, 0f); // 루프 오차 보정
-
     }
 
     void FixedUpdate()
@@ -161,7 +150,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     private IEnumerator Dissolve(float duration)
     {
         InGameManager.Instance.GetPlayerStats().GetExp(1);
-        Debug.Log("Im Dead");
+        
         gameObject.layer =  LayerMask.NameToLayer("Deactive");
         float curTime = 0f;
         _material.SetFloat(_DissolveAmountID, 0f);
@@ -178,7 +167,8 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         _releaseSelf?.Invoke();
     }
 
-    private void ChangeState(MonsterState newState)
+    // 자식 클래스가 상태 전환 흐름에 끼어들 수 있도록 virtual로 연다
+    protected virtual void ChangeState(MonsterState newState)
     {
         if (_currentState == newState)
             return;
@@ -191,6 +181,9 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         }
         
         _currentState = newState;
+
+        // 상태가 실제로 바뀐 시점에 자식 클래스가 추가 처리를 할 수 있게 훅을 호출한다
+        OnStateChanged(newState);
 
         switch (newState)
         {
@@ -213,6 +206,8 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         }
     }
 
+    protected virtual void OnStateChanged(MonsterState newState) { }
+
     private void TickIdle()
     {
         if(_playerTransform is not null)
@@ -226,8 +221,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             ChangeState(MonsterState.Idle);
             return;
         }
-
-        //Move(_playerTransform.position, 1f);
     }
 
     private void TickFear()
@@ -237,9 +230,5 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             ChangeState(MonsterState.Idle);
             return;
         }
-        
-        //Move(_playerTransform.position, -1f);
     }
-    
-    
 }
