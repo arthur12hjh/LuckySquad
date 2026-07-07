@@ -156,6 +156,9 @@ public class InGameManager : MonoBehaviour
 
     private void UpdateGameTime()
     {
+        if (currentSecond == 300)
+            return;
+
         gameTime += Time.deltaTime;
 
         currentSecond = Mathf.FloorToInt(gameTime);
@@ -170,7 +173,7 @@ public class InGameManager : MonoBehaviour
     // ?�시 로비�??�동
     public void EndStage()
     {
-        AddressablesManager.Instance.ReleaseStage(($"Stage{GameManager.Instance.currentStage}"));
+        AddressablesManager.Instance.ReleaseLabel($"Stage{GameManager.Instance.currentStage}");
         GameManager.Instance.SetStage(0);
         GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
         SceneManager.LoadScene("Loading");

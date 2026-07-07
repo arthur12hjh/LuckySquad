@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,12 +18,9 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource bgmAudioSource;
 
-    [Header("Bmg Clips")]
-    [SerializeField] private AudioClip bmgAudio; // 배경 음악
-
-    [Header("Sfx Clips")]
-    [SerializeField] private List<AudioClip> playerSfx; // 플레이어 효과음
-    [SerializeField] private List<AudioClip> stageSfx; // 스테이지 모든 효과음
+    private AudioClip bmgAudio; // 배경 음악
+    private List<AudioClip> playerSfx; // 플레이어 효과음
+    private List<AudioClip> stageSfx; // 스테이지 모든 효과음
 
     private uint currentStageIndex = 0;
     private Enums.SceneType currentStegeType;
@@ -59,19 +57,19 @@ public class AudioManager : MonoBehaviour
     public void PlayerSfxload()
     {
         Debug.Log("플레이어 사운드");
-        playerSfx = AddressablesManager.Instance.GetLabelDictionary<AudioClip>("Player", "sound");
+        playerSfx = AddressablesManager.Instance.GetLabelList<UnityEngine.Object>("PlayerSound").Cast<AudioClip>().ToList();
     }
 
     private void NomalSfxLoad(string SceneName)
     {
-        bmgAudio = AddressablesManager.Instance.GetLabelObject<AudioClip>(SceneName, "sound", $"{SceneName}Bmg");
-        stageSfx = AddressablesManager.Instance.GetLabelDictionary<AudioClip>(SceneName, "sound");
+        //bmgAudio = 
+        //stageSfx = 
     }
 
     private void StageSfxLoad(string SceneName)
     {
-        bmgAudio = AddressablesManager.Instance.GetLabelObject<AudioClip>(SceneName, "sound", $"{SceneName}Bmg");
-        stageSfx = AddressablesManager.Instance.GetLabelDictionary<AudioClip>(SceneName, "sound");
+        //bmgAudio = 
+        //stageSfx = 
     }
 
 }

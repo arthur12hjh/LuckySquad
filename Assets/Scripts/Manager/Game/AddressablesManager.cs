@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -37,13 +38,7 @@ public class AddressablesManager : MonoBehaviour
         public AsyncOperationHandle<T> handle;
     }
 
-    private class LabelCache<T>
-    {
-        public List<T> value;
-        public AsyncOperationHandle<IList<T>> handle;
-    }
-
-    private class CommonCache
+    private class Cache
     {
         public List<UnityEngine.Object> value;
         public Dictionary<string, UnityEngine.Object> keyValue;
@@ -56,9 +51,10 @@ public class AddressablesManager : MonoBehaviour
     private Dictionary<Type, Dictionary<string, object>> cache = new();
 
     // Label로 한번에 받은 데이터를 캐싱해서 재사용하기 위함
-    private Dictionary<string, object> labelCache = new();
+    private Dictionary<string, Cache> labelCache = new();
+    private Dictionary<string, Cache> commonCache = new();
 
-    private Dictionary<string, CommonCache> commonCache = new();
+
 
     // 초기화
     private IEnumerator InitFlow()
@@ -110,7 +106,6 @@ public class AddressablesManager : MonoBehaviour
         };
     }
 
-
     public bool TryGetCache<T>(string key, out T value)
     {
         value = default;
@@ -161,107 +156,15 @@ public class AddressablesManager : MonoBehaviour
     }
 
     //label
-    public AsyncOperationHandle<IList<T>> LoadLabel<T>(string label, string labelType)
+    public AsyncOperationHandle<IList<UnityEngine.Object>> LoadLabel(string label)
     {
-        // 캐시 키
-        // label이랑 labelType을 합쳐서 키 값을 만든다.
-        string cacheKey = $"{label}_{labelType}";
-
         // 1. 캐시 체크
         // 만약 이미 로드가 된거라면 Addressables를 호출 안함
-        if (TryGetLabel(cacheKey, out List<T> cached))
-            return Addressables.ResourceManager.CreateCompletedOperation<IList<T>>(cached, null);
-
-        // 라벨 2개
-        // Addressables에 label, labelType이 다 있는 걸 로드한다.
-        List<object> labels = new List<object>()    
-        {
-            label,
-            labelType
-        };
+        if (TryGetLabel(label, out List<UnityEngine.Object> cached))
+            return Addressables.ResourceManager.CreateCompletedOperation<IList<UnityEngine.Object>>(cached, null);
 
         // 두 라벨 모두 포함된 Asset 로드
-        var handle = Addressables.LoadAssetsAsync<T>(labels, null, Addressables.MergeMode.Intersection);
-
-        // 캐시 저장
-        handle.Completed += h =>
-        {
-            if (h.Status == AsyncOperationStatus.Succeeded)
-            {
-                labelCache[cacheKey] = new LabelCache<T>
-                {
-                    value = new List<T>(h.Result),
-                    handle = h
-                };
-            }
-        };
-
-        return handle;
-    }
-
-    private bool TryGetLabel<T>(string key, out List<T> value)
-    {
-        value = null;
-
-        // 존재하는지 확인 한다.
-        if (!labelCache.TryGetValue(key, out var obj))
-            return false;
-
-        // 데이터 타입이 맞는지 확인 후 실제 데이터를 반환한다.
-        if (obj is LabelCache<T> cache)
-        {
-            value = cache.value;
-            return true;
-        }
-
-        return false;
-    }
-
-    // 캐시에 저장된 에셋 중 이름이 일치하는 에셋을 반환한다.
-    // 사용 방법, label : Lobby, Stage 등 labelType : obj, img 등, assetName : 실제 객체이름
-    // test1 = AddressablesManager.Instance.GetLabelObject<GameObject>("Logo","obj","MonsterTest");
-
-    public T GetLabelObject<T>(string label, string labelType, string assetName)
-            // name로 찾을 때 int형이나 그런건 name가 없기 때문에 제네릭에서 Object라고 고정을 해준다.
-            where T : UnityEngine.Object
-    {
-        string key = $"{label}_{labelType}";
-
-        // 해당 라벨이 아직 로드되지 않았다면 null 반환
-        if (!TryGetLabel<T>(key, out var assets))
-            return null;
-
-        // 로드된 에셋 목록 중 이름이 일치하는 에셋 검색
-        return assets.Find(x => x.name == assetName);
-    }
-
-    public List<T> GetLabelDictionary<T>(string label, string labelType)
-    {
-        // 키 값을 그대로 받는다.
-        string key = $"{label}_{labelType}";
-
-        // 해당 라벨이 아직 로드되지 않았다면 null 반환
-        if (!labelCache.TryGetValue(key, out var obj))
-            return null;
-
-        // 현재 딕셔너리 타입을 그대록 가지고 온다.
-        if (obj is LabelCache<T> cache)
-            return cache.value;
-
-        return null;
-    }
-
-    public AsyncOperationHandle<IList<UnityEngine.Object>> LoadCommon()
-    {
-        // 1. 캐시 체크
-        // 만약 이미 로드가 된거라면 Addressables를 호출 안함
-        if (TryGetComponentList("Common", out List<UnityEngine.Object> cached))
-            return Addressables.ResourceManager.
-                CreateCompletedOperation<IList<UnityEngine.Object>>(cached, null);
-
-        // 라벨 Asset 로드
-        var handle = Addressables.LoadAssetsAsync<UnityEngine.Object>(
-            "Common", null, Addressables.MergeMode.Intersection);
+        var handle = Addressables.LoadAssetsAsync<UnityEngine.Object>(label, null, Addressables.MergeMode.Intersection);
 
         // 캐시 저장
         handle.Completed += h =>
@@ -276,7 +179,92 @@ public class AddressablesManager : MonoBehaviour
                     dictionary[obj.name] = obj;
                 }
 
-                commonCache["Common"] = new CommonCache
+                labelCache[label] = new Cache
+                {
+                    value = list,
+                    keyValue = dictionary,
+                    handle = h
+                };
+            }
+        };
+
+        return handle;
+    }
+
+    private bool TryGetLabel(string key, out List<UnityEngine.Object> value)
+    {
+        value = null;
+
+        // 존재하는지 확인 한다.
+        if (!labelCache.TryGetValue(key, out var obj))
+            return false;
+
+        // 데이터 타입이 맞는지 확인 후 실제 데이터를 반환한다.
+        value = obj.value;
+        return true;
+    }
+
+    private bool TryGetLabelmap(string key, out Dictionary<string, UnityEngine.Object> map)
+    {
+        map = null;
+
+        if (!labelCache.TryGetValue(key, out var obj))
+            return false;
+
+        map = obj.keyValue;
+        return true;
+    }
+
+    // 캐시에 저장된 에셋 중 이름이 일치하는 에셋을 반환한다.
+    // 사용 방법, label : Lobby, Stage 등 labelType : obj, img 등, assetName : 실제 객체이름
+    // test1 = AddressablesManager.Instance.GetLabelObject<GameObject>("Logo","obj","MonsterTest");
+
+    public T GetLabelDictionary<T>(string label, string assetName)
+            where T : UnityEngine.Object
+    {
+        // 해당 라벨이 아직 로드되지 않았다면 null 반환
+        if (!TryGetLabelmap(label, out var map))
+            return null;
+
+        if (map.TryGetValue(assetName, out var cache))
+            return cache as T;
+
+        return null;
+    }
+
+    public List<UnityEngine.Object> GetLabelList<T>(string label)
+    {
+        if (!TryGetLabel(label, out var list))
+            return null;
+
+        return list;
+    }
+
+    // Comm
+    public AsyncOperationHandle<IList<UnityEngine.Object>> LoadCommon()
+    {
+        // 1. 캐시 체크
+        // 만약 이미 로드가 된거라면 Addressables를 호출 안함
+        if (TryGetComponentList("Common", out List<UnityEngine.Object> cached))
+            return Addressables.ResourceManager.CreateCompletedOperation<IList<UnityEngine.Object>>(cached, null);
+
+        // 라벨 Asset 로드
+        var handle = Addressables.LoadAssetsAsync<UnityEngine.Object>("Common", null, Addressables.MergeMode.Intersection);
+
+        // 캐시 저장
+        handle.Completed += h =>
+        {
+            if (h.Status == AsyncOperationStatus.Succeeded)
+            {
+                var list = new List<UnityEngine.Object>(h.Result);
+                var dictionary = new Dictionary<string, UnityEngine.Object>();
+
+                foreach (var obj in list)
+                {
+                    dictionary[obj.name] = obj;
+                }
+
+                commonCache["Common"] = new Cache
                 {
                     value = list,
                     keyValue = dictionary,
@@ -328,37 +316,26 @@ public class AddressablesManager : MonoBehaviour
         if (!commonCache.TryGetValue("Common", out var obj))
             return;
 
-        if(obj is CommonCache cache)
+        if (obj is Cache cache)
         {
             Addressables.Release(cache.handle);
             commonCache.Remove("Common");
         }
     }
 
-    public void ReleaseStage(string stageName)
-    {
-        ReleaseLabel<GameObject>(stageName, "obj");
-        ReleaseLabel<AudioClip>(stageName, "sound");
-        ReleaseLabel<Sprite>(stageName, "img");
-        ReleaseLabel<SpriteAtlas>(stageName, "imgAtlas");
-        ReleaseLabel<StageRef>(stageName, "ref");
-    }
-
     // 데이터 해제
-    private void ReleaseLabel<T>(string label, string labelType)
+    public void ReleaseLabel(string label)
     {
-        string cacheKey = $"{label}_{labelType}";
-
         // 실패시 반환
-        if (!labelCache.TryGetValue(cacheKey, out var obj))
+        if (!labelCache.TryGetValue(label, out var obj))
             return;
 
         // Addressables 메모리 해제
         // 캐시 제거
-        if (obj is LabelCache<T> cache)
+        if (obj is Cache cache)
         {
             Addressables.Release(cache.handle);
-            labelCache.Remove(cacheKey);
+            commonCache.Remove("cache");
         }
     }
 

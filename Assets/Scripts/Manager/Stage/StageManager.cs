@@ -13,9 +13,9 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
 
-    private uint currentStageIndex;                      // 현재 스테이지
-    private int currentWaveIndex;                       // 현재 웨이브
-    private Dictionary<int, StageRef> stageDatas;    // 스테이지 데이터 저장용
+    private uint currentStageIndex;                      // ?�재 ?�테?��?
+    private int currentWaveIndex;                       // ?�재 ?�이�?
+    private Dictionary<int, StageRef> stageDatas;    // ?�테?��? ?�이???�?�용
 
     private int prevTimer = 0;
     private int bossIndex = 0;
@@ -26,7 +26,7 @@ public class StageManager : MonoBehaviour
     private bool atOnce = true;
 
     [SerializeField]
-    private StageRef currentStageData;                  // 현재 스테이지 데이터
+    private StageRef currentStageData;                  // ?�재 ?�테?��? ?�이??
 
     private void Awake()
     {
@@ -66,12 +66,12 @@ public class StageManager : MonoBehaviour
         if (atOnce)
         {
             //Debug.Log("Wave Called");
-            // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
+            // ?�이브�? 만들�?�??�이브에 ?�요??구조체�? ?�겨�?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
             atOnce = false;
         }
 
-        // 보스 (5분)
+        // 보스 (5�?
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
             Debug.Log("Boss Cerate");
@@ -81,12 +81,12 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // 웨이브 (매 분 0초)
+        // ?�이�?(�?�?0�?
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
             //Debug.Log("Wave Called");
             currentStageData.WaveIndex++;
-            // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
+            // ?�이브�? 만들�?�??�이브에 ?�요??구조체�? ?�겨�?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
         }
     }
@@ -94,7 +94,7 @@ public class StageManager : MonoBehaviour
     private void StageDateLoad()
     {
         string current_Stage = "Stage" + currentStageIndex;
-        currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", current_Stage);
+        currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", current_Stage);
     }
 
     public void StageSetting()
