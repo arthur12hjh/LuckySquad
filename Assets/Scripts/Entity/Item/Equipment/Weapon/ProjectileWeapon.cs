@@ -15,17 +15,8 @@ public class ProjectileWeapon : WeaponBase
     private SpawnPattern        spawnPattern = null;
     private Sprite[]            BulletSpriteTex;
 
-    private Vector2             vDir = Vector2.zero;
     private float               fSpeed = 3f;
     private int                 iShootCount = 0;
-
-    public override void Update_Directation(Vector2 dir)
-    {
-        if (dir == Vector2.zero)
-            return;
-
-        vDir = dir;
-    }
 
     public override void Initalize(ItemData itemData)
     {
@@ -76,6 +67,7 @@ public class ProjectileWeapon : WeaponBase
        if (ItemData.iID == 0 || spawnPattern == null)
             return;
 
+        Vector2 vDir = InGameManager.Instance.GetPlayerDir();
         if (vDir == Vector2.zero && type == ProjectileType.Projectile)
             return;
 

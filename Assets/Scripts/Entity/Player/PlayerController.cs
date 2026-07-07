@@ -16,24 +16,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private PlayerStats _playerStats;
 
-    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private Player _playercs;
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private Rigidbody2D _playerrb;
 
     [SerializeField] private Vector2 _inputVec;
-    
-    private static readonly int _isMoveID = Animator.StringToHash("isMove");
-    private static readonly int _directionID = Animator.StringToHash("Direction");
-    
+    private Vector2 _playerDir = default;
+    public Vector2 GetPlayerDir() => _playerDir;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-      
+
     }
 
     private void FixedUpdate()
@@ -41,18 +40,15 @@ public class PlayerController : MonoBehaviour
         if (_playerrb is not null)
         {
             _playerrb.MovePosition(_playerrb.position + _inputVec * (Speed * Time.fixedDeltaTime));
-            _playerAnimator.SetBool(_isMoveID, !Mathf.Approximately(_inputVec.magnitude, 0f));
+            _playercs.UpdatePlayer(_inputVec);
         }
     }
 
     void OnMove(InputValue value)
     {
         _inputVec = value.Get<Vector2>();
-        
-        if (!Mathf.Approximately(_inputVec.x, 0f))
-        {
-            _playerAnimator.SetFloat(_directionID, _inputVec.x);
-        }
+        _playercs.UpdatePlayer(_inputVec);
+        _playerDir = _inputVec;
     }
 
     public void Initialize(PlayerStats playerStats, GameObject playerObj)
@@ -64,8 +60,8 @@ public class PlayerController : MonoBehaviour
             enabled = false;
             return;
         }
-        
-        _playerAnimator = _playerObj.GetComponent<Animator>();
+
+        _playercs = playerObj.GetComponent<Player>();
         _playerTransform = _playerObj.transform;
         _playerrb = _playerObj.GetComponent<Rigidbody2D>();
 
@@ -75,8 +71,8 @@ public class PlayerController : MonoBehaviour
             _playerrb = InitializeRigidbody2D(_playerObj);
         }
     }
-    
-    public float Speed { get{return _playerStats.Speed;} set{_playerStats.Speed = value;} }
+
+    public float Speed { get { return _playerStats.Speed; } set { _playerStats.Speed = value; } }
 
     private Rigidbody2D InitializeRigidbody2D(GameObject obj)
     {

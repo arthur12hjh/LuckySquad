@@ -47,7 +47,7 @@ public class DataManager : ScriptableObject
         if (Items == null || Items.Count == 0)
             return null;
 
-        int index = Random.Range(0, Items.Count);
+        int index = UnityEngine.Random.Range(0, Items.Count);
         return Items.Values.ElementAt(index);
     }
 
