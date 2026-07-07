@@ -60,6 +60,7 @@
         }
       }
     ],
+    "WeaponType" : "Projectile",
     "WeaponConfigs": [
       {
         "fDamage": 20,
@@ -148,6 +149,7 @@
         }
       }
     ],
+    "WeaponType" : "HitScan",
     "WeaponConfigs": [
       {
         "fDamage": 18,
@@ -236,6 +238,7 @@
         }
       }
     ],
+    "WeaponType" : "Bounce",
     "WeaponConfigs": [
       {
         "fDamage": 15,
@@ -324,6 +327,7 @@
         }
       }
     ],
+    "WeaponType" : "Throw",
     "WeaponConfigs": [
       {
         "fDamage": 8,
@@ -412,6 +416,7 @@
         }
       }
     ],
+    "WeaponType" : "Projectile",
     "WeaponConfigs": [
       {
         "fDamage": 22,

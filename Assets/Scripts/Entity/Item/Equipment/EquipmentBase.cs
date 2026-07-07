@@ -26,8 +26,10 @@ public abstract class EquipmentBase : BaseItem
         {
             level++;
             SettingLevelData();
+
+            if(level >= 1)
+                gameObject.SetActive(true);
         }
-            
     }
 
     protected virtual bool bIsUseItem()

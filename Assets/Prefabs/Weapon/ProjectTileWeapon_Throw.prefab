@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 411193371421285648}
   - component: {fileID: 2481864778115880563}
   m_Layer: 0
-  m_Name: ProjectTileWeapon_Thorw
+  m_Name: ProjectTileWeapon_Throw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

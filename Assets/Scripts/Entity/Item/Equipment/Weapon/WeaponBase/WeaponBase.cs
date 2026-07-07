@@ -9,6 +9,7 @@ public class WeaponBase : EquipmentBase
     {
        base.Initalize(Data);
        WeaponData = Data as WeaponData;
+
     }
 
     protected override bool bIsUseItem()

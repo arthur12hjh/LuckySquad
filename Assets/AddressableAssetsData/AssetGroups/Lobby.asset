@@ -22,8 +22,36 @@ MonoBehaviour:
     - Lobby
     - imgAtlas
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b129920eb6bfa441af035e07b358451
+    m_Address: Assets/Sprites/Atlas/IconThunderAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - imgAtlas
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1cfa93d50500ee6459959ab2c029559a
     m_Address: Assets/Image/Atlas/ShurikenAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - imgAtlas
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 453947b1ff9f49f48975b4ba72cb9e40
+    m_Address: Assets/Sprites/Atlas/IconShurikenAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - imgAtlas
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74866bf224956154f86e327d0e4bfe1f
+    m_Address: Assets/Sprites/Atlas/IconGunWeaponAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    - imgAtlas
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86834112f6819d64fb4cf13fcefbf001
+    m_Address: Assets/Sprites/Atlas/IconBallIAtlas.spriteatlasv2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lobby

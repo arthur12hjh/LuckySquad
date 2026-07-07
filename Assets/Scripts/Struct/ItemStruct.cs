@@ -21,6 +21,7 @@ namespace Item
         None,
     }
 
+    [Serializable]
     public enum EWeaponType
     {
         Projectile,
@@ -234,6 +235,9 @@ namespace Item
 
     public class WeaponData : ItemData
     {
+        [JsonProperty("WeaponType")]
+        public readonly EWeaponType WeaponType;
+
         [JsonProperty("WeaponConfigs")]
         public readonly List<WeaponConfig> WeaponConfigs;
 
@@ -244,10 +248,12 @@ namespace Item
                         EItemType type = EItemType.None,
                         string iconName = null,
                         string textureName = null,
-                        List<LevelData> levelDatas = Snull,
+                        List<LevelData> levelDatas = null,
+                        EWeaponType weaponType = EWeaponType.None,
                         List<WeaponConfig> weaponConfigs = null) :
             base(id, name, maxLevel, type, iconName, textureName, levelDatas)
         {
+            this.WeaponType = weaponType;
             this.WeaponConfigs = weaponConfigs ?? new List<WeaponConfig>();
         }
     }
