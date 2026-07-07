@@ -18,66 +18,74 @@ MonoBehaviour:
   - m_GUID: 052d5f6cf7d3ebc44bba49fbe653f9a8
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_star_ellow_green.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 064c608c3a271334299e1fa22913842f
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_magic_blue_pink.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0adc79b956a5644959846037232c4e26
     m_Address: Assets/Prefabs/Entity/Monster/BatMonster.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2c27f6103c8348844a3cc636de15052a
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_ellow_pink.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 396d7abf91ece2449a38d5b5d82e9d54
     m_Address: Assets/Prefabs/Entity/Monster/MonsterTest.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
-    - obj
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c19ad7a926fc084ea69d9ba4fedeeab
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_blue_purple.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 895c6d094b6b213418cddcfb520298e9
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_magic_ellow_blue.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aa122f157eac1c8428ae5db8a315ccd8
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_ellow.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b219c04f384e7f345bb8ae1fef443965
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_star_ellow_purple.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dcd90c4976197424b9958a7c54b6bb8c
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_round_ellow.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: de44b2fd78ce530408e4758d6a271a94
     m_Address: Assets/Scenes/ScriptableObject/Stage/Stage1.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
-    - ref
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fca7daa172184b24aa547cdf8c45191a
     m_Address: Assets/Prefabs/Weapon/ProjectTileWeapon_projectile.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9431f25a67994e64e87f2dd68a4a24a7, type: 2}

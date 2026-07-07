@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Monster : BaseEntity, IDamageable, IPoolable
 {
-    // 자식 클래스에서 상태를 참조/전환할 수 있도록 protected로 연다
+    // ?�식 ?�래?�에???�태�?참조/?�환?????�도�?protected�??�다
     protected enum MonsterState {Idle, Chase, Fear, Dead, End}
     
     [Header("Components")]
@@ -97,7 +97,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     
     void Start()
     {
-        // 나중에 수정할 로직. 이후 플레이어 위치 받아주는거 다시 만들 예정
+        // ??�쨷????�젙??濡쒖�? ??�썑 ???��??�뼱 ?꾩튂 諛쏆븘二?�뒗�???�떆 留뚮�???�젙
         if(InGameManager.Instance is not null)
             _playerTransform = InGameManager.Instance.GetPlayerTransform();
         
@@ -131,7 +131,8 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_flashAmountID, 0f); // 루프 오차 보정
+        _material.SetFloat(_flashAmountID, 0f); // 루프 ?�차 보정
+
     }
 
     void FixedUpdate()
@@ -162,12 +163,12 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_DissolveAmountID, 1f); // 루프 오차 보정
+        _material.SetFloat(_DissolveAmountID, 1f); // ?�⑦�???�감 蹂댁??
         
         _releaseSelf?.Invoke();
     }
 
-    // 자식 클래스가 상태 전환 흐름에 끼어들 수 있도록 virtual로 연다
+    // ?�식 ?�래?��? ?�태 ?�환 ?�름???�어?????�도�?virtual�??�다
     protected virtual void ChangeState(MonsterState newState)
     {
         if (_currentState == newState)
@@ -182,7 +183,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         
         _currentState = newState;
 
-        // 상태가 실제로 바뀐 시점에 자식 클래스가 추가 처리를 할 수 있게 훅을 호출한다
+        // ?�태가 ?�제�?바�??�점???�식 ?�래?��? 추�? 처리�??????�게 ?�을 ?�출?�다
         OnStateChanged(newState);
 
         switch (newState)

@@ -13,13 +13,9 @@ MonoBehaviour:
   m_Name: Stage1
   m_EditorClassIdentifier: Assembly-CSharp::StageRef
   StageIndex: 1
-  WaveIndex: 0
-  WaveDatas:
-  - {fileID: 11400000, guid: 7e8ffd07ec46e4721915feeb9f3dbf7c, type: 2}
-  - {fileID: 11400000, guid: 568d779f4f06f41e697dc6908ab86967, type: 2}
-  - {fileID: 11400000, guid: 29b32755846794183a808bbe8ac4d979, type: 2}
-  - {fileID: 11400000, guid: b7e5104f9100149e2b27e7a4f71ab874, type: 2}
-  - {fileID: 11400000, guid: 78466a3ca6e40412b8c8662466acb53b, type: 2}
-  MonsterSpawnData: []
+  WaveIndex: 4
+  CurrentWaveData: {fileID: 11400000, guid: 3fe645c12c17e425a9b5d6635cff39fc, type: 2}
+  MonsterSpawnDate: []
+  RandomItemDatas: 0200000003000000
   Boss: []
-  StageTime: 3
+  StageTime: 5

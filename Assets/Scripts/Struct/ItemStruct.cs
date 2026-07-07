@@ -21,6 +21,7 @@ namespace Item
         None,
     }
 
+    [Serializable]
     public enum EWeaponType
     {
         Projectile,
@@ -203,8 +204,11 @@ namespace Item
         [JsonProperty("type")]
         public readonly EItemType           eType;
 
+        [JsonProperty("IconTexture")]
+        public readonly string              IconName;
+
         [JsonProperty("Textures")]
-        public readonly string              AddressableName;
+        public readonly string              TextureName;
 
         [JsonProperty("LevelData")]
         public readonly List<LevelData>     LevelDatas;
@@ -214,20 +218,26 @@ namespace Item
                         string name = "",
                         int maxLevel = 1,
                         EItemType type = EItemType.None,
-                        string addressableName = null,
+                        string iconName = null,
+                        string textureName = null,
                         List<LevelData> levelDatas = null)
         {
             this.iID = id;
             this.szName = name;
             this.MaxLevel = maxLevel;
             this.eType = type;
+            this.IconName = iconName;
+            this.TextureName = textureName;
             this.LevelDatas = levelDatas ?? new List<LevelData>();
-            this.AddressableName = addressableName;
+          
         }
     }
 
     public class WeaponData : ItemData
     {
+        [JsonProperty("WeaponType")]
+        public readonly EWeaponType WeaponType;
+
         [JsonProperty("WeaponConfigs")]
         public readonly List<WeaponConfig> WeaponConfigs;
 
@@ -236,11 +246,14 @@ namespace Item
                         string name = "",
                         int maxLevel = 1,
                         EItemType type = EItemType.None,
-                        string addressableName = null,
+                        string iconName = null,
+                        string textureName = null,
                         List<LevelData> levelDatas = null,
+                        EWeaponType weaponType = EWeaponType.None,
                         List<WeaponConfig> weaponConfigs = null) :
-            base(id, name, maxLevel, type, addressableName, levelDatas)
+            base(id, name, maxLevel, type, iconName, textureName, levelDatas)
         {
+            this.WeaponType = weaponType;
             this.WeaponConfigs = weaponConfigs ?? new List<WeaponConfig>();
         }
     }

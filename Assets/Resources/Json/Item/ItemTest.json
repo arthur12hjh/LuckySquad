@@ -5,6 +5,7 @@
     "name": "리볼버",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconGunWeaponAtlas",
     "Textures": "GunWeaponAtlas",
     "LevelData": [
       {
@@ -59,6 +60,7 @@
         }
       }
     ],
+    "WeaponType" : "Projectile",
     "WeaponConfigs": [
       {
         "fDamage": 20,
@@ -92,6 +94,7 @@
     "name": "체인 라이트닝",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconThunderAtlas",
     "Textures": "ThunderAtlas",
     "LevelData": [
       {
@@ -146,6 +149,7 @@
         }
       }
     ],
+    "WeaponType" : "HitScan",
     "WeaponConfigs": [
       {
         "fDamage": 18,
@@ -179,6 +183,7 @@
     "name": "공",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconBallAtlas",
     "Textures": "BallAtlas",
     "LevelData": [
       {
@@ -233,6 +238,7 @@
         }
       }
     ],
+    "WeaponType" : "Bounce",
     "WeaponConfigs": [
       {
         "fDamage": 15,
@@ -266,6 +272,7 @@
     "name": "맹독 안개",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconGroundFogAtlas",
     "Textures": "GroundFogAtlas",
     "LevelData": [
       {
@@ -320,6 +327,7 @@
         }
       }
     ],
+    "WeaponType" : "Throw",
     "WeaponConfigs": [
       {
         "fDamage": 8,
@@ -353,6 +361,7 @@
     "name": "수리검",
     "Max_Level": 3,
     "type": "Weapon",
+    "IconTexture": "IconShurikenAtlas",
     "Textures": "ShurikenAtlas",
     "LevelData": [
       {
@@ -407,6 +416,7 @@
         }
       }
     ],
+    "WeaponType" : "Projectile",
     "WeaponConfigs": [
       {
         "fDamage": 22,

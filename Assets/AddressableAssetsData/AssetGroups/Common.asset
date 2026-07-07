@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Common
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Common
+  m_GUID: 72af49aac8b53a74db40dd3c37034692
+  m_SerializeEntries:
+  - m_GUID: 05c545ca5d02a9c429134c02dd7370f2
+    m_Address: Assets/Image/Atlas/GunWeaponAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cfa93d50500ee6459959ab2c029559a
+    m_Address: Assets/Image/Atlas/ShurikenAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ec604e4763f1aa4fae6b810f0fa9c08
+    m_Address: Assets/Prefabs/Weapon/OrbitingWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fba5f1a449a73f4ba824904665752f9
+    m_Address: Assets/Prefabs/Weapon/HitScanWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ac190f1717799a40bef2c253a30dfec
+    m_Address: Assets/Prefabs/Weapon/BounceWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c535b8e4e09b3ed4f9efa74af28c13b3
+    m_Address: Assets/Image/Atlas/BulletAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6cdd10ebcd913f46b6b4c76a6059cb4
+    m_Address: Assets/Image/Atlas/BallAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f20eb9d2f9677744da0cdbbee2f861c3
+    m_Address: Assets/Image/Atlas/ThunderAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9431f25a67994e64e87f2dd68a4a24a7, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: de024a3cd9ba16f4fa9ff634597c3ab3, type: 2}
+    - {fileID: 11400000, guid: 4a9ac31020ade9247a7eb4938b19cf1d, type: 2}

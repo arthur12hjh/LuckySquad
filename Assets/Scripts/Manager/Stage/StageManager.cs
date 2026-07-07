@@ -1,21 +1,20 @@
+using Item;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework.Constraints;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
-using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
 
-    private uint currentStageIndex;                      // í˜„ì¬ ìŠ¤í…Œì´ì§€
-    private int currentWaveIndex;                       // í˜„ì¬ ì›¨ì´ë¸Œ
-    private Dictionary<int, StageRef> stageDatas;    // ìŠ¤í…Œì´ì§€ ë°ì´í„° ì €ì¥ìš©
+    private uint currentStageIndex;                       // ÇöÀç ½ºÅ×ÀÌÁö
+    private int  currentWaveIndex;                         // ÇöÀç ¿şÀÌºê
+    private Dictionary<int, StageRef>        stageDatas;       // ½ºÅ×ÀÌÁö µ¥ÀÌÅÍ ÀúÀå¿ë
+    private List<Tuple<int, EquipmentBase>>  stageItemDatas;   // ½ºÅ×ÀÌÁöÀÇ µ¥ÀÌÅÍ·Î ¾ÆÀÌÅÛ Á¤º¸ »ı¼º
+    private List<Tuple<int, int, ItemData>>  ShuffleList;
+
 
     private int prevTimer = 0;
     private int bossIndex = 0;
@@ -26,7 +25,7 @@ public class StageManager : MonoBehaviour
     private bool atOnce = true;
 
     [SerializeField]
-    private StageRef currentStageData;                  // í˜„ì¬ ìŠ¤í…Œì´ì§€ ë°ì´í„°
+    private StageRef currentStageData;                  // ÇöÀç ½ºÅ×ÀÌÁö µ¥ÀÌÅÍ
 
     private void Awake()
     {
@@ -35,7 +34,38 @@ public class StageManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
+        Instance.Initialize();
+    }
+
+    void Initialize()
+    {
+        stageItemDatas = new List<Tuple<int, EquipmentBase>>();
+        List<int> TotalItem = currentStageData.RandomItemDatas;
+
+        var PlayerTransform = InGameManager.Instance.GetPlayerTransform();
+        foreach(var item in TotalItem)
+            ADD_Item(item, PlayerTransform);
+
+        // ÇÃ·¹ÀÌ¾î ¹«±â¸¸ Level 1·Î Ãß°¡
+        //ADD_Item(InGameManager.Instance.GetPlayerWeapon(), PlayerTransform);
+
+        // Ã¹¹øÂ° ÀÎÀÚ¿¡´Â ¹è¿­ÀÇ Tuple°ª
+        // µÎ¹ø¤Š ÀÎÀÚ¿¡´Â ¿øº» ¹è¿­ÀÇ ÀÎµ¦½º °ª
+        ShuffleList = stageItemDatas.Select(
+                       (item, index) => Tuple.Create(
+                       index,
+                       item.Item1,
+                       item.Item2.ItemData)).ToList();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.End))
+        {
+            EventBus.Publish(new WeaponSelectEvent(1, 3));
+        }
     }
 
     private void Start()
@@ -46,6 +76,7 @@ public class StageManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        EventBus.Subscribe<WeaponSelectEvent>(LevelEvent);
     }
 
     private void OnDisable()
@@ -53,23 +84,49 @@ public class StageManager : MonoBehaviour
         currentStageData = null;
         InGameManager.Instance.OnTimeChange -= HandleTimeChange;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
 
+    // ÇöÀç ¼±ÅÃ°¡´ÉÇÑ itemÀ» °¡Á®¿Â´Ù.
+    // ÃÖ´ë 3°³±îÁö °¡Á®¿Â´Ù.
+    // Item1 : WeaponSlotIdx;
+    // Item2 : Level
+    // Item3 : Weapon Data
+    public List<Tuple<int, int, ItemData>> Get_RandomItem()
+    {
+        for (int i = ShuffleList.Count - 1; i > 0; --i)
+        {
+            int j = UnityEngine.Random.Range(0, i + 1);
+            (ShuffleList[i], ShuffleList[j]) = (ShuffleList[j], ShuffleList[i]);
+        }
+
+        int MaxCnt = Math.Min(ShuffleList.Count, 3);
+        return ShuffleList.Take(MaxCnt).ToList();
+    }
+
+    private void LevelEvent(WeaponSelectEvent msg)
+    {
+        if (msg == null) return;
+        if (stageItemDatas.Count <= msg.SlotIdx) return;
+
+        var ItemObj = stageItemDatas[msg.SlotIdx].Item2;
+        ItemObj.LevelUp();
+
+    }
 
     private void HandleTimeChange(int currentCount)
     {
         currentStageData.StageTime = currentCount;
-        //Debug.Log($"Time :  {currentStageData.StageTime}");
 
         if (atOnce)
         {
-            //Debug.Log("Wave Called");
-            // ì›¨ì´ë¸Œë¥¼ ë§Œë“¤ë©´ ê·¸ ì›¨ì´ë¸Œì— í•„ìš”í•œ êµ¬ì¡°ì²´ë¥¼ ë„˜ê²¨ì¤Œ
-            OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
+            Debug.Log("Wave Called");
+            // ¿şÀÌºê¸¦ ¸¸µé¸é ±× ¿şÀÌºê¿¡ ÇÊ¿äÇÑ ±¸Á¶Ã¼¸¦ ³Ñ°ÜÁÜ
+            OnWave?.Invoke(currentStageData.CurrentWaveData);
             atOnce = false;
         }
 
-        // ë³´ìŠ¤ (5ë¶„)
+        // º¸½º (5ºĞ)
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
             OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
@@ -77,19 +134,19 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // ì›¨ì´ë¸Œ (ë§¤ ë¶„ 0ì´ˆ)
+        // ¿şÀÌºê (¸Å ºĞ 0ÃÊ)
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
-            //Debug.Log("Wave Called");
+            Debug.Log("Wave Called");
             currentStageData.WaveIndex++;
-            // ì›¨ì´ë¸Œë¥¼ ë§Œë“¤ë©´ ê·¸ ì›¨ì´ë¸Œì— í•„ìš”í•œ êµ¬ì¡°ì²´ë¥¼ ë„˜ê²¨ì¤Œ
-            OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
+            // ¿şÀÌºê¸¦ ¸¸µé¸é ±× ¿şÀÌºê¿¡ ÇÊ¿äÇÑ ±¸Á¶Ã¼¸¦ ³Ñ°ÜÁÜ
+            OnWave?.Invoke(currentStageData.CurrentWaveData);
         }
     }
 
     private void StageDateLoad()
     {
-        currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", "Stage1");
+       // currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", "Stage1");
     }
 
     public void StageSetting()
@@ -108,7 +165,26 @@ public class StageManager : MonoBehaviour
 
     private void CheckWaveSpawnTime()
     {
+       
+    }
+    
+    private void ADD_Item(int ItemID, Transform parent)
+    {
+        var ItemData = DataManager.Instance.FindItemData(ItemID) as WeaponData;
+        if (ItemData != null)
+        {
+            var Prefab = DataManager.Instance.GetWeaponPrefab(ItemData.WeaponType);
+            var ItemObj = ItemFactory.AbstractCreateItem(Prefab, parent, ItemID);
 
+            if(ItemObj == null)
+            {
+                Debug.Log("Not Find : Prefab");
+                return;
+            }    
+
+            ItemObj.SetActive(false);
+            stageItemDatas.Add(new(0, ItemObj.GetComponent<EquipmentBase>()));
+        }
     }
 
     private void CheckBossSpawnTime()
