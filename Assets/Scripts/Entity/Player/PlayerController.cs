@@ -26,8 +26,11 @@ public class PlayerController : MonoBehaviour
         new Dictionary<EWeaponType, EquipmentBase>();
 
 
-    [SerializeField] private Vector2 _inputVec;
+    [SerializeField] private Vector2 _inputVec = default;
+    private Vector2 _playerDir = default;
     
+    
+    public Vector2 GetPlayerDir() => _playerDir;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,6 +55,7 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
         _inputVec = value.Get<Vector2>();
+        _playerDir = _inputVec;
         _playercs.UpdatePlayer(_inputVec);
         
         if (_equipmentItems.TryGetValue(EWeaponType.Projectile, out var obj))

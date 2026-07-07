@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // InGameManager
-// ?�게?�의 로직, Additive Scene과의 ?�신???�한 ?�이?��? ?�는 ?��???매니?�
-// DontDestroyOnLoad가 ?�닌, ?�게??진입?�에�??�정?�는 ?��???매니?�
+// ?�게?�의 로직, Additive Scene과의 ?�신???�한 ?�이?��? ?�는 ?��???매니?�
+// DontDestroyOnLoad가 ?�닌, ?�게??진입?�에�??�정?�는 ?��???매니?�
 
 // Player Initialize 로직
-// 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
-// 2) InGameManager::Start?�서 PlayerData�?기반?�로 class _playerStats = new PlayerStats()�??�성?�고 ?�이?��? ?�력??
-// 3) InGameManager::Start?�서 PlayerData�?기반?�로 Player Prefab�?PlayerController Prefab??Instantiate�???
-// 4) InGameManager::Start?�서 Player GameObject�?PlayerController???�록??
+// 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
+// 2) InGameManager::Start?�서 PlayerData�?기반?�로 class _playerStats = new PlayerStats()�??�성?�고 ?�이?��? ?�력??
+// 3) InGameManager::Start?�서 PlayerData�?기반?�로 Player Prefab�?PlayerController Prefab??Instantiate�???
+// 4) InGameManager::Start?�서 Player GameObject�?PlayerController???�록??
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager Instance { get; private set; }
@@ -26,24 +26,28 @@ public class InGameManager : MonoBehaviour
     public uint monsterCount { get; private set; } = 0;
     private bool isTimeEnd = false;
 
-    [Header("Debugger")]
-    [SerializeField] private PlayerStatsRef _tempStatsRef; // DataManager ?�동 ?�스???�용 ???�이???�용?��? ?�음
+    [Header("Debugger")] [SerializeField]
+    private PlayerStatsRef _tempStatsRef; // DataManager ?�동 ?�스???�용 ???�이???�용?��? ?�음
+
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _playerControllerPrefab;
     [SerializeField] private Vector2 _playerSpawnPos = new Vector2(0.6f, 0.3f);
     [SerializeField] private WaveData _waveData;
 
-    [Header("Player Data")]
-    [SerializeField] private PlayerStats _playerStats;
+    [Header("Player Data")] [SerializeField]
+    private PlayerStats _playerStats;
+
     [SerializeField] private GameObject _playerObj;
     [SerializeField] private GameObject _playerControllerObj;
     [SerializeField] private CinemachineVirtualCamera _playerCamera;
+    private PlayerController _playerController;
 
-    public event Action<int> OnTimeChange; // 게임 ?�간 변???�벤??1초마???�출
-    [SerializeField] private Vector3    _SpawnBound;
+
+    public event Action<int> OnTimeChange; // 게임 ?�간 변???�벤??1초마???�출
+    [SerializeField] private Vector3 _SpawnBound;
 
     SpawnPattern _spawnPattern = null;
-    public   SpawnPattern OutScreenSpawnPattern => _spawnPattern;
+    public SpawnPattern OutScreenSpawnPattern => _spawnPattern;
 
     void Awake()
     {
@@ -53,9 +57,10 @@ public class InGameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
-        // 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
-        // ?�장?� ?�단 비활?�화 ?�켜?�고, 추후 병합 �??�용???�이??처리 구조 ?�성 ??구현
+        // 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
+        // ?�장?� ?�단 비활?�화 ?�켜?�고, 추후 병합 �??�용???�이??처리 구조 ?�성 ??구현
         if (_tempStatsRef != null)
         {
             _playerStats = new PlayerStats(_tempStatsRef);
@@ -69,7 +74,9 @@ public class InGameManager : MonoBehaviour
         if (_playerControllerObj == null)
         {
             _playerControllerObj = Instantiate(_playerControllerPrefab);
-            _playerControllerObj.GetComponent<PlayerController>().Initialize(_playerStats, _playerObj);
+            _playerController =  _playerControllerObj.GetComponent<PlayerController>();
+            _playerController.Initialize(_playerStats, _playerObj);
+            
         }
 
         if (_playerCamera != null)
@@ -92,7 +99,7 @@ public class InGameManager : MonoBehaviour
     {
         OnGameStart?.Invoke();
     }
-    
+
     private void Update()
     {
         UpdateGameTime();
@@ -117,11 +124,11 @@ public class InGameManager : MonoBehaviour
             _playerCamera.AddCinemachineComponent<CinemachineFramingTransposer>();
         transposer.m_CameraDistance = 10f;
     }
-    
+
     public PlayerStats GetPlayerStats() => _playerStats;
     public Transform GetPlayerTransform() => _playerObj.transform;
 
-    // ?�시?��? 기능
+    // ?�시?��? 기능
     public void StopGame()
     {
         if (!isGamePaused)
@@ -132,7 +139,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    // ?�시?��? ?�제 기능
+    // ?�시?��? ?�제 기능
     public void ResumeGame()
     {
         if (isGamePaused)
@@ -156,10 +163,13 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    // ?�시 로비�??�동
+    // ?�시 로비�??�동
     public void EndStage()
     {
         GameManager.Instance.ChangeScene(Enums.SceneType.Lobby);
         SceneManager.LoadScene("Loading");
     }
+
+    public Vector2 GetPlayerDir() => _playerController.GetPlayerDir();
+
 }
