@@ -232,12 +232,13 @@ public class AddressablesManager : MonoBehaviour
         return null;
     }
 
-    public List<UnityEngine.Object> GetLabelList<T>(string label)
+    public List<T> GetLabelList<T>(string label)
+        where T : UnityEngine.Object
     {
         if (!TryGetLabel(label, out var list))
             return null;
 
-        return list;
+        return list.OfType<T>().ToList();
     }
 
     // Comm

@@ -146,7 +146,7 @@ public class StageManager : MonoBehaviour
 
     private void StageDateLoad()
     {
-       // currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", "Stage1");
+       currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", "Stage1");
     }
 
     public void StageSetting()
