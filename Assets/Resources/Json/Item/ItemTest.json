@@ -1,145 +1,436 @@
 [
   {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 1,
-    "name": "뉴비 표창",
-    "Max_Level": 2,
-    "type": 0,
+    "name": "리볼버",
+    "Max_Level": 3,
+    "type": "Weapon",
+    "Textures": "GunWeaponAtlas",
     "LevelData": [
-  {
-    "Level": 1,
-    "effects": [
       {
-        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-        "Count": 2,
-        "LineCount": 1,
-        "Damage": 20,
-        "Speed": 2,
-        "Duration": 0,
-        "TickPeriod": 0,
-        "Range": 1.5
+        "Particles": [
+          101
+        ],
+        "ItemEffects": {
+        "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 20,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          102
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 30,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          103
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 45,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 20,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 18,
+        "fRange": 10,
+        "fInterval": 0.5
+      },
+      {
+        "fDamage": 30,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 20,
+        "fRange": 10,
+        "fInterval": 0.45
+      },
+      {
+        "fDamage": 45,
+        "iCount": 2,
+        "iMaxLineCount": 1,
+        "fSpeed": 22,
+        "fRange": 12,
+        "fInterval": 0.4
       }
     ]
   },
   {
-    "Level": 2,
-    "effects": [
-      {
-        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-        "Count": 4,
-        "LineCount": 1,
-        "Damage": 40,
-        "Speed": 2,
-        "Duration": 0,
-        "TickPeriod": 0,
-        "Range": 1.5
-      }
-    ]
-  }
-]
-  },
-  {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 2,
-    "name": "뉴비 표창.Level2",
-    "Max_Level": 2,
-    "type": 0,
+    "name": "체인 라이트닝",
+    "Max_Level": 3,
+    "type": "Weapon",
+    "Textures": "ThunderAtlas",
     "LevelData": [
       {
-        "Level": 1,
-        "effects": [
-          {
-            "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-            "Count": 2,
-            "LineCount": 1,
-            "Damage": 30,
-            "Speed": 2,
-            "Duration": 0,
-            "TickPeriod": 1.5,
-            "Range": 10
-          }
-        ]
+        "Particles": [
+          201
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 18,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          202
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 28,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          203
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 40,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 18,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 999,
+        "fRange": 8,
+        "fInterval": 1.0
+      },
+      {
+        "fDamage": 28,
+        "iCount": 2,
+        "iMaxLineCount": 1,
+        "fSpeed": 999,
+        "fRange": 9,
+        "fInterval": 0.9
+      },
+      {
+        "fDamage": 40,
+        "iCount": 3,
+        "iMaxLineCount": 1,
+        "fSpeed": 999,
+        "fRange": 10,
+        "fInterval": 0.8
       }
     ]
   },
   {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 3,
-    "name": "뉴비 표창.Level3",
-    "Max_Level": 2,
-    "type": 0,
+    "name": "공",
+    "Max_Level": 3,
+    "type": "Weapon",
+    "Textures": "BallAtlas",
     "LevelData": [
       {
-        "Level": 1,
-        "effects": [
-          {
-            "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-            "Count": 4,
-            "LineCount": 1,
-            "Damage": 60,
-            "Speed": 2,
-            "Duration": 0,
-            "TickPeriod": 0,
-            "Range": 10
-          }
-        ]
+        "Particles": [
+          1001
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 15,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          1002
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 25,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          1003
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 35,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 15,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 6,
+        "fRange": 3,
+        "fInterval": 0.2
+      },
+      {
+        "fDamage": 25,
+        "iCount": 2,
+        "iMaxLineCount": 1,
+        "fSpeed": 7,
+        "fRange": 3.5,
+        "fInterval": 0.2
+      },
+      {
+        "fDamage": 35,
+        "iCount": 3,
+        "iMaxLineCount": 1,
+        "fSpeed": 8,
+        "fRange": 4,
+        "fInterval": 0.2
       }
     ]
   },
   {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 4,
-    "name": "땅땅땅땅",
-    "Max_Level": 2,
-    "type": 0,
+    "name": "맹독 안개",
+    "Max_Level": 3,
+    "type": "Weapon",
+    "Textures": "GroundFogAtlas",
     "LevelData": [
-  {
-    "Level": 1,
-    "effects": [
       {
-        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-        "Count": 1,
-        "LineCount": 1,
-        "Damage": 20,
-        "Speed": 2,
-        "Duration": 0,
-        "TickPeriod": 2.5,
-        "Range": 1.5
+        "Particles": [
+          401
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 8,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          402
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 12,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          403
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 18,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 8,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 0,
+        "fRange": 4,
+        "fInterval": 2.0
+      },
+      {
+        "fDamage": 12,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 0,
+        "fRange": 5,
+        "fInterval": 1.5
+      },
+      {
+        "fDamage": 18,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 0,
+        "fRange": 6,
+        "fInterval": 1.0
       }
     ]
   },
   {
-    "Level": 2,
-    "effects": [
-      {
-        "$type": "Item.ProjectTileEffect, Assembly-CSharp",
-        "Count": 2,
-        "LineCount": 6,
-        "Damage": 40,
-        "Speed": 2,
-        "Duration": 0,
-        "TickPeriod": 1.5,
-        "Range": 1.5
-      }
-    ]
-  }
-]
-  },
-   {
+    "$type": "Item.WeaponData, Assembly-CSharp",
     "id": 5,
-    "name": "번개 번개 번개맨",
-    "Max_Level": 1,
-    "type": 0,
+    "name": "수리검",
+    "Max_Level": 3,
+    "type": "Weapon",
+    "Textures": "ShurikenAtlas",
     "LevelData": [
       {
-        "Level": 1,
-        "effects": [
-          {
-            "$type": "Item.DamageEffect, Assembly-CSharp",
-            "EffectType": 0,
-            "Damage": 30,
-            "AttackCount": 1,
-            "Duration": 0,
-            "TickPeriod": 1,
-            "Range": 10
-          }
-        ]
+        "Particles": [
+          501
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 22,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          502
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 30,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          503
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 42,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      }
+    ],
+    "WeaponConfigs": [
+      {
+        "fDamage": 22,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 16,
+        "fRange": 9,
+        "fInterval": 0.8
+      },
+      {
+        "fDamage": 30,
+        "iCount": 2,
+        "iMaxLineCount": 1,
+        "fSpeed": 18,
+        "fRange": 10,
+        "fInterval": 0.7
+      },
+      {
+        "fDamage": 42,
+        "iCount": 3,
+        "iMaxLineCount": 1,
+        "fSpeed": 20,
+        "fRange": 11,
+        "fInterval": 0.6
       }
     ]
   }

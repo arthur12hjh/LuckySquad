@@ -22,13 +22,6 @@ MonoBehaviour:
     - Stage1
     - obj
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9cd20b202dcef486e8dcee5949fa5a9a
-    m_Address: Assets/Prefabs/Entity/PlayerTest.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Stage1
-    - obj
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: de44b2fd78ce530408e4758d6a271a94
     m_Address: Assets/Scenes/ScriptableObject/Stage/Stage1.asset
     m_ReadOnly: 0

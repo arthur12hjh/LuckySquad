@@ -7,7 +7,6 @@ public class ObjectPoolManager : MonoBehaviour
     public static ObjectPoolManager Instance { get; private set; }
 
     [SerializeField] private List<ObjectPoolRef> objectPoolRefs;            // 데이터 리스트.
-
     private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> _poolDictionary = new(); // 예비객체 담는 맵
 
     private void Awake()

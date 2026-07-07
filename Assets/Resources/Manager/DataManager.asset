@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: DataManager
   m_EditorClassIdentifier: 
   JsonUrl: Json/Item/ItemTest
+  _Effects:
+  - {fileID: 11400000, guid: 34e335514ef049946a26455117eff87c, type: 2}
+  - {fileID: 11400000, guid: 7caf32b30536fd44987d19b491bfb106, type: 2}
+  - {fileID: 11400000, guid: f71231ee995c7334db66ceca18caeb4a, type: 2}

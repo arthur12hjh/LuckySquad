@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,7 +13,6 @@ public class GameManager : MonoBehaviour
     public uint currentStage { get; private set; } = 0;
 
     public Enums.SceneType currentSceneType { get; private set; }
-
     public event Action<Enums.SceneType> OnSceneChanged;
 
     private void Awake()

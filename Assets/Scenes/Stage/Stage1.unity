@@ -981,12 +981,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2349,6 +2349,9 @@ MonoBehaviour:
   objectPoolRefs:
   - {fileID: 11400000, guid: fa8d161f1512b4eacac69b8c1efb1176, type: 2}
   - {fileID: 11400000, guid: 67e4bad2f3043460e8a45127d8ba97ef, type: 2}
+  - {fileID: 11400000, guid: f71231ee995c7334db66ceca18caeb4a, type: 2}
+  - {fileID: 11400000, guid: 7caf32b30536fd44987d19b491bfb106, type: 2}
+  - {fileID: 11400000, guid: 34e335514ef049946a26455117eff87c, type: 2}
 --- !u!1 &1138711847
 GameObject:
   m_ObjectHideFlags: 0

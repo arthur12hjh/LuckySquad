@@ -48,14 +48,10 @@ public abstract class BaseItem : MonoBehaviour
     protected int               level = 1;
     protected ItemData          info;
 
-    [SerializeField] string     SpriteTextureUrl;
-
-
     public virtual void Initalize(ItemData Data)
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
-        var sprite = AddressablesManager.Instance.GetLabelObject<SpriteAtlas>("Lobby", "imgAtlas", SpriteTextureUrl);
+        var sprite = AddressablesManager.Instance.GetLabelObject<SpriteAtlas>("Lobby", "imgAtlas", Data.AddressableName);
         if (sprite != null)
         {
             spriteTexs = new Sprite[sprite.spriteCount];

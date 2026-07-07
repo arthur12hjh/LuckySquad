@@ -29,27 +29,6 @@ MonoBehaviour:
     - Lobby
     - imgAtlas
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1ec604e4763f1aa4fae6b810f0fa9c08
-    m_Address: Assets/Prefabs/Weapon/OrbitingWeapon.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - obj
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2fba5f1a449a73f4ba824904665752f9
-    m_Address: Assets/Prefabs/Weapon/HitScanWeapon.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - obj
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8ac190f1717799a40bef2c253a30dfec
-    m_Address: Assets/Prefabs/Weapon/BounceWeapon.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - obj
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c535b8e4e09b3ed4f9efa74af28c13b3
     m_Address: Assets/Image/Atlas/BulletAtlas.spriteatlasv2
     m_ReadOnly: 0
@@ -70,13 +49,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Lobby
     - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fca7daa172184b24aa547cdf8c45191a
-    m_Address: Assets/Prefabs/Weapon/ProjectTileWeapon_projectile.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - obj
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9431f25a67994e64e87f2dd68a4a24a7, type: 2}

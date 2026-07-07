@@ -21,6 +21,16 @@ namespace Item
         None,
     }
 
+    public enum EWeaponType
+    {
+        Projectile,
+        Bounce,
+        Rotation,
+        Throw,
+        HitScan,
+        None
+    }
+
     [Serializable]
     public struct Projectileinfo
     {
@@ -35,6 +45,48 @@ namespace Item
     }
 
     [Serializable]
+    public class LevelData
+    {
+        [JsonProperty("Particles")]
+        public readonly List<int>               ParticleIDs;
+
+        [JsonProperty("ItemEffects")]
+        public readonly Dictionary<EEffectType, List<Effect>>  ItemEffects;
+
+        public LevelData(
+            List<int>    particleIDs = null,
+            Dictionary<EEffectType, List<Effect>> effects = null)
+        {
+           
+            this.ParticleIDs = particleIDs;
+            this.ItemEffects = effects ?? new Dictionary<EEffectType, List<Effect>>();
+        }
+    }
+
+    [Serializable]
+    public class WeaponConfig
+    {
+        [JsonProperty("fDamage")]
+        public int          fDamage;         // Damage
+
+        [JsonProperty("iCount")]
+        public int          iCount;          // Projectile Count
+
+        [JsonProperty("iMaxLineCount")]
+        public int          iMaxLineCount;   // Projectile Line Count
+
+        [JsonProperty("fSpeed")]
+        public float        fSpeed;          // Weapon Speed
+
+        [JsonProperty("fRange")]
+        public float        fRange;          // Weapon Range
+
+        [JsonProperty("fInterval")]
+        public float        fInterval;       // Weapon Attack Interval
+    }
+
+    #region Effect Data
+    [Serializable]
     public abstract class Effect
     {
         [JsonProperty("type")]
@@ -42,74 +94,26 @@ namespace Item
     }
 
     [Serializable]
-    public class LevelData
-    {
-        [JsonProperty("Level")]
-        public readonly int Level;
-
-        [JsonProperty("effects")]
-        public readonly List<Effect> Effects;
-
-        public LevelData(int level = 1,
-                         List<Effect> effects = null)
-        {
-            this.Level = level;
-            this.Effects = effects ?? new List<Effect>();
-        }
-    }
-
-    [Serializable]
     public class DamageEffect : Effect
     {
         public enum EDamageType
         {
-            Instant,     // 즉시 회복
-            OverTime,    // 지속 회복
+            Instant,     // 즉시 데미지
+            OverTime,    // 지속 데미지
             None,
         }
 
         [JsonProperty("EffectType")]
         public EDamageType  eDamageType;
 
-        [JsonProperty("Damage")]
-        public float        fDamage;        // 값
-
-        [JsonProperty("AttackCount")]
-        public int          iCount;        // 공격 횟수
+        [JsonProperty("Amount")]
+        public float fMagnitude;     // 값
 
         [JsonProperty("Duration")]
-        public float        fDuration;      // 지속 시간
+        public float fDuration;      // 지속 시간
 
-        [JsonProperty("TickPeriod")]
-        public float        fInterval;      // 틱 주기
-
-        [JsonProperty("Range")]
-        public float        fRange;         // 사거리
-    }
-
-    [Serializable]
-    public class ProjectTileEffect : Effect
-    {
-        [JsonProperty("Count")]
-        public int iCount;              // 값
-
-        [JsonProperty("LineCount")]
-        public int ilineCount;          // 값
-
-        [JsonProperty("Damage")]
-        public float fDamage;           // 값
-
-        [JsonProperty("Speed")]
-        public float fSpeed;           // 값
-
-        [JsonProperty("Duration")]
-        public float fDuration;         // 지속 시간
-
-        [JsonProperty("TickPeriod")]
-        public float fInterval;         // 틱 주기
-
-        [JsonProperty("Range")]
-        public float fRange;            // 사거리
+        [JsonProperty("Interval")]
+        public float fInterval;      // 틱 주기
     }
 
     [Serializable]
@@ -184,7 +188,7 @@ namespace Item
         [JsonProperty("Interval")]
         public float        fInterval;      // 틱 주기
     }
-
+    #endregion
     public class ItemData
     {
         [JsonProperty("id")]
@@ -199,6 +203,9 @@ namespace Item
         [JsonProperty("type")]
         public readonly EItemType           eType;
 
+        [JsonProperty("Textures")]
+        public readonly string              AddressableName;
+
         [JsonProperty("LevelData")]
         public readonly List<LevelData>     LevelDatas;
 
@@ -207,6 +214,7 @@ namespace Item
                         string name = "",
                         int maxLevel = 1,
                         EItemType type = EItemType.None,
+                        string addressableName = null,
                         List<LevelData> levelDatas = null)
         {
             this.iID = id;
@@ -214,19 +222,26 @@ namespace Item
             this.MaxLevel = maxLevel;
             this.eType = type;
             this.LevelDatas = levelDatas ?? new List<LevelData>();
+            this.AddressableName = addressableName;
         }
     }
 
-    [System.Serializable]
-    public enum EWeaponType
+    public class WeaponData : ItemData
     {
-        Projectile,
-        Bounce,
-        Rotation,
-        Throw,
-        HitScan,
-        None
-    }
+        [JsonProperty("WeaponConfigs")]
+        public readonly List<WeaponConfig> WeaponConfigs;
 
-   
+        // 생성자를 통해서 딱 한 번만 세팅 가능
+        public WeaponData(int id = 1,
+                        string name = "",
+                        int maxLevel = 1,
+                        EItemType type = EItemType.None,
+                        string addressableName = null,
+                        List<LevelData> levelDatas = null,
+                        List<WeaponConfig> weaponConfigs = null) :
+            base(id, name, maxLevel, type, addressableName, levelDatas)
+        {
+            this.WeaponConfigs = weaponConfigs ?? new List<WeaponConfig>();
+        }
+    }
 }

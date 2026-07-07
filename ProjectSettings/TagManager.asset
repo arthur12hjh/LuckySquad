@@ -2,10 +2,8 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 3
-  tags:
-  - Ground
-  - Area
+  serializedVersion: 2
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -13,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - Monster
-  - Projectile
-  - Player
-  - Deactive
-  - Wall
-  - BounceBall
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -43,20 +41,3 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Priority
-    uniqueID: 2600366619
-    locked: 0
-  - name: Background
-    uniqueID: 2421123253
-    locked: 0
-  - name: Entity
-    uniqueID: 174949215
-    locked: 0
-  - name: Environment
-    uniqueID: 1916664915
-    locked: 0
-  - name: UI
-    uniqueID: 1339961131
-    locked: 0
-  m_RenderingLayers:
-  - Default
