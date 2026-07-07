@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -7279092471994209858}
   - component: {fileID: -5154470861279189825}
   - component: {fileID: -5563275233759536185}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerTest
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 174949215
+  m_SortingLayerID: 1432290107
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
@@ -167,7 +167,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &-5154470861279189825
 Animator:
   serializedVersion: 7
@@ -202,4 +202,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51188101d2c4e456eb4e843ba80a07fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  _animator: {fileID: 0}
+  _animator: {fileID: -5154470861279189825}

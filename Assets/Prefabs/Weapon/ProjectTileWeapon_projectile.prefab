@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 174949215
+  m_SortingLayerID: 1432290107
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
@@ -104,7 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908724df420c4b0418bd85bce9478b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileWeapon
-  SpriteTextureUrl: GunWeaponAtlas
   projectTileRefSO: {fileID: 11400000, guid: a3a439ad94b92954e89e8d5cdef17a40, type: 2}
   LineAngle: 90
   BulletTextureUrl: BulletAtlas
