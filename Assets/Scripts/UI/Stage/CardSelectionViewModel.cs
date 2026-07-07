@@ -57,7 +57,6 @@ public class CardSelectionViewModel : BaseViewModel
             card.SetData();
             card.Open();
         }
-        Debug.Log("OpenCard!");
         InGameManager.Instance.StopGame();
     }
 
