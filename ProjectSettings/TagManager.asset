@@ -2,18 +2,18 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Deactive
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Monster
+  - Player
+  - Projectile
   - 
   - 
   - 
@@ -41,3 +41,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3462416515
+    locked: 0
+  - name: Environment
+    uniqueID: 285531713
+    locked: 0
+  - name: Entity
+    uniqueID: 1432290107
+    locked: 0
+  - name: Priority
+    uniqueID: 2373707757
+    locked: 0
+  - name: UI
+    uniqueID: 1625624893
+    locked: 0
+  - name: Overlay
+    uniqueID: 101786279
+    locked: 0
+  m_RenderingLayers:
+  - Default

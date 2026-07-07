@@ -13,9 +13,9 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
 
-    private uint currentStageIndex;                      // ÇöÀç ½ºÅ×ÀÌÁö
-    private int currentWaveIndex;                       // ÇöÀç ¿şÀÌºê
-    private Dictionary<int, StageRef> stageDatas;    // ½ºÅ×ÀÌÁö µ¥ÀÌÅÍ ÀúÀå¿ë
+    private uint currentStageIndex;                      // í˜„ì¬ ìŠ¤í…Œì´ì§€
+    private int currentWaveIndex;                       // í˜„ì¬ ì›¨ì´ë¸Œ
+    private Dictionary<int, StageRef> stageDatas;    // ìŠ¤í…Œì´ì§€ ë°ì´í„° ì €ì¥ìš©
 
     private int prevTimer = 0;
     private int bossIndex = 0;
@@ -26,7 +26,7 @@ public class StageManager : MonoBehaviour
     private bool atOnce = true;
 
     [SerializeField]
-    private StageRef currentStageData;                  // ÇöÀç ½ºÅ×ÀÌÁö µ¥ÀÌÅÍ
+    private StageRef currentStageData;                  // í˜„ì¬ ìŠ¤í…Œì´ì§€ ë°ì´í„°
 
     private void Awake()
     {
@@ -61,16 +61,17 @@ public class StageManager : MonoBehaviour
     private void HandleTimeChange(int currentCount)
     {
         currentStageData.StageTime = currentCount;
+        Debug.Log($"Time :  {currentStageData.StageTime}");
 
         if (atOnce)
         {
             Debug.Log("Wave Called");
-            // ¿şÀÌºê¸¦ ¸¸µé¸é ±× ¿şÀÌºê¿¡ ÇÊ¿äÇÑ ±¸Á¶Ã¼¸¦ ³Ñ°ÜÁÜ
+            // ì›¨ì´ë¸Œë¥¼ ë§Œë“¤ë©´ ê·¸ ì›¨ì´ë¸Œì— í•„ìš”í•œ êµ¬ì¡°ì²´ë¥¼ ë„˜ê²¨ì¤Œ
             OnWave?.Invoke(currentStageData.CurrentWaveData);
             atOnce = false;
         }
 
-        // º¸½º (5ºĞ)
+        // ë³´ìŠ¤ (5ë¶„)
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
             Debug.Log("Boss Cerate");
@@ -80,12 +81,12 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // ¿şÀÌºê (¸Å ºĞ 0ÃÊ)
+        // ì›¨ì´ë¸Œ (ë§¤ ë¶„ 0ì´ˆ)
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
             Debug.Log("Wave Called");
             currentStageData.WaveIndex++;
-            // ¿şÀÌºê¸¦ ¸¸µé¸é ±× ¿şÀÌºê¿¡ ÇÊ¿äÇÑ ±¸Á¶Ã¼¸¦ ³Ñ°ÜÁÜ
+            // ì›¨ì´ë¸Œë¥¼ ë§Œë“¤ë©´ ê·¸ ì›¨ì´ë¸Œì— í•„ìš”í•œ êµ¬ì¡°ì²´ë¥¼ ë„˜ê²¨ì¤Œ
             OnWave?.Invoke(currentStageData.CurrentWaveData);
         }
     }

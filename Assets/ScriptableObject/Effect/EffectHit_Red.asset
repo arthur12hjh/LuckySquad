@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ec095786681fa46ab46a606bf89890, type: 3}
   m_Name: EffectHit_Red
   m_EditorClassIdentifier: Assembly-CSharp::EffectHit_Red
-  prefab: {fileID: 1211728282166712, guid: ff8053654c6032d4aab42a0e49f9aae5, type: 3}
+  poolName: EffectHit_Red
+  prefab:
+    m_AssetGUID: 2c27f6103c8348844a3cc636de15052a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
   initRef: {fileID: 0}
   initializePoolSize: 100
   EffectID: 1003

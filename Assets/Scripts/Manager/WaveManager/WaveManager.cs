@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -35,7 +36,9 @@ public class WaveManager : MonoBehaviour
     //[SerializeField] private WaveData _waveData;
     [SerializeField] private WaveState _currentWaveState;
     [SerializeField] private float _playTime = 0f;
-
+    
+    [SerializeField] private Vector3[] _spawnPoints;
+    
     private int _activeWaveCount = 0;
     private StageManager _stageManager;
 
@@ -97,23 +100,66 @@ public class WaveManager : MonoBehaviour
     {
     }
 
+    // interval에 따라 몬스터를 소환한다
+    // 위치를 
     IEnumerator RunWave(SpawnEvent spawnEvent)
     {
         var interval = new WaitForSeconds(spawnEvent.interval);
         yield return new WaitForSeconds(spawnEvent.startTime);
         
-        while (Time.time - _playTime < spawnEvent.endTime - spawnEvent.startTime)
+        while (Time.time - _playTime < spawnEvent.endTime)
         {
-            for(int i=0; i<spawnEvent.monsterCount; ++i)
-                SpawnMonster(spawnEvent.poolKey);
+            switch (spawnEvent.spawnType)
+            {
+                case SpawnType.Default: // 일반. 플레이어 주위 화면 밖
+                    DefaultSpawn(spawnEvent);
+                    break;
+                case SpawnType.Boids:   // 떼. 플레이어 주위 화면 밖에서 뭉쳐 생성
+                    BoidsSpawn(spawnEvent);
+                    break;
+                case SpawnType.Timing:  // 타이밍. 아직 구현 기획 없음
+                    break;
+                case SpawnType.Unexpected:  // 돌발. 아직 구현 기획 없음
+                    break;
+                case SpawnType.Boss:    // 보스. 1회만 생성. 플레이어 주위 화면 밖에서 생성
+                    break;
+                case SpawnType.Fixed:   // 고정형. 플레이어 위치 기준이 아닌, 고정 위치 기준 생성
+                    break;
+            }
+            
+            
             yield return interval;
         }
     }
 
-    void SpawnMonster(ObjectPoolRef objRef)
+    void DefaultSpawn(SpawnEvent spawnEvent)
+    {
+        Vector3 centerPos = InGameManager.Instance.GetPlayerTransform().position;
+        
+        for (int i = 0; i < spawnEvent.monsterCount; ++i)
+        {
+            SpawnMonster(spawnEvent.poolKey, centerPos + new Vector3(Random.Range(-10f, 10f), Random.Range(-20f, 20f), 0f));
+        }
+    }
+    
+    
+    void BoidsSpawn(SpawnEvent spawnEvent)
+    {
+        Vector3 centerPos = InGameManager.Instance.GetPlayerTransform().position;
+        centerPos += _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+        for (int i = 0; i < spawnEvent.monsterCount; ++i)
+        {
+            SpawnMonster(spawnEvent.poolKey, centerPos  + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f));
+        }
+    }
+
+    
+    // SpawnMonster 분기 나누기
+    void SpawnMonster(ObjectPoolRef objRef, Vector2 pos = default)
     {
         var monster = ObjectPoolManager.Instance.Get(objRef);
-        monster.transform.position = new Vector3(Random.Range(-7.5f, 7.8f), Random.Range(-3.3f, 2.7f), 0f);
+        // monster.transform.position = new Vector3(Random.Range(-7.5f, 7.8f), Random.Range(-3.3f, 2.7f), 0f);
+        monster.transform.position = pos;
         monster.GetComponent<BaseEntity>().Initialize(objRef.initRef);
     }
 

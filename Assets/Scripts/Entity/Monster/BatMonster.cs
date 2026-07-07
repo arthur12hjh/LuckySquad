@@ -3,7 +3,8 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class Monster : BaseEntity, IDamageable, IPoolable
+// 박쥐는 살짝 다르게, Move를 _playerTransform이 아니라 그냥 처음에 초기화된 진행 방향으로 할 것
+public class BatMonster : BaseEntity, IDamageable, IPoolable
 {
     private enum MonsterState {Idle, Chase, Fear, Dead, End}
     
@@ -13,6 +14,8 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private Material _material;
     [SerializeField] private Rigidbody2D _rigidbody2D;
+
+    [SerializeField] private Vector2 _moveDir = default;
 
     private static readonly int _flashAmountID = Shader.PropertyToID("_FlashAmount");
     private static readonly int _DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
@@ -94,11 +97,11 @@ public class Monster : BaseEntity, IDamageable, IPoolable
 
     protected override void Move(Vector3 position, float speedModifier = 1f)
     {
-        // transform.position = Vector3.MoveTowards(transform.position, position, Speed * speedModifier * Time.deltaTime);
+        // transform.Translate(_moveDir * (Speed * speedModifier * Time.deltaTime));
         // _animator.SetBool(_isMoveID, true);
         // _animator.SetFloat(_directionID, _playerTransform.position.x - transform.position.x);
         Vector2 currentPos = _rigidbody2D.position;
-        Vector2 targetPos = Vector2.MoveTowards(currentPos, position, Speed * speedModifier * Time.fixedDeltaTime);
+        Vector2 targetPos = currentPos + _moveDir * (Speed * speedModifier * Time.fixedDeltaTime);
         _rigidbody2D.MovePosition(targetPos);
 
         _animator.SetBool(_isMoveID, true);
@@ -107,7 +110,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     
     void Start()
     {
-        // ?�중???�정??로직. ?�후 ?�레?�어 ?�치 받아주는�??�시 만들 ?�정
+        // 나중에 수정할 로직. 이후 플레이어 위치 받아주는거 다시 만들 예정
         if(InGameManager.Instance is not null)
             _playerTransform = InGameManager.Instance.GetPlayerTransform();
         
@@ -141,7 +144,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_flashAmountID, 0f); // 루프 ?�차 보정
+        _material.SetFloat(_flashAmountID, 0f); // 루프 오차 보정
 
     }
 
@@ -160,7 +163,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     
     private IEnumerator Dissolve(float duration)
     {
-        Debug.Log("Im Dead");
         gameObject.layer =  LayerMask.NameToLayer("Deactive");
         float curTime = 0f;
         _material.SetFloat(_DissolveAmountID, 0f);
@@ -172,7 +174,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_DissolveAmountID, 1f); // 루프 ?�차 보정
+        _material.SetFloat(_DissolveAmountID, 1f); // 루프 오차 보정
         
         _releaseSelf?.Invoke();
     }
@@ -191,6 +193,8 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         
         _currentState = newState;
 
+        _moveDir = Vector2.Normalize(_playerTransform.position - transform.position);
+        
         switch (newState)
         {
             case MonsterState.Idle:
