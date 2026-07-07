@@ -20,7 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c0eb8bd3989e44c2b991c97fc1471643, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1e6dca2cbbe72419ca89ce7bc02abff9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -32,7 +32,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: animator_m2_bat
+  m_Name: animator_m5_elitebat
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isFear

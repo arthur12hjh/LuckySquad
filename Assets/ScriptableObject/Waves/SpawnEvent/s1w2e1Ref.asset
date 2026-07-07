@@ -16,5 +16,5 @@ MonoBehaviour:
   startTime: 0
   endTime: 60
   interval: 5
-  monsterCount: 20
+  monsterCount: 7
   spawnType: 0

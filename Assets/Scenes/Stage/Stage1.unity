@@ -2386,7 +2386,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPoolManager
   objectPoolRefs:
   - {fileID: 11400000, guid: fa8d161f1512b4eacac69b8c1efb1176, type: 2}
+  - {fileID: 11400000, guid: 2d89bc20225084b47b44dc3cc8769a6b, type: 2}
+  - {fileID: 11400000, guid: 9b9eac8e357dc4b1f8a3d102b8e5d3f9, type: 2}
   - {fileID: 11400000, guid: 67e4bad2f3043460e8a45127d8ba97ef, type: 2}
+  - {fileID: 11400000, guid: 278c14d82d8fe447a84c0aa469e5f91a, type: 2}
+  - {fileID: 11400000, guid: 34e335514ef049946a26455117eff87c, type: 2}
+  - {fileID: 11400000, guid: 7caf32b30536fd44987d19b491bfb106, type: 2}
+  - {fileID: 11400000, guid: f71231ee995c7334db66ceca18caeb4a, type: 2}
+  - {fileID: 11400000, guid: d2c4a288c1082de44bbd450e720168fb, type: 2}
+  - {fileID: 11400000, guid: 1e24f5c0bf0967c4797a91b9c21d4b8c, type: 2}
+  - {fileID: 11400000, guid: a3a439ad94b92954e89e8d5cdef17a40, type: 2}
 --- !u!1 &1138711847
 GameObject:
   m_ObjectHideFlags: 0
