@@ -160,6 +160,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     
     private IEnumerator Dissolve(float duration)
     {
+        InGameManager.Instance.GetPlayerStats().GetExp(1);
         Debug.Log("Im Dead");
         gameObject.layer =  LayerMask.NameToLayer("Deactive");
         float curTime = 0f;
@@ -206,6 +207,8 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             case MonsterState.Dead: 
                 _animator.SetBool(_isMoveID, false);
                 StartCoroutine(Dissolve(1f));
+                //TestCode
+                
                 break;
         }
     }
