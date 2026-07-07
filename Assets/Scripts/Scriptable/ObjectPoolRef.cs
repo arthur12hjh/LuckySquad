@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 [CreateAssetMenu(fileName = "ObjectPoolRef", menuName = "Scriptable Objects/ObjectPoolRef")]
 public class ObjectPoolRef : ScriptableObject
 {
-    [SerializeField] public GameObject prefab;
+    public string poolName;
+    [SerializeField] public AssetReferenceGameObject prefab;
     [SerializeField] public ScriptableObject initRef;
     [SerializeField] public int initializePoolSize;
 }

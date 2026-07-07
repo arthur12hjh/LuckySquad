@@ -19,10 +19,12 @@ using UnityEngine;
 
 public enum SpawnType
 {
-    Default,
-    Unexpected,
-    Timing,
-    Boss,
+    Default,        // 일반
+    Boids,          // 뱀서 박쥐 느낌
+    Unexpected,     // 돌발
+    Timing,         // 타이밍
+    Boss,           // 보스
+    Fixed,          // 고정 위치
 }
 
 [System.Serializable]

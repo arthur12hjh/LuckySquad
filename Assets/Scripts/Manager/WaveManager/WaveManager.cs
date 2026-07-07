@@ -1,31 +1,32 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
- * 웨이브 시스템
+ * ?�이�??�스??
  
    ScriptableObject SpawnEvent
-   - 웨이브 단일 데이터를 보관한다.
-   - 파티클 이펙트와 비슷한 느낌
-   - Get할 Pool Object의 Key값
-   - 몇 초부터 몇 초까지를 정한다.
-   - 그리고 그 사이 주기를 정한다.
-   - 한 번에 몇 마리를 내보낼지 정한다
-   - enum으로 단일 보스웨이브, 몬스터 웨이브 등 설정한다
+   - ?�이�??�일 ?�이?��? 보�??�다.
+   - ?�티???�펙?��? 비슷???�낌
+   - Get??Pool Object??Key�?
+   - �?초�???�?초까지�??�한??
+   - 그리�?�??�이 주기�??�한??
+   - ??번에 �?마리�??�보?��? ?�한??
+   - enum?�로 ?�일 보스?�이�? 몬스???�이�????�정?�다
    
    ScriptableObject WaveData
-   - 한 스테이지의 모든 웨이브 정보를 담는다
-   - List로 SpawnEvent를 담고 있는다
+   - ???�테?��???모든 ?�이�??�보�??�는??
+   - List�?SpawnEvent�??�고 ?�는??
    
    WaveManager
-   - WaveData를 받아 저장합니다.
-   - float _playTime을 만듭니다. 매프레임 Time.deltaTime을 더해줍니다.
-   - StartCoroutine.RunWave(SpawnEvent)으로 List에 있는 SpawnEvent들을 각각 돌려줍니다.
+   - WaveData�?받아 ?�?�합?�다.
+   - float _playTime??만듭?�다. 매프?�임 Time.deltaTime???�해줍니??
+   - StartCoroutine.RunWave(SpawnEvent)?�로 List???�는 SpawnEvent?�을 각각 ?�려줍니??
    
    RunWave
-   - interval에 따라 미리 WaitForSeconds를 만들어줍니다.
-   - startTime - _playTime만큼 기다려줍니다.
-   - while(endTime > _playTime) 동안 ObjectPool.Get; yield return interval;을 반복해줍니다.
+   - interval???�라 미리 WaitForSeconds�?만들?�줍?�다.
+   - startTime - _playTime만큼 기다?�줍?�다.
+   - while(endTime > _playTime) ?�안 ObjectPool.Get; yield return interval;??반복?�줍?�다.
  */
 public class WaveManager : MonoBehaviour
 {
@@ -35,11 +36,16 @@ public class WaveManager : MonoBehaviour
     //[SerializeField] private WaveData _waveData;
     [SerializeField] private WaveState _currentWaveState;
     [SerializeField] private float _playTime = 0f;
+    
+    [SerializeField] private Vector3[] _spawnPoints;
 
+    [SerializeField]
+    private WaveData _currentWaveData;
+    
     private int _activeWaveCount = 0;
     private StageManager _stageManager;
 
-    // Intialize는 바꿔야한다.
+    // Intialize??바꿔?�한??
     // 
     public void Initialize(WaveData waveData)
     {
@@ -54,9 +60,12 @@ public class WaveManager : MonoBehaviour
         Debug.Log("Waves Start");
         StopAllCoroutines();
         
+        
+        _currentWaveData = waveData;
+        
         if (waveData is null || waveData.spawnEvents == null || waveData.spawnEvents.Count == 0)
         {
-            Debug.LogWarning($"[{nameof(WaveManager)}] WaveData가 비어 있어 시작할 수 없습니다.");
+            Debug.LogWarning($"[{nameof(WaveManager)}] WaveData가 비어 ?�어 ?�작?????�습?�다.");
             return;
         }
  
@@ -97,23 +106,66 @@ public class WaveManager : MonoBehaviour
     {
     }
 
+    // interval에 따라 몬스터를 소환한다
+    // 위치를 
     IEnumerator RunWave(SpawnEvent spawnEvent)
     {
         var interval = new WaitForSeconds(spawnEvent.interval);
         yield return new WaitForSeconds(spawnEvent.startTime);
         
-        while (Time.time - _playTime < spawnEvent.endTime - spawnEvent.startTime)
+        while (Time.time - _playTime < spawnEvent.endTime)
         {
-            for(int i=0; i<spawnEvent.monsterCount; ++i)
-                SpawnMonster(spawnEvent.poolKey);
+            switch (spawnEvent.spawnType)
+            {
+                case SpawnType.Default: // 일반. 플레이어 주위 화면 밖
+                    DefaultSpawn(spawnEvent);
+                    break;
+                case SpawnType.Boids:   // 떼. 플레이어 주위 화면 밖에서 뭉쳐 생성
+                    BoidsSpawn(spawnEvent);
+                    break;
+                case SpawnType.Timing:  // 타이밍. 아직 구현 기획 없음
+                    break;
+                case SpawnType.Unexpected:  // 돌발. 아직 구현 기획 없음
+                    break;
+                case SpawnType.Boss:    // 보스. 1회만 생성. 플레이어 주위 화면 밖에서 생성
+                    break;
+                case SpawnType.Fixed:   // 고정형. 플레이어 위치 기준이 아닌, 고정 위치 기준 생성
+                    break;
+            }
+            
+            
             yield return interval;
         }
     }
 
-    void SpawnMonster(ObjectPoolRef objRef)
+    void DefaultSpawn(SpawnEvent spawnEvent)
+    {
+        Vector3 centerPos = InGameManager.Instance.GetPlayerTransform().position;
+        
+        for (int i = 0; i < spawnEvent.monsterCount; ++i)
+        {
+            SpawnMonster(spawnEvent.poolKey, centerPos + new Vector3(Random.Range(-10f, 10f), Random.Range(-20f, 20f), 0f));
+        }
+    }
+    
+    
+    void BoidsSpawn(SpawnEvent spawnEvent)
+    {
+        Vector3 centerPos = InGameManager.Instance.GetPlayerTransform().position;
+        centerPos += _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+        for (int i = 0; i < spawnEvent.monsterCount; ++i)
+        {
+            SpawnMonster(spawnEvent.poolKey, centerPos  + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f));
+        }
+    }
+
+    
+    // SpawnMonster 분기 나누기
+    void SpawnMonster(ObjectPoolRef objRef, Vector2 pos = default)
     {
         var monster = ObjectPoolManager.Instance.Get(objRef);
-        monster.transform.position = new Vector3(Random.Range(-7.5f, 7.8f), Random.Range(-3.3f, 2.7f), 0f);
+        // monster.transform.position = new Vector3(Random.Range(-7.5f, 7.8f), Random.Range(-3.3f, 2.7f), 0f);
+        monster.transform.position = pos;
         monster.GetComponent<BaseEntity>().Initialize(objRef.initRef);
     }
 
@@ -127,7 +179,7 @@ public class WaveManager : MonoBehaviour
         if (StageManager.Instance != null)
         {
             _stageManager = StageManager.Instance;
-            Debug.Log("구독과 좋아요 알람설정까지");
+            Debug.Log("구독�?좋아???�람?�정까�?");
             _stageManager.OnWave += StartWaves;
         }
     }

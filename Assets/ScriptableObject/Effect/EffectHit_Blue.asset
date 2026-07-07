@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002742533fe80e4b847c383023889bf, type: 3}
   m_Name: EffectHit_Blue
   m_EditorClassIdentifier: Assembly-CSharp::EffectHit_Blue
-  prefab: {fileID: 1419525465467072, guid: ca151ce4250545c41b60b0dea0a85a6d, type: 3}
+  poolName: EffectHit_Blue
+  prefab:
+    m_AssetGUID: 7c19ad7a926fc084ea69d9ba4fedeeab
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
   initRef: {fileID: 0}
   initializePoolSize: 100
   EffectID: 1002

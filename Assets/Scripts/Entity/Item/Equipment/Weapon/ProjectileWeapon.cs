@@ -30,7 +30,7 @@ public class ProjectileWeapon : WeaponBase
     public override void Initalize(ItemData itemData)
     {
         base.Initalize(itemData);
-        var sprite = AddressablesManager.Instance.GetLabelObject<SpriteAtlas>("Lobby", "imgAtlas", BulletTextureUrl);
+        var sprite = AddressablesManager.Instance.GetCommon<SpriteAtlas>(BulletTextureUrl);
         if (sprite != null)
         {
             BulletSpriteTex = new Sprite[sprite.spriteCount];

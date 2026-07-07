@@ -17,4 +17,4 @@ MonoBehaviour:
   endTime: 50
   interval: 10
   monsterCount: 20
-  spawnType: 0
+  spawnType: 1

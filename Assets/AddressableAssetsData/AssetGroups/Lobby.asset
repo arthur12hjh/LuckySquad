@@ -14,70 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Lobby
   m_GUID: 186be961464b8914a8cff6ebf69c8bdc
-  m_SerializeEntries:
-  - m_GUID: 05c545ca5d02a9c429134c02dd7370f2
-    m_Address: Assets/Image/Atlas/GunWeaponAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0b129920eb6bfa441af035e07b358451
-    m_Address: Assets/Sprites/Atlas/IconThunderAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1cfa93d50500ee6459959ab2c029559a
-    m_Address: Assets/Image/Atlas/ShurikenAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 453947b1ff9f49f48975b4ba72cb9e40
-    m_Address: Assets/Sprites/Atlas/IconShurikenAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 74866bf224956154f86e327d0e4bfe1f
-    m_Address: Assets/Sprites/Atlas/IconGunWeaponAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 86834112f6819d64fb4cf13fcefbf001
-    m_Address: Assets/Sprites/Atlas/IconBallIAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c535b8e4e09b3ed4f9efa74af28c13b3
-    m_Address: Assets/Image/Atlas/BulletAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e6cdd10ebcd913f46b6b4c76a6059cb4
-    m_Address: Assets/Image/Atlas/BallAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f20eb9d2f9677744da0cdbbee2f861c3
-    m_Address: Assets/Image/Atlas/ThunderAtlas.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lobby
-    - imgAtlas
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9431f25a67994e64e87f2dd68a4a24a7, type: 2}
   m_SchemaSet:

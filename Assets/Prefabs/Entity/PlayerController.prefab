@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5872539953287254477}
   m_Layer: 0
   m_Name: PlayerController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
     _currentHp: 0
     _power: 0
     _speed: 0
-  _playerAnimator: {fileID: 0}
+  _playercs: {fileID: 0}
   _playerTransform: {fileID: 0}
   _playerrb: {fileID: 0}
   _weaponPrefab:

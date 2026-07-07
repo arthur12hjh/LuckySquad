@@ -5,25 +5,26 @@ using System.Collections;
 
 public class Monster : BaseEntity, IDamageable, IPoolable
 {
-    private enum MonsterState {Idle, Chase, Fear, Dead, End}
+    // ?ì‹ ?´ë˜?¤ì—???íƒœë¥?ì°¸ì¡°/?„í™˜?????ˆë„ë¡?protectedë¡??°ë‹¤
+    protected enum MonsterState {Idle, Chase, Fear, Dead, End}
     
     [Header("Components")]
-    [SerializeField] private Transform _playerTransform;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private SpriteRenderer _renderer;
-    [SerializeField] private Material _material;
-    [SerializeField] private Rigidbody2D _rigidbody2D;
+    [SerializeField] protected Transform _playerTransform;
+    [SerializeField] protected Animator _animator;
+    [SerializeField] protected SpriteRenderer _renderer;
+    [SerializeField] protected Material _material;
+    [SerializeField] protected Rigidbody2D _rigidbody2D;
 
-    private static readonly int _flashAmountID = Shader.PropertyToID("_FlashAmount");
-    private static readonly int _DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
+    protected static readonly int _flashAmountID = Shader.PropertyToID("_FlashAmount");
+    protected static readonly int _DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
 
-    private static readonly int _isMoveID = Animator.StringToHash("isMove");
-    private static readonly int _isFearID = Animator.StringToHash("isFear");
-    private static readonly int _directionID = Animator.StringToHash("Direction");
+    protected static readonly int _isMoveID = Animator.StringToHash("isMove");
+    protected static readonly int _isFearID = Animator.StringToHash("isFear");
+    protected static readonly int _directionID = Animator.StringToHash("Direction");
     
     private Action _releaseSelf;
     
-    private MonsterState _currentState = MonsterState.Idle;
+    protected MonsterState _currentState = MonsterState.Idle;
     
     public void OnSpawn(Action releaseSelf) => _releaseSelf = releaseSelf;
     
@@ -36,9 +37,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     {
         if (_currentState == MonsterState.Dead)
             return;
-        // Debug.Log($"Damage : {DamageStruct.iDamage } \n" +
-        //           $"Hit Count: { DamageStruct.iHitCount } \n" + 
-        //           $"Type : { DamageStruct.AttackType.ToString() }");
 
         _currentHp -= DamageStruct.iDamage * DamageStruct.iHitCount;
         StartCoroutine(HitFlash(0.1f));
@@ -46,10 +44,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         {
             ChangeState(MonsterState.Dead);
         }
-        // else
-        // {
-        //     Debug.Log("Damaged");
-        // }
     }
     
     public float GuardDamage()
@@ -88,21 +82,22 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             _material.SetFloat(_DissolveAmountID, 0f);
         }
 
-        
         _currentState = MonsterState.Idle;
     }
 
     protected override void Move(Vector3 position, float speedModifier = 1f)
     {
-        transform.position = Vector3.MoveTowards(transform.position, position, Speed * speedModifier * Time.deltaTime);
+        Vector2 currentPos = _rigidbody2D.position;
+        Vector2 targetPos = Vector2.MoveTowards(currentPos, position, Speed * speedModifier * Time.fixedDeltaTime);
+        _rigidbody2D.MovePosition(targetPos);
+
         _animator.SetBool(_isMoveID, true);
         _animator.SetFloat(_directionID, _playerTransform.position.x - transform.position.x);
-
     }
     
     void Start()
     {
-        // ë‚˜ì¤‘ì— ìˆ˜ì •í•  ë¡œì§. ì´í›„ í”Œë ˆì´ì–´ ìœ„ì¹˜ ë°›ì•„ì£¼ëŠ”ê±° ë‹¤ì‹œ ë§Œë“¤ ì˜ˆì •
+        // ??ì¨·????ì ™??æ¿¡ì’–ì­? ??„ì‘ ??? …??ë¼± ?ê¾©íŠ‚ è«›ì†ë¸˜äºŒ?°ë’—å«???¼ë–† ï§ëš®ë±???‰ì ™
         if(InGameManager.Instance is not null)
             _playerTransform = InGameManager.Instance.GetPlayerTransform();
         
@@ -115,17 +110,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ChangeState(MonsterState.Fear);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Damaged(this.gameObject, new SAttackData(1, 1, EAttackType.Strike));
-        }
-
         switch (_currentState)
         {
             case MonsterState.Idle: TickIdle(); break;
@@ -147,17 +131,27 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_flashAmountID, 0f); // ë£¨í”„ ì˜¤ì°¨ ë³´ì •
+        _material.SetFloat(_flashAmountID, 0f); // ë£¨í”„ ?¤ì°¨ ë³´ì •
 
     }
 
     void FixedUpdate()
     {
+        switch (_currentState)
+        {
+            case MonsterState.Chase:
+                Move(_playerTransform.position, 1f);
+                break;
+            case MonsterState.Fear:
+                Move(_playerTransform.position, -1f);
+                break;
+        }
     }
     
     private IEnumerator Dissolve(float duration)
     {
-        Debug.Log("Im Dead");
+        InGameManager.Instance.GetPlayerStats().GetExp(1);
+        
         gameObject.layer =  LayerMask.NameToLayer("Deactive");
         float curTime = 0f;
         _material.SetFloat(_DissolveAmountID, 0f);
@@ -169,12 +163,13 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_DissolveAmountID, 1f); // ë£¨í”„ ì˜¤ì°¨ ë³´ì •
+        _material.SetFloat(_DissolveAmountID, 1f); // ?·â‘¦ë´???¼ê° è¹‚ëŒ??
         
         _releaseSelf?.Invoke();
     }
 
-    private void ChangeState(MonsterState newState)
+    // ?ì‹ ?´ë˜?¤ê? ?íƒœ ?„í™˜ ?ë¦„???¼ì–´?????ˆë„ë¡?virtualë¡??°ë‹¤
+    protected virtual void ChangeState(MonsterState newState)
     {
         if (_currentState == newState)
             return;
@@ -187,6 +182,9 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         }
         
         _currentState = newState;
+
+        // ?íƒœê°€ ?¤ì œë¡?ë°”ë€??œì ???ì‹ ?´ë˜?¤ê? ì¶”ê? ì²˜ë¦¬ë¥??????ˆê²Œ ?…ì„ ?¸ì¶œ?œë‹¤
+        OnStateChanged(newState);
 
         switch (newState)
         {
@@ -203,9 +201,13 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             case MonsterState.Dead: 
                 _animator.SetBool(_isMoveID, false);
                 StartCoroutine(Dissolve(1f));
+                //TestCode
+                
                 break;
         }
     }
+
+    protected virtual void OnStateChanged(MonsterState newState) { }
 
     private void TickIdle()
     {
@@ -220,8 +222,6 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             ChangeState(MonsterState.Idle);
             return;
         }
-
-        Move(_playerTransform.position, 1f);
     }
 
     private void TickFear()
@@ -231,9 +231,5 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             ChangeState(MonsterState.Idle);
             return;
         }
-        
-        Move(_playerTransform.position, -1f);
     }
-    
-    
 }
