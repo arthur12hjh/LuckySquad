@@ -31,7 +31,8 @@ public class WeaponBase : EquipmentBase
 
     protected override void SettingLevelData()
     {
-        SerializationWeaponData();
+        if(level > 0)
+            SerializationWeaponData();
     }
 
     private bool SerializationWeaponData()
@@ -39,7 +40,9 @@ public class WeaponBase : EquipmentBase
         if (info.MaxLevel < level)
             return false;
 
-        spriteRenderer.sprite = spriteTexs[level - 1];
+        if(spriteRenderer != null)
+            spriteRenderer.sprite = spriteTexs[level - 1];
+
         return true;
     }
 }

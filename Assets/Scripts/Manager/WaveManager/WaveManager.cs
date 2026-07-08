@@ -106,8 +106,8 @@ public class WaveManager : MonoBehaviour
     {
     }
 
-    // interval에 따라 몬스터를 소환한다
-    // 위치를 
+    // interval???�라 몬스?��? ?�환?�다
+    // ?�치�?
     IEnumerator RunWave(SpawnEvent spawnEvent)
     {
         var interval = new WaitForSeconds(spawnEvent.interval);
@@ -117,20 +117,20 @@ public class WaveManager : MonoBehaviour
         {
             switch (spawnEvent.spawnType)
             {
-                case SpawnType.Default: // 일반. 플레이어 주위 화면 밖
+                case SpawnType.Default: // ?�반. ?�레?�어 주위 ?�면 �?
                     DefaultSpawn(spawnEvent);
                     break;
-                case SpawnType.Boids:   // 떼. 플레이어 주위 화면 밖에서 뭉쳐 생성
+                case SpawnType.Boids:   // ?? ?�레?�어 주위 ?�면 밖에??뭉쳐 ?�성
                     BoidsSpawn(spawnEvent);
                     break;
-                case SpawnType.Timing:  // 타이밍. 아직 구현 기획 없음
+                case SpawnType.Timing:  // ?�?�밍. ?�직 구현 기획 ?�음
                     break;
                 case SpawnType.Unexpected:  // 돌발. 엘리트몹처럼 한 번만 생성되는 몬스터
                     DefaultSpawn(spawnEvent);
                     break;
-                case SpawnType.Boss:    // 보스. 1회만 생성. 플레이어 주위 화면 밖에서 생성
+                case SpawnType.Boss:    // 보스. 1?�만 ?�성. ?�레?�어 주위 ?�면 밖에???�성
                     break;
-                case SpawnType.Fixed:   // 고정형. 플레이어 위치 기준이 아닌, 고정 위치 기준 생성
+                case SpawnType.Fixed:   // 고정?? ?�레?�어 ?�치 기�????�닌, 고정 ?�치 기�? ?�성
                     break;
             }
             
@@ -161,7 +161,7 @@ public class WaveManager : MonoBehaviour
     }
 
     
-    // SpawnMonster 분기 나누기
+    // SpawnMonster 분기 ?�누�?
     void SpawnMonster(ObjectPoolRef objRef, Vector2 pos = default)
     {
         var monster = ObjectPoolManager.Instance.Get(objRef);

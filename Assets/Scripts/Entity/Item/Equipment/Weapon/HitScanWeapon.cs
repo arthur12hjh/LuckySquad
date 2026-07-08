@@ -1,62 +1,42 @@
 using Item;
 using System.Collections;
-using System.Linq;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class HitScanWeapon : EquipmentBase
+public class HitScanWeapon : WeaponBase
 {
-    private WeaponData          WeaponData;
-    private int                 iAttackCnt = 0;
-    private float               AccTime = 0;
+    [SerializeField] private GameObject     BulletPrfab;
 
-    private float               fShowTime = 0.3f;
-    private float               iTime = 0;
+    private List<HitScanBullet>             BulletList = new List<HitScanBullet>();
 
-    private CircleCollider2D    circleCollider = null;
-
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(RepeatActionCoroutine());
     }
 
-    private void Update()
+    IEnumerator RepeatActionCoroutine()
     {
-        if (circleCollider == null)
-            return;
+        if (level <= 0) yield return null;
 
-        if (circleCollider.isTrigger)
+        while (true)
         {
-            AccTime += Time.deltaTime;
-            if (AccTime >= fShowTime)
-            {
-                circleCollider.isTrigger = false;
-                spriteRenderer.sprite = null;
-                AccTime = 0;
-            }
-            else
-            {
-                int iIndex = (int)(AccTime / iTime);
-                spriteRenderer.sprite = spriteTexs[iIndex];
-            }
+            var Config = WeaponData.WeaponConfigs[level - 1];
+
+            foreach(var Bullet in BulletList)
+                Bullet.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(Config.fInterval);
         }
     }
 
     public override void Initalize(ItemData itemData)
     {
         base.Initalize(itemData);
-
-        circleCollider = GetComponent<CircleCollider2D>();
-        iTime = fShowTime / spriteTexs.Count();
-
-        SerializationWeaponData();
     }
 
     protected override bool bIsUseItem()
-    {
-        return true;
-    }
-
-    protected override bool bIsLevelUpItem()
     {
         return true;
     }
@@ -68,56 +48,18 @@ public class HitScanWeapon : EquipmentBase
 
     protected override void SettingLevelData()
     {
-        SerializationWeaponData();
-    }
+        int Count = BulletList.Count;
+        var Config = WeaponData.WeaponConfigs[level - 1];
+        int NeedCnt = Config.iMaxLineCount - Count;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        
-    }
+        for(int i = 0; i < NeedCnt; i++)
+            BulletList.Add(GameObject.Instantiate(BulletPrfab).GetComponent<HitScanBullet>());
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Debug.Log($"Exit : {other.name}");
-    }
-
-    private bool SerializationWeaponData()
-    {
-        if (info.MaxLevel < level)
-            return false;
-
-        return true;
-    }
-
-    IEnumerator RepeatActionCoroutine()
-    {
-        while (true)
+        float angle = 360 / BulletList.Count;
+        for (int i = 0; i < BulletList.Count; i++)
         {
-            float interval = 0.3f;
-            int ATK_cnt = GetWeaponAttackCount();
-
-            Attack();
-            if (iAttackCnt >= ATK_cnt)
-            {
-                iAttackCnt = 0;
-                interval = WeaponData.WeaponConfigs[level - 1].fInterval;
-            }
-
-            yield return new WaitForSeconds(interval);
+            Vector2 dir = Quaternion.Euler(0, 0, angle * i) * Vector2.right;
+            BulletList[i].Initialize(Config.iCount, Config.fRange, dir, spriteTexs);
         }
-    }
-
-    void Attack()
-    {
-        transform.position = Vector3.zero + Vector3.one * iAttackCnt;
-
-        circleCollider.radius = WeaponData.WeaponConfigs[level - 1].fRange;
-        circleCollider.isTrigger = true;
-        iAttackCnt++;
-    }
-
-    int GetWeaponAttackCount()
-    {
-        return WeaponData.WeaponConfigs[level - 1].iCount + 2;
     }
 }

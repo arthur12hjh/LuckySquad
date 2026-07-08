@@ -16,6 +16,6 @@ MonoBehaviour:
   WaveIndex: 4
   CurrentWaveData: {fileID: 11400000, guid: 3fe645c12c17e425a9b5d6635cff39fc, type: 2}
   MonsterSpawnDate: []
-  RandomItemDatas: 0200000003000000
+  RandomItemDatas: 02000000030000000400000005000000
   Boss: []
   StageTime: 5

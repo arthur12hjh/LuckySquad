@@ -84,13 +84,13 @@ public class BounceWeapon : WeaponBase
             float angle = UnityEngine.Random.Range(-10f, 10f);
             dir = Quaternion.AngleAxis(angle, Vector3.forward) * dir;
 
-            foreach (var particleID in WeaponData.LevelDatas[level - 1].ParticleIDs)
+            /*foreach (var particleID in WeaponData.LevelDatas[level - 1].ParticleIDs)
             {
                 var EffectSO = DataManager.Instance.FindEffectSO(particleID);
                 var obj = ObjectPoolManager.Instance.Get(EffectSO);
 
                 obj.gameObject.transform.position = transform.position;
-            }
+            }*/
         }
     }   
 
