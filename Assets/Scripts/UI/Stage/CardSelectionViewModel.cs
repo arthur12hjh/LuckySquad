@@ -1,3 +1,4 @@
+using Item;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,13 +51,20 @@ public class CardSelectionViewModel : BaseViewModel
 
     public void OpenCards()
     {
+        List<Tuple<int, int, ItemData>> items = StageManager.Instance.Get_RandomItem();
+        int iSize = items.Count;
+        for (int i = 0; i < iSize; i++)
+        {
+            Cards[i].SetData(items[i]);
+            Cards[i].Open();
+        }
+
+        // TestCode
+        Cards[2].SetData(items[0]);
+        Cards[2].Open();
+
         OnOpened?.Invoke();
 
-        foreach (var card in Cards)
-        {
-            card.SetData();
-            card.Open();
-        }
         InGameManager.Instance.StopGame();
     }
 
