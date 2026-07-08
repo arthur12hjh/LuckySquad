@@ -20,7 +20,7 @@ public class HolyWater : ProjectileBase
         if(animator == null)
             animator = GetComponent<Animator>();
 
-        animator.speed = 1f;
+        animator.speed = 0f;
     }
 
     private void OnDisable()
