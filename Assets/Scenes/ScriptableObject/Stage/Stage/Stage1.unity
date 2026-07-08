@@ -1572,7 +1572,7 @@ MonoBehaviour:
   _playerObj: {fileID: 0}
   _playerControllerObj: {fileID: 0}
   _playerCamera: {fileID: 0}
-  _SpawnBound: {x: 0, y: 0, z: 0}
+  _SpawnBound: {x: 1.2, y: 1.2, z: 0}
 --- !u!4 &753822484
 Transform:
   m_ObjectHideFlags: 0

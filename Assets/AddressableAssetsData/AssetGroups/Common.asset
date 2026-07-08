@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Common
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cfa889c069b15a44a68551e6574d4e4
+    m_Address: Assets/Sprites/Atlas/CookieAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1cfa93d50500ee6459959ab2c029559a
     m_Address: Assets/Image/Atlas/ShurikenAtlas.spriteatlasv2
     m_ReadOnly: 0

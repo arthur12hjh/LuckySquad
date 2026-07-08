@@ -156,24 +156,24 @@
         "iCount": 1,
         "iMaxLineCount": 1,
         "fSpeed": 999,
-        "fRange": 8,
-        "fInterval": 1.0
+        "fRange": 0.7,
+        "fInterval": 2.0
       },
       {
         "fDamage": 28,
         "iCount": 2,
         "iMaxLineCount": 2,
         "fSpeed": 999,
-        "fRange": 9,
-        "fInterval": 0.9
+        "fRange": 0.9,
+        "fInterval": 1.7
       },
       {
         "fDamage": 40,
         "iCount": 3,
         "iMaxLineCount": 3,
         "fSpeed": 999,
-        "fRange": 10,
-        "fInterval": 0.8
+        "fRange": 1,
+        "fInterval": 1.5
       }
     ]
   },

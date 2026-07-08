@@ -23,16 +23,13 @@ public class Bullet : ProjectileBase
 
     }
 
-    public override void ShootProjectile(Projectileinfo projectileinfo, Vector2 vdir, Sprite Tex)
+    public override void ShootProjectile(Projectileinfo projectileinfo, Vector2 vdir, string AtalsName)
     {
-        base.ShootProjectile(projectileinfo, vdir, Tex);
+        base.ShootProjectile(projectileinfo, vdir, AtalsName);
 
         // 로컬 x, y를 사용하면 캐릭터의 로컬 right 기준 각도가 나옵니다.
         float degAngle = Mathf.Atan2(vDir.y, vDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, degAngle));
-
-        spriteRenderer.sprite = Tex;
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)

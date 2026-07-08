@@ -2,6 +2,7 @@ using Item;
 using Attack;
 using System.Collections;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class HitScanBullet : ProjectileBase
 {
@@ -11,7 +12,6 @@ public class HitScanBullet : ProjectileBase
     private float fShowTime = 1f;
     private float iTime = 0;
 
-    private Sprite[] spriteTexs;
     private CircleCollider2D circleCollider = null;
 
     public void Initialize(int AttackCnt,
@@ -25,12 +25,12 @@ public class HitScanBullet : ProjectileBase
         if (circleCollider == null)
             circleCollider = GetComponent<CircleCollider2D>();
 
-        spriteTexs = sprites;
+        SpriteTexs = sprites;
 
         _AttackCnt = AttackCnt;
         vDir = vdir.normalized;
         circleCollider.radius = Range;
-        iTime = fShowTime / spriteTexs.Length;
+        iTime = fShowTime / SpriteTexs.Length;
         gameObject.SetActive(false);
     }
 
@@ -48,7 +48,7 @@ public class HitScanBullet : ProjectileBase
         else
         {
             int iIndex = (int)(AccTime / iTime);
-            spriteRenderer.sprite = spriteTexs[iIndex];
+            spriteRenderer.sprite = SpriteTexs[iIndex];
         }
     }
 
@@ -66,13 +66,14 @@ public class HitScanBullet : ProjectileBase
     {
         int ATKcnt = 0;
         float interval = fShowTime / _AttackCnt;
+        var PlayerPos = InGameManager.Instance.GetPlayerTransform().position;
 
         if (circleCollider == null) 
             yield return null;
 
         while (ATKcnt < _AttackCnt)
         {
-            Attack(ATKcnt);
+            Attack(PlayerPos, ATKcnt);
             ATKcnt++;
 
             yield return new WaitForSeconds(interval);
@@ -83,10 +84,13 @@ public class HitScanBullet : ProjectileBase
         yield return null;
     }
 
-    void Attack(int AtkCnt)
+    void Attack(Vector3 vPos, int AtkCnt)
     {
-        var PlayerPos = InGameManager.Instance.GetPlayerTransform().position;
-        transform.position = PlayerPos + vDir * (AtkCnt + 1);
+        float AngleX = UnityEngine.Random.Range(0f, 360f) * Mathf.Deg2Rad; ;
+        float AngleY = UnityEngine.Random.Range(0f, 360f) * Mathf.Deg2Rad; ;
+
+        vDir = new Vector3( Mathf.Cos(AngleY), Mathf.Sin(AngleX));
+        transform.position = vPos + vDir * (AtkCnt + 1);
         circleCollider.isTrigger = true;
     }
 }

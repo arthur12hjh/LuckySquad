@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class HitScanWeapon : WeaponBase
 {
     [SerializeField] private GameObject     BulletPrfab;
+
     private List<HitScanBullet>             BulletList = new List<HitScanBullet>();
 
     void OnEnable()
@@ -52,7 +53,7 @@ public class HitScanWeapon : WeaponBase
         int NeedCnt = Config.iMaxLineCount - Count;
 
         for(int i = 0; i < NeedCnt; i++)
-            BulletList.Add(GameObject.Instantiate(BulletPrfab, gameObject.transform).GetComponent<HitScanBullet>());
+            BulletList.Add(GameObject.Instantiate(BulletPrfab).GetComponent<HitScanBullet>());
 
         float angle = 360 / BulletList.Count;
         for (int i = 0; i < BulletList.Count; i++)
