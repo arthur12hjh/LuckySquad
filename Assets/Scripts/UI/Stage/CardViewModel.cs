@@ -1,4 +1,5 @@
 using Item;
+using NUnit.Framework.Interfaces;
 using System;
 using UnityEngine;
 
@@ -10,36 +11,24 @@ public class CardViewModel : BaseViewModel
     public event Action OnOpened;
     public event Action OnClosed;
 
-    ItemData itemData;
+    private ItemData itemData;
+    int cardGrade;
 
     public override void Initialize() { }
 
     public override void Release() { }
 
-    int cardID;
-    int cardGrade;
-    string cardName;
-    int currentLevel;
-
-    public void SetData()
+    public void SetData(Tuple<int, int, ItemData> item)
     {
-        itemData = DataManager.Instance != null ? DataManager.Instance.GetRandomItemData() : null;
-        if (itemData == null)
-        {
-            Debug.LogError("Failed to roll random item data for card");
-            return;
-        }
-
-        cardID = itemData.iID;
+        itemData = item.Item3;
         cardGrade = UnityEngine.Random.Range(0, GradeCount);
-
+  
         // currentLevel
         //BindSprites();
     }
 
     public ItemData GetItemData()
     {
-        SetData();
         return itemData;
     }
 
