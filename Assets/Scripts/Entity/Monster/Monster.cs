@@ -122,6 +122,9 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     private IEnumerator HitFlash(float duration)
     {
         float curTime = 0f;
+        if (_material == null)
+            yield return null;
+
         _material.SetFloat(_flashAmountID, 1f);
         while (curTime < duration)
         {
