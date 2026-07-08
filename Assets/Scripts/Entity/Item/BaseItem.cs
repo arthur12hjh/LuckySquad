@@ -45,13 +45,13 @@ public abstract class BaseItem : MonoBehaviour
     protected SpriteRenderer    spriteRenderer = null;
     protected Sprite[]          spriteTexs = null;
 
-    public int                  level { get; protected set; }
+    public int                  level { get; protected set; } = 0;
     protected ItemData          info;
 
     public virtual void Initalize(ItemData Data)
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        level = 1;
+        level = 0;
 
         var sprite = AddressablesManager.Instance.GetCommon<SpriteAtlas>(Data.TextureName);
         if (sprite != null)

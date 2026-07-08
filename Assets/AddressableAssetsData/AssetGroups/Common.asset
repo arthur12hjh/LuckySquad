@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Common
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cfa889c069b15a44a68551e6574d4e4
+    m_Address: Assets/Sprites/Atlas/CookieAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1cfa93d50500ee6459959ab2c029559a
     m_Address: Assets/Image/Atlas/ShurikenAtlas.spriteatlasv2
     m_ReadOnly: 0
@@ -29,6 +35,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1ec604e4763f1aa4fae6b810f0fa9c08
     m_Address: Assets/Prefabs/Weapon/OrbitingWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20d2a22332083584ba691433da7857d9
+    m_Address: Assets/Sprites/Atlas/GroundFogAtlas.spriteatlasv2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Common
@@ -59,6 +71,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f20eb9d2f9677744da0cdbbee2f861c3
     m_Address: Assets/Image/Atlas/ThunderAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: febe8019c39fea6468dc31f1a97c6057
+    m_Address: Assets/Sprites/Atlas/IconGroundFogAtlas.spriteatlasv2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Common

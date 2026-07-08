@@ -15,7 +15,6 @@ public class StageManager : MonoBehaviour
     private List<Tuple<int, EquipmentBase>>  stageItemDatas;   // 스테이지의 데이터로 아이템 정보 생성
     private List<Tuple<int, int, ItemData>>  ShuffleList;
 
-
     private int prevTimer = 0;
     private int bossIndex = 0;
 
@@ -65,6 +64,21 @@ public class StageManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.End))
         {
             EventBus.Publish(new WeaponSelectEvent(1, 3));
+        }
+
+        if (Input.GetKeyUp(KeyCode.Home))
+        {
+            EventBus.Publish(new WeaponSelectEvent(0, 2));
+        }
+
+        if (Input.GetKeyUp(KeyCode.PageDown))
+        {
+            EventBus.Publish(new WeaponSelectEvent(2, 1));
+        }
+
+        if (Input.GetKeyUp(KeyCode.PageUp))
+        {
+            EventBus.Publish(new WeaponSelectEvent(3, 4));
         }
     }
 
