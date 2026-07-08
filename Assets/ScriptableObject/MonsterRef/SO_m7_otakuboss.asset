@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b67d6a397b0f4414bfe0c1804579964, type: 3}
-  m_Name: s1w5Ref
-  m_EditorClassIdentifier: Assembly-CSharp::WaveData
-  spawnEvents:
-  - {fileID: 11400000, guid: b4ee1a057efae4941990daffb70c6ff5, type: 2}
+  m_Script: {fileID: 11500000, guid: b1094119bc3d9db42a2023d1f7b80c4e, type: 3}
+  m_Name: SO_m7_otakuboss
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterRef
+  HP: 500
+  Power: 0
+  Speed: 0.7

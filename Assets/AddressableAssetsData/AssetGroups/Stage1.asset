@@ -21,6 +21,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage1
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 060000ea906bb44919a51f98ce207401
+    m_Address: Assets/Sprites/Sprites_m1_otaku.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 064c608c3a271334299e1fa22913842f
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_magic_blue_pink.prefab
     m_ReadOnly: 0
@@ -32,6 +37,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2140a063c446c4f07a8cc4b1c2696c8c
+    m_Address: Assets/Sprites/Sprites_m2_otakuyellowtanning.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2c27f6103c8348844a3cc636de15052a
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_ellow_pink.prefab
@@ -56,6 +66,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage1
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c32a165bd9324c04aea86e02e155317
+    m_Address: Assets/Sprites/otakuboss.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 81891a515eae944ebbda94ea7fe8a979
     m_Address: Assets/Prefabs/Entity/Monster/prefab_m1_otaku.prefab
     m_ReadOnly: 0
@@ -66,6 +81,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97d7ca049d9784d1bbdbe2f5cdba5851
+    m_Address: Assets/Sprites/bat.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a59ce00093659452db464c13c5b764d4
     m_Address: Assets/Prefabs/Entity/Monster/prefab_m2_otakuyellowtanning.prefab
@@ -89,11 +109,26 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cafe59aaef16e4ed0a622bb3df3862b9
+    m_Address: Assets/Sprites/Sprites_m3_otakucosplay.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dcd90c4976197424b9958a7c54b6bb8c
     m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Flash/Flash_round_ellow.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e24f97b8dd1ee4ebc8d4f0a136b9f79b
+    m_Address: Assets/Prefabs/Entity/Monster/prefab_m7_OtakuBoss.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc64785714cff4a159b6c9fde4045c0a
+    m_Address: Assets/Sprites/Sprites_m5_elitebat.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fca7daa172184b24aa547cdf8c45191a
     m_Address: Assets/Prefabs/Weapon/ProjectTileWeapon_projectile.prefab
