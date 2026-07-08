@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160d8235b2f4d475492cb0b3649fed94, type: 3}
   m_Name: s1w5e1Ref
   m_EditorClassIdentifier: Assembly-CSharp::SpawnEvent
-  poolKey: {fileID: 11400000, guid: fa8d161f1512b4eacac69b8c1efb1176, type: 2}
+  poolKey: {fileID: 11400000, guid: 9b9eac8e357dc4b1f8a3d102b8e5d3f9, type: 2}
   startTime: 0
   endTime: 60
   interval: 5
-  monsterCount: 50
+  monsterCount: 40
   spawnType: 0

@@ -3,30 +3,30 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /*
- * ?�이�??�스??
+ * ?�이�??�스??
  
    ScriptableObject SpawnEvent
-   - ?�이�??�일 ?�이?��? 보�??�다.
-   - ?�티???�펙?��? 비슷???�낌
-   - Get??Pool Object??Key�?
-   - �?초�???�?초까지�??�한??
-   - 그리�?�??�이 주기�??�한??
-   - ??번에 �?마리�??�보?��? ?�한??
-   - enum?�로 ?�일 보스?�이�? 몬스???�이�????�정?�다
+   - ?�이�??�일 ?�이?��? 보�??�다.
+   - ?�티???�펙?��? 비슷???�낌
+   - Get??Pool Object??Key�?
+   - �?초�???�?초까지�??�한??
+   - 그리�?�??�이 주기�??�한??
+   - ??번에 �?마리�??�보?��? ?�한??
+   - enum?�로 ?�일 보스?�이�? 몬스???�이�????�정?�다
    
    ScriptableObject WaveData
-   - ???�테?��???모든 ?�이�??�보�??�는??
-   - List�?SpawnEvent�??�고 ?�는??
+   - ???�테?��???모든 ?�이�??�보�??�는??
+   - List�?SpawnEvent�??�고 ?�는??
    
    WaveManager
-   - WaveData�?받아 ?�?�합?�다.
-   - float _playTime??만듭?�다. 매프?�임 Time.deltaTime???�해줍니??
-   - StartCoroutine.RunWave(SpawnEvent)?�로 List???�는 SpawnEvent?�을 각각 ?�려줍니??
+   - WaveData�?받아 ?�?�합?�다.
+   - float _playTime??만듭?�다. 매프?�임 Time.deltaTime???�해줍니??
+   - StartCoroutine.RunWave(SpawnEvent)?�로 List???�는 SpawnEvent?�을 각각 ?�려줍니??
    
    RunWave
-   - interval???�라 미리 WaitForSeconds�?만들?�줍?�다.
-   - startTime - _playTime만큼 기다?�줍?�다.
-   - while(endTime > _playTime) ?�안 ObjectPool.Get; yield return interval;??반복?�줍?�다.
+   - interval???�라 미리 WaitForSeconds�?만들?�줍?�다.
+   - startTime - _playTime만큼 기다?�줍?�다.
+   - while(endTime > _playTime) ?�안 ObjectPool.Get; yield return interval;??반복?�줍?�다.
  */
 public class WaveManager : MonoBehaviour
 {
@@ -45,7 +45,7 @@ public class WaveManager : MonoBehaviour
     private int _activeWaveCount = 0;
     private StageManager _stageManager;
 
-    // Intialize??바꿔?�한??
+    // Intialize??바꿔?�한??
     // 
     public void Initialize(WaveData waveData)
     {
@@ -65,7 +65,7 @@ public class WaveManager : MonoBehaviour
         
         if (waveData is null || waveData.spawnEvents == null || waveData.spawnEvents.Count == 0)
         {
-            Debug.LogWarning($"[{nameof(WaveManager)}] WaveData가 비어 ?�어 ?�작?????�습?�다.");
+            Debug.LogWarning($"[{nameof(WaveManager)}] WaveData가 비어 ?�어 ?�작?????�습?�다.");
             return;
         }
  
@@ -125,7 +125,8 @@ public class WaveManager : MonoBehaviour
                     break;
                 case SpawnType.Timing:  // 타이밍. 아직 구현 기획 없음
                     break;
-                case SpawnType.Unexpected:  // 돌발. 아직 구현 기획 없음
+                case SpawnType.Unexpected:  // 돌발. 엘리트몹처럼 한 번만 생성되는 몬스터
+                    DefaultSpawn(spawnEvent);
                     break;
                 case SpawnType.Boss:    // 보스. 1회만 생성. 플레이어 주위 화면 밖에서 생성
                     break;
@@ -179,7 +180,7 @@ public class WaveManager : MonoBehaviour
         if (StageManager.Instance != null)
         {
             _stageManager = StageManager.Instance;
-            Debug.Log("구독�?좋아???�람?�정까�?");
+            Debug.Log("구독�?좋아???�람?�정까�?");
             _stageManager.OnWave += StartWaves;
         }
     }
