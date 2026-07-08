@@ -5,8 +5,8 @@ using System.Collections;
 
 public class Monster : BaseEntity, IDamageable, IPoolable
 {
-    // ?�식 ?�래?�에???�태�?참조/?�환?????�도�?protected�??�다
-    protected enum MonsterState {Idle, Chase, Fear, Dead, End}
+    // ?�식 ?�래?�에???�태�?참조/?�환?????�도�?protected�??�다
+    protected enum MonsterState {Idle, Chase, Fear, Dead, Skill, End}
     
     [Header("Components")]
     [SerializeField] protected Transform _playerTransform;
@@ -95,9 +95,9 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         _animator.SetFloat(_directionID, _playerTransform.position.x - transform.position.x);
     }
     
-    void Start()
+    protected virtual void Start()
     {
-        // ??�쨷????�젙??濡쒖�? ??�썑 ???��??�뼱 ?꾩튂 諛쏆븘二?�뒗�???�떆 留뚮�???�젙
+        // ??�쨷????�젙??濡쒖�? ??�썑 ???��??�뼱 ?꾩튂 諛쏆븘二?�뒗�???�떆 留뚮�???�젙
         if(InGameManager.Instance is not null)
             _playerTransform = InGameManager.Instance.GetPlayerTransform();
         
@@ -108,7 +108,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         ChangeState(MonsterState.Idle);
     }
 
-    void Update()
+    protected virtual void Update()
     {
         switch (_currentState)
         {
@@ -134,11 +134,11 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_flashAmountID, 0f); // 루프 ?�차 보정
+        _material.SetFloat(_flashAmountID, 0f); // 루프 ?�차 보정
 
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         switch (_currentState)
         {
@@ -166,12 +166,12 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             yield return null;
         }
         
-        _material.SetFloat(_DissolveAmountID, 1f); // ?�⑦�???�감 蹂댁??
+        _material.SetFloat(_DissolveAmountID, 1f); // ?�⑦�???�감 蹂댁??
         
         _releaseSelf?.Invoke();
     }
 
-    // ?�식 ?�래?��? ?�태 ?�환 ?�름???�어?????�도�?virtual�??�다
+    // ?�식 ?�래?��? ?�태 ?�환 ?�름???�어?????�도�?virtual�??�다
     protected virtual void ChangeState(MonsterState newState)
     {
         if (_currentState == newState)
@@ -186,7 +186,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         
         _currentState = newState;
 
-        // ?�태가 ?�제�?바�??�점???�식 ?�래?��? 추�? 처리�??????�게 ?�을 ?�출?�다
+        // ?�태가 ?�제�?바�??�점???�식 ?�래?��? 추�? 처리�??????�게 ?�을 ?�출?�다
         OnStateChanged(newState);
 
         switch (newState)
@@ -212,13 +212,13 @@ public class Monster : BaseEntity, IDamageable, IPoolable
 
     protected virtual void OnStateChanged(MonsterState newState) { }
 
-    private void TickIdle()
+    protected virtual void TickIdle()
     {
         if(_playerTransform is not null)
             ChangeState(MonsterState.Chase);
     }
 
-    private void TickChase()
+    protected virtual void TickChase()
     {
         if (_playerTransform is null)
         {
@@ -227,7 +227,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
         }
     }
 
-    private void TickFear()
+    protected virtual void TickFear()
     {
         if (_playerTransform is null)
         {
@@ -235,4 +235,10 @@ public class Monster : BaseEntity, IDamageable, IPoolable
             return;
         }
     }
+    
+    protected virtual void TickSkill()
+    {
+        ChangeState(MonsterState.Idle);
+    }
+    
 }

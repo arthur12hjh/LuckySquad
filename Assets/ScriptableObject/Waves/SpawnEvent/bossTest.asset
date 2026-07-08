@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 160d8235b2f4d475492cb0b3649fed94, type: 3}
-  m_Name: s1w4e1Ref
+  m_Name: bossTest
   m_EditorClassIdentifier: Assembly-CSharp::SpawnEvent
-  poolKey: {fileID: 11400000, guid: fa8d161f1512b4eacac69b8c1efb1176, type: 2}
+  poolKey: {fileID: 11400000, guid: eb30d2ee0b07c4feea3cede4d27879ac, type: 2}
   startTime: 0
-  endTime: 60
+  endTime: 1
   interval: 5
-  monsterCount: 40
-  spawnType: 0
+  monsterCount: 1
+  spawnType: 2

@@ -24,17 +24,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 _playerDir = default;
     public Vector2 GetPlayerDir() => _playerDir = Vector2.left;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         if (_playerrb is not null)
