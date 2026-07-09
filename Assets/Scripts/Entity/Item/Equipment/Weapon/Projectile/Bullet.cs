@@ -9,7 +9,7 @@ public class Bullet : ProjectileBase
     {
         if(bIsAlive)
         {
-            transform.position += vDir * info.fSpeed * Time.deltaTime;
+            transform.position += vDir * info._config.fSpeed * Time.deltaTime;
 
             Vector2 CamPos = Camera.main.transform.position;
             float Distance = ((Vector3)CamPos - transform.position).magnitude;
@@ -23,9 +23,12 @@ public class Bullet : ProjectileBase
 
     }
 
-    public override void ShootProjectile(Projectileinfo projectileinfo, Vector2 vdir, string AtalsName)
+    protected override void ShootProjectile(Projectileinfo projectileinfo, 
+                                         Vector2 vdir, 
+                                         string AtalsName,
+                                         string ControolerName)
     {
-        base.ShootProjectile(projectileinfo, vdir, AtalsName);
+        base.ShootProjectile(projectileinfo, vdir, AtalsName, ControolerName);
 
         // 로컬 x, y를 사용하면 캐릭터의 로컬 right 기준 각도가 나옵니다.
         float degAngle = Mathf.Atan2(vDir.y, vDir.x) * Mathf.Rad2Deg;
@@ -39,13 +42,8 @@ public class Bullet : ProjectileBase
         var Monster = other.gameObject.GetComponent<Monster>();
         if(Monster != null)
         {
-            Monster.Damaged(Monster.gameObject, new SAttackData(info.fDamage, 1, EAttackType.Strike));
+            Monster.Damaged(Monster.gameObject, new SAttackData(info._config.fDamage, 1, EAttackType.Strike));
             Release();
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Debug.Log($"Exit : {other.name}");
     }
 }
