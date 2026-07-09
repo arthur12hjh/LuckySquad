@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91acb002ceb9294ea4009f1cfab4d72, type: 3}
   m_Name: Projectile Holy Ref
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileRef
-  poolName: 
+  poolName: ProjectileHolyRef
   prefab:
-    m_AssetGUID: fca7daa172184b24aa547cdf8c45191a
+    m_AssetGUID: 4e784e51179e50a4ba15ea36e0b5530c
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 

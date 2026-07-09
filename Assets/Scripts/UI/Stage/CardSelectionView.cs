@@ -17,7 +17,7 @@ public class CardSelectionView : BaseView
             _viewModel = viewModel;
             _viewModel.OnOpened += Open;
             _viewModel.OnClosed += Close;
-            testButton.onClick.AddListener(Open);
+            testButton.onClick.AddListener(_viewModel.OpenCards);
             for (int i = 0; i < _cards.Count; i++)
                 _cards[i].Bind(_viewModel.GetCardVM(i));
         }

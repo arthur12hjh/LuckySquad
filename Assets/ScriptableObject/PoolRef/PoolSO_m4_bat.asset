@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a247890ef29b84b86c2f6d97e705b2, type: 3}
+  m_Name: PoolSO_m4_bat
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPoolRef
+  poolName: Bat
+  prefab:
+    m_AssetGUID: 0adc79b956a5644959846037232c4e26
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  initRef: {fileID: 11400000, guid: c1b587f0f79ac4251887dea6d2165436, type: 2}
+  initializePoolSize: 500

@@ -35,11 +35,13 @@ namespace Item
     [Serializable]
     public struct Projectileinfo
     {
+        public int   iLevel;
         public float fSpeed;
         public float fDamage;
 
-        public Projectileinfo(float fspeed, float fdamage)
+        public Projectileinfo(int iLevel, float fspeed, float fdamage)
         {
+            this.iLevel = iLevel;
             this.fSpeed = fspeed;
             this.fDamage = fdamage;
         }

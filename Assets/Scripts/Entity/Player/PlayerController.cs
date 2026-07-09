@@ -22,18 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Vector2 _inputVec;
     private Vector2 _playerDir = default;
-    public Vector2 GetPlayerDir() => _playerDir;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
+    public Vector2 GetPlayerDir() => _playerDir = Vector2.left;
 
     private void FixedUpdate()
     {
@@ -48,7 +37,8 @@ public class PlayerController : MonoBehaviour
     {
         _inputVec = value.Get<Vector2>();
         _playercs.UpdatePlayer(_inputVec);
-        _playerDir = _inputVec;
+        if(_inputVec != default)
+            _playerDir = _inputVec;
     }
 
     public void Initialize(PlayerStats playerStats, GameObject playerObj)

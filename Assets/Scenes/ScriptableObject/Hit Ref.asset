@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd2e93d27f622f458c8ddf3a6fdb793, type: 3}
   m_Name: Hit Ref
   m_EditorClassIdentifier: Assembly-CSharp::HitBoxRef
-  prefab: {fileID: 8484734915249954641, guid: 9472d273d201a234abf465c69046889a, type: 3}
+  poolName: HitRef
+  prefab:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  initRef: {fileID: 0}
   initializePoolSize: 20

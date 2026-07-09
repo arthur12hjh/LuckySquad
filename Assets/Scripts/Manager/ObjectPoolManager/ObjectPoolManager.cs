@@ -10,11 +10,11 @@ public class ObjectPoolManager : MonoBehaviour
     public static ObjectPoolManager Instance { get; private set; }
     public bool IsReady { get; private set; }
 
-    [SerializeField] private List<ObjectPoolRef> objectPoolRefs;            // 데이터 리스트.
+    [SerializeField] private List<ObjectPoolRef> objectPoolRefs;            // ?�이??리스??
 
-    private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> _poolDictionary = new(); // 풀링으로 만들어진 예비객체들
-    private readonly Dictionary<ObjectPoolRef, GameObject> _prefabPool = new(); // 해당 SO의 프리팹
-    private readonly Dictionary<ObjectPoolRef, AsyncOperationHandle<GameObject>> _asyncOperationHandles = new(); // 해당 SO의 어드레서블 핸들
+    private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> _poolDictionary = new(); // ?�링으�?만들?�진 ?�비객체??
+    private readonly Dictionary<ObjectPoolRef, GameObject> _prefabPool = new(); // ?�당 SO???�리??
+    private readonly Dictionary<ObjectPoolRef, AsyncOperationHandle<GameObject>> _asyncOperationHandles = new(); // ?�당 SO???�드?�서�??�들
 
     private void Awake()
     {
@@ -43,16 +43,16 @@ public class ObjectPoolManager : MonoBehaviour
     {
         foreach (var refSO in objectPoolRefs)
         {
-            // 비동기 작업 핸들. 일 좀 오래걸리니까 비동기로 팔게
+            // 비동�??�업 ?�들. ??좀 ?�래걸리?�까 비동기로 ?�게
             AsyncOperationHandle<GameObject> handle = refSO.prefab.LoadAssetAsync<GameObject>();
             
-            // Load Asset 끝날 때까지 기다리기
+            // Load Asset ?�날 ?�까지 기다리기
             await handle.Task;
 
             if (handle.Status != AsyncOperationStatus.Succeeded)
             {
                 Debug.LogError($"Error : Object Pool Ref {refSO.poolName} cannot be loaded");
-                continue; // 라이브 빌드에서는 그래도 일단 실행은 돼야하니가...
+                continue; // ?�이�?빌드?�서??그래???�단 ?�행?� ?�야?�니가...
             }
 
             _asyncOperationHandles[refSO] = handle;
@@ -76,20 +76,20 @@ public class ObjectPoolManager : MonoBehaviour
                 if(obj.TryGetComponent<IPoolable>(out IPoolable poolable))
                     poolable.OnSpawn(() => pool.Release(obj));
                 return obj;
-            },            // 생성 방식
-            actionOnGet: obj => obj.SetActive(true),              // Get. 인게임 필드로 불러올 때 방식
-            actionOnRelease: obj  => obj.SetActive(false),        // Release. 필드에서 이탈할 때 방식
-            actionOnDestroy: obj => Destroy(obj),                 // Destroy. 아예 삭제할 때 방식
-            collectionCheck: false,                                         // Release할 때 풀에 들어가있는 오브젝트인지 체크.
-            defaultCapacity: refSO.initializePoolSize,                      // 처음 생성할 객체양
-            maxSize: refSO.initializePoolSize * 2                           // 최대 상한선
+            },            // ?�성 방식
+            actionOnGet: obj => obj.SetActive(true),              // Get. ?�게???�드�?불러????방식
+            actionOnRelease: obj  => obj.SetActive(false),        // Release. ?�드?�서 ?�탈????방식
+            actionOnDestroy: obj => Destroy(obj),                 // Destroy. ?�예 ??��????방식
+            collectionCheck: false,                                         // Release?????�???�어가?�는 ?�브?�트?��? 체크.
+            defaultCapacity: refSO.initializePoolSize,                      // 처음 ?�성??객체??
+            maxSize: refSO.initializePoolSize * 2                           // 최�? ?�한??
             );
         Prewarm(pool, refSO.initializePoolSize);
 
         return pool;
     }
 
-    // 사전 생성. defaultCapacity만큼 미리 만들어두기
+    // ?�전 ?�성. defaultCapacity만큼 미리 만들?�두�?
     private void Prewarm(ObjectPool<GameObject> pool, int iSize)
     {
         var tempObjectList = new GameObject[iSize];
@@ -104,19 +104,19 @@ public class ObjectPoolManager : MonoBehaviour
 
     public bool Clear(ObjectPoolRef refSO)
     {
-    //     비워야하는거
-    // private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> _poolDictionary = new(); // 풀링으로 만들어진 예비객체들
-    // private readonly Dictionary<ObjectPoolRef, GameObject> _prefabPool = new(); // 해당 SO의 프리팹
-    // private readonly Dictionary<ObjectPoolRef, AsyncOperationHandle<GameObject>> _asyncOperationHandles = new(); // 해당 SO의 어드레서블 핸들
+    //     비워?�하?�거
+    // private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> _poolDictionary = new(); // ?�링으�?만들?�진 ?�비객체??
+    // private readonly Dictionary<ObjectPoolRef, GameObject> _prefabPool = new(); // ?�당 SO???�리??
+    // private readonly Dictionary<ObjectPoolRef, AsyncOperationHandle<GameObject>> _asyncOperationHandles = new(); // ?�당 SO???�드?�서�??�들
     
-        // 지워줘야할 것 : ObjectPool<GameObject>, ScriptableObject, handle, ScriptableObject.AssetReferenceGameObject
-        // 1. 먼저 ObjectPool<GameObject>를 비우자 (예비 객체 모음)
+        // 지?�줘?�할 �?: ObjectPool<GameObject>, ScriptableObject, handle, ScriptableObject.AssetReferenceGameObject
+        // 1. 먼�? ObjectPool<GameObject>�?비우??(?�비 객체 모음)
         if (!_poolDictionary.TryGetValue(refSO, out var pool))
             return false;
         
         pool.Clear();
         
-        // 2. 이제 ScriptableObject 기반으로 Addressable 해지, handle, 프리팹 모음, ObjectPool 모음에서 해당 값을 빼줘야한다.
+        // 2. ?�제 ScriptableObject 기반?�로 Addressable ?��?, handle, ?�리??모음, ObjectPool 모음?�서 ?�당 값을 빼줘?�한??
         if(_asyncOperationHandles.TryGetValue(refSO, out var handle) && handle.IsValid())
             refSO.prefab.ReleaseAsset();
         
@@ -127,18 +127,18 @@ public class ObjectPoolManager : MonoBehaviour
         return true;
     }
 
-    // Addressable 기반이기에, 해제를 해줘야한다.
+    // Addressable 기반?�기?? ?�제�??�줘?�한??
     private void OnDestroy()
     {
-        // Dispose => Clear인데 C#에서 초기화됐는지 컴파일 타임에 자동 추적해줌.
+        // Dispose => Clear?�데 C#?�서 초기?�됐?��? 컴파???�?�에 ?�동 추적?�줌.
         foreach(var pool in _poolDictionary.Values)
             pool.Dispose();
         _poolDictionary.Clear();
 
-        foreach (var handle in _asyncOperationHandles.Values)
+        foreach (var refSO in _asyncOperationHandles.Keys)
         {
-            if(handle.IsValid())
-                Addressables.Release(handle);
+            if (refSO.prefab.IsValid())
+                refSO.prefab.ReleaseAsset();
         }
         
         _asyncOperationHandles.Clear();

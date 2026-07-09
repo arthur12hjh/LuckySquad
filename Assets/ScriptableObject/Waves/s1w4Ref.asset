@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: s1w4Ref
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   spawnEvents:
-  - {fileID: 11400000, guid: ba41d88f7c9be46c08448540444b8b31, type: 2}
+  - {fileID: 11400000, guid: aa39c864269d7be4f9eae8b916431cd0, type: 2}

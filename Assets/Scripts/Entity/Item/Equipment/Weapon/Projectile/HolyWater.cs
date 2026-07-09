@@ -1,63 +1,54 @@
 using Attack;
+using DG.Tweening;
 using Item;
 using UnityEngine;
 
 public class HolyWater : ProjectileBase
 {
-    [SerializeField] Sprite TempTex = null;
-    Collider2D  collider2D = null;
-    
-    Vector3     StartPoint = Vector3.zero;
+    [SerializeField] LayerMask LayerMask;
+
+    Animator   animator = null;
     Vector3     TargetPoint = Vector3.zero;
-
-    float       AccTime = 0f;
-    bool        AttackAble = false;
-
+    
     void Awake()
     {
-        collider2D = GetComponent<CapsuleCollider2D>();
-        collider2D.isTrigger = false;
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        if (bIsAlive)
+        if(animator == null)
+            animator = GetComponent<Animator>();
+
+        animator.speed = 1f;
+    }
+
+    private void OnDisable()
+    {
+        transform.DOKill();
+    }
+
+    public void DamagedAct()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.3f, LayerMask.value);
+        foreach (var hit in hits)
         {
-            AccTime += Time.deltaTime;
-            if (AttackAble)
-            {
-                if (AccTime >= 50f)
-                {
-                    collider2D.isTrigger = false;
-                    bIsAlive = false;
-                    Release();
-                }
-            }
-            else
-            {
-                if (AccTime < 10f)
-                {
-                    transform.position = Vector3.Lerp(StartPoint, TargetPoint, AccTime / 10f);
-                }
-                else
-                {
-                    AccTime = 0;
-                    spriteRenderer.sprite = TempTex;
-                    gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0f);
-                    collider2D.isTrigger = true;
-                    AttackAble = true;
-                }
-            }
+            hit.GetComponent<Monster>()?.Damaged(gameObject, new SAttackData(20));
         }
     }
 
-    public override void ShootProjectile(Projectileinfo projectileinfo, Vector2 vdir, Sprite Tex)
+    public override void ShootProjectile(Projectileinfo projectileinfo, Vector2 vdir, string AtalsName)
     {
-        base.ShootProjectile(projectileinfo, vdir, Tex);
+        base.ShootProjectile(projectileinfo, vdir, AtalsName);
 
-        AccTime = 0;
-        AttackAble = false;
-        StartPoint = transform.position;
+        if (SpriteTexs.Length > projectileinfo.iLevel)
+            spriteRenderer.sprite = SpriteTexs[0];
+
+        transform.DOMove(TargetPoint, 1)
+            .OnComplete(() =>
+            {
+                animator.speed = 1f;
+                animator.Play("Base", 0, 0f);
+            });
     }
 }
