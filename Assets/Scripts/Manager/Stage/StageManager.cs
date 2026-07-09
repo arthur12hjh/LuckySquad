@@ -10,10 +10,10 @@ public class StageManager : MonoBehaviour
     public static StageManager Instance { get; private set; }
 
     private uint currentStageIndex;                       // 현재 스테이지
-    private int  currentWaveIndex;                         // 현재 웨이브
-    private Dictionary<int, StageRef>        stageDatas;       // 스테이지 데이터 저장용
-    private List<Tuple<int, EquipmentBase>>  stageItemDatas;   // 스테이지의 데이터로 아이템 정보 생성
-    private List<Tuple<int, int, ItemData>>  ShuffleList;
+    private int currentWaveIndex;                         // 현재 웨이브
+    private Dictionary<int, StageRef> stageDatas;       // 스테이지 데이터 저장용
+    private List<Tuple<int, EquipmentBase>> stageItemDatas;   // 스테이지의 데이터로 아이템 정보 생성
+    private List<Tuple<int, int, ItemData>> ShuffleList;
 
 
     private int prevTimer = 0;
@@ -45,7 +45,7 @@ public class StageManager : MonoBehaviour
         List<int> TotalItem = currentStageData.RandomItemDatas;
 
         var PlayerTransform = InGameManager.Instance.GetPlayerTransform();
-        foreach(var item in TotalItem)
+        foreach (var item in TotalItem)
             ADD_Item(item, PlayerTransform);
 
         // 플레이어 무기만 Level 1로 추가
@@ -82,7 +82,10 @@ public class StageManager : MonoBehaviour
     private void OnDisable()
     {
         currentStageData = null;
-        InGameManager.Instance.OnTimeChange -= HandleTimeChange;
+
+        if (InGameManager.Instance != null)
+            InGameManager.Instance.OnTimeChange -= HandleTimeChange;
+
         SceneManager.sceneLoaded -= OnSceneLoaded;
         EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
@@ -146,7 +149,7 @@ public class StageManager : MonoBehaviour
 
     private void StageDateLoad()
     {
-       currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", "Stage1");
+        currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", "Stage1");
     }
 
     public void StageSetting()
@@ -165,9 +168,9 @@ public class StageManager : MonoBehaviour
 
     private void CheckWaveSpawnTime()
     {
-       
+
     }
-    
+
     private void ADD_Item(int ItemID, Transform parent)
     {
         var ItemData = DataManager.Instance.FindItemData(ItemID) as WeaponData;
@@ -176,11 +179,11 @@ public class StageManager : MonoBehaviour
             var Prefab = DataManager.Instance.GetWeaponPrefab(ItemData.WeaponType);
             var ItemObj = ItemFactory.AbstractCreateItem(Prefab, parent, ItemID);
 
-            if(ItemObj == null)
+            if (ItemObj == null)
             {
                 Debug.Log("Not Find : Prefab");
                 return;
-            }    
+            }
 
             ItemObj.SetActive(false);
             stageItemDatas.Add(new(0, ItemObj.GetComponent<EquipmentBase>()));
