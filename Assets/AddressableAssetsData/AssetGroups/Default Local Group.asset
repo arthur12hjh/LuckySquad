@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81a74a0aefeb7674ca32535d1a269b4a
+    m_Address: Assets/Lana Studio/Hyper Casual FX/Prefabs/Area/Area_magic_multicolor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fd205ad84432bb14b98221c05fcbf8e6
     m_Address: Assets/Prefabs/Projectile/Projectile.prefab
     m_ReadOnly: 0

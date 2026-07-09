@@ -19662,6 +19662,7 @@ GameObject:
   - component: {fileID: 8846737274113074932}
   - component: {fileID: 8846737274113074930}
   - component: {fileID: 8846737274113074933}
+  - component: {fileID: 8703018844352768127}
   m_Layer: 0
   m_Name: Area_magic_multicolor
   m_TagString: Untagged
@@ -24562,6 +24563,21 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &8703018844352768127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846737274113074935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d6e37713f475b448402d3c72f1d0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundFogEffect
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8846737274401868933
 GameObject:
   m_ObjectHideFlags: 0

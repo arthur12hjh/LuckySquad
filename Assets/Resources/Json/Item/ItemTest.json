@@ -13,7 +13,7 @@
           101
         ],
         "ItemEffects": {
-        "Damage": [
+          "Damage": [
             {
               "$type": "Item.DamageEffect, Assembly-CSharp",
               "type": "Damage",
@@ -60,7 +60,9 @@
         }
       }
     ],
-    "WeaponType" : "Projectile",
+    "WeaponType": "Projectile",
+    "BulletName": "BulletAtlas",
+    "AnimController": "",
     "WeaponConfigs": [
       {
         "fDamage": 20,
@@ -149,7 +151,9 @@
         }
       }
     ],
-    "WeaponType" : "HitScan",
+    "WeaponType": "HitScan",
+    "BulletName": "",
+    "AnimController": "ThunderAnimator",
     "WeaponConfigs": [
       {
         "fDamage": 18,
@@ -238,7 +242,9 @@
         }
       }
     ],
-    "WeaponType" : "Bounce",
+    "WeaponType": "Bounce",
+    "BulletName": "",
+    "AnimController": "",
     "WeaponConfigs": [
       {
         "fDamage": 15,
@@ -277,7 +283,7 @@
     "LevelData": [
       {
         "Particles": [
-          401
+          1004
         ],
         "ItemEffects": {
           "Damage": [
@@ -286,8 +292,8 @@
               "type": "Damage",
               "EffectType": "Instant",
               "Amount": 8,
-              "Duration": 0,
-              "Interval": 0
+              "Duration": 3,
+              "Interval": 0.9
             }
           ]
         }
@@ -303,8 +309,8 @@
               "type": "Damage",
               "EffectType": "Instant",
               "Amount": 12,
-              "Duration": 0,
-              "Interval": 0
+              "Duration": 4,
+              "Interval": 0.7
             }
           ]
         }
@@ -320,14 +326,16 @@
               "type": "Damage",
               "EffectType": "Instant",
               "Amount": 18,
-              "Duration": 0,
-              "Interval": 0
+              "Duration": 4,
+              "Interval": 0.7
             }
           ]
         }
       }
     ],
-    "WeaponType" : "Throw",
+    "WeaponType": "Throw",
+    "BulletName": "CookieAtlas",
+    "AnimController": "cookieAnimator",
     "WeaponConfigs": [
       {
         "fDamage": 8,
@@ -416,7 +424,9 @@
         }
       }
     ],
-    "WeaponType" : "Projectile",
+    "WeaponType": "Projectile",
+    "BulletName": "ShurikenAtlas",
+    "AnimController": "",
     "WeaponConfigs": [
       {
         "fDamage": 22,
