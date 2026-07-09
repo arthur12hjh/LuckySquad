@@ -20,8 +20,8 @@ public class Chunk : MonoBehaviour
         Generate();
     }
 
-    // Ã»ÇÁ ÇÁ¸®ÆÕ ¿ÀºêÁ§Æ® Ç®À» ÇÏ¿©¼­ ¹Ì¸® »ı¼ºÀ» ÇØ ³õ´Â´Ù.
-    // ¿ì¼± »çÀÌÁî¸£ 12·Î ÇÏ´Âµ¥ È¤½Ã ¸ğ¸¦ »óÈ²À» ´ëºñÇØ¼­ ´õ »ı¼º ÇØ³õ´Â´Ù.
+    // ì²­í”„ í”„ë¦¬íŒ¹ ì˜¤ë¸Œì íŠ¸ í’€ì„ í•˜ì—¬ì„œ ë¯¸ë¦¬ ìƒì„±ì„ í•´ ë†“ëŠ”ë‹¤.
+    // ìš°ì„  ì‚¬ì´ì¦ˆë¥´ 12ë¡œ í•˜ëŠ”ë° í˜¹ì‹œ ëª¨ë¥¼ ìƒí™©ì„ ëŒ€ë¹„í•´ì„œ ë” ìƒì„± í•´ë†“ëŠ”ë‹¤.
     void InitPool()
     {
         int poolSize = size * size;
@@ -29,7 +29,7 @@ public class Chunk : MonoBehaviour
         for (int i = 0; i < poolSize; ++i)
         {
             {
-                // ÇÁ¸®ÆÕ ¸¸µå´Â ÇÔ¼ö
+                // í”„ë¦¬íŒ¹ ë§Œë“œëŠ” í•¨ìˆ˜
                 GameObject tile = Instantiate(tilePrefab, transform);
                 tile.SetActive(false);
                 tilePool.Enqueue(tile);
@@ -37,7 +37,7 @@ public class Chunk : MonoBehaviour
         }
     }
 
-    // 12*12·Î ¸¸µë
+    // 12*12ë¡œ ë§Œë“¬
     public void Generate()
     {
         ClearTiles();
@@ -46,18 +46,18 @@ public class Chunk : MonoBehaviour
         {
             for (int y = 0; y < size; y++)
             {
-                // Å¸ÀÏ 1°³¸¦ ¸ÕÀú °¡Áö°í ¿Â´Ù.
+                // íƒ€ì¼ 1ê°œë¥¼ ë¨¼ì € ê°€ì§€ê³  ì˜¨ë‹¤.
                 GameObject tile = GetTile();
 
-                // À§Ä¡¸¦ ÃÊ±âÈ­ ÇØÁÖ°í Active¸¦ true·Î ÇØ¼­ º¸¿©ÁØ´Ù.
+                // ìœ„ì¹˜ë¥¼ ì´ˆê¸°í™” í•´ì£¼ê³  Activeë¥¼ trueë¡œ í•´ì„œ ë³´ì—¬ì¤€ë‹¤.
                 tile.transform.localPosition = new Vector3(x, y, 0);
                 tile.SetActive(true);
 
-                // ±×¸®°í Sprite¿¡ ÀÖ´Â °ª Áß ·£´ıÀ¸·Î 1°³¸¦ ²¨³»¼­ ¸¸µé¾î µĞ´Ù.
+                // ê·¸ë¦¬ê³  Spriteì— ìˆëŠ” ê°’ ì¤‘ ëœë¤ìœ¼ë¡œ 1ê°œë¥¼ êº¼ë‚´ì„œ ë§Œë“¤ì–´ ë‘”ë‹¤.
                 SpriteRenderer sr = tile.GetComponent<SpriteRenderer>();
                 sr.sprite = tiles[Random.Range(0, tiles.Length)];
 
-                // ±× ÈÄ List¿¡ ³Ö¾îµĞ´Ù.
+                // ê·¸ í›„ Listì— ë„£ì–´ë‘”ë‹¤.
                 activeTiles.Add(tile);
             }
         }
@@ -65,17 +65,17 @@ public class Chunk : MonoBehaviour
 
     GameObject GetTile()
     {
-        // Å¥¿¡ °ªÀÌ ÀÖÀ¸¸é ±×´ë·Î ²¨³»¿Â´Ù.
+        // íì— ê°’ì´ ìˆìœ¼ë©´ ê·¸ëŒ€ë¡œ êº¼ë‚´ì˜¨ë‹¤.
         if (tilePool.Count > 0)
             return tilePool.Dequeue();
 
-        // ±×·² ÀÏÀº ¾øÁö¸¸ È¤½Ã ¾øÀ» ¼öµµ ÀÖ´Âµ¥ ¾øÀ» ½Ã »ı¼ºÀ» ÇÏ°í ³Ñ°ÜÁØ´Ù.
+        // ê·¸ëŸ´ ì¼ì€ ì—†ì§€ë§Œ í˜¹ì‹œ ì—†ì„ ìˆ˜ë„ ìˆëŠ”ë° ì—†ì„ ì‹œ ìƒì„±ì„ í•˜ê³  ë„˜ê²¨ì¤€ë‹¤.
         GameObject tile = Instantiate(tilePrefab, transform);
         tile.SetActive(false);
         return tile;
     }
 
-    // »ı¼º ÇÏ±â Àü¿¡ ¸ÕÀú ÃÊ±âÈ­¸¦ ÇØÁØ´Ù.
+    // ìƒì„± í•˜ê¸° ì „ì— ë¨¼ì € ì´ˆê¸°í™”ë¥¼ í•´ì¤€ë‹¤.
     void ClearTiles()
     {
         for (int i = 0; i < activeTiles.Count; i++)

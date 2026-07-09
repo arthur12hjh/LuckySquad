@@ -110,6 +110,19 @@ public class Monster : BaseEntity, IDamageable, IPoolable
 
     protected virtual void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_currentState == MonsterState.Dead)
+                return;
+
+            _currentHp -= 1;
+            StartCoroutine(HitFlash(0.1f));
+            if (_currentHp <= 0)
+            {
+                ChangeState(MonsterState.Dead);
+            }
+        }
+        
         switch (_currentState)
         {
             case MonsterState.Idle: TickIdle(); break;
