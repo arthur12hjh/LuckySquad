@@ -19,9 +19,16 @@ public class OutBoundSpawnPattern : SpawnPattern
 
     public override Vector3 GetPosition(Vector3 offset)
     {
+        Camera cam = Camera.main;
+
+        float height = cam.orthographicSize;
+        float width = height * cam.aspect;
+
+        float margin = offset.x;
+
         Vector3 PlayerPos = InGameManager.Instance.GetPlayerTransform().position;
         Vector2 dir = Random.insideUnitCircle.normalized;
-    
-        return PlayerPos + (Vector3)(dir * Random.Range(vOffset.x, vOffset.y));
+
+        return PlayerPos + (Vector3)(dir * Mathf.Max(width, height) + dir * margin);
     }
 }
