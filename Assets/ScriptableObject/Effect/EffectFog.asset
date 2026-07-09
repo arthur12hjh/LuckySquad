@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EffectFog
   poolName: EffectFog
   prefab:
-    m_AssetGUID: 81a74a0aefeb7674ca32535d1a269b4a
+    m_AssetGUID: 84998828becc74d4792da2f2b864b44b
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
