@@ -59,10 +59,6 @@ public class CardSelectionViewModel : BaseViewModel
             Cards[i].Open();
         }
 
-        // TestCode
-        Cards[2].SetData(items[0]);
-        Cards[2].Open();
-
         OnOpened?.Invoke();
 
         InGameManager.Instance.StopGame();

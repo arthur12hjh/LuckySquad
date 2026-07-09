@@ -96,7 +96,8 @@ public class StageManager : MonoBehaviour
     private void OnDisable()
     {
         currentStageData = null;
-        InGameManager.Instance.OnTimeChange -= HandleTimeChange;
+        if(null != InGameManager.Instance)
+            InGameManager.Instance.OnTimeChange -= HandleTimeChange;
         SceneManager.sceneLoaded -= OnSceneLoaded;
         EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
