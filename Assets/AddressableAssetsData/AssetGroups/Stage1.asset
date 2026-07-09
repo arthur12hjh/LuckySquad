@@ -120,6 +120,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage1
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de44b2fd78ce530408e4758d6a271a94
+    m_Address: Assets/Scenes/ScriptableObject/Stage/Stage1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e24f97b8dd1ee4ebc8d4f0a136b9f79b
     m_Address: Assets/Prefabs/Entity/Monster/prefab_m7_OtakuBoss.prefab
     m_ReadOnly: 0
