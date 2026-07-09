@@ -110,6 +110,9 @@ public class WaveManager : MonoBehaviour
     // ?�치�?
     IEnumerator RunWave(SpawnEvent spawnEvent)
     {
+        while (ObjectPoolManager.Instance == null || !ObjectPoolManager.Instance.IsReady)
+            yield return null;
+        
         var interval = new WaitForSeconds(spawnEvent.interval);
         yield return new WaitForSeconds(spawnEvent.startTime);
         

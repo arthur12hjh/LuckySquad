@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class HolyWater : ProjectileBase
 {
-    [SerializeField] Sprite TempTex = null;
-    Collider2D  collider2D = null;
-    
-    Vector3     StartPoint = Vector3.zero;
+    [SerializeField] LayerMask LayerMask;
+
+    Animator   animator = null;
     Vector3     TargetPoint = Vector3.zero;
-
-    private float fShowTime = 1f;
-    private float iTime = 0;
-
-    float       AccTime = 0f;
-    bool        AttackAble = false;
-
+    
     void Awake()
     {
-        collider2D = GetComponent<CapsuleCollider2D>();
-        collider2D.isTrigger = false;
+        animator = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        if(animator == null)
+            animator = GetComponent<Animator>();
+
+        animator.speed = 1f;
     }
 
     private void OnDisable()
@@ -28,23 +28,12 @@ public class HolyWater : ProjectileBase
         transform.DOKill();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DamagedAct()
     {
-        if (AttackAble)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.3f, LayerMask.value);
+        foreach (var hit in hits)
         {
-            AccTime += Time.deltaTime;
-            if (AccTime >= fShowTime)
-            {
-                collider2D.isTrigger = false;
-                bIsAlive = false;
-                Release();
-            }
-            else
-            {
-                int iIndex = (int)(AccTime / iTime);
-                spriteRenderer.sprite = SpriteTexs[iIndex];
-            }
+            hit.GetComponent<Monster>()?.Damaged(gameObject, new SAttackData(20));
         }
     }
 
@@ -55,17 +44,11 @@ public class HolyWater : ProjectileBase
         if (SpriteTexs.Length > projectileinfo.iLevel)
             spriteRenderer.sprite = SpriteTexs[0];
 
-        iTime = fShowTime / SpriteTexs.Length;
-        AccTime = 0;
-        AttackAble = false;
-        StartPoint = transform.position;
         transform.DOMove(TargetPoint, 1)
             .OnComplete(() =>
             {
-                spriteRenderer.sprite = TempTex;
-                gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0f);
-                collider2D.isTrigger = true;
-                AttackAble = true;
+                animator.speed = 1f;
+                animator.Play("Base", 0, 0f);
             });
     }
 }

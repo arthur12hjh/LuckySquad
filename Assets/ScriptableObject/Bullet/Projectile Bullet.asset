@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91acb002ceb9294ea4009f1cfab4d72, type: 3}
   m_Name: Projectile Bullet
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileRef
-  poolName: 
+  poolName: ProjectileBullet
   prefab:
     m_AssetGUID: fd205ad84432bb14b98221c05fcbf8e6
     m_SubObjectName: 

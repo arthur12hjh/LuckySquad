@@ -13,6 +13,7 @@ public class AddressablesManager : MonoBehaviour
     public static AddressablesManager Instance => instance;
 
     public event Action OnInitialized;
+    Dictionary<string, Sprite[]>  _SortAltasTextures = new Dictionary<string, Sprite[]>();
 
     private void Awake()
     {
@@ -262,6 +263,15 @@ public class AddressablesManager : MonoBehaviour
                 foreach (var obj in list)
                 {
                     dictionary[obj.name] = obj;
+
+                    if (obj is SpriteAtlas Atlas)
+                    {
+                        Sprite[] sprites = new Sprite[Atlas.spriteCount];
+                        Atlas.GetSprites(sprites);
+
+                        Array.Sort(sprites, (a, b) => a.name.CompareTo(b.name));
+                        _SortAltasTextures.Add(obj.name, sprites);
+                    }
                 }
 
                 commonCache["Common"] = new Cache
@@ -295,6 +305,15 @@ public class AddressablesManager : MonoBehaviour
 
         if (map.TryGetValue(name, out var cache))
             return cache as T;
+
+        return null;
+    }
+
+    public Sprite[] GetAtlasSprite<T>(string name)
+    where T : UnityEngine.Object
+    {
+        if (_SortAltasTextures.TryGetValue(name, out var map))
+            return map;
 
         return null;
     }

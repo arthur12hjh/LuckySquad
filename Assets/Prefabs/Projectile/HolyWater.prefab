@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4175609922422744794}
   - component: {fileID: 3442754918770180624}
-  - component: {fileID: -2423366181711007207}
+  - component: {fileID: 909776441168780980}
   - component: {fileID: 189409287007318086}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: HolyWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 3890843891498451051}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.99281, y: 0.34185, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,57 +79,42 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 285531713
-  m_SortingLayer: 2
+  m_SortingLayerID: 1432290107
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1123977777716130304, guid: 9a22789ed2adfd04db8192d114e91f2c, type: 3}
+  m_Sprite: {fileID: -9035046104517103275, guid: 6a7f307805bb7684a8c5ebea4b571737, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.87, y: 2.37}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!70 &-2423366181711007207
-CapsuleCollider2D:
+--- !u!95 &909776441168780980
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3890843891498451051}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.99, y: 1.09}
-  m_Direction: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac4a8ac848f0a4b489d879e9ce28a42e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &189409287007318086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,4 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f72a204343378439be291e832fc4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HolyWater
-  TempTex: {fileID: 3941515354516406409, guid: 9d5cc12d7954b6e42b2f5ebd3f132512, type: 3}
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 64

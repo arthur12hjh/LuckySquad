@@ -19,11 +19,13 @@ public abstract class ProjectileBase : MonoBehaviour, IPoolable
         vDir = vdir;
         bIsAlive = true;
 
-        var sprite = AddressablesManager.Instance.GetCommon<SpriteAtlas>(AtalsName);
+        var sprite = AddressablesManager.Instance.GetAtlasSprite<SpriteAtlas>(AtalsName);
         if (sprite != null)
         {
-            SpriteTexs = new Sprite[sprite.spriteCount];
-            sprite.GetSprites(SpriteTexs);
+            SpriteTexs = sprite;
+
+            //SpriteTexs = new Sprite[sprite.spriteCount];
+            //sprite.GetSprites(SpriteTexs);
         }
 
         if (spriteRenderer == null)
@@ -33,7 +35,7 @@ public abstract class ProjectileBase : MonoBehaviour, IPoolable
             spriteRenderer.sprite = SpriteTexs[projectileinfo.iLevel - 1];
     }
 
-    public void Release()
+    public virtual void Release()
     {
         if (_releaseAct != null)
             _releaseAct.Invoke();

@@ -135,10 +135,10 @@ public class ObjectPoolManager : MonoBehaviour
             pool.Dispose();
         _poolDictionary.Clear();
 
-        foreach (var handle in _asyncOperationHandles.Values)
+        foreach (var refSO in _asyncOperationHandles.Keys)
         {
-            if(handle.IsValid())
-                Addressables.Release(handle);
+            if (refSO.prefab.IsValid())
+                refSO.prefab.ReleaseAsset();
         }
         
         _asyncOperationHandles.Clear();

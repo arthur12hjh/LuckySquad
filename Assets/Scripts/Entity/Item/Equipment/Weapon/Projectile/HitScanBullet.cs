@@ -6,31 +6,23 @@ using Unity.VisualScripting;
 
 public class HitScanBullet : ProjectileBase
 {
+    [SerializeField] LayerMask LayerMask;
+
     private int     _AttackCnt = 0;
-    private float   AccTime = 0;
-
-    private float fShowTime = 1f;
-    private float iTime = 0;
-
-    private CircleCollider2D circleCollider = null;
+    Animator        _animator = null;
+    float           _Range = 0.3f;
 
     public void Initialize(int AttackCnt,
                            float Range,       
                            Vector3 vdir,
                            Sprite[] sprites)
     {
-        if (spriteRenderer == null)
-            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
-        if (circleCollider == null)
-            circleCollider = GetComponent<CircleCollider2D>();
-
-        SpriteTexs = sprites;
+        if (_animator == null)
+            _animator = GetComponent<Animator>();
 
         _AttackCnt = AttackCnt;
         vDir = vdir.normalized;
-        circleCollider.radius = Range;
-        iTime = fShowTime / SpriteTexs.Length;
+        _Range = Range;
         gameObject.SetActive(false);
     }
 
@@ -39,36 +31,20 @@ public class HitScanBullet : ProjectileBase
         StartCoroutine(RepeatActionCoroutine());
     }
 
-    // Update is called once per frame
-    private void Update()
+    public void Attack()
     {
-        AccTime += Time.deltaTime;
-        if (AccTime >= fShowTime)
-            AccTime = 0;
-        else
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.3f, LayerMask.value);
+        foreach (var hit in hits)
         {
-            int iIndex = (int)(AccTime / iTime);
-            spriteRenderer.sprite = SpriteTexs[iIndex];
+            hit.GetComponent<Monster>()?.Damaged(gameObject, new SAttackData(20));
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        var Mon = collision.gameObject.GetComponent<Monster>();
-        if (Mon == null)
-            return;
-
-        Mon.Damaged(gameObject, new Attack.SAttackData(20));
-        Debug.Log($"Hit BoundBall : {Mon.name}");
     }
 
     IEnumerator RepeatActionCoroutine()
     {
         int ATKcnt = 0;
-        float interval = fShowTime / _AttackCnt;
         var PlayerPos = InGameManager.Instance.GetPlayerTransform().position;
-
-        if (circleCollider == null) 
+        if (_animator == null)
             yield return null;
 
         while (ATKcnt < _AttackCnt)
@@ -76,10 +52,9 @@ public class HitScanBullet : ProjectileBase
             Attack(PlayerPos, ATKcnt);
             ATKcnt++;
 
-            yield return new WaitForSeconds(interval);
+            yield return new WaitForSeconds(0.7f);
         }
 
-        circleCollider.isTrigger = false;
         gameObject.SetActive(false);
         yield return null;
     }
@@ -90,7 +65,15 @@ public class HitScanBullet : ProjectileBase
         float AngleY = UnityEngine.Random.Range(0f, 360f) * Mathf.Deg2Rad; ;
 
         vDir = new Vector3( Mathf.Cos(AngleY), Mathf.Sin(AngleX));
+
+        _animator.speed = 1f;
+        _animator.Play("Base", 0, 0);
         transform.position = vPos + vDir * (AtkCnt + 1);
-        circleCollider.isTrigger = true;
+    }
+
+    public override void Release()
+    {
+        _animator.speed = 0f;
+        base.Release();
     }
 }
