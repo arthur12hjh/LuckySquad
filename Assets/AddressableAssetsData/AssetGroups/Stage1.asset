@@ -33,11 +33,22 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage1
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08f580fc7731fe14e92ace32faa1fb66
+    m_Address: Assets/Animatons/Effect/Thunder/ThunderAnimator.controller
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0adc79b956a5644959846037232c4e26
     m_Address: Assets/Prefabs/Entity/Monster/BatMonster.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e24f5c0bf0967c4797a91b9c21d4b8c
+    m_Address: Assets/ScriptableObject/Bullet/Projectile Holy Ref.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2140a063c446c4f07a8cc4b1c2696c8c
     m_Address: Assets/Sprites/Sprites_m2_otakuyellowtanning.png
@@ -87,8 +98,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage1
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 928262c832284ee46bbfe891ea2705bb
+    m_Address: Assets/ScriptableObject/Bullet/Projectile Bullet.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 97d7ca049d9784d1bbdbe2f5cdba5851
     m_Address: Assets/Sprites/bat.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a30aadcebd3a741439f22aadf85461ad
+    m_Address: Assets/Animatons/Effect/cooookie/cookieAnimator.controller
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1

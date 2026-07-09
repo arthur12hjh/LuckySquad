@@ -134,11 +134,9 @@ public class StageManager : MonoBehaviour
     private void HandleTimeChange(int currentCount)
     {
         currentStageData.StageTime = currentCount;
-
         if (atOnce)
         {
             Debug.Log("Wave Called");
-            // ?¨ì´ë¸Œë? ë§Œë“¤ë©?ê·??¨ì´ë¸Œì— ?„ìš”??êµ¬ì¡°ì²´ë? ?˜ê²¨ì¤?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
             atOnce = false;
         }
@@ -154,7 +152,6 @@ public class StageManager : MonoBehaviour
         // ?¨ì´ë¸?(ë§?ë¶?0ì´?
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
-            Debug.Log("Wave Called");
             currentStageData.WaveIndex++;
             // ?¨ì´ë¸Œë? ë§Œë“¤ë©?ê·??¨ì´ë¸Œì— ?„ìš”??êµ¬ì¡°ì²´ë? ?˜ê²¨ì¤?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
@@ -163,7 +160,7 @@ public class StageManager : MonoBehaviour
 
     private void StageDateLoad()
     {
-        currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", "Stage1");
+       currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", "Stage1");
     }
 
     public void StageSetting()

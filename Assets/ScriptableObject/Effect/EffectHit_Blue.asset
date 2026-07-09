@@ -22,3 +22,4 @@ MonoBehaviour:
   initRef: {fileID: 0}
   initializePoolSize: 100
   EffectID: 1002
+  _Type: 0

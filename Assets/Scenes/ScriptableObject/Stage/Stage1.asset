@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stage1
   m_EditorClassIdentifier: Assembly-CSharp::StageRef
   StageIndex: 1
-  WaveIndex: 4
+  WaveIndex: 0
   WaveDatas:
   - {fileID: 11400000, guid: 7e8ffd07ec46e4721915feeb9f3dbf7c, type: 2}
   - {fileID: 11400000, guid: 568d779f4f06f41e697dc6908ab86967, type: 2}
