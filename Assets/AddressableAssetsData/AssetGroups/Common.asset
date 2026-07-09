@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Common
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b129920eb6bfa441af035e07b358451
+    m_Address: Assets/Sprites/Atlas/IconThunderAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1cfa889c069b15a44a68551e6574d4e4
     m_Address: Assets/Sprites/Atlas/CookieAtlas.spriteatlasv2
     m_ReadOnly: 0
@@ -47,6 +53,24 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2fba5f1a449a73f4ba824904665752f9
     m_Address: Assets/Prefabs/Weapon/HitScanWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 453947b1ff9f49f48975b4ba72cb9e40
+    m_Address: Assets/Sprites/Atlas/IconShurikenAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74866bf224956154f86e327d0e4bfe1f
+    m_Address: Assets/Sprites/Atlas/IconGunWeaponAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86834112f6819d64fb4cf13fcefbf001
+    m_Address: Assets/Sprites/Atlas/IconBallIAtlas.spriteatlasv2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Common

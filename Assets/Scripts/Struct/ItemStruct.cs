@@ -35,15 +35,13 @@ namespace Item
     [Serializable]
     public struct Projectileinfo
     {
-        public int   iLevel;
-        public float fSpeed;
-        public float fDamage;
+        public int              iLevel;
+        public WeaponConfig     _config;
 
-        public Projectileinfo(int iLevel, float fspeed, float fdamage)
+        public Projectileinfo(int iLevel, WeaponConfig config)
         {
             this.iLevel = iLevel;
-            this.fSpeed = fspeed;
-            this.fDamage = fdamage;
+            this._config = config;
         }
     }
 
@@ -238,10 +236,16 @@ namespace Item
     public class WeaponData : ItemData
     {
         [JsonProperty("WeaponType")]
-        public readonly EWeaponType WeaponType;
+        public readonly EWeaponType         WeaponType;
+
+        [JsonProperty("AnimController")]
+        public readonly string              AnimController;
+
+        [JsonProperty("BulletName")]
+        public readonly string              BulletName;
 
         [JsonProperty("WeaponConfigs")]
-        public readonly List<WeaponConfig> WeaponConfigs;
+        public readonly List<WeaponConfig>  WeaponConfigs;
 
         // 생성자를 통해서 딱 한 번만 세팅 가능
         public WeaponData(int id = 1,
@@ -252,10 +256,14 @@ namespace Item
                         string textureName = null,
                         List<LevelData> levelDatas = null,
                         EWeaponType weaponType = EWeaponType.None,
+                        string Controller = "",
+                        string bulletName = "",
                         List<WeaponConfig> weaponConfigs = null) :
             base(id, name, maxLevel, type, iconName, textureName, levelDatas)
         {
             this.WeaponType = weaponType;
+            this.AnimController = Controller;
+            this.BulletName = bulletName;
             this.WeaponConfigs = weaponConfigs ?? new List<WeaponConfig>();
         }
     }

@@ -21,6 +21,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7e5104f9100149e2b27e7a4f71ab874, type: 2}
   - {fileID: 11400000, guid: 78466a3ca6e40412b8c8662466acb53b, type: 2}
   MonsterSpawnDate: []
-  RandomItemDatas: 02000000030000000400000005000000
+  RandomItemDatas: 02000000030000000400000001000000
   Boss: []
-  StageTime: 10
+  StageTime: 15

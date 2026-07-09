@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91acb002ceb9294ea4009f1cfab4d72, type: 3}
   m_Name: Projectile Ref
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileRef
-  prefab: {fileID: 4732061679744568107, guid: d1bd1f14bc4f81e419b898e53de999a8, type: 3}
+  poolName: 
+  prefab:
+    m_AssetGUID: fd205ad84432bb14b98221c05fcbf8e6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  initRef: {fileID: 0}
   initializePoolSize: 100

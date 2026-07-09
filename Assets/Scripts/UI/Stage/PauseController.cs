@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseButtonController : MonoBehaviour
+public class PauseController : MonoBehaviour
 {
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button pauseUICloseButton;
@@ -10,18 +10,18 @@ public class PauseButtonController : MonoBehaviour
 
     private void Start()
     {
-        pauseButton.onClick.AddListener(OnPauseClick);
-        pauseUICloseButton.onClick.AddListener(OnResumeClick);
+        pauseButton.onClick.AddListener(OnPause);
+        pauseUICloseButton.onClick.AddListener(OnResume);
     }
 
-    private void OnPauseClick()
+    public void OnPause()
     {
         pauseUI.Open();
         dimPanel.SetActive(true);
         InGameManager.Instance.StopGame();
     }
 
-    public void OnResumeClick()
+    public void OnResume()
     {
         pauseUI.Close();
         dimPanel.SetActive(false);

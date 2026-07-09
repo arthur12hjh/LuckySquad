@@ -1,6 +1,7 @@
 using Item;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class ProjectileWeapon : WeaponBase
 {
@@ -8,7 +9,6 @@ public class ProjectileWeapon : WeaponBase
 
     [SerializeField] private ObjectPoolRef  projectTileRefSO = null;
     [SerializeField] private int            LineAngle = 90;
-    [SerializeField] private string         BulletTextureUrl;
     [SerializeField] private float          fSpeed = 10f;
     [SerializeField] private ProjectileType type = ProjectileType.Projectile;
 
@@ -19,7 +19,6 @@ public class ProjectileWeapon : WeaponBase
     {
         base.Initalize(itemData);
         
-
         switch (type)
         {
             case ProjectileType.Projectile:
@@ -73,6 +72,8 @@ public class ProjectileWeapon : WeaponBase
         int startAngle = -(angle * (ShootLineCnt - 1)) / 2; ;
 
         int LineCount = GetShootLineCount();
+        var weaponConfig = WeaponData.WeaponConfigs[level - 1];
+
         for (int i = 0, AccAngle = startAngle; i < LineCount; i++, AccAngle += angle)
         {
             if (ObjectPoolManager.Instance == null)
@@ -83,12 +84,12 @@ public class ProjectileWeapon : WeaponBase
 
             gameObj.SetActive(true);
             gameObj.transform.position = spawnPattern.GetPosition(Vector3.zero);
-            gameObj.GetComponent<ProjectileBase>().ShootProjectile(new Projectileinfo(
-                                       level,
-                                       fSpeed, 
-                                       WeaponData.WeaponConfigs[level - 1].fDamage),
-                                       newDir, 
-                                       BulletTextureUrl);
+
+            gameObj.GetComponent<ProjectileBase>().Initalize(
+                                       WeaponData.LevelDatas[level - 1],
+                                       new Projectileinfo(level, weaponConfig),
+                                       newDir,
+                                       WeaponData.BulletName, WeaponData.AnimController);
         }
 
         iShootCount++;

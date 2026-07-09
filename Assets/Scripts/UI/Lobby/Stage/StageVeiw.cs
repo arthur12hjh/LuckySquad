@@ -5,11 +5,21 @@ using UnityEngine.UI;
 public class StageVeiw : BaseView
 {
     [SerializeField] private TextMeshProUGUI stageText;
+    [SerializeField] private TextMeshProUGUI stageName;
     [SerializeField] private Button prevStageButton;
     [SerializeField] private Button nextStageButton;
     [SerializeField] private Button StageStartButton;
 
     private StageViewModel _viewModel;
+
+    private void Awake()
+    { 
+        if (null == stageText || null == stageName || null == prevStageButton
+            || null == nextStageButton || null == StageStartButton)
+        {
+            Debug.LogError("Failed StageView Bind");
+        }
+    }
 
     public override void Bind(BaseViewModel baseViewModel)
     {
@@ -36,6 +46,8 @@ public class StageVeiw : BaseView
     private void OnStageChanged(uint stageIndex)
     {
         stageText.text = $"STAGE {(stageIndex)}";
+        // TODO stageData 에서 받아오도록 수정
+        stageName.text = "폐쇄구역: 제4교차로";
     }
 
     private void OnDestroy()

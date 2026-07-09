@@ -29,7 +29,8 @@ public class HUDView : MonoBehaviour
 
     private void Update()
     {
-        monsterCountText.text = $"{InGameManager.Instance.monsterCount}";
+        monsterCountText.text = $"{InGameManager.Instance.GetMonsterDeathCount()}";
+       
     }
 
     private void OnDestroy()
@@ -50,7 +51,6 @@ public class HUDView : MonoBehaviour
     void UpdateExpUI()
     {
         expSlider.value = playerStats.CurrentExp % expSlider.maxValue;
-        Debug.Log("경험치 변경 호출");
     }
 
     void UpdateGoldUI()

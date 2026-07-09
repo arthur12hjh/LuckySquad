@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 public class EffectBsae : MonoBehaviour, IPoolable
 {
-    private Action          _releaseAct;
+    protected Action       _releaseAct;
 
     public void OnSpawn(Action releaseSelf)
     {

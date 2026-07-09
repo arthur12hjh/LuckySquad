@@ -17,13 +17,14 @@ public class InGameManager : MonoBehaviour
     public static InGameManager Instance { get; private set; }
 
     public event Action OnGameStart;
+    public event Action OnGameClear;
 
     private bool isGamePaused = false;
     private float gameTime = 0f;
     private int currentSecond = 0;
     private int previousSecond = 0;
 
-    public uint monsterCount { get; private set; } = 0;
+    private uint monsterDeathCount = 0;
     private bool isTimeEnd = false;
 
     [Header("Debugger")] [SerializeField]
@@ -98,6 +99,7 @@ public class InGameManager : MonoBehaviour
     void Start()
     {
         OnGameStart?.Invoke();
+        monsterDeathCount = 0;
     }
 
     private void Update()
@@ -106,6 +108,11 @@ public class InGameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P)) 
         {
             EndStage();
+        }
+
+        if(Input.GetKeyDown(KeyCode.O)) 
+        {
+            OnGameClear?.Invoke();
         }
     }
 
@@ -180,5 +187,6 @@ public class InGameManager : MonoBehaviour
     }
 
     public Vector2 GetPlayerDir() => _playerController.GetPlayerDir();
-
+    public void IncrementMonsterDeathCount() { monsterDeathCount++; }
+    public uint GetMonsterDeathCount() { return monsterDeathCount; }
 }
