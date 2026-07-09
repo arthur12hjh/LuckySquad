@@ -18,6 +18,7 @@ public class InGameManager : MonoBehaviour
 
     public event Action OnGameStart;
     public event Action OnGameClear;
+    public event Action OnCameraShake;
 
     private bool isGamePaused = false;
     private float gameTime = 0f;
@@ -44,6 +45,11 @@ public class InGameManager : MonoBehaviour
     private PlayerController _playerController;
 
 
+    [Header("Camera Shake")]
+    [SerializeField] private float _shakeForce = 1f;      // 셰이크 세기
+    [SerializeField] private float _shakeDuration = 0.2f; // 셰이크 지속 시간
+    private CinemachineImpulseSource _impulseSource;
+    
     public event Action<int> OnTimeChange; // 게임 ?�간 변???�벤??1초마???�출
     [SerializeField] private Vector3 _SpawnBound;
 
