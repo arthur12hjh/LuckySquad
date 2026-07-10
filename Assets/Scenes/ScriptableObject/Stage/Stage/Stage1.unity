@@ -1679,7 +1679,7 @@ MonoBehaviour:
   itemImage: {fileID: 1060118594}
   gradeImage: {fileID: 743789285}
   InfoText: {fileID: 1264268015}
-  LevelText: {fileID: 0}
+  LevelText: {fileID: 1161637662}
   button: {fileID: 743789284}
   itemSprites: []
   cardRefs:
@@ -1831,6 +1831,8 @@ MonoBehaviour:
   _playerObj: {fileID: 0}
   _playerControllerObj: {fileID: 0}
   _playerCamera: {fileID: 0}
+  _shakeForce: 1
+  _shakeDuration: 0.2
   _SpawnBound: {x: 2, y: 2, z: 2}
 --- !u!4 &753822484
 Transform:
@@ -4208,7 +4210,7 @@ MonoBehaviour:
   itemImage: {fileID: 1018762436}
   gradeImage: {fileID: 1458086856}
   InfoText: {fileID: 650446271}
-  LevelText: {fileID: 0}
+  LevelText: {fileID: 897894487}
   button: {fileID: 1458086855}
   itemSprites: []
   cardRefs:
@@ -5605,7 +5607,7 @@ MonoBehaviour:
   itemImage: {fileID: 1484276678}
   gradeImage: {fileID: 1952697102}
   InfoText: {fileID: 1389896009}
-  LevelText: {fileID: 0}
+  LevelText: {fileID: 729635714}
   button: {fileID: 1952697101}
   itemSprites: []
   cardRefs:
