@@ -279,7 +279,7 @@
     "Max_Level": 3,
     "type": "Weapon",
     "IconTexture": "IconGroundFogAtlas",
-    "Textures": "GroundFogAtlas",
+    "Textures": "",
     "LevelData": [
       {
         "Particles": [
@@ -342,7 +342,7 @@
         "iCount": 1,
         "iMaxLineCount": 1,
         "fSpeed": 0,
-        "fRange": 4,
+        "fRange": 0.2,
         "fInterval": 2.0
       },
       {
@@ -350,7 +350,7 @@
         "iCount": 1,
         "iMaxLineCount": 1,
         "fSpeed": 0,
-        "fRange": 5,
+        "fRange": 0.3,
         "fInterval": 1.5
       },
       {
@@ -358,7 +358,7 @@
         "iCount": 1,
         "iMaxLineCount": 1,
         "fSpeed": 0,
-        "fRange": 6,
+        "fRange": 0.4,
         "fInterval": 1.0
       }
     ]

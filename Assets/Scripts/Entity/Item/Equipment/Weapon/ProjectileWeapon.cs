@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Item;
 using System.Collections;
 using UnityEngine;
@@ -32,6 +33,23 @@ public class ProjectileWeapon : WeaponBase
 
         SettingLevelData();
         IsActive = true;
+    }
+
+    private void Update()
+    {
+        Vector3  vPlayerDir = InGameManager.Instance.GetPlayerDir();
+        float angle = Mathf.Atan2(vPlayerDir.y, vPlayerDir.x) * Mathf.Rad2Deg;
+        if (vPlayerDir.x < 0)
+        {
+            spriteRenderer.flipX = true;
+            angle += 180f; // 또는 -angle, 축 설정에 따라 다름
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+
+        transform.DORotate(new Vector3(0, 0, angle), 0.3f);
     }
 
     private void OnEnable()

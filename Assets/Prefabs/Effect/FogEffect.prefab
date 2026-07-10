@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797347374748487101}
+  - component: {fileID: 8250628969375092903}
   m_Layer: 0
   m_Name: FogEffect
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   - {fileID: 5669683267528976937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &8250628969375092903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7754243987225293224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d6e37713f475b448402d3c72f1d0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundFogEffect
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8445387483764047060
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +271,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.6882107, g: 0.46342114, b: 0.7735849, a: 1}
+      maxColor: {r: 0.91745293, g: 0.504717, b: 1, a: 0.78039217}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1340,7 +1356,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 0.5176471}
+        key0: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0.04101926}
         key2: {r: 1, g: 1, b: 1, a: 0.04101926}
         key3: {r: 0, g: 0, b: 0, a: 0.04101926}
@@ -1356,7 +1372,7 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 0
+        atime0: 578
         atime1: 65535
         atime2: 65535
         atime3: 65535

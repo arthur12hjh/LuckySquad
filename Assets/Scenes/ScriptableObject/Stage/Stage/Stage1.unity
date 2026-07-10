@@ -1831,6 +1831,8 @@ MonoBehaviour:
   _playerObj: {fileID: 0}
   _playerControllerObj: {fileID: 0}
   _playerCamera: {fileID: 0}
+  _shakeForce: 1
+  _shakeDuration: 0.2
   _SpawnBound: {x: 2, y: 2, z: 2}
 --- !u!4 &753822484
 Transform:
@@ -3665,8 +3667,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f6847186ecc9f41a35ac3db8970f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseView
-  PauseController: {fileID: 886114838}
-  ExitButton: {fileID: 89136899}
+  PauseController: {fileID: 0}
+  ExitButton: {fileID: 0}
 --- !u!1 &1356734748
 GameObject:
   m_ObjectHideFlags: 0
@@ -4736,8 +4738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 499bca9b75d89a74aafd789c3b9a2bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResultView
-  ExitButton: {fileID: 2126418588}
-  Panel: {fileID: 751832293}
+  ExitButton: {fileID: 0}
+  Panel: {fileID: 0}
 --- !u!1 &1663562128
 GameObject:
   m_ObjectHideFlags: 0
