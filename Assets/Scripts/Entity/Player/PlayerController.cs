@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D _playerrb;
 
     [SerializeField] private Vector2 _inputVec;
-    private Vector2 _playerDir = default;
-    public Vector2 GetPlayerDir() => _playerDir = Vector2.left;
+    private Vector2 _playerDir = Vector2.left;
+    public Vector2 GetPlayerDir() => _playerDir;
 
     private void FixedUpdate()
     {
