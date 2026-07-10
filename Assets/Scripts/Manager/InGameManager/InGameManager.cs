@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // InGameManager
-// ?�게?�의 로직, Additive Scene과의 ?�신???�한 ?�이?��? ?�는 ?��???매니?�
-// DontDestroyOnLoad가 ?�닌, ?�게??진입?�에�??�정?�는 ?��???매니?�
+// ?�게?�의 로직, Additive Scene과의 ?�신???�한 ?�이?��? ?�는 ?��???매니?�?
+// DontDestroyOnLoad가 ?�닌, ?�게??진입?�에�??�정?�는 ?��???매니?�?
 
 // Player Initialize 로직
-// 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
-// 2) InGameManager::Start?�서 PlayerData�?기반?�로 class _playerStats = new PlayerStats()�??�성?�고 ?�이?��? ?�력??
-// 3) InGameManager::Start?�서 PlayerData�?기반?�로 Player Prefab�?PlayerController Prefab??Instantiate�???
-// 4) InGameManager::Start?�서 Player GameObject�?PlayerController???�록??
+// 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
+// 2) InGameManager::Start?�서 PlayerData�?기반?�로 class _playerStats = new PlayerStats()�??�성?�고 ?�이?��? ?�력??
+// 3) InGameManager::Start?�서 PlayerData�?기반?�로 Player Prefab�?PlayerController Prefab??Instantiate�???
+// 4) InGameManager::Start?�서 Player GameObject�?PlayerController???�록??
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager Instance { get; private set; }
@@ -46,8 +46,8 @@ public class InGameManager : MonoBehaviour
 
 
     [Header("Camera Shake")]
-    [SerializeField] private float _shakeForce = 1f;      // 셰이크 세기
-    [SerializeField] private float _shakeDuration = 0.2f; // 셰이크 지속 시간
+    [SerializeField] private float _shakeForce = 1f;      // ?�이???�기
+    [SerializeField] private float _shakeDuration = 0.2f; // ?�이??지???�간
     private CinemachineImpulseSource _impulseSource;
     
     public event Action<int> OnTimeChange; // 게임 ?�간 변???�벤??1초마???�출
@@ -66,8 +66,8 @@ public class InGameManager : MonoBehaviour
         }
 
         Instance = this;
-        // 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
-        // ?�장?� ?�단 비활?�화 ?�켜?�고, 추후 병합 �??�용???�이??처리 구조 ?�성 ??구현
+        // 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
+        // ?�장?�??�단 비활?�화 ?�켜?�고, 추후 병합 �??�용???�이??처리 구조 ?�성 ??구현
         if (_tempStatsRef != null)
         {
             _playerStats = new PlayerStats(_tempStatsRef);
@@ -169,7 +169,7 @@ public class InGameManager : MonoBehaviour
 
     private void UpdateGameTime()
     {
-        if (currentSecond == 300)
+        if (previousSecond == 300)
             return;
 
         gameTime += Time.deltaTime;
@@ -183,7 +183,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    // ?�시 로비�??�동
+    // ?�시 로비�??�동
     public void EndStage()
     {
         AddressablesManager.Instance.ReleaseLabel($"Stage{GameManager.Instance.currentStage}");

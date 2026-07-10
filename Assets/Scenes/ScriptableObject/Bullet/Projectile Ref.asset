@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileRef
   poolName: 
   prefab:
-    m_AssetGUID: fd205ad84432bb14b98221c05fcbf8e6
+    m_AssetGUID: fca7daa172184b24aa547cdf8c45191a
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 

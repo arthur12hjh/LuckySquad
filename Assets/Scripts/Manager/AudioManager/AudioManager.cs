@@ -19,8 +19,8 @@ public class AudioManager : MonoBehaviour
     private AudioSource bgmAudioSource;
 
     private AudioClip bmgAudio; // 배경 음악
-    private List<AudioClip> playerSfx; // 플레이어 효과음
-    private List<AudioClip> stageSfx; // 스테이지 모든 효과음
+    private List<AudioClip> playerSfx = new(); // 플레이어 효과음
+    private List<AudioClip> stageSfx = new(); // 스테이지 모든 효과음
 
     private uint currentStageIndex = 0;
     private Enums.SceneType currentStegeType;
@@ -36,12 +36,20 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        bgmAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
-    private void SettingScene()
+    public void SettingScene()
     {
         currentStegeType = GameManager.Instance.currentSceneType;
         currentStageIndex = GameManager.Instance.currentStage;
+
+        if(bgmAudioSource.isPlaying)
+        {
+            bgmAudioSource.Stop();
+            bgmAudioSource.clip = null;
+        }
 
         if (currentStageIndex >= 1)
             StageSfxLoad($"{currentStegeType.ToString()}{currentStageIndex}");
@@ -51,25 +59,28 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBGM()
     {
-        bgmAudioSource.PlayOneShot(bmgAudio, 1f);
+        bgmAudioSource.clip = bmgAudio;
+        bgmAudioSource.loop = true;
+        bgmAudioSource.Play();
     }
 
     public void PlayerSfxload()
     {
         Debug.Log("플레이어 사운드");
-        playerSfx = AddressablesManager.Instance.GetLabelList<UnityEngine.Object>("PlayerSound").Cast<AudioClip>().ToList();
+        playerSfx = AddressablesManager.Instance.GetLabelList<AudioClip>("PlayerSound");
     }
 
     private void NomalSfxLoad(string SceneName)
     {
-        //bmgAudio = 
-        //stageSfx = 
+        // 뒤에 오디오 이름을 넣으면 된다.
+        bmgAudio = AddressablesManager.Instance.GetLabelDictionary<AudioClip>(SceneName, "TestSound");
+        stageSfx = AddressablesManager.Instance.GetLabelList<AudioClip>(SceneName);
     }
 
     private void StageSfxLoad(string SceneName)
     {
-        //bmgAudio = 
-        //stageSfx = 
+        // bmgAudio = AddressablesManager.Instance.GetLabelDictionary<AudioClip>(SceneName, "");
+        stageSfx = AddressablesManager.Instance.GetLabelList<AudioClip>(SceneName);
     }
 
 }

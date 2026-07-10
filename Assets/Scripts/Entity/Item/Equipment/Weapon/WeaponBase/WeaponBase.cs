@@ -40,7 +40,7 @@ public class WeaponBase : EquipmentBase
         if (info.MaxLevel < level)
             return false;
 
-        if(spriteRenderer != null)
+        if(spriteRenderer != null && spriteTexs != null)
             spriteRenderer.sprite = spriteTexs[level - 1];
 
         return true;

@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScriptableObject/Stage/Stage/Stage1.unity
     guid: 18f98fbe5d7570d4babcbfdda2515fcc
+  - enabled: 1
+    path: Assets/Scenes/SignIn/SignIn.unity
+    guid: 90e31ed489d0c4e41a8596aa1a4ce56f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 90c8bda03f40c584a8609ae18511613a, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
