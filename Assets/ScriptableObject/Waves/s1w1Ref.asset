@@ -15,4 +15,3 @@ MonoBehaviour:
   spawnEvents:
   - {fileID: 11400000, guid: ddbf20af382d71b4eaa9ed78b6d5f6c0, type: 2}
   - {fileID: 11400000, guid: 2e2367ace6ec20a42bee327508d77e84, type: 2}
-  - {fileID: 11400000, guid: 59878e8931759494ebf0f7ff5da528aa, type: 2}

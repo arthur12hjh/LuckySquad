@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -5468595444158397916, guid: 7c32a165bd9324c04aea86e02e155317, type: 3}
+  m_Sprite: {fileID: -7553402628446156714, guid: 625745dead4e14cc59f7226399099bc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -199,3 +199,4 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 0}
   _chaseRange: 1.7
   _skillRange: 2
+  _jumpCooldown: 10

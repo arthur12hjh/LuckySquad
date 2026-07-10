@@ -21,11 +21,11 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     protected static readonly int _isMoveID = Animator.StringToHash("isMove");
     protected static readonly int _isFearID = Animator.StringToHash("isFear");
     protected static readonly int _directionID = Animator.StringToHash("Direction");
-    
+
     private Action _releaseSelf;
     
     protected MonsterState _currentState = MonsterState.Idle;
-    
+
     public void OnSpawn(Action releaseSelf) => _releaseSelf = releaseSelf;
     
     public float CriticalDamage()
@@ -110,6 +110,19 @@ public class Monster : BaseEntity, IDamageable, IPoolable
 
     protected virtual void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_currentState == MonsterState.Dead)
+                return;
+
+            _currentHp -= 1;
+            StartCoroutine(HitFlash(0.1f));
+            if (_currentHp <= 0)
+            {
+                ChangeState(MonsterState.Dead);
+            }
+        }
+        
         switch (_currentState)
         {
             case MonsterState.Idle: TickIdle(); break;
@@ -154,6 +167,7 @@ public class Monster : BaseEntity, IDamageable, IPoolable
     private IEnumerator Dissolve(float duration)
     {
         InGameManager.Instance.GetPlayerStats().GetExp(1);
+        InGameManager.Instance.IncrementMonsterDeathCount();
 
         gameObject.layer =  LayerMask.NameToLayer("Deactive");
         float curTime = 0f;

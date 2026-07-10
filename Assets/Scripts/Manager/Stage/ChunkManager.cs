@@ -22,7 +22,7 @@ public class ChunkManager : MonoBehaviour
     public GameObject chunkPrefab;
     private Transform player;
 
-    public int chunkSize = 9;
+    public int chunkSize = 4;
     public int viewDistance = 1;
     public int poolSize = 20;
 

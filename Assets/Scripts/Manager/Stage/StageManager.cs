@@ -9,10 +9,10 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
 
-    private uint currentStageIndex;                       // ?„ì¬ ?¤í…Œ?´ì?
-    private int currentWaveIndex;                         // ?„ì¬ ?¨ì´ë¸?
-    private Dictionary<int, StageRef> stageDatas;       // ?¤í…Œ?´ì? ?°ì´???€?¥ìš©
-    private List<Tuple<int, EquipmentBase>> stageItemDatas;   // ?¤í…Œ?´ì????°ì´?°ë¡œ ?„ì´???•ë³´ ?ì„±
+    private uint currentStageIndex;                       // ?ê¾©ì˜± ??½ë€???
+    private int currentWaveIndex;                         // ?ê¾©ì˜± ??¥ì” ??
+    private Dictionary<int, StageRef> stageDatas;       // ??½ë€??? ?ê³—ì” ?????Î¼??
+    private List<Tuple<int, EquipmentBase>> stageItemDatas;   // ??½ë€??????ê³—ì” ?ê³•ì¤ˆ ?ê¾©ì” ???ëº£ë‚« ??¹ê½¦
     private List<Tuple<int, int, ItemData>> ShuffleList;
 
     private int prevTimer = 0;
@@ -24,7 +24,7 @@ public class StageManager : MonoBehaviour
     private bool atOnce = true;
 
     [SerializeField]
-    private StageRef currentStageData;                  // ?„ì¬ ?¤í…Œ?´ì? ?°ì´??
+    private StageRef currentStageData;                  // ?ê¾©ì˜± ??½ë€??? ?ê³—ì” ??
 
     private void Awake()
     {
@@ -47,11 +47,11 @@ public class StageManager : MonoBehaviour
         foreach (var item in TotalItem)
             ADD_Item(item, PlayerTransform);
 
-        // ?Œë ˆ?´ì–´ ë¬´ê¸°ë§?Level 1ë¡?ì¶”ê?
+        // ??? …??ë¼± ?¾ë‹¿ë¦°ï§?Level 1æ¿??°ë¶½?
         //ADD_Item(InGameManager.Instance.GetPlayerWeapon(), PlayerTransform);
 
-        // ì²«ë²ˆì§??¸ì?ëŠ” ë°°ì—´??Tupleê°?
-        // ?ë²ˆï¿??¸ì?ëŠ” ?ë³¸ ë°°ì—´???¸ë±??ê°?
+        // ï§£ãƒ«ì¾²ï§??ëª„ì˜„?ë¨?’— è«›ê³—ë¿??Tupleåª?
+        // ?ë¨?¾²???ëª„ì˜„?ë¨?’— ?ë¨?‚¯ è«›ê³—ë¿???ëªƒëœ³??åª?
         ShuffleList = stageItemDatas.Select(
                        (item, index) => Tuple.Create(
                        index,
@@ -96,16 +96,14 @@ public class StageManager : MonoBehaviour
     private void OnDisable()
     {
         currentStageData = null;
-
-        if (InGameManager.Instance != null)
+        if(null != InGameManager.Instance)
             InGameManager.Instance.OnTimeChange -= HandleTimeChange;
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
         EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
 
-    // ?„ì¬ ? íƒê°€?¥í•œ item??ê°€?¸ì˜¨??
-    // ìµœë? 3ê°œê¹Œì§€ ê°€?¸ì˜¨??
+    // ?ê¾©ì˜± ?ì¢ê¹®åª›Â€?Î½ë¸?item??åª›Â€?ëª„ì‚©??
+    // ï§¤ì’•? 3åª›ì’“?´ï§? åª›Â€?ëª„ì‚©??
     // Item1 : WeaponSlotIdx;
     // Item2 : Level
     // Item3 : Weapon Data
@@ -141,7 +139,7 @@ public class StageManager : MonoBehaviour
             atOnce = false;
         }
 
-        // ë³´ìŠ¤ (5ë¶?
+        // è¹‚ëŒ??(5??
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
             OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
@@ -149,11 +147,11 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // ?¨ì´ë¸?(ë§?ë¶?0ì´?
+        // ??¥ì” ??(ï§???0??
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
             currentStageData.WaveIndex++;
-            // ?¨ì´ë¸Œë? ë§Œë“¤ë©?ê·??¨ì´ë¸Œì— ?„ìš”??êµ¬ì¡°ì²´ë? ?˜ê²¨ì¤?
+            // ??¥ì” ?‰ëš®? ï§ëš®ë±¾ï§?æ´???¥ì” ?‰ëš¯ë¿??ê¾©ìŠ‚???´ÑŠâ€œï§£?€? ??êº¼ä»?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
         }
     }

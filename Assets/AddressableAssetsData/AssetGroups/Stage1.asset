@@ -48,7 +48,8 @@ MonoBehaviour:
   - m_GUID: 1e24f5c0bf0967c4797a91b9c21d4b8c
     m_Address: Assets/ScriptableObject/Bullet/Projectile Holy Ref.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage1
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2140a063c446c4f07a8cc4b1c2696c8c
     m_Address: Assets/Sprites/Sprites_m2_otakuyellowtanning.png

@@ -2,6 +2,7 @@ using DG.Tweening;
 using Item;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.U2D;
@@ -13,6 +14,7 @@ public class CardView : MonoBehaviour
     [SerializeField] private Image itemImage;
     [SerializeField] private Image gradeImage;
     [SerializeField] private TextMeshProUGUI InfoText;
+    [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private Button button;
 
     [SerializeField] private Sprite[] itemSprites;
@@ -59,29 +61,29 @@ public class CardView : MonoBehaviour
         // 값 대입
 
         ItemData Item = _viewModel.GetItemData();
+        int grade = _viewModel.GetGrade();
+        int itemLevel = _viewModel.GetItemLevel() + grade + 1;
         if (Item == null)
         {
             Debug.LogError("Item data not found for CardView");
             return;
         }
 
-        int grade = _viewModel.GetGrade();
         if (cardRefs == null || grade < 0 || grade >= cardRefs.Length)
         {
             Debug.LogError("No CardSO configured for grade: " + grade);
             return;
         }
 
-        CardSO cardRef = cardRefs[grade];
-
+        LevelText.text = "Lv. " + itemLevel.ToString();
         InfoText.text = Item.szName;
 
-        var sprite = AddressablesManager.Instance.GetCommon<SpriteAtlas>(Item.TextureName);
+        var sprite = AddressablesManager.Instance.GetCommon<SpriteAtlas>(Item.IconName);
         if (sprite != null)
         {
             itemSprites = new Sprite[sprite.spriteCount];
             sprite.GetSprites(itemSprites);
-            itemImage.sprite = itemSprites[0];
+            itemImage.sprite = itemSprites[Math.Min(sprite.spriteCount - 1, itemLevel)];
         }
         else
        { 
@@ -99,6 +101,7 @@ public class CardView : MonoBehaviour
         //else
         //    Debug.Log("Failed to Load icon");
 
+        CardSO cardRef = cardRefs[grade];
 
         gradeImage.sprite = cardRef.GradeImage;
         //gradeText.text = cardRef.GradeName;
