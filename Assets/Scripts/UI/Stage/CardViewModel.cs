@@ -78,7 +78,7 @@ public class CardViewModel : BaseViewModel
         // 아이템 선택
         // Player 아이템 추가 로직
         OnSelected?.Invoke();
-        for (int i = 0; i < cardGrade; i++)
+        for (int i = 0; i < cardGrade + 1; i++)
         {
             EventBus.Publish(new WeaponSelectEvent(slotIndex, itemData.iID));
         }

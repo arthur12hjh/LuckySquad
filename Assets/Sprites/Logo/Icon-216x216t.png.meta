@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 8fc954312ecf3aa43b5745b81f91df8a
+guid: 0853f9fed96b84645aa7cca282eafdf5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2346351362085378370
-    second: BulletTex_0
-  - first:
-      213: 7031340534820663148
-    second: BulletTex_1
-  - first:
-      213: -827334395602209805
-    second: BulletTex_2
-  - first:
-      213: 7285242915665364756
-    second: BulletTex_3
+      213: -4511975439172129748
+    second: Icon-216x216t_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -122,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BulletTex_0
+      name: Icon-216x216t_0
       rect:
         serializedVersion: 2
-        x: 74
-        y: 41
-        width: 170
-        height: 71
+        x: 0
+        y: 0
+        width: 216
+        height: 216
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,74 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2495a5fd12aef8020800000000000000
-      internalID: 2346351362085378370
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BulletTex_1
-      rect:
-        serializedVersion: 2
-        x: 333
-        y: 41
-        width: 156
-        height: 71
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c6f6ac876f6549160800000000000000
-      internalID: 7031340534820663148
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BulletTex_2
-      rect:
-        serializedVersion: 2
-        x: 578
-        y: 41
-        width: 166
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3f3faa720c7b484f0800000000000000
-      internalID: -827334395602209805
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BulletTex_3
-      rect:
-        serializedVersion: 2
-        x: 806
-        y: 38
-        width: 171
-        height: 73
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4174aaa35d16a1560800000000000000
-      internalID: 7285242915665364756
+      spriteID: c2cabd85e3e3261c0800000000000000
+      internalID: -4511975439172129748
       vertices: []
       indices: 
       edges: []
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BulletTex_0: 2346351362085378370
-      BulletTex_1: 7031340534820663148
-      BulletTex_2: -827334395602209805
-      BulletTex_3: 7285242915665364756
+      Icon-216x216t_0: -4511975439172129748
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
