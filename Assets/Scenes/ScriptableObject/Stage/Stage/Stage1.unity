@@ -2639,8 +2639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e03f4b5d7081047834f283727c0540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChunkManager
-  chunkPrefab: {fileID: 2222480657183727898, guid: d852b4aadb53acf4ba2189baabea5b5b, type: 3}
-  chunkSize: 9
+  chunkPrefab: {fileID: 3873890292588799592, guid: 6dfb01a96a4c279458ad9b2ee609e8f4, type: 3}
+  chunkSize: 4
   viewDistance: 1
   poolSize: 20
 --- !u!1 &1099373413

@@ -22,9 +22,11 @@ public class ChunkManager : MonoBehaviour
     public GameObject chunkPrefab;
     private Transform player;
 
-    public int chunkSize = 4;
     public int viewDistance = 1;
     public int poolSize = 20;
+
+    private float chunkWidth;
+    private float chunkHeight;
 
     private Dictionary<Vector2Int, GameObject> activeChunks = new();
     private Queue<GameObject> pool = new();
@@ -32,8 +34,15 @@ public class ChunkManager : MonoBehaviour
     void Start()
     {
         InitPool();
-        GenerateInitialChunks();
+
+        SpriteRenderer sr = chunkPrefab.GetComponent<SpriteRenderer>();
+
+        chunkWidth = sr.bounds.size.x;
+        chunkHeight = sr.bounds.size.y;
+
         player = InGameManager.Instance.GetPlayerTransform();
+
+        GenerateInitialChunks();
     }
 
     void Update()
@@ -121,7 +130,7 @@ public class ChunkManager : MonoBehaviour
                 if (!activeChunks.ContainsKey(coord))
                 {
                     GameObject chunk = GetChunkFromPool();
-                    Vector3 worldPos = new Vector3(coord.x * chunkSize, coord.y * chunkSize, 0);
+                    Vector3 worldPos = new Vector3(coord.x * chunkWidth, coord.y * chunkHeight, 0);
                     chunk.transform.position = worldPos;
                     activeChunks.Add(coord, chunk);
                 }
@@ -137,8 +146,8 @@ public class ChunkManager : MonoBehaviour
         Vector3 pos = player != null ? player.position : Vector3.zero;
 
         return new Vector2Int(
-            Mathf.FloorToInt(pos.x / chunkSize),
-            Mathf.FloorToInt(pos.y / chunkSize)
+            Mathf.FloorToInt(pos.x / chunkWidth),
+            Mathf.FloorToInt(pos.y / chunkHeight)
         );
     }
 }
