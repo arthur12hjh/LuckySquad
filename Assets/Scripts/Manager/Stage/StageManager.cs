@@ -47,11 +47,11 @@ public class StageManager : MonoBehaviour
         foreach (var item in TotalItem)
             ADD_Item(item, PlayerTransform);
 
-        // ???��??�뼱 ?�닿린留?Level 1�??�붽?
+        // ???��??�뼱 ?�닿린留?Level 1�??�붽?
         //ADD_Item(InGameManager.Instance.GetPlayerWeapon(), PlayerTransform);
 
-        // 泥ル쾲吏??몄옄?�?�� 諛곗�??Tuple�?
-        // ?�?��???몄옄?�?�� ?�?�� 諛곗�???몃뜳??�?
+        // 泥ル쾲吏??몄옄?�?�� 諛곗�??Tuple�?
+        // ?�?��???몄옄?�?�� ?�?�� 諛곗�???몃뜳??�?
         ShuffleList = stageItemDatas.Select(
                        (item, index) => Tuple.Create(
                        index,
@@ -102,7 +102,7 @@ public class StageManager : MonoBehaviour
         EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
 
-    // ?꾩옱 ?좏깮媛?ν�?item??媛?몄삩??
+    // ?꾩옱 ?좏깮媛?ν�?item??媛?몄삩??
     // 理쒕? 3媛쒓?�吏? 媛?몄삩??
     // Item1 : WeaponSlotIdx;
     // Item2 : Level
@@ -143,15 +143,16 @@ public class StageManager : MonoBehaviour
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
             OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
+            Debug.Log(1);
             bossIndex++;
             return;
         }
 
-        // ??�씠??(�???0??
+        // ??�씠??(�???0??
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
             currentStageData.WaveIndex++;
-            // ??�씠?�뚮? 留뚮뱾硫?�???�씠?�뚯�??꾩슂???�ъ“泥?�? ??�꺼�?
+            // ??�씠?�뚮? 留뚮뱾硫?�???�씠?�뚯�??꾩슂???�ъ“泥?�? ??�꺼�?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
         }
     }
