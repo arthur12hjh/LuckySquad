@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public class StageManager : MonoBehaviour
 {
@@ -42,13 +43,18 @@ public class StageManager : MonoBehaviour
     {
         stageItemDatas = new List<Tuple<int, EquipmentBase>>();
         List<int> TotalItem = currentStageData.RandomItemDatas;
-
+  
+        var PlayerState = InGameManager.Instance.GetPlayerStats();
         var PlayerTransform = InGameManager.Instance.GetPlayerTransform();
+
         foreach (var item in TotalItem)
             ADD_Item(item, PlayerTransform);
 
-        // ???��??�뼱 ?�닿린留?Level 1�??�붽?
-        //ADD_Item(InGameManager.Instance.GetPlayerWeapon(), PlayerTransform);
+        if(PlayerState.StartWeapon > 0)
+        {
+            ADD_Item(PlayerState.StartWeapon, PlayerTransform);
+            stageItemDatas.Last().Item2.LevelUp();
+        }
 
         // 泥ル쾲吏??몄옄?�?�� 諛곗�??Tuple�?
         // ?�?��???몄옄?�?�� ?�?�� 諛곗�???몃뜳??�?
@@ -102,8 +108,6 @@ public class StageManager : MonoBehaviour
         EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
 
-    // ?꾩옱 ?좏깮媛?ν�?item??媛?몄삩??
-    // 理쒕? 3媛쒓?�吏? 媛?몄삩??
     // Item1 : WeaponSlotIdx;
     // Item2 : Level
     // Item3 : Weapon Data
@@ -139,7 +143,6 @@ public class StageManager : MonoBehaviour
             atOnce = false;
         }
 
-        // 蹂댁??(5??
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
             OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
@@ -147,11 +150,9 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // ??�씠??(�???0??
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
             currentStageData.WaveIndex++;
-            // ??�씠?�뚮? 留뚮뱾硫?�???�씠?�뚯�??꾩슂???�ъ“泥?�? ??�꺼�?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
         }
     }

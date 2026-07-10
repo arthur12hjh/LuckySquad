@@ -21,4 +21,5 @@ MonoBehaviour:
   AttackRange: 0
   AttackSpeed: 0
   ProjectileSpeed: 0
+  StartItemIndex: 1
   Duration: 0

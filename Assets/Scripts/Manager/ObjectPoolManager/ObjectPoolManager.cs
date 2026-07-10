@@ -45,7 +45,7 @@ public class ObjectPoolManager : MonoBehaviour
         {
             // ë¹„ë™ê¸??‘ì—… ?¸ë“¤. ??ì¢€ ?¤ë˜ê±¸ë¦¬?ˆê¹Œ ë¹„ë™ê¸°ë¡œ ?”ê²Œ
             AsyncOperationHandle<GameObject> handle = refSO.prefab.LoadAssetAsync<GameObject>();
-            
+
             // Load Asset ?ë‚  ?Œê¹Œì§€ ê¸°ë‹¤ë¦¬ê¸°
             await handle.Task;
 
@@ -57,28 +57,28 @@ public class ObjectPoolManager : MonoBehaviour
 
             _asyncOperationHandles[refSO] = handle;
             _prefabPool[refSO] = handle.Result;
-            
+
             var parent = new GameObject($"{refSO.name}Pool").transform;
             parent.SetParent(transform);
             _poolDictionary[refSO] = CreatePool(refSO, parent);
         }
     }
-    
-    
+
+
     private ObjectPool<GameObject> CreatePool(ObjectPoolRef refSO, Transform parent)
     {
         ObjectPool<GameObject> pool = null;
         GameObject prefab = _prefabPool[refSO];
         pool = new ObjectPool<GameObject>(
             createFunc: () =>
-            { 
-                var obj =  Instantiate(prefab, parent);
-                if(obj.TryGetComponent<IPoolable>(out IPoolable poolable))
+            {
+                var obj = Instantiate(prefab, parent);
+                if (obj.TryGetComponent<IPoolable>(out IPoolable poolable))
                     poolable.OnSpawn(() => pool.Release(obj));
                 return obj;
             },            // ?ì„± ë°©ì‹
             actionOnGet: obj => obj.SetActive(true),              // Get. ?¸ê²Œ???„ë“œë¡?ë¶ˆëŸ¬????ë°©ì‹
-            actionOnRelease: obj  => obj.SetActive(false),        // Release. ?„ë“œ?ì„œ ?´íƒˆ????ë°©ì‹
+            actionOnRelease: obj => obj.SetActive(false),        // Release. ?„ë“œ?ì„œ ?´íƒˆ????ë°©ì‹
             actionOnDestroy: obj => Destroy(obj),                 // Destroy. ?„ì˜ˆ ?? œ????ë°©ì‹
             collectionCheck: false,                                         // Release?????€???¤ì–´ê°€?ˆëŠ” ?¤ë¸Œ?íŠ¸?¸ì? ì²´í¬.
             defaultCapacity: refSO.initializePoolSize,                      // ì²˜ìŒ ?ì„±??ê°ì²´??
@@ -99,7 +99,14 @@ public class ObjectPoolManager : MonoBehaviour
             pool.Release(tempObjectList[i]);
     }
 
-    public GameObject Get(ObjectPoolRef refSO) => _poolDictionary[refSO].Get();
+    public GameObject Get(ObjectPoolRef refSO)
+    {
+        if (_poolDictionary.TryGetValue(refSO, out var so))
+            return so.Get();
+
+        return null;
+    }
+
     public void Release(ObjectPoolRef refSO, GameObject obj) => _poolDictionary[refSO].Release(obj);
 
     public bool Clear(ObjectPoolRef refSO)
