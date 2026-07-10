@@ -31,12 +31,12 @@ public class AddressablesManager : MonoBehaviour
     }
     public int Progress { get; private set; } = 1;
 
-    // ±¸Á¶Ã¼´Â º¹»ç°¡ ÀÏ¾î³ª¼­ Å¬·¡½º·Î ¸¸µë
+    // êµ¬ì¡°ì²´ëŠ” ë³µì‚¬ê°€ ì¼ì–´ë‚˜ì„œ í´ë˜ìŠ¤ë¡œ ë§Œë“¬
     private class CacheEntry<T>
     {
-        // ½ÇÁ¦ µ¥ÀÌÅÍ
+        // ì‹¤ì œ ë°ì´í„°
         public T value;
-        // ¸Ş¸ğ¸® ÇØÁ¦¸¦ À§ÇØ¼­ ÇÊ¿äÇÔ
+        // ë©”ëª¨ë¦¬ í•´ì œë¥¼ ìœ„í•´ì„œ í•„ìš”í•¨
         public AsyncOperationHandle<T> handle;
     }
 
@@ -47,38 +47,38 @@ public class AddressablesManager : MonoBehaviour
         public AsyncOperationHandle<IList<UnityEngine.Object>> handle;
     }
 
-    // µ¥ÀÌÅÍ¸¦ Ä³½ÌÇØ¼­ Àç»ç¿ëÇÏ±â À§ÇÔ
-    // Á¦³×¸¯À¸·Î µ¥ÀÌÅÍ¸¦ ¹Ş°í ÀÌ¸§ÀÌ¶û °á°ú·Î ÀúÀåÇÑ´Ù
-    // Hash¸¦ ÀÌ¿ëÇÔ
+    // ë°ì´í„°ë¥¼ ìºì‹±í•´ì„œ ì¬ì‚¬ìš©í•˜ê¸° ìœ„í•¨
+    // ì œë„¤ë¦­ìœ¼ë¡œ ë°ì´í„°ë¥¼ ë°›ê³  ì´ë¦„ì´ë‘ ê²°ê³¼ë¡œ ì €ì¥í•œë‹¤
+    // Hashë¥¼ ì´ìš©í•¨
     private Dictionary<Type, Dictionary<string, object>> cache = new();
 
-    // Label·Î ÇÑ¹ø¿¡ ¹ŞÀº µ¥ÀÌÅÍ¸¦ Ä³½ÌÇØ¼­ Àç»ç¿ëÇÏ±â À§ÇÔ
+    // Labelë¡œ í•œë²ˆì— ë°›ì€ ë°ì´í„°ë¥¼ ìºì‹±í•´ì„œ ì¬ì‚¬ìš©í•˜ê¸° ìœ„í•¨
     private Dictionary<string, Cache> labelCache = new();
     private Dictionary<string, Cache> commonCache = new();
 
 
 
-    // ÃÊ±âÈ­
+    // ì´ˆê¸°í™”
     private IEnumerator InitFlow()
     {
         yield return Addressables.InitializeAsync();
         OnInitialized?.Invoke();
     }
 
-    // Addressables ¿¡¼ÂÀ» ·ÎµåÇÏ´Â ÇÔ¼ö
-    // Key°ªÀ¸·Î Ã£À½
+    // Addressables ì—ì…‹ì„ ë¡œë“œí•˜ëŠ” í•¨ìˆ˜
+    // Keyê°’ìœ¼ë¡œ ì°¾ìŒ
     public AsyncOperationHandle<T> LoadRoutine<T>(string key)
     {
-        // 1. Ä³½Ã Ã¼Å©
-        // ¸¸¾à ÀÌ¹Ì ·Îµå°¡ µÈ°Å¶ó¸é ±×³É ±×°Å Ã£¾Æ¼­  ºÒ·¯¿È
+        // 1. ìºì‹œ ì²´í¬
+        // ë§Œì•½ ì´ë¯¸ ë¡œë“œê°€ ëœê±°ë¼ë©´ ê·¸ëƒ¥ ê·¸ê±° ì°¾ì•„ì„œ  ë¶ˆëŸ¬ì˜´
         if (TryGetCache<T>(key, out T cached))
             return Addressables.ResourceManager.CreateCompletedOperation<T>(cached, null);
 
-        // 2. ·Îµù ½ÃÀÛ
-        // Áö±İºÎÅÍ ºñµ¿±â ½ÃÀÛ
+        // 2. ë¡œë”© ì‹œì‘
+        // ì§€ê¸ˆë¶€í„° ë¹„ë™ê¸° ì‹œì‘
         var handle = Addressables.LoadAssetAsync<T>(key);
 
-        // 3. ¿Ï·á ÈÄ Ä³½Ì
+        // 3. ì™„ë£Œ í›„ ìºì‹±
 
         handle.Completed += h =>
         {
@@ -91,12 +91,12 @@ public class AddressablesManager : MonoBehaviour
         return handle;
     }
 
-    // Ä³½Ã¿¡ ÀúÀåÇÏ´Â ÇÔ¼ö
+    // ìºì‹œì— ì €ì¥í•˜ëŠ” í•¨ìˆ˜
     private void SetCache<T>(string key, T value, AsyncOperationHandle<T> handle)
     {
         Type type = typeof(T);
 
-        // Å¸ÀÔÀ» µñ¼Å³Ê¸®¿¡ Ã£¾Æ¼­ ¾øÀ¸¸é Ãß°¡
+        // íƒ€ì…ì„ ë”•ì…”ë„ˆë¦¬ì— ì°¾ì•„ì„œ ì—†ìœ¼ë©´ ì¶”ê°€
         if (!cache.ContainsKey(type))
             cache[type] = new Dictionary<string, object>();
 
@@ -112,18 +112,18 @@ public class AddressablesManager : MonoBehaviour
     {
         value = default;
 
-        // Á¦³×¸¯À¸·Î ¹ŞÀº Å¸ÀÔÀ» Á¤ÀÇ ÇØÁØ´Ù.
+        // ì œë„¤ë¦­ìœ¼ë¡œ ë°›ì€ íƒ€ì…ì„ ì •ì˜ í•´ì¤€ë‹¤.
         Type type = typeof(T);
 
-        // ¸¸¾à Dictionary°¡ ¾øÀ¸¸é ÇÔ¼ö¸¦ Á¾·áÇÑ´Ù.
+        // ë§Œì•½ Dictionaryê°€ ì—†ìœ¼ë©´ í•¨ìˆ˜ë¥¼ ì¢…ë£Œí•œë‹¤.
         if (!cache.TryGetValue(type, out var dict))
             return false;
 
-        // ¸¸¾à ÇØ´ç Å¸ÀÔÀÇ Ä³½Ã°¡ ¾øÀ¸¸é Á¾·áÇÑ´Ù.
+        // ë§Œì•½ í•´ë‹¹ íƒ€ì…ì˜ ìºì‹œê°€ ì—†ìœ¼ë©´ ì¢…ë£Œí•œë‹¤.
         if (!dict.TryGetValue(key, out var obj))
             return false;
 
-        // Å¸ÀÔÀÌ ¸ÂÀ¸¸é ¹İÈ¯
+        // íƒ€ì…ì´ ë§ìœ¼ë©´ ë°˜í™˜
         if (obj is CacheEntry<T> entry)
         {
             value = entry.value;
@@ -133,20 +133,20 @@ public class AddressablesManager : MonoBehaviour
         return false;
     }
 
-    // Å°°ªÀ¸·Î ÇØÁ¦
+    // í‚¤ê°’ìœ¼ë¡œ í•´ì œ
     public void Release<T>(string key)
     {
-        // Á¦³×¸¯ Å¸ÀÔÀ» ¹İÈ¯ ÇØÁØ´Ù.
+        // ì œë„¤ë¦­ íƒ€ì…ì„ ë°˜í™˜ í•´ì¤€ë‹¤.
         Type type = typeof(T);
 
-        // ½ÇÆĞ½Ã Á¾·á
+        // ì‹¤íŒ¨ì‹œ ì¢…ë£Œ
         if (!cache.TryGetValue(type, out var dict))
             return;
 
         if (!dict.TryGetValue(key, out var obj))
             return;
 
-        // Á¦°Å
+        // ì œê±°
         if (obj is CacheEntry<T> entry)
         {
             Addressables.Release(entry.handle);
@@ -160,15 +160,15 @@ public class AddressablesManager : MonoBehaviour
     //label
     public AsyncOperationHandle<IList<UnityEngine.Object>> LoadLabel(string label)
     {
-        // 1. Ä³½Ã Ã¼Å©
-        // ¸¸¾à ÀÌ¹Ì ·Îµå°¡ µÈ°Å¶ó¸é Addressables¸¦ È£Ãâ ¾ÈÇÔ
+        // 1. ìºì‹œ ì²´í¬
+        // ë§Œì•½ ì´ë¯¸ ë¡œë“œê°€ ëœê±°ë¼ë©´ Addressablesë¥¼ í˜¸ì¶œ ì•ˆí•¨
         if (TryGetLabel(label, out List<UnityEngine.Object> cached))
             return Addressables.ResourceManager.CreateCompletedOperation<IList<UnityEngine.Object>>(cached, null);
 
-        // µÎ ¶óº§ ¸ğµÎ Æ÷ÇÔµÈ Asset ·Îµå
+        // ë‘ ë¼ë²¨ ëª¨ë‘ í¬í•¨ëœ Asset ë¡œë“œ
         var handle = Addressables.LoadAssetsAsync<UnityEngine.Object>(label, null, Addressables.MergeMode.Intersection);
 
-        // Ä³½Ã ÀúÀå
+        // ìºì‹œ ì €ì¥
         handle.Completed += h =>
         {
             if (h.Status == AsyncOperationStatus.Succeeded)
@@ -196,11 +196,11 @@ public class AddressablesManager : MonoBehaviour
     {
         value = null;
 
-        // Á¸ÀçÇÏ´ÂÁö È®ÀÎ ÇÑ´Ù.
+        // ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸ í•œë‹¤.
         if (!labelCache.TryGetValue(key, out var obj))
             return false;
 
-        // µ¥ÀÌÅÍ Å¸ÀÔÀÌ ¸Â´ÂÁö È®ÀÎ ÈÄ ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ ¹İÈ¯ÇÑ´Ù.
+        // ë°ì´í„° íƒ€ì…ì´ ë§ëŠ”ì§€ í™•ì¸ í›„ ì‹¤ì œ ë°ì´í„°ë¥¼ ë°˜í™˜í•œë‹¤.
         value = obj.value;
         return true;
     }
@@ -216,14 +216,14 @@ public class AddressablesManager : MonoBehaviour
         return true;
     }
 
-    // Ä³½Ã¿¡ ÀúÀåµÈ ¿¡¼Â Áß ÀÌ¸§ÀÌ ÀÏÄ¡ÇÏ´Â ¿¡¼ÂÀ» ¹İÈ¯ÇÑ´Ù.
-    // »ç¿ë ¹æ¹ı, label : Lobby, Stage µî labelType : obj, img µî, assetName : ½ÇÁ¦ °´Ã¼ÀÌ¸§
+    // ìºì‹œì— ì €ì¥ëœ ì—ì…‹ ì¤‘ ì´ë¦„ì´ ì¼ì¹˜í•˜ëŠ” ì—ì…‹ì„ ë°˜í™˜í•œë‹¤.
+    // ì‚¬ìš© ë°©ë²•, label : Lobby, Stage ë“± labelType : obj, img ë“±, assetName : ì‹¤ì œ ê°ì²´ì´ë¦„
     // test1 = AddressablesManager.Instance.GetLabelObject<GameObject>("Logo","obj","MonsterTest");
 
     public T GetLabelDictionary<T>(string label, string assetName)
             where T : UnityEngine.Object
     {
-        // ÇØ´ç ¶óº§ÀÌ ¾ÆÁ÷ ·ÎµåµÇÁö ¾Ê¾Ò´Ù¸é null ¹İÈ¯
+        // í•´ë‹¹ ë¼ë²¨ì´ ì•„ì§ ë¡œë“œë˜ì§€ ì•Šì•˜ë‹¤ë©´ null ë°˜í™˜
         if (!TryGetLabelmap(label, out var map))
             return null;
 
@@ -245,43 +245,45 @@ public class AddressablesManager : MonoBehaviour
     // Comm
     public AsyncOperationHandle<IList<UnityEngine.Object>> LoadCommon()
     {
-        // 1. Ä³½Ã Ã¼Å©
-        // ¸¸¾à ÀÌ¹Ì ·Îµå°¡ µÈ°Å¶ó¸é Addressables¸¦ È£Ãâ ¾ÈÇÔ
+        // ì´ë¯¸ ë¡œë“œëœ ê²½ìš° Addressables í˜¸ì¶œ ì—†ì´ ìºì‹œë¥¼ ë°˜í™˜í•œë‹¤
         if (TryGetComponentList("Common", out List<UnityEngine.Object> cached))
             return Addressables.ResourceManager.CreateCompletedOperation<IList<UnityEngine.Object>>(cached, null);
 
-        // ¶óº§ Asset ·Îµå
         var handle = Addressables.LoadAssetsAsync<UnityEngine.Object>("Common", null, Addressables.MergeMode.Intersection);
 
-        // Ä³½Ã ÀúÀå
         handle.Completed += h =>
         {
-            if (h.Status == AsyncOperationStatus.Succeeded)
+            if (h.Status != AsyncOperationStatus.Succeeded)
+                return;
+
+            var list = new List<UnityEngine.Object>(h.Result);
+            var dictionary = new Dictionary<string, UnityEngine.Object>();
+
+            foreach (var obj in list)
             {
-                var list = new List<UnityEngine.Object>(h.Result);
-                var dictionary = new Dictionary<string, UnityEngine.Object>();
+                // íŒ¨í‚¹ ë¹Œë“œì—ì„œëŠ” ê°™ì€ ì´ë¦„ì˜ ì˜¤ë¸Œì íŠ¸ê°€ ì¤‘ë³µìœ¼ë¡œ ë“¤ì–´ì˜¬ ìˆ˜ ìˆìœ¼ë¯€ë¡œ
+                // Add ëŒ€ì‹  ì¸ë±ì„œë¥¼ ì‚¬ìš©í•˜ê³ , ì•„í‹€ë¼ìŠ¤ë„ ì¤‘ë³µ ë“±ë¡ì„ ê±´ë„ˆë›´ë‹¤
+                dictionary[obj.name] = obj;
 
-                foreach (var obj in list)
+                if (obj is SpriteAtlas atlas)
                 {
-                    dictionary[obj.name] = obj;
+                    if (_SortAltasTextures.ContainsKey(obj.name))
+                        continue;
 
-                    if (obj is SpriteAtlas Atlas)
-                    {
-                        Sprite[] sprites = new Sprite[Atlas.spriteCount];
-                        Atlas.GetSprites(sprites);
+                    Sprite[] sprites = new Sprite[atlas.spriteCount];
+                    atlas.GetSprites(sprites);
 
-                        Array.Sort(sprites, (a, b) => a.name.CompareTo(b.name));
-                        _SortAltasTextures.Add(obj.name, sprites);
-                    }
+                    Array.Sort(sprites, (a, b) => a.name.CompareTo(b.name));
+                    _SortAltasTextures.Add(obj.name, sprites);
                 }
-
-                commonCache["Common"] = new Cache
-                {
-                    value = list,
-                    keyValue = dictionary,
-                    handle = h
-                };
             }
+
+            commonCache["Common"] = new Cache
+            {
+                value = list,
+                keyValue = dictionary,
+                handle = h
+            };
         };
 
         return handle;
@@ -323,7 +325,7 @@ public class AddressablesManager : MonoBehaviour
     {
         map = null;
 
-        // Á¸ÀçÇÏ´ÂÁö È®ÀÎ ÇÑ´Ù.
+        // ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸ í•œë‹¤.
         if (!commonCache.TryGetValue(key, out var cache))
             return false;
 
@@ -343,15 +345,15 @@ public class AddressablesManager : MonoBehaviour
         }
     }
 
-    // µ¥ÀÌÅÍ ÇØÁ¦
+    // ë°ì´í„° í•´ì œ
     public void ReleaseLabel(string label)
     {
-        // ½ÇÆĞ½Ã ¹İÈ¯
+        // ì‹¤íŒ¨ì‹œ ë°˜í™˜
         if (!labelCache.TryGetValue(label, out var obj))
             return;
 
-        // Addressables ¸Ş¸ğ¸® ÇØÁ¦
-        // Ä³½Ã Á¦°Å
+        // Addressables ë©”ëª¨ë¦¬ í•´ì œ
+        // ìºì‹œ ì œê±°
         if (obj is Cache cache)
         {
             Addressables.Release(cache.handle);
