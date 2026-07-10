@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
     public static AudioManager Instance => instance;
 
-    private AudioSource bgmAudioSource;
+    public AudioSource bgmAudioSource;
 
     private AudioClip bmgAudio; // 배경 음악
     private List<AudioClip> playerSfx = new(); // 플레이어 효과음
@@ -40,6 +40,11 @@ public class AudioManager : MonoBehaviour
         bgmAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        bgmAudioSource = gameObject.AddComponent<AudioSource>();
+    }
+
     public void SettingScene()
     {
         currentStegeType = GameManager.Instance.currentSceneType;
@@ -59,6 +64,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBGM()
     {
+        //bgmAudioSource.PlayOneShot(bmgAudio, 1f);
         bgmAudioSource.clip = bmgAudio;
         bgmAudioSource.loop = true;
         bgmAudioSource.Play();
@@ -72,15 +78,15 @@ public class AudioManager : MonoBehaviour
 
     private void NomalSfxLoad(string SceneName)
     {
-        // 뒤에 오디오 이름을 넣으면 된다.
-        bmgAudio = AddressablesManager.Instance.GetLabelDictionary<AudioClip>(SceneName, "TestSound");
-        stageSfx = AddressablesManager.Instance.GetLabelList<AudioClip>(SceneName);
+        bmgAudio = AddressablesManager.Instance.GetLabelDictionary<AudioClip>(SceneName, "BGM1");
+        //stageSfx = 
     }
 
     private void StageSfxLoad(string SceneName)
     {
-        // bmgAudio = AddressablesManager.Instance.GetLabelDictionary<AudioClip>(SceneName, "");
-        stageSfx = AddressablesManager.Instance.GetLabelList<AudioClip>(SceneName);
+        Debug.Log("Load Stage_BGM");
+        bmgAudio = AddressablesManager.Instance.GetLabelDictionary<AudioClip>(SceneName, "Stage_BGM");
+        //stageSfx = 
     }
 
 }

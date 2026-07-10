@@ -106,6 +106,7 @@ public class InGameManager : MonoBehaviour
     {
         OnGameStart?.Invoke();
         monsterDeathCount = 0;
+        AudioManager.Instance.PlayBGM();
     }
 
     private void Update()

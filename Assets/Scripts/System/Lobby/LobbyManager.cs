@@ -34,9 +34,9 @@ public class LobbyManager : MonoBehaviour
         _screens[(int)(LobbyScreen.Stage)].SreenView.Show();
     }
 
-    private void Start()
+    public void Start()
     {
-        //AudioManager.Instance.PlayBGM();
+        AudioManager.Instance.PlayBGM();
     }
 
     public void ScreenChage(LobbyScreen sceneType)

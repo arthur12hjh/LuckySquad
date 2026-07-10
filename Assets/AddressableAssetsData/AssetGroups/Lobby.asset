@@ -15,6 +15,13 @@ MonoBehaviour:
   m_GroupName: Lobby
   m_GUID: 186be961464b8914a8cff6ebf69c8bdc
   m_SerializeEntries:
+  - m_GUID: 9bc1d78105f7d5f45b6bfa08f53486c5
+    m_Address: Assets/Audio/BGM1.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lobby
+    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries:
   - m_GUID: 2f8f366c8546071439a733d8199c009d
     m_Address: Assets/Sound/LobbySound.mp3
     m_ReadOnly: 0

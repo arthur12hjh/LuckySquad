@@ -8,13 +8,15 @@ public class ResultView : BaseView
 
     private void Start()
     {
-        ExitButton.onClick.AddListener(InGameManager.Instance.EndStage);
+        if(ExitButton != null)
+            ExitButton.onClick.AddListener(InGameManager.Instance.EndStage);
         InGameManager.Instance.OnGameClear += Show;
     }
 
     public override void Show()
     {
-        Panel.SetActive(true);
+        if(Panel != null)
+            Panel.SetActive(true);
     }
 
     private void OnDestroy()

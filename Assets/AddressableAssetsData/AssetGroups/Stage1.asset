@@ -111,6 +111,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage1
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d615f76bc40e874f87cc54a632992e1
+    m_Address: Assets/Audio/Stage_BGM.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a30aadcebd3a741439f22aadf85461ad
     m_Address: Assets/Animatons/Effect/cooookie/cookieAnimator.controller
     m_ReadOnly: 0
