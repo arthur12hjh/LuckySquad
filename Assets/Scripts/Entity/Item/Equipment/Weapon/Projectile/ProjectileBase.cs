@@ -2,7 +2,6 @@ using Item;
 using UnityEngine;
 using System;
 using UnityEngine.U2D;
-using UnityEditor.Animations;
 
 public abstract class ProjectileBase : MonoBehaviour, IPoolable
 {
@@ -42,7 +41,7 @@ public abstract class ProjectileBase : MonoBehaviour, IPoolable
 
         if (animator != null)
         {
-            var Animcontroller = AddressablesManager.Instance.GetLabelDictionary<AnimatorController>("Stage1", ControolerName);
+            var Animcontroller = AddressablesManager.Instance.GetLabelDictionary<RuntimeAnimatorController>("Stage1", ControolerName);
             if (Animcontroller != null)
                 animator.runtimeAnimatorController = Animcontroller ;
         }
