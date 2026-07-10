@@ -9,11 +9,11 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
 
-    private uint currentStageIndex;                       // 현재 스테이지
-    private int  currentWaveIndex;                         // 현재 웨이브
-    private Dictionary<int, StageRef>        stageDatas;       // 스테이지 데이터 저장용
-    private List<Tuple<int, EquipmentBase>>  stageItemDatas;   // 스테이지의 데이터로 아이템 정보 생성
-    private List<Tuple<int, int, ItemData>>  ShuffleList;
+    private uint currentStageIndex;                       // ?꾩옱 ??��???
+    private int currentWaveIndex;                         // ?꾩옱 ??�씠??
+    private Dictionary<int, StageRef> stageDatas;       // ??��??? ?곗씠?????μ??
+    private List<Tuple<int, EquipmentBase>> stageItemDatas;   // ??��??????곗씠?곕줈 ?꾩씠???뺣낫 ??�꽦
+    private List<Tuple<int, int, ItemData>> ShuffleList;
 
     private int prevTimer = 0;
     private int bossIndex = 0;
@@ -24,7 +24,7 @@ public class StageManager : MonoBehaviour
     private bool atOnce = true;
 
     [SerializeField]
-    private StageRef currentStageData;                  // 현재 스테이지 데이터
+    private StageRef currentStageData;                  // ?꾩옱 ??��??? ?곗씠??
 
     private void Awake()
     {
@@ -44,14 +44,14 @@ public class StageManager : MonoBehaviour
         List<int> TotalItem = currentStageData.RandomItemDatas;
 
         var PlayerTransform = InGameManager.Instance.GetPlayerTransform();
-        foreach(var item in TotalItem)
+        foreach (var item in TotalItem)
             ADD_Item(item, PlayerTransform);
 
-        // 플레이어 무기만 Level 1로 추가
+        // ???��??�뼱 ?�닿린留?Level 1�??�붽?
         //ADD_Item(InGameManager.Instance.GetPlayerWeapon(), PlayerTransform);
 
-        // 첫번째 인자에는 배열의 Tuple값
-        // 두번� 인자에는 원본 배열의 인덱스 값
+        // 泥ル쾲吏??몄옄?�?�� 諛곗�??Tuple�?
+        // ?�?��???몄옄?�?�� ?�?�� 諛곗�???몃뜳??�?
         ShuffleList = stageItemDatas.Select(
                        (item, index) => Tuple.Create(
                        index,
@@ -102,8 +102,8 @@ public class StageManager : MonoBehaviour
         EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
 
-    // 현재 선택가능한 item을 가져온다.
-    // 최대 3개까지 가져온다.
+    // ?꾩옱 ?좏깮媛?ν�?item??媛?몄삩??
+    // 理쒕? 3媛쒓?�吏? 媛?몄삩??
     // Item1 : WeaponSlotIdx;
     // Item2 : Level
     // Item3 : Weapon Data
@@ -132,16 +132,14 @@ public class StageManager : MonoBehaviour
     private void HandleTimeChange(int currentCount)
     {
         currentStageData.StageTime = currentCount;
-
         if (atOnce)
         {
             Debug.Log("Wave Called");
-            // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
             atOnce = false;
         }
 
-        // 보스 (5분)
+        // 蹂댁??(5??
         if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
         {
             OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
@@ -149,19 +147,18 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // 웨이브 (매 분 0초)
+        // ??�씠??(�???0??
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
-            Debug.Log("Wave Called");
             currentStageData.WaveIndex++;
-            // 웨이브를 만들면 그 웨이브에 필요한 구조체를 넘겨줌
+            // ??�씠?�뚮? 留뚮뱾硫?�???�씠?�뚯�??꾩슂???�ъ“泥?�? ??�꺼�?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
         }
     }
 
     private void StageDateLoad()
     {
-       // currentStageData = AddressablesManager.Instance.GetLabelObject<StageRef>($"Stage{currentStageIndex}", "ref", "Stage1");
+       currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", "Stage1");
     }
 
     public void StageSetting()
@@ -180,9 +177,9 @@ public class StageManager : MonoBehaviour
 
     private void CheckWaveSpawnTime()
     {
-       
+
     }
-    
+
     private void ADD_Item(int ItemID, Transform parent)
     {
         var ItemData = DataManager.Instance.FindItemData(ItemID) as WeaponData;
@@ -191,11 +188,11 @@ public class StageManager : MonoBehaviour
             var Prefab = DataManager.Instance.GetWeaponPrefab(ItemData.WeaponType);
             var ItemObj = ItemFactory.AbstractCreateItem(Prefab, parent, ItemID);
 
-            if(ItemObj == null)
+            if (ItemObj == null)
             {
                 Debug.Log("Not Find : Prefab");
                 return;
-            }    
+            }
 
             ItemObj.SetActive(false);
             stageItemDatas.Add(new(0, ItemObj.GetComponent<EquipmentBase>()));

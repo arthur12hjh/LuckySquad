@@ -20,21 +20,18 @@ public class Loading : MonoBehaviour
 
         currentStege = GameManager.Instance.currentStage;
 
-
-        //SceneManager.LoadScene(sceneName);
         if (currentStege == 0)
             StartCoroutine(SceneChange(sceneName));
         else
             StartCoroutine(StageChange($"{sceneName}{currentStege}"));
-
         StartCoroutine(AnimateLoadingText());
-
     }
 
     // 로비, 스토어 등등
     private IEnumerator SceneChange(string sceneName)
     {
         yield return StartCoroutine(LoadSceneObject(sceneName));
+        AudioManager.Instance.SettingScene();
         SceneManager.LoadScene(sceneName);
         //SceneManager.LoadScene("Weapon");
     }
