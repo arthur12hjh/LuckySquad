@@ -31,7 +31,6 @@ public class CardViewModel : BaseViewModel
         cardGrade = RollGrade();
 
 
-        Debug.Log($"{slotIndex} : {itemData.szName}");
         // currentLevel
         //BindSprites();
     }

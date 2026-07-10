@@ -101,6 +101,5 @@ public class BounceWeapon : WeaponBase
             return;
 
         Mon.Damaged(gameObject, new Attack.SAttackData(20));
-        Debug.Log($"Hit BoundBall : {Mon.name}");
     }
 }

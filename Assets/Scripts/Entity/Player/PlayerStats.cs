@@ -12,6 +12,7 @@ public class PlayerStats
     [SerializeField] private float _attackRange;      // 범위 증가
     [SerializeField] private float _attackSpeed;      // 공격속도 증가
     [SerializeField] private float _projectileSpeed;  // 투사체 속도 증가
+    [SerializeField] private int   _StartItemIndex;   // 시작 무기 임시
     [SerializeField] private float _duration;         // 투사체 지속시간 증가
 
     [SerializeField] private int _level;
@@ -33,6 +34,7 @@ public class PlayerStats
         _attackRange = refSO.AttackRange;
         _attackSpeed = refSO.AttackSpeed;
         _projectileSpeed = refSO.ProjectileSpeed;
+        _StartItemIndex = refSO.StartItemIndex;
         _duration = refSO.Duration;
         _level = 0;
         _currentExp = 0;
@@ -54,6 +56,7 @@ public class PlayerStats
         }
     }
 
+    public int StartWeapon => _StartItemIndex;
     public int currentGold
     {
         get => _currentGold;

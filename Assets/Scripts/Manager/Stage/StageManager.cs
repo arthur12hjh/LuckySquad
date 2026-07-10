@@ -4,19 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
 
-    private uint currentStageIndex;                       // ?꾩옱 ??��???
-    private int currentWaveIndex;                         // ?꾩옱 ??�씠??
-    private Dictionary<int, StageRef> stageDatas;       // ??��??? ?곗씠?????μ??
-    private List<Tuple<int, EquipmentBase>> stageItemDatas;   // ??��??????곗씠?곕줈 ?꾩씠???뺣낫 ??�꽦
+    private uint currentStageIndex;                       // ?袁⑹?????�쏙????
+    private int currentWaveIndex;                         // ?袁⑹?????�쎌�??
+    private Dictionary<int, StageRef> stageDatas;       // ???�쏙???? ??�쀬뵠????????
+    private List<Tuple<int, EquipmentBase>> stageItemDatas;   // ???�쏙????????�쀬뵠??�뺤�??袁⑹�???類ｋ�????�쎄??
     private List<Tuple<int, int, ItemData>> ShuffleList;
 
     private int prevTimer = 0;
     private int bossIndex = 0;
+    private int WaveIndex = 0;
 
     public event Action<WaveData> OnWave;
     public event Action<GameObject> OnBoss;
@@ -24,7 +26,7 @@ public class StageManager : MonoBehaviour
     private bool atOnce = true;
 
     [SerializeField]
-    private StageRef currentStageData;                  // ?꾩옱 ??��??? ?곗씠??
+    private StageRef currentStageData;                  // ?袁⑹?????�쏙???? ??�쀬뵠??
 
     private void Awake()
     {
@@ -42,16 +44,21 @@ public class StageManager : MonoBehaviour
     {
         stageItemDatas = new List<Tuple<int, EquipmentBase>>();
         List<int> TotalItem = currentStageData.RandomItemDatas;
-
+  
+        var PlayerState = InGameManager.Instance.GetPlayerStats();
         var PlayerTransform = InGameManager.Instance.GetPlayerTransform();
+
         foreach (var item in TotalItem)
             ADD_Item(item, PlayerTransform);
 
-        // ???��??�뼱 ?�닿린留?Level 1�??�붽?
-        //ADD_Item(InGameManager.Instance.GetPlayerWeapon(), PlayerTransform);
+        if(PlayerState.StartWeapon > 0)
+        {
+            ADD_Item(PlayerState.StartWeapon, PlayerTransform);
+            stageItemDatas.Last().Item2.LevelUp();
+        }
 
-        // 泥ル쾲吏??몄옄?�?�� 諛곗�??Tuple�?
-        // ?�?��???몄옄?�?�� ?�?�� 諛곗�???몃뜳??�?
+        // 筌ｃ꺂苡?��???紐꾩?????�쏙???�쏄?�占??Tuple??
+        // ????�쏙????紐꾩?????�쏙??????�쏙???�쏄?�占???紐껊?????
         ShuffleList = stageItemDatas.Select(
                        (item, index) => Tuple.Create(
                        index,
@@ -96,14 +103,12 @@ public class StageManager : MonoBehaviour
     private void OnDisable()
     {
         currentStageData = null;
-        if(null != InGameManager.Instance)
+        if (null != InGameManager.Instance)
             InGameManager.Instance.OnTimeChange -= HandleTimeChange;
         SceneManager.sceneLoaded -= OnSceneLoaded;
         EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
 
-    // ?꾩옱 ?좏깮媛?ν�?item??媛?몄삩??
-    // 理쒕? 3媛쒓?�吏? 媛?몄삩??
     // Item1 : WeaponSlotIdx;
     // Item2 : Level
     // Item3 : Weapon Data
@@ -134,32 +139,35 @@ public class StageManager : MonoBehaviour
         currentStageData.StageTime = currentCount;
         if (atOnce)
         {
-            Debug.Log("Wave Called");
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
             atOnce = false;
         }
 
         // 蹂댁??(5??
-        if (currentStageData.StageTime == 150 || currentStageData.StageTime == 300)
+        if (currentStageData.StageTime == 150)
         {
             OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
-            Debug.Log(1);
             bossIndex++;
+            return;
+        }
+
+        if (currentStageData.StageTime == 295)
+        {
+            OnBoss?.Invoke(currentStageData.Boss[bossIndex]);
             return;
         }
 
         // ??�씠??(�???0??
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
-            currentStageData.WaveIndex++;
-            // ??�씠?�뚮? 留뚮뱾硫?�???�씠?�뚯�??꾩슂???�ъ“泥?�? ??�꺼�?
-            OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
+            WaveIndex++;
+            OnWave?.Invoke(currentStageData.WaveDatas[WaveIndex]);
         }
     }
 
     private void StageDateLoad()
     {
-       currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", "Stage1");
+        currentStageData = AddressablesManager.Instance.GetLabelDictionary<StageRef>($"Stage{currentStageIndex}", "Stage1");
     }
 
     public void StageSetting()
@@ -167,8 +175,8 @@ public class StageManager : MonoBehaviour
         currentStageIndex = GameManager.Instance.currentStage;
         currentWaveIndex = 0;
 
-        // if (currentStageIndex >= 1)
-        //     StageDateLoad();
+        if (currentStageIndex >= 1)
+            StageDateLoad();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

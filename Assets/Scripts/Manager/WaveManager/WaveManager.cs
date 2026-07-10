@@ -185,6 +185,7 @@ public class WaveManager : MonoBehaviour
             _stageManager = StageManager.Instance;
             Debug.Log("구독�?좋아???�람?�정까�?");
             _stageManager.OnWave += StartWaves;
+
         }
     }
 }

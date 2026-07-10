@@ -37,7 +37,6 @@ public class Bullet : ProjectileBase
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"Enter : {other.name}");
 
         var Monster = other.gameObject.GetComponent<Monster>();
         if(Monster != null)

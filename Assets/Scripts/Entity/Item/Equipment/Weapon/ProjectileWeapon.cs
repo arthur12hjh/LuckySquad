@@ -98,6 +98,9 @@ public class ProjectileWeapon : WeaponBase
                 break;
 
             var gameObj = ObjectPoolManager.Instance.Get(projectTileRefSO);
+            if (gameObj == null)
+                return;
+
             Vector3 newDir = Quaternion.Euler(0, 0, AccAngle) * vDir;
 
             gameObj.SetActive(true);
