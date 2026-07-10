@@ -9,10 +9,10 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
 
-    private uint currentStageIndex;                       // ?꾩옱 ??��???
-    private int currentWaveIndex;                         // ?꾩옱 ??�씠??
-    private Dictionary<int, StageRef> stageDatas;       // ??��??? ?곗씠?????μ??
-    private List<Tuple<int, EquipmentBase>> stageItemDatas;   // ??��??????곗씠?곕줈 ?꾩씠???뺣낫 ??�꽦
+    private uint currentStageIndex;                       // ?꾩옱 ??��???
+    private int currentWaveIndex;                         // ?꾩옱 ??�씠??
+    private Dictionary<int, StageRef> stageDatas;       // ??��??? ?곗씠?????μ??
+    private List<Tuple<int, EquipmentBase>> stageItemDatas;   // ??��??????곗씠?곕줈 ?꾩씠???뺣낫 ??�꽦
     private List<Tuple<int, int, ItemData>> ShuffleList;
 
     private int prevTimer = 0;
@@ -24,7 +24,7 @@ public class StageManager : MonoBehaviour
     private bool atOnce = true;
 
     [SerializeField]
-    private StageRef currentStageData;                  // ?꾩옱 ??��??? ?곗씠??
+    private StageRef currentStageData;                  // ?꾩옱 ??��??? ?곗씠??
 
     private void Awake()
     {
@@ -47,11 +47,11 @@ public class StageManager : MonoBehaviour
         foreach (var item in TotalItem)
             ADD_Item(item, PlayerTransform);
 
-        // ???��??�뼱 ?�닿린留?Level 1�??�붽?
+        // ???��??�뼱 ?�닿린留?Level 1�??�붽?
         //ADD_Item(InGameManager.Instance.GetPlayerWeapon(), PlayerTransform);
 
-        // 泥ル쾲吏??몄옄?�?�� 諛곗�??Tuple�?
-        // ?�?��???몄옄?�?�� ?�?�� 諛곗�???몃뜳??�?
+        // 泥ル쾲吏??몄옄?�?�� 諛곗�??Tuple�?
+        // ?�?��???몄옄?�?�� ?�?�� 諛곗�???몃뜳??�?
         ShuffleList = stageItemDatas.Select(
                        (item, index) => Tuple.Create(
                        index,
@@ -102,8 +102,8 @@ public class StageManager : MonoBehaviour
         EventBus.Unsubscribe<WeaponSelectEvent>(LevelEvent);
     }
 
-    // ?꾩옱 ?좏깮媛?ν�?item??媛?몄삩??
-    // 理쒕? 3媛쒓?�吏? 媛?몄삩??
+    // ?꾩옱 ?좏깮媛?ν�?item??媛?몄삩??
+    // 理쒕? 3媛쒓?�吏? 媛?몄삩??
     // Item1 : WeaponSlotIdx;
     // Item2 : Level
     // Item3 : Weapon Data
@@ -147,11 +147,11 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // ??�씠??(�???0??
+        // ??�씠??(�???0??
         if (currentStageData.StageTime < 300 && currentStageData.StageTime % 60 == 0)
         {
             currentStageData.WaveIndex++;
-            // ??�씠?�뚮? 留뚮뱾硫?�???�씠?�뚯�??꾩슂???�ъ“泥?�? ??�꺼�?
+            // ??�씠?�뚮? 留뚮뱾硫?�???�씠?�뚯�??꾩슂???�ъ“泥?�? ??�꺼�?
             OnWave?.Invoke(currentStageData.WaveDatas[currentStageData.WaveIndex]);
         }
     }
@@ -166,8 +166,8 @@ public class StageManager : MonoBehaviour
         currentStageIndex = GameManager.Instance.currentStage;
         currentWaveIndex = 0;
 
-        if (currentStageIndex >= 1)
-            StageDateLoad();
+        // if (currentStageIndex >= 1)
+        //     StageDateLoad();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
