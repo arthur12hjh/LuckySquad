@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.U2D;
+using static UnityEngine.Rendering.DebugUI;
 
 public class AddressablesManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class AddressablesManager : MonoBehaviour
     public static AddressablesManager Instance => instance;
 
     public event Action OnInitialized;
-    Dictionary<string, Sprite[]>  _SortAltasTextures = new Dictionary<string, Sprite[]>();
+    Dictionary<string, Sprite[]> _SortAltasTextures = new Dictionary<string, Sprite[]>();
 
     private void Awake()
     {
@@ -188,7 +189,6 @@ public class AddressablesManager : MonoBehaviour
                 };
             }
         };
-
         return handle;
     }
 

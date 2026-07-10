@@ -24,6 +24,8 @@ public class Loading : MonoBehaviour
             StartCoroutine(SceneChange(sceneName));
         else
             StartCoroutine(StageChange($"{sceneName}{currentStege}"));
+
+
         StartCoroutine(AnimateLoadingText());
     }
 
@@ -40,6 +42,8 @@ public class Loading : MonoBehaviour
     private IEnumerator StageChange(string sceneName)
     {
         yield return StartCoroutine(LoadStageObject(sceneName));
+        AudioManager.Instance.SettingScene();
+
         SceneManager.LoadScene(sceneName);
     }
 
@@ -48,7 +52,6 @@ public class Loading : MonoBehaviour
         float objP = 0f;
 
         var obj = AddressablesManager.Instance.LoadLabel(sceneName);
-
         while (true)
         {
             objP = obj.PercentComplete;
