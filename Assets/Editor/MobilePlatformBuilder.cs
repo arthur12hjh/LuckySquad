@@ -6,9 +6,11 @@ using CustomBuild;
 
 public class PlatformBuild
 {
-    public static void Build(string platform)
+    public static void Build()
     {
-        IPlatformBuilder builder = ParseTarget(platform) switch
+        string target = Environment.GetEnvironmentVariable("BUILD_TARGET");
+
+        IPlatformBuilder builder = ParseTarget(target) switch
         {
             BuildTarget.Android => new AndroidBuilder(),
             _ => throw new NotSupportedException()
