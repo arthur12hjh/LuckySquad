@@ -13,6 +13,7 @@ public class PlatformBuild
         IPlatformBuilder builder = ParseTarget(target) switch
         {
             BuildTarget.Android => new AndroidBuilder(),
+            BuildTarget.StandaloneWindows64 => new WindowBuilder(),
             _ => throw new NotSupportedException()
         };
 
