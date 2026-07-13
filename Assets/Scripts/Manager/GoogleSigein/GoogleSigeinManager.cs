@@ -8,8 +8,29 @@ using UnityEngine;
 
 public class GoogleSigeinManager : MonoBehaviour
 {
+    private static GoogleSigeinManager instance = null;
+    public static GoogleSigeinManager Instance
+    {
+        get { return instance; }
+    }
+
+    public event Action OnTutch;
+
     private FirebaseAuth auth;
     private FirebaseUser user;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -38,7 +59,7 @@ public class GoogleSigeinManager : MonoBehaviour
         {
             GoogleSignIn.Configuration = new GoogleSignInConfiguration()
             {
-                WebClientId = "YourClientId",
+                WebClientId = "683244745219-t823olatilftf7j5bkg52cm00v94pnh8.apps.googleusercontent.com",
                 RequestIdToken = true,
                 UseGameSignIn = false,
                 RequestEmail = true
@@ -85,6 +106,9 @@ public class GoogleSigeinManager : MonoBehaviour
 
                 Debug.Log($"UserName: {user.DisplayName}");
                 Debug.Log($"UserEmail: {user.Email}");
+
+                OnTutch?.Invoke();
+
             });
         }
     }

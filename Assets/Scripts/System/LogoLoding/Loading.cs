@@ -23,7 +23,7 @@ public class Loading : MonoBehaviour
         if (currentStege == 0)
             StartCoroutine(SceneChange(sceneName));
         else
-            StartCoroutine(StageChange($"{sceneName}{currentStege}"));
+            StartCoroutine(SceneChange($"{sceneName}{currentStege}"));
 
 
         StartCoroutine(AnimateLoadingText());
@@ -38,15 +38,6 @@ public class Loading : MonoBehaviour
         //SceneManager.LoadScene("Weapon");
     }
 
-    // 스테이지
-    private IEnumerator StageChange(string sceneName)
-    {
-        yield return StartCoroutine(LoadStageObject(sceneName));
-        AudioManager.Instance.SettingScene();
-
-        SceneManager.LoadScene(sceneName);
-    }
-
     private IEnumerator LoadSceneObject(string sceneName)
     {
         float objP = 0f;
@@ -57,26 +48,6 @@ public class Loading : MonoBehaviour
             objP = obj.PercentComplete;
 
             if (obj.IsDone)
-                break;
-
-            yield return null;
-        }
-
-        // 안전 대기
-        yield return obj;
-    }
-
-    private IEnumerator LoadStageObject(string sceneName)
-    {
-        float objP = 0f;
-
-        var obj = AddressablesManager.Instance.LoadLabel(sceneName);
-
-        while (true)
-        {
-            objP = obj.PercentComplete;
-
-            if (obj.IsDone) // && audio.IsDone && img.IsDone && imgA.IsDone
                 break;
 
             yield return null;

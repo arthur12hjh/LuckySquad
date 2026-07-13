@@ -12,7 +12,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     [SerializeField] private List<ObjectPoolRef> objectPoolRefs;            // ?°ì´??ë¦¬ìŠ¤??
 
-    private readonly Dictionary<ObjectPoolRef, ObjectPool<GameObject>> _poolDictionary = new(); // ?€ë§ìœ¼ë¡?ë§Œë“¤?´ì§„ ?ˆë¹„ê°ì²´??
+    private readonly Dictionary<string, ObjectPool<GameObject>> _poolDictionary = new(); // ?€ë§ìœ¼ë¡?ë§Œë“¤?´ì§„ ?ˆë¹„ê°ì²´??
     private readonly Dictionary<ObjectPoolRef, GameObject> _prefabPool = new(); // ?´ë‹¹ SO???„ë¦¬??
     private readonly Dictionary<ObjectPoolRef, AsyncOperationHandle<GameObject>> _asyncOperationHandles = new(); // ?´ë‹¹ SO???´ë“œ?ˆì„œë¸??¸ë“¤
 
@@ -60,7 +60,7 @@ public class ObjectPoolManager : MonoBehaviour
 
             var parent = new GameObject($"{refSO.name}Pool").transform;
             parent.SetParent(transform);
-            _poolDictionary[refSO] = CreatePool(refSO, parent);
+            _poolDictionary[refSO.poolName] = CreatePool(refSO, parent);
         }
     }
 
@@ -101,13 +101,13 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject Get(ObjectPoolRef refSO)
     {
-        if (_poolDictionary.TryGetValue(refSO, out var so))
+       if (_poolDictionary.TryGetValue(refSO.poolName, out var so))
             return so.Get();
 
         return null;
     }
 
-    public void Release(ObjectPoolRef refSO, GameObject obj) => _poolDictionary[refSO].Release(obj);
+    public void Release(ObjectPoolRef refSO, GameObject obj) => _poolDictionary[refSO.poolName].Release(obj);
 
     public bool Clear(ObjectPoolRef refSO)
     {
@@ -118,7 +118,7 @@ public class ObjectPoolManager : MonoBehaviour
     
         // ì§€?Œì¤˜?¼í•  ê²?: ObjectPool<GameObject>, ScriptableObject, handle, ScriptableObject.AssetReferenceGameObject
         // 1. ë¨¼ì? ObjectPool<GameObject>ë¥?ë¹„ìš°??(?ˆë¹„ ê°ì²´ ëª¨ìŒ)
-        if (!_poolDictionary.TryGetValue(refSO, out var pool))
+        if (!_poolDictionary.TryGetValue(refSO.poolName, out var pool))
             return false;
         
         pool.Clear();
@@ -127,7 +127,7 @@ public class ObjectPoolManager : MonoBehaviour
         if(_asyncOperationHandles.TryGetValue(refSO, out var handle) && handle.IsValid())
             refSO.prefab.ReleaseAsset();
         
-        _poolDictionary.Remove(refSO);
+        _poolDictionary.Remove(refSO.poolName);
         _asyncOperationHandles.Remove(refSO);
         _prefabPool.Remove(refSO);
         

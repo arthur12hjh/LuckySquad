@@ -4,10 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Logo : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI pressMessageText;
+    [SerializeField] private Button button;
 
     private InputAction action;
 
@@ -18,13 +20,11 @@ public class Logo : MonoBehaviour
 
     private void OnEnable()
     {
-        // InputAction 생성 (빌드 안정성 위해 OnEnable 권장)
+        // InputAction 생성(빌드 안정성 위해 OnEnable 권장)
         action = new InputAction(type: InputActionType.Button);
 
-        action.AddBinding("<Mouse>/leftButton");
+        //action.AddBinding("<Mouse>/leftButton");
         action.AddBinding("<Touchscreen>/primaryTouch/press");
-
-        // performed 사용 (canceled보다 안정적)
         action.performed += OnPressed;
 
         action.Enable();
@@ -32,20 +32,28 @@ public class Logo : MonoBehaviour
 
     private void Start()
     {
-        if (pressMessageText != null)
-        {
-            pressMessageText.DOFade(minAlpha, textFadeDuration)
-                .SetEase(Ease.InOutSine)
-                .SetLoops(-1, LoopType.Yoyo);
-        }
-
+        pressMessageText.gameObject.SetActive(false);
         StartCoroutine(LoadCommon());
 
+        GoogleSigeinManager.Instance.OnTutch += LoginSuccess;
     }
 
     private IEnumerator LoadCommon()
     {
         yield return AddressablesManager.Instance.LoadCommon();
+        //isReady = true;
+    }
+
+    private void LoginSuccess()
+    {
+        button.gameObject.SetActive(false);
+        if (pressMessageText != null)
+        {
+            pressMessageText.gameObject.SetActive(true);
+            pressMessageText.DOFade(minAlpha, textFadeDuration)
+                .SetEase(Ease.InOutSine)
+                .SetLoops(-1, LoopType.Yoyo);
+        }
         isReady = true;
     }
 
