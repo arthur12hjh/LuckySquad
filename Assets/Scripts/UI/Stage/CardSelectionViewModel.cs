@@ -11,7 +11,6 @@ public class CardSelectionViewModel : BaseViewModel
     public event Action OnClosed;
 
     private readonly int maxCards = 3;
-    private bool isCardOpen = false;
 
     public override void Initialize()
     {
