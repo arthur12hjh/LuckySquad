@@ -23,7 +23,9 @@ public class Logo : MonoBehaviour
         // InputAction 생성(빌드 안정성 위해 OnEnable 권장)
         action = new InputAction(type: InputActionType.Button);
 
-        //action.AddBinding("<Mouse>/leftButton");
+#if UNITY_EDITOR
+        action.AddBinding("<Mouse>/leftButton");
+#endif
         action.AddBinding("<Touchscreen>/primaryTouch/press");
         action.performed += OnPressed;
 
@@ -32,7 +34,11 @@ public class Logo : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
+        button.gameObject.SetActive(false);
+#elif UNITY_ANDROID
         pressMessageText.gameObject.SetActive(false);
+#endif
         StartCoroutine(LoadCommon());
 
         GoogleSigeinManager.Instance.OnTutch += LoginSuccess;
@@ -41,11 +47,15 @@ public class Logo : MonoBehaviour
     private IEnumerator LoadCommon()
     {
         yield return AddressablesManager.Instance.LoadCommon();
-        //isReady = true;
+#if UNITY_EDITOR
+        isReady = true;
+#endif
+
     }
 
     private void LoginSuccess()
     {
+#if UNITY_ANDROID
         button.gameObject.SetActive(false);
         if (pressMessageText != null)
         {
@@ -55,6 +65,8 @@ public class Logo : MonoBehaviour
                 .SetLoops(-1, LoopType.Yoyo);
         }
         isReady = true;
+#endif
+
     }
 
     private void OnPressed(InputAction.CallbackContext ctx)
