@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SO_m5_elitebat
   m_EditorClassIdentifier: Assembly-CSharp::MonsterRef
   HP: 150
-  Power: 0
+  Power: 2
   Speed: 0.7

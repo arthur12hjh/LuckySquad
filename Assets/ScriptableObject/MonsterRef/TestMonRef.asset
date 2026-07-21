@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TestMonRef
   m_EditorClassIdentifier: Assembly-CSharp::MonsterRef
   HP: 10
-  Power: 0
+  Power: 1
   Speed: 0.5

@@ -23,7 +23,7 @@ public class PlayerStats
     [SerializeField] private float _power;
     [SerializeField] private float _speed;
 
-    private int BASE_EXPERIENCE = 200;
+    private int BASE_EXPERIENCE = 50;
     private const int maxLevel = 50;
     
     public PlayerStats(PlayerStatsRef refSO)

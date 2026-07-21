@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SO_m2_otakuyellowtanning
   m_EditorClassIdentifier: Assembly-CSharp::MonsterRef
   HP: 20
-  Power: 0
+  Power: 1
   Speed: 0.5
