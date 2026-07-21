@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStats
 {
     public event Action OnChanged; // UI용 
+    public event Action OnDead; // UI용 
     public event Action OnChangedLevel; // 레벨업 이벤트
     [SerializeField] private float _magneticPower;    // 자석
     [SerializeField] private float _expMagnification;
@@ -76,6 +77,11 @@ public class PlayerStats
             if (Mathf.Approximately(_currentHp, value)) return;
             _currentHp = value;
             OnChanged?.Invoke();
+
+            if (_currentHp <= 0)
+            {
+                OnDead.Invoke();
+            }
         }
     }
 

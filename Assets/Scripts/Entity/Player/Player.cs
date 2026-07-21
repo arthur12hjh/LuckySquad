@@ -50,7 +50,7 @@ public class Player : BaseEntity
         {
             return;
         }
-
+        Debug.Log($"Monster Power {monster.Power}");
         TakeDamage(monster.Power);
     }
 
