@@ -12,7 +12,28 @@
           "package_name": "com.practice.luckysquad"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "683244745219-560ooqe54ojmjutq3d1bk43mq4ttmqq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.practice.luckysquad",
+            "certificate_hash": "ad9eb8885ff14990fb021f738397de40f9404af9"
+          }
+        },
+        {
+          "client_id": "683244745219-6l6vrl6fhq0kqbq1uu677r3vebm5kluq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.practice.luckysquad",
+            "certificate_hash": "0acc42f7a41f452b93cbe21fa98a14abd703b55b"
+          }
+        },
+        {
+          "client_id": "683244745219-t823olatilftf7j5bkg52cm00v94pnh8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBUPpSFa1zyKL_YjogXNlQ366p6I0Q5Fm4"
@@ -20,7 +41,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683244745219-t823olatilftf7j5bkg52cm00v94pnh8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
