@@ -68,10 +68,8 @@ public class InGameManager : MonoBehaviour
         Instance = this;
         // 1) ??진입 ?? InGameManager::Awake?�서 Player Data�?받아?�다.
         // ?�장?�??�단 비활?�화 ?�켜?�고, 추후 병합 �??�용???�이??처리 구조 ?�성 ??구현
-        if (_tempStatsRef != null)
-        {
-            _playerStats = new PlayerStats(_tempStatsRef);
-        }
+       
+        _playerStats = new PlayerStats(GameManager.Instance._playerStatsRef);
 
         if (_playerObj == null)
         {

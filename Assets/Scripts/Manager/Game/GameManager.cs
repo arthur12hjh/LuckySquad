@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     }
 
     public uint currentStage { get; private set; } = 0;
+    [SerializeField] public PlayerStatsRef _playerStatsRef;
 
     public Enums.SceneType currentSceneType { get; private set; }
     public event Action<Enums.SceneType> OnSceneChanged;
