@@ -453,5 +453,96 @@
         "fInterval": 0.6
       }
     ]
+  },
+  {
+    "$type": "Item.WeaponData, Assembly-CSharp",
+    "id": 6,
+    "name": "회전하는 검",
+    "Max_Level": 3,
+    "type": "Weapon",
+    "IconTexture": "IconSwordAtlas",
+    "Textures": "SwordAtlas",
+    "LevelData": [
+      {
+        "Particles": [
+          501
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 22,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          502
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 30,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      },
+      {
+        "Particles": [
+          503
+        ],
+        "ItemEffects": {
+          "Damage": [
+            {
+              "$type": "Item.DamageEffect, Assembly-CSharp",
+              "type": "Damage",
+              "EffectType": "Instant",
+              "Amount": 42,
+              "Duration": 0,
+              "Interval": 0
+            }
+          ]
+        }
+      }
+    ],
+    "WeaponType": "Rotation",
+    "BulletName": "SwordAtlas",
+    "AnimController": "",
+    "WeaponConfigs": [
+      {
+        "fDamage": 22,
+        "iCount": 1,
+        "iMaxLineCount": 1,
+        "fSpeed": 16,
+        "fRange": 0.5,
+        "fInterval": 0
+      },
+      {
+        "fDamage": 30,
+        "iCount": 2,
+        "iMaxLineCount": 1,
+        "fSpeed": 18,
+        "fRange": 0.7,
+        "fInterval": 0
+      },
+      {
+        "fDamage": 42,
+        "iCount": 3,
+        "iMaxLineCount": 1,
+        "fSpeed": 20,
+        "fRange": 0.7,
+        "fInterval": 0
+      }
+    ]
   }
 ]

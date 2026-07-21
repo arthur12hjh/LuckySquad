@@ -57,6 +57,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Common
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31b04b0272372d1469d24e66be12b62f
+    m_Address: Assets/Sprites/Atlas/SwordAtlas.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 453947b1ff9f49f48975b4ba72cb9e40
     m_Address: Assets/Sprites/Atlas/IconShurikenAtlas.spriteatlasv2
     m_ReadOnly: 0
@@ -77,6 +83,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8ac190f1717799a40bef2c253a30dfec
     m_Address: Assets/Prefabs/Weapon/BounceWeapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c48288211b128494db55853526dcbd0a
+    m_Address: Assets/Sprites/Atlas/IconSwordAtlas.spriteatlasv2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Common
