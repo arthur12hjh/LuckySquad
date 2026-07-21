@@ -14,19 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "683244745219-560ooqe54ojmjutq3d1bk43mq4ttmqq0.apps.googleusercontent.com",
+          "client_id": "683244745219-0klmh20vqer2pb8c2sa4kbdfua1d4nn6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.practice.luckysquad",
-            "certificate_hash": "ad9eb8885ff14990fb021f738397de40f9404af9"
-          }
-        },
-        {
-          "client_id": "683244745219-6l6vrl6fhq0kqbq1uu677r3vebm5kluq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.practice.luckysquad",
-            "certificate_hash": "0acc42f7a41f452b93cbe21fa98a14abd703b55b"
+            "certificate_hash": "8eb6b85568c5086ef3a7636e12265c8e0d6045bc"
           }
         },
         {
