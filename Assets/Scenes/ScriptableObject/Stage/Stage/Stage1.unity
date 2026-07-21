@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.009887695, y: 0}
+  m_AnchoredPosition: {x: 0.009765625, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3997072
@@ -1633,6 +1633,7 @@ MonoBehaviour:
     _attackRange: 0
     _attackSpeed: 0
     _projectileSpeed: 0
+    _StartItemIndex: 0
     _duration: 0
     _level: 0
     _currentExp: 0
@@ -2724,6 +2725,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1e24f5c0bf0967c4797a91b9c21d4b8c, type: 2}
   - {fileID: 11400000, guid: 928262c832284ee46bbfe891ea2705bb, type: 2}
   - {fileID: 11400000, guid: ec0269a36a7e7e34199ce829b965a598, type: 2}
+  - {fileID: 11400000, guid: a3a439ad94b92954e89e8d5cdef17a40, type: 2}
 --- !u!1 &1123954761
 GameObject:
   m_ObjectHideFlags: 0

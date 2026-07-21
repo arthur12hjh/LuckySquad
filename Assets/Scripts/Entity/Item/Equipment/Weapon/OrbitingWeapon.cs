@@ -5,7 +5,7 @@ using UnityEngine;
 public class OrbitingWeapon : WeaponBase
 {
     [SerializeField] private ObjectPoolRef projectTileRefSO = null;
-    List<GameObject> ProjecTileList = new List<GameObject>();
+    List<ProjectileBase> ProjecTileList = new List<ProjectileBase>();
 
     private float               TickAngle = 0f;
     private float               fSpeed = 3f;
@@ -22,7 +22,6 @@ public class OrbitingWeapon : WeaponBase
     public override void Initalize(ItemData itemData)
     {
         base.Initalize(itemData);
-        SerializationWeaponData();
 
         transform.localPosition = new Vector3(0f, transform.parent.transform.localScale.y * 0.5f, 0f);
         IsActive = true;
@@ -66,34 +65,34 @@ public class OrbitingWeapon : WeaponBase
                 var gameOb = ObjectPoolManager.Instance.Get(projectTileRefSO);
                 gameOb.transform.parent = gameObject.transform;
                 gameOb.SetActive(false);
-                var ObjSR  = gameOb.GetComponent<SpriteRenderer>();
-                if(ObjSR != null)
-                    ObjSR.sprite = spriteTexs[level - 1];
 
-                ProjecTileList.Add(gameOb);
+                ProjecTileList.Add(gameOb.GetComponent<ProjectileBase>());
             }
         }
     }
 
     private void ComputeProjecTilePosition()
     {
-        float range = WeaponData.WeaponConfigs[level - 1].fRange;
-        int Count = WeaponData.WeaponConfigs[level - 1].iCount;
+        var Config = WeaponData.WeaponConfigs[level - 1];
 
         for (int i = 0; i < ProjecTileList.Count; ++i)
         {
-            if (i < Count)
+            if (i < Config.iCount)
             {
                 float rad = i * TickAngle * Mathf.Deg2Rad;
                 
-                float posX = Mathf.Sin(rad) * range;
-                float posY = Mathf.Cos(rad) * range;
+                float posX = Mathf.Sin(rad) * Config.fRange;
+                float posY = Mathf.Cos(rad) * Config.fRange;
 
                 ProjecTileList[i].transform.localPosition = new Vector3(posX, posY, 0);
-                ProjecTileList[i].SetActive(true);
+
+                ProjecTileList[i].gameObject.SetActive(true);
+                ProjecTileList[i].Initalize(WeaponData.LevelDatas[level - 1],
+                                            new Projectileinfo(level, Config),
+                                            Vector2.zero, WeaponData.TextureName, WeaponData.AnimController);
             }
             else
-                ProjecTileList[i].SetActive(false);
+                ProjecTileList[i].gameObject.SetActive(false);
         }
     }
 
