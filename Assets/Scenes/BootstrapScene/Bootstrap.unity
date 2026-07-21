@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070f85ef541b6574faabcf82998628b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
+  playerStatsRef: {fileID: 11400000, guid: d811c910dfbaf486bbcf26dda48fd292, type: 2}
 --- !u!4 &1553864747
 Transform:
   m_ObjectHideFlags: 0
