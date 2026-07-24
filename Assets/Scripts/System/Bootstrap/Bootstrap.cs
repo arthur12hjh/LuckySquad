@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Bootstrap : MonoBehaviour
 {
+    [SerializeField] private PlayerStatsRef playerStatsRef;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -20,8 +21,9 @@ public class Bootstrap : MonoBehaviour
 
     void CreateManagers()
     {
-        new GameObject("GameManager").AddComponent<GameManager>();
+        var gameManager = new GameObject("GameManager").AddComponent<GameManager>();
+        gameManager._playerStatsRef = playerStatsRef;
         new GameObject("Addressables").AddComponent<AddressablesManager>();
         new GameObject("Audio").AddComponent<AudioManager>();
     }
-}   
+}

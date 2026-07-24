@@ -13,7 +13,6 @@ public class ItemView : BaseView
     private void Start()
     {
         _selectedIndex = 1;
-        GameManager.Instance._playerStatsRef.StartItemIndex = 0;
         StartItemImage.sprite = StartItemImages[_selectedIndex];
         for (int i = 0; i < ItemSelectButtons.Length; i++)
         {
@@ -22,6 +21,7 @@ public class ItemView : BaseView
         }
 
         SelectItem(_selectedIndex);
+        GameManager.Instance._playerStatsRef.StartItemIndex = 0;
     }
 
     private void SelectItem(int index)
@@ -30,11 +30,6 @@ public class ItemView : BaseView
         GameManager.Instance._playerStatsRef.StartItemIndex = _selectedIndex;
 
         StartItemImage.sprite = StartItemImages[_selectedIndex - 1];
-
-        //for (int i = 0; i < StartItemImages.Length; i++)
-        //{
-        //    StartItemImage.sprite = StartItemImages[i];
-        //}
     }
 
     public override void Bind(BaseViewModel baseViewModel)
@@ -46,7 +41,6 @@ public class ItemView : BaseView
         {
             _viewModel = itemView;
             _viewModel.Initialize();
-
         }
         else
         {
